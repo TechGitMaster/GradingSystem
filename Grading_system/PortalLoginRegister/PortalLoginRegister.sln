@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesOfFirstCome", "PortalLoginRegister\ClassesOfFirstCome.csproj", "{308CBD3E-5D5F-4DF2-AD2D-8C094195E114}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormLoginRegister", "..\Form_login_register\FormLoginRegister\FormLoginRegister.csproj", "{DE80DC6B-1F07-4DE5-9213-291727075619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditingFromForGradingSystem", "..\EditingSectionForm\EditingFromForGradingSystem\EditingFromForGradingSystem.csproj", "{181C198F-EEFF-4586-A7A2-8F213ECC0813}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormUserGrading", "..\FormUser\WindowsFormUserGrading\WindowsFormUserGrading.csproj", "{F3826442-4502-44A9-A358-71564EAD35DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassUserForm", "..\FormUser\ClassOfUser\ClassUserForm\ClassUserForm.csproj", "{63D30745-A620-43CF-9985-CDEC8D3B96C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingStateMentForGradingAccount", "..\LoadingStatement\LoadingStateMentForGradingAccount\LoadingStateMentForGradingAccount.csproj", "{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{308CBD3E-5D5F-4DF2-AD2D-8C094195E114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{308CBD3E-5D5F-4DF2-AD2D-8C094195E114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{308CBD3E-5D5F-4DF2-AD2D-8C094195E114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{308CBD3E-5D5F-4DF2-AD2D-8C094195E114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE80DC6B-1F07-4DE5-9213-291727075619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE80DC6B-1F07-4DE5-9213-291727075619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE80DC6B-1F07-4DE5-9213-291727075619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE80DC6B-1F07-4DE5-9213-291727075619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3826442-4502-44A9-A358-71564EAD35DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3826442-4502-44A9-A358-71564EAD35DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3826442-4502-44A9-A358-71564EAD35DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3826442-4502-44A9-A358-71564EAD35DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D30745-A620-43CF-9985-CDEC8D3B96C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D30745-A620-43CF-9985-CDEC8D3B96C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D30745-A620-43CF-9985-CDEC8D3B96C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D30745-A620-43CF-9985-CDEC8D3B96C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85248A05-F463-42E3-98FD-F5A36C5845AB}
+	EndGlobalSection
+EndGlobal
