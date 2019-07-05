@@ -13,6 +13,7 @@ namespace EditingFromForGradingSystem
 {
     public partial class Form1 : Form
     {
+    protected static asd = "";
         protected override CreateParams CreateParams
         {
             get
