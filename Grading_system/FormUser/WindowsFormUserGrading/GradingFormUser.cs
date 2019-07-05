@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using ClassesOfFirstCome;
 using ClassUserForm;
 using LoadingStateMentForGradingAccount;
@@ -104,7 +105,7 @@ namespace WindowsFormUserGrading
 
             //TIME SHOW IN CALENDAR CLASS.......................................
             string Hrs, Mmn, Sec, AP = "";
-            Timer timerCalendar = new Timer();
+            System.Windows.Forms.Timer timerCalendar = new System.Windows.Forms.Timer();
             timerCalendar.Interval = 1000;
             timerCalendar.Start();
             timerCalendar.Tick += (object sender, EventArgs e) =>
@@ -509,7 +510,6 @@ namespace WindowsFormUserGrading
                                                 //SHOW THE LEAST OF THE HOLE DATABASE SCHEDULE FOR THE USER YOU CLICKED....
                                                 if (numberScanMinAdmin != numberScanIfMax)
                                                 {
-                                                    numberCountPanel = 8;
                                                     string asd = "";
                                                     //SHOW AND DESIGN OF SCHEDULE OF USER ARRIVED..............
                                                     foreach (var showcalendar in GetTheScheduleOfUserClicked)
@@ -527,18 +527,15 @@ namespace WindowsFormUserGrading
 
                                                                     functionDelegateControls createCon = new functionDelegateControls(createControlsSched);
 
-                                                                    await Task.Run(() => createCon.Invoke(showcalendar.NameUserWhoAdded, showcalendar.DateTimeRange,
-                                                                        showcalendar.ImageUserWhoAdded, numberCountPanel, ""));
+                                                                    createCon.Invoke(showcalendar.NameUserWhoAdded, showcalendar.DateTimeRange,
+                                                                        showcalendar.ImageUserWhoAdded, numberCountPanel, "");
 
-                                                                    if (numberCountPanel == 8)
-                                                                    {
-                                                                        loadingOrWaiting.Hide();
-                                                                        this.Show();
-                                                                    }
                                                                     numberCountPanel += 93;
                                                                     asd = "";
                                                                 }
                                                             }
+                                                            loadingOrWaiting.Hide();
+                                                            this.Show();
                                                         }
                                                         else
                                                         {
@@ -685,6 +682,10 @@ namespace WindowsFormUserGrading
             bttnSched.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#1C2833");
             bttnSched.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#1C2833");
             panAdd.Controls.Add(bttnSched);
+
+            if (HandlingAdmin == "") {
+                Thread.Sleep(1000);
+            }
         }
 
 
