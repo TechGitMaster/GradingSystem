@@ -390,6 +390,7 @@ namespace WindowsFormUserGrading
         //This is the click event for search bar TO SET A SCHEDULE TO USER.........................................
         private static string usernameAccesssibleToDatabase;
         private static List<CalendarList> GetTheScheduleOfUserClicked = new List<CalendarList>();
+        private VScrollBar scroll;
         protected async void ClickedDataSearchToCalendar(object controls, EventArgs e) {
             NoAssignedAddSched.Controls.Clear();
             NoAssignedAddSched.AutoScroll = true;
@@ -402,7 +403,7 @@ namespace WindowsFormUserGrading
             this.Hide();
 
             int numberCountScroll = 0;
-            VScrollBar scroll = new VScrollBar() {
+             scroll = new VScrollBar() {
                 Name = "scrollCalendarSchedAdd",
                 Dock = DockStyle.Right,
                 Enabled = false,
@@ -489,65 +490,24 @@ namespace WindowsFormUserGrading
                                             }
                                         }
                                         else {
-                                            //SHOWING THE ADMIN SCHED ASSIGNED TO THE USER YOU CLICKED................
-                                            foreach (var ShowAdminSched in GetTheScheduleOfUserClicked) {
-                                                if (ShowAdminSched.ErrCheck == "") {
-                                                    if (ShowAdminSched.HandlingAdmin == "ADMIN") {
-                                                        numberForAdmins--;
-                                                        numberScanMinAdmin++;
-                                                        numberCountScroll++;
 
-                                                        functionDelegateControls delegFunc = new functionDelegateControls(createControlsSched);
-                                                        delegFunc.Invoke(ShowAdminSched.NameUserWhoAdded, ShowAdminSched.DateTimeRange,
-                                                            ShowAdminSched.ImageUserWhoAdded, numberCountPanel, ShowAdminSched.HandlingAdmin);
+                                            //SHOW FIRST THE ADMIN SCHEDULE...............................
+                                            //Task<string> messageTask = new Task<string>(() => adminShowAndEtc(GetTheScheduleOfUserClicked,
+                                            //   numberForAdmins, numberScanMinAdmin, numberScanIfMax));
+                                           // messageTask.Start();
+                                            string message = adminShowAndEtc(GetTheScheduleOfUserClicked,
+                                               numberForAdmins, numberScanMinAdmin, numberScanIfMax, scroll);
 
-                                                        numberCountPanel += 93;
-                                                    }
-                                                }
+                                            if (message == "Succesful to show")
+                                            {
+                                                loadingOrWaiting.Hide();
+                                                this.Show();
                                             }
-
-                                            if (numberForAdmins == 0) { 
-                                                //SHOW THE LEAST OF THE HOLE DATABASE SCHEDULE FOR THE USER YOU CLICKED....
-                                                if (numberScanMinAdmin != numberScanIfMax)
-                                                {
-                                                    string asd = "";
-                                                    //SHOW AND DESIGN OF SCHEDULE OF USER ARRIVED..............
-                                                    foreach (var showcalendar in GetTheScheduleOfUserClicked)
-                                                    {
-                                                        if (showcalendar.ErrCheck == "")
-                                                        {
-                                                            if (showcalendar.HandlingAdmin == "" || showcalendar.HandlingAdmin is null) {
-                                                                if (asd == "") {
-                                                                    asd = "have";
-                                                                    numberCountScroll++;
-                                                                    if (numberCountScroll > 3)
-                                                                    {
-                                                                        scroll.Visible = false;
-                                                                    }
-
-                                                                    functionDelegateControls createCon = new functionDelegateControls(createControlsSched);
-
-                                                                    createCon.Invoke(showcalendar.NameUserWhoAdded, showcalendar.DateTimeRange,
-                                                                        showcalendar.ImageUserWhoAdded, numberCountPanel, "");
-
-                                                                    numberCountPanel += 93;
-                                                                    asd = "";
-                                                                }
-                                                            }
-                                                            loadingOrWaiting.Hide();
-                                                            this.Show();
-                                                        }
-                                                        else
-                                                        {
-                                                            loadingOrWaiting.Show();
-                                                            this.Hide();
-                                                        }
-                                                    }
-                                                }
-                                                else {
-                                                    loadingOrWaiting.Hide();
-                                                    this.Show();
-                                                }
+                                            else if(message is "Please Check Your Connection.")
+                                            {
+                                                loadingOrWaiting.Show();
+                                                this.Hide();
+                                                MessageBox.Show("Please Check Your Connection.");
                                             }
                                         }
                                     }
@@ -588,6 +548,81 @@ namespace WindowsFormUserGrading
                 }
             }
 
+        }
+
+
+        //ADMIN DETECT SHOWS FIRST FUNCTION................................................
+        public string adminShowAndEtc(List<CalendarList> GetTheScheduleOfUserClicked, int numberForAdmins,
+                                                int numberScanMinAdmin, int numberScanIfMax, VScrollBar scroll) {
+            //SHOWING THE ADMIN SCHED ASSIGNED TO THE USER YOU CLICKED................
+            int numberCountScroll = 0;
+            int numberCountPanel = 8;
+            string handleMessageReturningBack = "";
+            foreach (var ShowAdminSched in GetTheScheduleOfUserClicked)
+            {
+                if (ShowAdminSched.ErrCheck == "")
+                {
+                    if (ShowAdminSched.HandlingAdmin == "ADMIN")
+                    {
+                        numberForAdmins--;
+                        numberScanMinAdmin++;
+                        numberCountScroll++;
+
+                        functionDelegateControls delegFunc = new functionDelegateControls(createControlsSched);
+                        delegFunc.Invoke(ShowAdminSched.NameUserWhoAdded, ShowAdminSched.DateTimeRange,
+                            ShowAdminSched.ImageUserWhoAdded, numberCountPanel, ShowAdminSched.HandlingAdmin);
+
+                        numberCountPanel += 93;
+                    }
+                }
+            }
+
+            if (numberForAdmins == 0)
+            {
+                //SHOW THE LEAST OF THE HOLE DATABASE SCHEDULE FOR THE USER YOU CLICKED....
+                if (numberScanMinAdmin != numberScanIfMax)
+                {
+                    string waiting = "";
+                    //SHOW AND DESIGN OF SCHEDULE OF USER ARRIVED..............
+                    foreach (var showcalendar in GetTheScheduleOfUserClicked)
+                    {
+                        if (showcalendar.ErrCheck == "")
+                        {
+                            if (showcalendar.HandlingAdmin == "" || showcalendar.HandlingAdmin is null)
+                            {
+                                if (waiting == "")
+                                {
+                                    waiting = "have";
+                                    numberCountScroll++;
+                                    if (numberCountScroll > 3)
+                                    {
+                                        scroll.Visible = false;
+                                    }
+
+                                    functionDelegateControls createCon = new functionDelegateControls(createControlsSched);
+
+                                    createCon.Invoke(showcalendar.NameUserWhoAdded, showcalendar.DateTimeRange,
+                                        showcalendar.ImageUserWhoAdded, numberCountPanel, "");
+
+                                    numberCountPanel += 93;
+                                    waiting = "";
+                                }
+                            }
+                            handleMessageReturningBack = "Succesful to show";
+                        }
+                        else
+                        {
+                            handleMessageReturningBack = "Please Check Your Connection.";
+                        }
+                    }
+                }
+                else
+                {
+                    handleMessageReturningBack = "Succesful to show";
+                }
+            }
+
+            return handleMessageReturningBack;
         }
 
 
@@ -673,8 +708,9 @@ namespace WindowsFormUserGrading
             {
                 FlatStyle = FlatStyle.Flat,
                 ForeColor = ColorTranslator.FromHtml("#B3B6B7"),
-                Text = "Sched:",
                 Size = new Size(55, 32),
+                Text = (HandlingAdmin != "ADMIN") ? "User:" : "Admin:",
+                Font = new Font("Microsoft Sans Serif", ((HandlingAdmin != "ADMIN") ? 10:9), FontStyle.Regular),
                 Location = new Point(10, 46),
                 BackColor = ColorTranslator.FromHtml("#1C2833")
             };
@@ -887,6 +923,9 @@ namespace WindowsFormUserGrading
 
                                                             if (Show.ErrCheck == "SuccInserting")
                                                             {
+                                                                string doneToScannAdmin = "";
+                                                                int numberScanIfMax = 0;
+                                                                int numberForAdmins = 0;
                                                                 NoAssignedAddSched.Controls.Clear();
 
                                                                 int numberCountScroll = 0;
@@ -900,33 +939,86 @@ namespace WindowsFormUserGrading
                                                                 this.NoAssignedAddSched.Controls.Add(scroll);
 
 
-                                                                foreach (var showcalendar in await Task.Run(() => calendarClass.getAllDataInAddSched(usernameAccesssibleToDatabase)))
+                                                                //SCANNING KUNG MAY ADMIN BA NA SCHEDULE OR WALA...............
+                                                                int scanIfHaveAdminOrNo(List<CalendarList> scanForAdmin)
                                                                 {
-                                                                    if (showcalendar.ErrCheck == "")
+                                                                    int scanAdminHave = 0;
+                                                                    doneToScannAdmin = "Have";
+                                                                    foreach (var scan in scanForAdmin)
                                                                     {
-                                                                        numberCountScroll++;
-
-                                                                        if (numberCountScroll > 3)
+                                                                        numberScanIfMax++;
+                                                                        if (String.IsNullOrEmpty(scan.HandlingAdmin) != true)
                                                                         {
-                                                                            scroll.Visible = false;
+                                                                            scanAdminHave++;
                                                                         }
+                                                                    }
+                                                                    doneToScannAdmin = "";
+                                                                    return scanAdminHave;
+                                                                }
 
-                                                                        functionDelegateControls variableSched = new functionDelegateControls(createControlsSched);
-                                                                        variableSched.Invoke(showcalendar.NameUserWhoAdded,
-                                                                            showcalendar.DateTimeRange, showcalendar.ImageUserWhoAdded, numberCountPanels, "");
+                                                                Task<int> intFunctionAdmin = new Task<int>(() => scanIfHaveAdminOrNo(GetTheScheduleOfUserClicked));
+                                                                intFunctionAdmin.Start();
 
-                                                                        if (numberCountPanels == 8)
+                                                                numberForAdmins = await intFunctionAdmin.ConfigureAwait(true);
+                                                                doneToScannAdmin = "";
+
+                                                                List<CalendarList> calenListSched = await Task.Run(() => calendarClass.getAllDataInAddSched(usernameAccesssibleToDatabase));
+
+                                                                if (doneToScannAdmin != "Have") {
+                                                                    if (numberForAdmins <= 0)
+                                                                    {
+                                                                        foreach (var showcalendar in calenListSched)
+                                                                        {
+                                                                            if (showcalendar.ErrCheck == "")
+                                                                            {
+                                                                                numberCountScroll++;
+
+                                                                                if (numberCountScroll > 3)
+                                                                                {
+                                                                                    scroll.Visible = false;
+                                                                                }
+
+                                                                                functionDelegateControls variableSched = new functionDelegateControls(createControlsSched);
+                                                                                variableSched.Invoke(showcalendar.NameUserWhoAdded,
+                                                                                    showcalendar.DateTimeRange, showcalendar.ImageUserWhoAdded, numberCountPanels, "");
+
+                                                                                if (numberCountPanels == 8)
+                                                                                {
+                                                                                    loadingOrWaiting.Hide();
+                                                                                    this.Show();
+                                                                                }
+
+                                                                                numberCountPanels += 93;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                loadingOrWaiting.Show();
+                                                                                this.Hide();
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        int numberScanMinAdmin = 0;
+                                                                        //SHOW FIRST THE ADMIN SCHEDULE...............................
+                                                                       // Task<string> messageTask = new Task<string>(() => adminShowAndEtc(calenListSched,
+                                                                      //     numberForAdmins, numberScanMinAdmin, numberScanIfMax));
+                                                                      //  messageTask.Start();
+
+                                                                        string message = adminShowAndEtc(calenListSched,
+                                                                           numberForAdmins, numberScanMinAdmin, numberScanIfMax, scroll);
+
+                                                                        if (message == "Succesful to show")
                                                                         {
                                                                             loadingOrWaiting.Hide();
                                                                             this.Show();
                                                                         }
+                                                                        else if (message is "Please Check Your Connection.")
+                                                                        {
+                                                                            loadingOrWaiting.Show();
+                                                                            this.Hide();
+                                                                            MessageBox.Show("Please Check Your Connection.");
+                                                                        }
 
-                                                                        numberCountPanels += 93;
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        loadingOrWaiting.Show();
-                                                                        this.Hide();
                                                                     }
                                                                 }
                                                             }
