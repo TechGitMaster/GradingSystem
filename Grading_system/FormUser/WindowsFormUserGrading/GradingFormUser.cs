@@ -581,7 +581,7 @@ namespace WindowsFormUserGrading
             {
                 //SHOW THE LEAST OF THE HOLE DATABASE SCHEDULE FOR THE USER YOU CLICKED....
                 if (numberScanMinAdmin != numberScanIfMax)
-                {
+                { 
                     string waiting = "";
                     //SHOW AND DESIGN OF SCHEDULE OF USER ARRIVED..............
                     foreach (var showcalendar in GetTheScheduleOfUserClicked)
@@ -939,7 +939,7 @@ namespace WindowsFormUserGrading
                                                                 this.NoAssignedAddSched.Controls.Add(scroll);
 
 
-                                                                //SCANNING KUNG MAY ADMIN BA NA SCHEDULE OR WALA...............
+                                                                //SCANNING KUNG MAY ADMIN BA NA SCHEDULE OR WALA FUNCTION...............
                                                                 int scanIfHaveAdminOrNo(List<CalendarList> scanForAdmin)
                                                                 {
                                                                     int scanAdminHave = 0;
@@ -956,12 +956,14 @@ namespace WindowsFormUserGrading
                                                                     return scanAdminHave;
                                                                 }
 
+                                                                //SCAN AND RETURN THE DATA IF HAVE AN ADMIN SCHED OR NOT.................
                                                                 Task<int> intFunctionAdmin = new Task<int>(() => scanIfHaveAdminOrNo(GetTheScheduleOfUserClicked));
                                                                 intFunctionAdmin.Start();
 
                                                                 numberForAdmins = await intFunctionAdmin.ConfigureAwait(true);
                                                                 doneToScannAdmin = "";
 
+                                                                //GET THE DATA INTO DATABASE AND RETURN IT HERE.......................... 
                                                                 List<CalendarList> calenListSched = await Task.Run(() => calendarClass.getAllDataInAddSched(usernameAccesssibleToDatabase));
 
                                                                 if (doneToScannAdmin != "Have") {
@@ -1158,29 +1160,78 @@ namespace WindowsFormUserGrading
 
                                                                 if (checkIfHaveTable.numberCount == 1)
                                                                 {
-
-                                                                    int numberCountPanel = 8;
-
-                                                                    List<CalendarList> listreturnValue = await Task.Run(() => calendarClass.getAllDataInAddSched(usernameAccesssibleToDatabase)).ConfigureAwait(true);
-                                                                    try
+                                                                    string doneToScannAdmin = "";
+                                                                    int numberScanIfMax = 0;
+                                                                    int numberForAdmins = 0;
+                                                                    //SCANNING KUNG MAY ADMIN BA NA SCHEDULE OR WALA FUNCTION...............
+                                                                    int scanIfHaveAdminOrNo(List<CalendarList> scanForAdmin)
                                                                     {
-                                                                        foreach (var returnValue in listreturnValue)
+                                                                        int scanAdminHave = 0;
+                                                                        doneToScannAdmin = "Have";
+                                                                        foreach (var scan in scanForAdmin)
                                                                         {
-                                                                            numberCountScroll++;
-
-                                                                            if (numberCountScroll > 3) {
-                                                                                scroll.Visible = false;
+                                                                            numberScanIfMax++;
+                                                                            if (String.IsNullOrEmpty(scan.HandlingAdmin) != true)
+                                                                            {
+                                                                                scanAdminHave++;
                                                                             }
-
-                                                                            functionDelegateControls returnfunctiondele = new functionDelegateControls(createControlsSched);
-                                                                            returnfunctiondele.Invoke(returnValue.NameUserWhoAdded, returnValue.DateTimeRange,
-                                                                                returnValue.ImageUserWhoAdded, numberCountPanel, "");
-                                                                            numberCountPanel += 93;
                                                                         }
+                                                                        doneToScannAdmin = "";
+                                                                        return scanAdminHave;
                                                                     }
-                                                                    catch (Exception err)
-                                                                    {
-                                                                        MessageBox.Show(err.ToString());
+
+                                                                    //SCAN AND RETURN THE DATA IF HAVE AN ADMIN SCHED OR NOT.................
+                                                                    Calendar calen = new Calendar();
+                                                                    List<CalendarList> listreturnValue = await Task.Run(() => calen.getAllDataInAddSched(usernameAccesssibleToDatabase)).ConfigureAwait(true);
+                                                                    Task<int> intFunctionAdmin = new Task<int>(() => scanIfHaveAdminOrNo(listreturnValue));
+                                                                    intFunctionAdmin.Start();
+
+                                                                    numberForAdmins = await intFunctionAdmin.ConfigureAwait(true);
+                                                                    doneToScannAdmin = "";
+
+
+                                                                    if (doneToScannAdmin != "Have") {
+                                                                        if (numberForAdmins == 0)
+                                                                        {
+                                                                            int numberCountPanel = 8;
+                                                                            foreach (var returnValue in listreturnValue)
+                                                                            {
+                                                                                numberCountScroll++;
+
+                                                                                if (numberCountScroll > 3)
+                                                                                {
+                                                                                    scroll.Visible = false;
+                                                                                }
+
+                                                                                functionDelegateControls returnfunctiondele = new functionDelegateControls(createControlsSched);
+                                                                                returnfunctiondele.Invoke(returnValue.NameUserWhoAdded, returnValue.DateTimeRange,
+                                                                                    returnValue.ImageUserWhoAdded, numberCountPanel, "");
+                                                                                numberCountPanel += 93;
+                                                                            }
+                                                                        }
+                                                                        else {
+                                                                            //SCANNING FOR ADMON AND SHOW IT................
+                                                                            int numberScanMinAdmin = 0;
+                                                                            //SHOW FIRST THE ADMIN SCHEDULE...............................
+                                                                            // Task<string> messageTask = new Task<string>(() => adminShowAndEtc(calenListSched,
+                                                                            //     numberForAdmins, numberScanMinAdmin, numberScanIfMax));
+                                                                            //  messageTask.Start();
+
+                                                                            string message = adminShowAndEtc(listreturnValue,
+                                                                               (numberForAdmins), numberScanMinAdmin, numberScanIfMax, scroll);
+
+                                                                            if (message == "Succesful to show")
+                                                                            {
+                                                                                loadingOrWaiting.Hide();
+                                                                                this.Show();
+                                                                            }
+                                                                            else if (message is "Please Check Your Connection.")
+                                                                            {
+                                                                                loadingOrWaiting.Show();
+                                                                                this.Hide();
+                                                                                MessageBox.Show("Please Check Your Connection.");
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                                 else {
