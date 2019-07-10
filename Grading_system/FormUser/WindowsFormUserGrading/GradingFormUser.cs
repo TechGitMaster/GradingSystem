@@ -25,6 +25,7 @@ namespace WindowsFormUserGrading
         private static string conditionToCLick = "CalendarLoaded";
         protected static List<CalendarList> ListScheduleSelf = new List<CalendarList>();
         protected System.Windows.Forms.Timer TimerSchedUserSelf = new System.Windows.Forms.Timer();
+        private int NumberHandleCondition = 0;
         protected Calendar calendarClass = new Calendar();
         protected override CreateParams CreateParams {
             get {
@@ -87,12 +88,35 @@ namespace WindowsFormUserGrading
             TimerSchedUserSelf.Interval = 5000;
             TimerSchedUserSelf.Tick += async(object ob, EventArgs e) => {
                 System.Windows.Forms.Timer time = (System.Windows.Forms.Timer)ob;
+
                 time.Stop();
 
-            //    Thread.Sleep(2000);
                 ListScheduleSelf = await Task.Run(() => calendarClass.GetAllSchedThisUser("vee")).ConfigureAwait(true);
 
-                this.intervalVoidShowAndScanSched("vee");
+                Thread th = new Thread(() => {
+                    int number = 0;
+                    foreach (var count in ListScheduleSelf)
+                    {
+                        if (count.ErrCheck == "")
+                        {
+                            if (count.numberCount > 0)
+                            {
+                                number++;
+                            }
+                        }
+                    }
+                    if (NumberHandleCondition != number)
+                    {
+                        Action ac = () => this.intervalVoidShowAndScanSched("vee");
+                        this.BeginInvoke(ac);
+                    }
+                    else {
+                        Action times = () => time.Start();
+                        this.BeginInvoke(times);
+                    }
+                });
+                th.Start();
+
             };
             foreach (Control buttonsClick in navigator.Controls) {
                 if (buttonsClick.GetType() == typeof(Button)) {
@@ -338,8 +362,6 @@ namespace WindowsFormUserGrading
             LoadingScreen load = new LoadingScreen();
             List<CalendarList> handleDataSched = new List<CalendarList>();
             List<CalendarList> AdminAndUserHandle = new List<CalendarList>();
-            //load.Show();
-            //this.Hide();
 
 
             if (conditionFirst != false)
@@ -393,6 +415,8 @@ namespace WindowsFormUserGrading
                     }
 
                     EqualNumber = numberCountHole;
+
+                    NumberHandleCondition = EqualNumber;
 
                     //CONDITION IF SUCCESFUL HAVE AN ADMIN SCHEDULE OR NOT .........................
                     //IT WILL DEFINE IF HAVE ADMIN SCHED OR NO......................
@@ -1176,6 +1200,7 @@ namespace WindowsFormUserGrading
         protected async void AddScheduleCalendar(object control, EventArgs e) {
             loadingOrWaiting.Show();
             this.Hide();
+          //  TimerSchedUserSelf.Stop();
             int numberCountPanels = 8;
             int count_number = 0;
 

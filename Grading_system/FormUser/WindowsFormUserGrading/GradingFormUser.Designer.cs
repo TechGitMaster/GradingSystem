@@ -46,6 +46,25 @@
             this.PanelBox = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.SetScheduleForOtherUser = new System.Windows.Forms.Panel();
+            this.SchedSetMess = new System.Windows.Forms.Button();
+            this.YourScheduleAndOther = new System.Windows.Forms.Panel();
+            this.CalendarTime = new System.Windows.Forms.Panel();
+            this.TimeCalendarLabel = new System.Windows.Forms.Label();
+            this.ScheduleUserPanel1 = new System.Windows.Forms.Panel();
+            this.ScheduleUserPanel2 = new System.Windows.Forms.Panel();
+            this.ThisSchedule = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.UserNoSchedule = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.SchedulePanelBarSearch = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.SearchBoxCalender = new System.Windows.Forms.TextBox();
+            this.BttnSearchBar = new System.Windows.Forms.PictureBox();
             this.BackSched = new System.Windows.Forms.Button();
             this.UserSchedAddPanelAdd = new System.Windows.Forms.Panel();
             this.NameOfUserAddCalendar = new System.Windows.Forms.Button();
@@ -90,28 +109,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.YourScheduleAndOther = new System.Windows.Forms.Panel();
-            this.CalendarTime = new System.Windows.Forms.Panel();
-            this.TimeCalendarLabel = new System.Windows.Forms.Label();
-            this.ScheduleUserPanel1 = new System.Windows.Forms.Panel();
-            this.ScheduleUserPanel2 = new System.Windows.Forms.Panel();
-            this.ThisSchedule = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.UserNoSchedule = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.SchedulePanelBarSearch = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.SearchBoxCalender = new System.Windows.Forms.TextBox();
-            this.BttnSearchBar = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.SchedSetMess = new System.Windows.Forms.Button();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -120,6 +120,16 @@
             this.PanelBox.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SetScheduleForOtherUser.SuspendLayout();
+            this.YourScheduleAndOther.SuspendLayout();
+            this.CalendarTime.SuspendLayout();
+            this.ScheduleUserPanel1.SuspendLayout();
+            this.ScheduleUserPanel2.SuspendLayout();
+            this.ThisSchedule.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.SchedulePanelBarSearch.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).BeginInit();
             this.UserSchedAddPanelAdd.SuspendLayout();
             this.NoAssignedAddSched.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -136,16 +146,6 @@
             this.GradingPanel.SuspendLayout();
             this.ReportsPanel.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
-            this.YourScheduleAndOther.SuspendLayout();
-            this.CalendarTime.SuspendLayout();
-            this.ScheduleUserPanel1.SuspendLayout();
-            this.ScheduleUserPanel2.SuspendLayout();
-            this.ThisSchedule.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.SchedulePanelBarSearch.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -383,6 +383,232 @@
             this.SetScheduleForOtherUser.Size = new System.Drawing.Size(779, 497);
             this.SetScheduleForOtherUser.TabIndex = 1;
             // 
+            // SchedSetMess
+            // 
+            this.SchedSetMess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.SchedSetMess.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.SchedSetMess.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.SchedSetMess.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.SchedSetMess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SchedSetMess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SchedSetMess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.SchedSetMess.Location = new System.Drawing.Point(299, 19);
+            this.SchedSetMess.Name = "SchedSetMess";
+            this.SchedSetMess.Size = new System.Drawing.Size(274, 38);
+            this.SchedSetMess.TabIndex = 38;
+            this.SchedSetMess.Text = "Set a Schedule For This User:";
+            this.SchedSetMess.UseVisualStyleBackColor = false;
+            this.SchedSetMess.Visible = false;
+            // 
+            // YourScheduleAndOther
+            // 
+            this.YourScheduleAndOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.YourScheduleAndOther.Controls.Add(this.CalendarTime);
+            this.YourScheduleAndOther.Controls.Add(this.ScheduleUserPanel1);
+            this.YourScheduleAndOther.Controls.Add(this.SchedulePanelBarSearch);
+            this.YourScheduleAndOther.Controls.Add(this.panel7);
+            this.YourScheduleAndOther.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.YourScheduleAndOther.Location = new System.Drawing.Point(-1, 0);
+            this.YourScheduleAndOther.Name = "YourScheduleAndOther";
+            this.YourScheduleAndOther.Size = new System.Drawing.Size(779, 497);
+            this.YourScheduleAndOther.TabIndex = 31;
+            // 
+            // CalendarTime
+            // 
+            this.CalendarTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.CalendarTime.Controls.Add(this.TimeCalendarLabel);
+            this.CalendarTime.Location = new System.Drawing.Point(9, 35);
+            this.CalendarTime.Name = "CalendarTime";
+            this.CalendarTime.Size = new System.Drawing.Size(213, 34);
+            this.CalendarTime.TabIndex = 3;
+            // 
+            // TimeCalendarLabel
+            // 
+            this.TimeCalendarLabel.AutoSize = true;
+            this.TimeCalendarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeCalendarLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.TimeCalendarLabel.Location = new System.Drawing.Point(6, 6);
+            this.TimeCalendarLabel.Name = "TimeCalendarLabel";
+            this.TimeCalendarLabel.Size = new System.Drawing.Size(59, 25);
+            this.TimeCalendarLabel.TabIndex = 0;
+            this.TimeCalendarLabel.Text = "Time";
+            // 
+            // ScheduleUserPanel1
+            // 
+            this.ScheduleUserPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.ScheduleUserPanel1.Controls.Add(this.ScheduleUserPanel2);
+            this.ScheduleUserPanel1.Controls.Add(this.label15);
+            this.ScheduleUserPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScheduleUserPanel1.Location = new System.Drawing.Point(9, 75);
+            this.ScheduleUserPanel1.Name = "ScheduleUserPanel1";
+            this.ScheduleUserPanel1.Size = new System.Drawing.Size(443, 411);
+            this.ScheduleUserPanel1.TabIndex = 2;
+            // 
+            // ScheduleUserPanel2
+            // 
+            this.ScheduleUserPanel2.AutoScroll = true;
+            this.ScheduleUserPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.ScheduleUserPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ScheduleUserPanel2.Controls.Add(this.ThisSchedule);
+            this.ScheduleUserPanel2.Controls.Add(this.UserNoSchedule);
+            this.ScheduleUserPanel2.Location = new System.Drawing.Point(10, 45);
+            this.ScheduleUserPanel2.Name = "ScheduleUserPanel2";
+            this.ScheduleUserPanel2.Size = new System.Drawing.Size(421, 355);
+            this.ScheduleUserPanel2.TabIndex = 1;
+            // 
+            // ThisSchedule
+            // 
+            this.ThisSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.ThisSchedule.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ThisSchedule.Controls.Add(this.button6);
+            this.ThisSchedule.Controls.Add(this.button3);
+            this.ThisSchedule.Controls.Add(this.button2);
+            this.ThisSchedule.Controls.Add(this.pictureBox2);
+            this.ThisSchedule.Location = new System.Drawing.Point(5, 5);
+            this.ThisSchedule.Name = "ThisSchedule";
+            this.ThisSchedule.Size = new System.Drawing.Size(390, 80);
+            this.ThisSchedule.TabIndex = 1;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(97)))), ((int)(((byte)(85)))));
+            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.button6.Location = new System.Drawing.Point(64, 45);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(314, 28);
+            this.button6.TabIndex = 3;
+            this.button6.Text = "Janunary 8, 2019 / 1: 56 mng";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(97)))), ((int)(((byte)(85)))));
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.button3.Location = new System.Drawing.Point(64, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(314, 37);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Kyle Velarde";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(97)))), ((int)(((byte)(85)))));
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.button2.Location = new System.Drawing.Point(5, 48);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(53, 25);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Admin:";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_2;
+            this.pictureBox2.Location = new System.Drawing.Point(5, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(53, 39);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
+            // UserNoSchedule
+            // 
+            this.UserNoSchedule.AutoSize = true;
+            this.UserNoSchedule.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.UserNoSchedule.Location = new System.Drawing.Point(156, 173);
+            this.UserNoSchedule.Name = "UserNoSchedule";
+            this.UserNoSchedule.Size = new System.Drawing.Size(112, 16);
+            this.UserNoSchedule.TabIndex = 0;
+            this.UserNoSchedule.Text = "No Schedule Yet.";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label15.Location = new System.Drawing.Point(7, 14);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(108, 18);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Your Schedule:";
+            // 
+            // SchedulePanelBarSearch
+            // 
+            this.SchedulePanelBarSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.SchedulePanelBarSearch.Controls.Add(this.label16);
+            this.SchedulePanelBarSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SchedulePanelBarSearch.Location = new System.Drawing.Point(458, 75);
+            this.SchedulePanelBarSearch.Name = "SchedulePanelBarSearch";
+            this.SchedulePanelBarSearch.Size = new System.Drawing.Size(302, 411);
+            this.SchedulePanelBarSearch.TabIndex = 1;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label16.Location = new System.Drawing.Point(101, 194);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(101, 15);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "No Schedule Yet.";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Location = new System.Drawing.Point(458, 23);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(302, 46);
+            this.panel7.TabIndex = 0;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel8.Controls.Add(this.SearchBoxCalender);
+            this.panel8.Controls.Add(this.BttnSearchBar);
+            this.panel8.Location = new System.Drawing.Point(12, 8);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(276, 30);
+            this.panel8.TabIndex = 0;
+            // 
+            // SearchBoxCalender
+            // 
+            this.SearchBoxCalender.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.SearchBoxCalender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SearchBoxCalender.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchBoxCalender.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.SearchBoxCalender.Location = new System.Drawing.Point(31, 4);
+            this.SearchBoxCalender.Name = "SearchBoxCalender";
+            this.SearchBoxCalender.Size = new System.Drawing.Size(232, 21);
+            this.SearchBoxCalender.TabIndex = 1;
+            // 
+            // BttnSearchBar
+            // 
+            this.BttnSearchBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BttnSearchBar.Image = global::WindowsFormUserGrading.Properties.Resources.icons8_google_web_search_26;
+            this.BttnSearchBar.Location = new System.Drawing.Point(3, 3);
+            this.BttnSearchBar.Name = "BttnSearchBar";
+            this.BttnSearchBar.Size = new System.Drawing.Size(25, 24);
+            this.BttnSearchBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BttnSearchBar.TabIndex = 0;
+            this.BttnSearchBar.TabStop = false;
+            // 
             // BackSched
             // 
             this.BackSched.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(97)))), ((int)(((byte)(141)))));
@@ -392,9 +618,9 @@
             this.BackSched.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackSched.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BackSched.ForeColor = System.Drawing.Color.White;
-            this.BackSched.Location = new System.Drawing.Point(692, 16);
+            this.BackSched.Location = new System.Drawing.Point(692, 19);
             this.BackSched.Name = "BackSched";
-            this.BackSched.Size = new System.Drawing.Size(71, 38);
+            this.BackSched.Size = new System.Drawing.Size(71, 35);
             this.BackSched.TabIndex = 32;
             this.BackSched.Text = "Back ";
             this.BackSched.UseVisualStyleBackColor = false;
@@ -892,215 +1118,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "ControlsPanel";
             // 
-            // YourScheduleAndOther
-            // 
-            this.YourScheduleAndOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.YourScheduleAndOther.Controls.Add(this.CalendarTime);
-            this.YourScheduleAndOther.Controls.Add(this.ScheduleUserPanel1);
-            this.YourScheduleAndOther.Controls.Add(this.SchedulePanelBarSearch);
-            this.YourScheduleAndOther.Controls.Add(this.panel7);
-            this.YourScheduleAndOther.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.YourScheduleAndOther.Location = new System.Drawing.Point(-1, 0);
-            this.YourScheduleAndOther.Name = "YourScheduleAndOther";
-            this.YourScheduleAndOther.Size = new System.Drawing.Size(779, 497);
-            this.YourScheduleAndOther.TabIndex = 31;
-            // 
-            // CalendarTime
-            // 
-            this.CalendarTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.CalendarTime.Controls.Add(this.TimeCalendarLabel);
-            this.CalendarTime.Location = new System.Drawing.Point(9, 35);
-            this.CalendarTime.Name = "CalendarTime";
-            this.CalendarTime.Size = new System.Drawing.Size(213, 34);
-            this.CalendarTime.TabIndex = 3;
-            // 
-            // TimeCalendarLabel
-            // 
-            this.TimeCalendarLabel.AutoSize = true;
-            this.TimeCalendarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimeCalendarLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.TimeCalendarLabel.Location = new System.Drawing.Point(6, 6);
-            this.TimeCalendarLabel.Name = "TimeCalendarLabel";
-            this.TimeCalendarLabel.Size = new System.Drawing.Size(59, 25);
-            this.TimeCalendarLabel.TabIndex = 0;
-            this.TimeCalendarLabel.Text = "Time";
-            // 
-            // ScheduleUserPanel1
-            // 
-            this.ScheduleUserPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.ScheduleUserPanel1.Controls.Add(this.ScheduleUserPanel2);
-            this.ScheduleUserPanel1.Controls.Add(this.label15);
-            this.ScheduleUserPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScheduleUserPanel1.Location = new System.Drawing.Point(9, 75);
-            this.ScheduleUserPanel1.Name = "ScheduleUserPanel1";
-            this.ScheduleUserPanel1.Size = new System.Drawing.Size(443, 411);
-            this.ScheduleUserPanel1.TabIndex = 2;
-            // 
-            // ScheduleUserPanel2
-            // 
-            this.ScheduleUserPanel2.AutoScroll = true;
-            this.ScheduleUserPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.ScheduleUserPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ScheduleUserPanel2.Controls.Add(this.ThisSchedule);
-            this.ScheduleUserPanel2.Controls.Add(this.UserNoSchedule);
-            this.ScheduleUserPanel2.Location = new System.Drawing.Point(10, 45);
-            this.ScheduleUserPanel2.Name = "ScheduleUserPanel2";
-            this.ScheduleUserPanel2.Size = new System.Drawing.Size(421, 355);
-            this.ScheduleUserPanel2.TabIndex = 1;
-            // 
-            // ThisSchedule
-            // 
-            this.ThisSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.ThisSchedule.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ThisSchedule.Controls.Add(this.button6);
-            this.ThisSchedule.Controls.Add(this.button3);
-            this.ThisSchedule.Controls.Add(this.button2);
-            this.ThisSchedule.Controls.Add(this.pictureBox2);
-            this.ThisSchedule.Location = new System.Drawing.Point(5, 5);
-            this.ThisSchedule.Name = "ThisSchedule";
-            this.ThisSchedule.Size = new System.Drawing.Size(390, 80);
-            this.ThisSchedule.TabIndex = 1;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(97)))), ((int)(((byte)(85)))));
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.button6.Location = new System.Drawing.Point(64, 45);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(314, 28);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "Janunary 8, 2019 / 1: 56 mng";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(97)))), ((int)(((byte)(85)))));
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.button3.Location = new System.Drawing.Point(64, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(314, 37);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Kyle Velarde";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(97)))), ((int)(((byte)(85)))));
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.button2.Location = new System.Drawing.Point(5, 48);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(53, 25);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Admin:";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_2;
-            this.pictureBox2.Location = new System.Drawing.Point(5, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(53, 39);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // UserNoSchedule
-            // 
-            this.UserNoSchedule.AutoSize = true;
-            this.UserNoSchedule.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.UserNoSchedule.Location = new System.Drawing.Point(156, 173);
-            this.UserNoSchedule.Name = "UserNoSchedule";
-            this.UserNoSchedule.Size = new System.Drawing.Size(112, 16);
-            this.UserNoSchedule.TabIndex = 0;
-            this.UserNoSchedule.Text = "No Schedule Yet.";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label15.Location = new System.Drawing.Point(7, 14);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(108, 18);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Your Schedule:";
-            // 
-            // SchedulePanelBarSearch
-            // 
-            this.SchedulePanelBarSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.SchedulePanelBarSearch.Controls.Add(this.label16);
-            this.SchedulePanelBarSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SchedulePanelBarSearch.Location = new System.Drawing.Point(458, 75);
-            this.SchedulePanelBarSearch.Name = "SchedulePanelBarSearch";
-            this.SchedulePanelBarSearch.Size = new System.Drawing.Size(302, 411);
-            this.SchedulePanelBarSearch.TabIndex = 1;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label16.Location = new System.Drawing.Point(101, 194);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(101, 15);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "No Schedule Yet.";
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(458, 23);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(302, 46);
-            this.panel7.TabIndex = 0;
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel8.Controls.Add(this.SearchBoxCalender);
-            this.panel8.Controls.Add(this.BttnSearchBar);
-            this.panel8.Location = new System.Drawing.Point(12, 8);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(276, 30);
-            this.panel8.TabIndex = 0;
-            // 
-            // SearchBoxCalender
-            // 
-            this.SearchBoxCalender.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.SearchBoxCalender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SearchBoxCalender.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchBoxCalender.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.SearchBoxCalender.Location = new System.Drawing.Point(31, 4);
-            this.SearchBoxCalender.Name = "SearchBoxCalender";
-            this.SearchBoxCalender.Size = new System.Drawing.Size(232, 21);
-            this.SearchBoxCalender.TabIndex = 1;
-            // 
-            // BttnSearchBar
-            // 
-            this.BttnSearchBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BttnSearchBar.Image = global::WindowsFormUserGrading.Properties.Resources.icons8_google_web_search_26;
-            this.BttnSearchBar.Location = new System.Drawing.Point(3, 3);
-            this.BttnSearchBar.Name = "BttnSearchBar";
-            this.BttnSearchBar.Size = new System.Drawing.Size(25, 24);
-            this.BttnSearchBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BttnSearchBar.TabIndex = 0;
-            this.BttnSearchBar.TabStop = false;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label3);
@@ -1132,23 +1149,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
-            // SchedSetMess
-            // 
-            this.SchedSetMess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.SchedSetMess.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.SchedSetMess.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.SchedSetMess.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.SchedSetMess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SchedSetMess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SchedSetMess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.SchedSetMess.Location = new System.Drawing.Point(299, 19);
-            this.SchedSetMess.Name = "SchedSetMess";
-            this.SchedSetMess.Size = new System.Drawing.Size(274, 38);
-            this.SchedSetMess.TabIndex = 38;
-            this.SchedSetMess.Text = "Set a Schedule For This User:";
-            this.SchedSetMess.UseVisualStyleBackColor = false;
-            this.SchedSetMess.Visible = false;
-            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1175,6 +1175,21 @@
             this.PanelBox.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.SetScheduleForOtherUser.ResumeLayout(false);
+            this.YourScheduleAndOther.ResumeLayout(false);
+            this.CalendarTime.ResumeLayout(false);
+            this.CalendarTime.PerformLayout();
+            this.ScheduleUserPanel1.ResumeLayout(false);
+            this.ScheduleUserPanel1.PerformLayout();
+            this.ScheduleUserPanel2.ResumeLayout(false);
+            this.ScheduleUserPanel2.PerformLayout();
+            this.ThisSchedule.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.SchedulePanelBarSearch.ResumeLayout(false);
+            this.SchedulePanelBarSearch.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).EndInit();
             this.UserSchedAddPanelAdd.ResumeLayout(false);
             this.NoAssignedAddSched.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -1200,21 +1215,6 @@
             this.ReportsPanel.PerformLayout();
             this.ControlsPanel.ResumeLayout(false);
             this.ControlsPanel.PerformLayout();
-            this.YourScheduleAndOther.ResumeLayout(false);
-            this.CalendarTime.ResumeLayout(false);
-            this.CalendarTime.PerformLayout();
-            this.ScheduleUserPanel1.ResumeLayout(false);
-            this.ScheduleUserPanel1.PerformLayout();
-            this.ScheduleUserPanel2.ResumeLayout(false);
-            this.ScheduleUserPanel2.PerformLayout();
-            this.ThisSchedule.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.SchedulePanelBarSearch.ResumeLayout(false);
-            this.SchedulePanelBarSearch.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
