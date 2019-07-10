@@ -761,6 +761,14 @@ namespace WindowsFormUserGrading
             loadingOrWaiting.Show();
             this.Hide();
 
+            Thread th = new Thread(() => {
+                this.BeginInvoke((Action)delegate() {
+                   TimerSchedUserSelf.Stop();
+                    BackSched.Click += new System.EventHandler(BackSchedErase);
+                });
+            });
+            th.Start();
+
             int numberCountScroll = 0;
              scroll = new VScrollBar() {
                 Name = "scrollCalendarSchedAdd",
@@ -908,6 +916,20 @@ namespace WindowsFormUserGrading
                 }
             }
 
+        }
+
+
+        //BTTN TO BACK TO FIRST SEE OF SCHED........................................
+        protected void BackSchedErase(object control, EventArgs e) {
+            Thread th = new Thread(() => {
+                this.BeginInvoke((Action)delegate() {
+                    TimerSchedUserSelf.Start();
+                    YourScheduleAndOther.Visible = true;
+                    SchedSetMess.Visible = false;
+                    BackSched.Click -= new System.EventHandler(BackSchedErase);
+                });
+            });
+            th.Start();
         }
 
 
@@ -1200,7 +1222,6 @@ namespace WindowsFormUserGrading
         protected async void AddScheduleCalendar(object control, EventArgs e) {
             loadingOrWaiting.Show();
             this.Hide();
-          //  TimerSchedUserSelf.Stop();
             int numberCountPanels = 8;
             int count_number = 0;
 
