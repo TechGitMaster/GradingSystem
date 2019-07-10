@@ -22,6 +22,9 @@ namespace WindowsFormUserGrading
         protected static string[] arrComboBox = new string[] { "comboBoxHrs", "comboBoxMnt", "comboBoxAP", "TimeRangeHrs", "TimeRangeMnt" };
         protected int handlingIdInToProtected;
         protected LoadingScreen loadingOrWaiting = new LoadingScreen();
+        private static string conditionToCLick = "CalendarLoaded";
+        protected static List<CalendarList> ListScheduleSelf = new List<CalendarList>();
+        protected System.Windows.Forms.Timer TimerSchedUserSelf = new System.Windows.Forms.Timer();
         protected Calendar calendarClass = new Calendar();
         protected override CreateParams CreateParams {
             get {
@@ -80,11 +83,39 @@ namespace WindowsFormUserGrading
             //Click the button for example 'Reports' the Paint Graphics will follow-
             //-Where ever the 'Reports' is there.......................
             DrawLine2Final.Paint += new System.Windows.Forms.PaintEventHandler(paintDrawLine2);
+
+            TimerSchedUserSelf.Interval = 5000;
+            TimerSchedUserSelf.Tick += async(object ob, EventArgs e) => {
+                System.Windows.Forms.Timer time = (System.Windows.Forms.Timer)ob;
+                time.Stop();
+
+            //    Thread.Sleep(2000);
+                ListScheduleSelf = await Task.Run(() => calendarClass.GetAllSchedThisUser("vee")).ConfigureAwait(true);
+
+                this.intervalVoidShowAndScanSched("vee");
+            };
             foreach (Control buttonsClick in navigator.Controls) {
                 if (buttonsClick.GetType() == typeof(Button)) {
+
+                    if (buttonsClick.Name is "Calendar") {
+                        ScheduleUserPanel2.Controls.Clear();
+                        this.intervalVoidShowAndScanSched("vee");
+                    }
+
                     buttonsClick.Click += new System.EventHandler((object sender, EventArgs e) => {
                         Button bttn = (Button)sender;
                         DrawLine2Final.Location = new Point(0, bttn.Location.Y);
+
+                        if (buttonsClick.Name != "Calendar")
+                        {
+                            conditionToCLick = "";
+                            TimerSchedUserSelf.Stop();
+                        }
+                        else {
+                            if (conditionToCLick != "CalendarLoaded") {
+                                TimerSchedUserSelf.Start();
+                            }
+                        }
 
                         foreach (Panel panelBoxs in PanelBox.Controls)
                         {
@@ -293,6 +324,309 @@ namespace WindowsFormUserGrading
             CreatingControlUserSearchAndGet();
         }
 
+
+
+
+
+
+        private static bool conditionFirst = true;
+        protected async void intervalVoidShowAndScanSched(string userName) {
+            bool conditionSecond = true;
+            string conditionToShow = "";
+            string conditionToThisFinal = "";
+            int EqualNumber = 0, numberCountToRepeat = 0;
+            LoadingScreen load = new LoadingScreen();
+            List<CalendarList> handleDataSched = new List<CalendarList>();
+            List<CalendarList> AdminAndUserHandle = new List<CalendarList>();
+            //load.Show();
+            //this.Hide();
+
+
+            if (conditionFirst != false)
+            {
+                Calendar getSchedThisUser = new Calendar();
+                handleDataSched = await Task.Run(() => getSchedThisUser.GetAllSchedThisUser(userName)).ConfigureAwait(true);
+                conditionFirst = false;
+
+                //SCANNING IF HAVE A ADMIN OR NO..............................................
+                if (await Task.Run(() => ScanForAdmin(handleDataSched)) == "DoneScan")
+                {
+                    await Task.Run(() => forEachShowSched());
+                    Thread.Sleep(100);
+                    if (conditionToThisFinal == "DoneShowSched")
+                    {
+                        TimerSchedUserSelf.Start();
+                    }
+                }
+            }
+            else {
+                conditionSecond = false;
+                handleDataSched = ListScheduleSelf;
+                conditionSecond = true;
+
+                if (conditionSecond == true) {
+                    if (await Task.Run(() => ScanForAdmin(handleDataSched)).ConfigureAwait(true) == "DoneScan") {
+                        await Task.Run(() => forEachShowSched());
+
+                        if (conditionToThisFinal == "DoneShowSched")
+                        {
+                            TimerSchedUserSelf.Start();
+                        }
+                    }
+                }
+            }
+
+            //SCANNING FUNCTION THAT WILL SCAN IF THE USER HAVE A SCHEDULE IN ADMIN....................
+            async Task<string> ScanForAdmin(List<CalendarList> handleDataSchedScan) {
+                int numberCountEqual = 0, numberCountHole = 0, numberCountAdmin = 0;
+                string asd = "";
+                string trys()
+                {
+                    //CHECK IF THERE IS HAVE ADMIN SCHED ASSIGNED AND COUNT IT..........................
+                    foreach (var scanAdmin in handleDataSchedScan)
+                    {
+                        numberCountHole++;
+                        if (scanAdmin.HandlingAdmin == "ADMIN")
+                        {
+                            numberCountAdmin = numberCountAdmin + 1;
+                        }
+                    }
+
+                    EqualNumber = numberCountHole;
+
+                    //CONDITION IF SUCCESFUL HAVE AN ADMIN SCHEDULE OR NOT .........................
+                    //IT WILL DEFINE IF HAVE ADMIN SCHED OR NO......................
+                    if (numberCountAdmin > 0)
+                    {
+                        //IF HAVE THIS WILL ADDED IN NEW LIST.....................
+                        foreach (var scanAdminFinal in handleDataSchedScan)
+                        {
+                            if (scanAdminFinal.HandlingAdmin == "ADMIN")
+                            {
+                                AdminAndUserHandle.Add(new CalendarList
+                                {
+                                    ErrCheck = scanAdminFinal.ErrCheck,
+                                    numberCount = scanAdminFinal.numberCount,
+                                    NameUserWhoAdded = scanAdminFinal.NameUserWhoAdded,
+                                    ImageUserWhoAdded = scanAdminFinal.ImageUserWhoAdded,
+                                    DateTimeRangeAddHrs = scanAdminFinal.DateTimeRangeAddHrs,
+                                    DateTimeRangeAddMnt = scanAdminFinal.DateTimeRangeAddMnt,
+                                    DateTimeRangeAddAP = scanAdminFinal.DateTimeRangeAddAP,
+                                    calendarRangeAddMonth = scanAdminFinal.calendarRangeAddMonth,
+                                    calendarRangeAddConvert = scanAdminFinal.calendarRangeAddConvert,
+                                    calendarRangeAddDay = scanAdminFinal.calendarRangeAddDay,
+                                    calendarRangeAddYear = scanAdminFinal.calendarRangeAddYear,
+                                    SetDurationTimeAdd = scanAdminFinal.SetDurationTimeAdd,
+                                    SetDurationTimeAddHrs = scanAdminFinal.SetDurationTimeAddHrs,
+                                    DateTimeRange = scanAdminFinal.DateTimeRange,
+                                    HandlingAdmin = scanAdminFinal.HandlingAdmin
+                                });
+                                numberCountEqual++;
+                                numberCountAdmin--;
+                            }
+                        }
+
+
+                        if (numberCountAdmin == 0)
+                        {
+                            //BUT IF THERE IS HAVE A USER AFTER ADDED ALL ADMIN THIS WILL HAPPEND
+                            if (numberCountEqual != numberCountHole)
+                            {
+                                //SCAN IT AND ADD USERS........................
+                                foreach (var scanAdminFinals in handleDataSchedScan)
+                                {
+                                    if (scanAdminFinals.HandlingAdmin != "ADMIN")
+                                    {
+                                        AdminAndUserHandle.Add(new CalendarList
+                                        {
+                                            ErrCheck = scanAdminFinals.ErrCheck,
+                                            numberCount = scanAdminFinals.numberCount,
+                                            NameUserWhoAdded = scanAdminFinals.NameUserWhoAdded,
+                                            ImageUserWhoAdded = scanAdminFinals.ImageUserWhoAdded,
+                                            DateTimeRangeAddHrs = scanAdminFinals.DateTimeRangeAddHrs,
+                                            DateTimeRangeAddMnt = scanAdminFinals.DateTimeRangeAddMnt,
+                                            DateTimeRangeAddAP = scanAdminFinals.DateTimeRangeAddAP,
+                                            calendarRangeAddMonth = scanAdminFinals.calendarRangeAddMonth,
+                                            calendarRangeAddConvert = scanAdminFinals.calendarRangeAddConvert,
+                                            calendarRangeAddDay = scanAdminFinals.calendarRangeAddDay,
+                                            calendarRangeAddYear = scanAdminFinals.calendarRangeAddYear,
+                                            SetDurationTimeAdd = scanAdminFinals.SetDurationTimeAdd,
+                                            SetDurationTimeAddHrs = scanAdminFinals.SetDurationTimeAddHrs,
+                                            DateTimeRange = scanAdminFinals.DateTimeRange,
+                                            HandlingAdmin = scanAdminFinals.HandlingAdmin
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        AdminAndUserHandle = handleDataSchedScan;
+                    }
+                    return "DoneScan";
+                }
+                asd = await Task.Run(trys);
+                return asd;
+            }
+
+
+            async void forEachShowSched() {
+                int locationY = 5;
+                ScheduleUserPanel2.BeginInvoke((Action)delegate ()
+                {
+                    ScheduleUserPanel2.Controls.Clear();
+                });
+
+                foreach (var getData in AdminAndUserHandle)
+                {
+                    if (getData.ErrCheck == "")
+                    {
+                        if (getData.numberCount > 0)
+                        {
+                           if (conditionToShow == "")
+                           {
+
+                                conditionToShow = "Wait";
+
+                                conditionToShow = await Task.Run(() => wait());
+
+                                string wait()
+                                {
+                                    //THREAD THAT IGNORING THE ERROR..............................
+                                    Thread th = new Thread(async() =>
+                                    {
+                                        if (ScheduleUserPanel2.InvokeRequired != false)
+                                        {
+                                            ScheduleUserPanel2.BeginInvoke((Action)delegate ()
+                                            {
+                                                var delegateFunc = new functionDelegateControls(ControlsLoadSHow);
+                                                delegateFunc.Invoke(getData.NameUserWhoAdded, getData.DateTimeRange,
+                                                    getData.ImageUserWhoAdded, locationY, getData.HandlingAdmin);
+                                                locationY += 85;
+                                            });
+
+                                        }
+                                        else {
+                                            Task StringReturn = new Task(() => this.ControlsLoadSHow(getData.NameUserWhoAdded, getData.DateTimeRange,
+                                                    getData.ImageUserWhoAdded, locationY, getData.HandlingAdmin));
+                                            StringReturn.Start();
+                                            await StringReturn.ConfigureAwait(true);
+                                            locationY += 80;
+                                        };
+                                    });
+                                    th.Start();
+
+                                    return "";
+                                }
+                                numberCountToRepeat++;
+                            }
+                        }
+                        else
+                        { 
+                            Label labelNoSched = new Label
+                            {
+                                Name = "UserNoSchedule",
+                                Location = new Point(156, 173),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                Size = new Size(212, 16),
+                                Text = "No Schedule Yet."
+                            };
+                            ScheduleUserPanel2.Controls.Add(labelNoSched);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(getData.ErrCheck);
+                    }
+                }
+                if (numberCountToRepeat == EqualNumber) {
+                    conditionToThisFinal = "DoneShowSched";
+                }
+            }
+
+        }
+
+
+        //SHOW CONTROLS DATA SCHEDULE....................
+        protected void ControlsLoadSHow(string NameUserWhoAdded, string DateTimeRange, string ImageUserWhoAdded, 
+                                        int numberCountPanel, string HandlingAdmin) {
+
+            Panel pan = new Panel
+            {
+                Name = NameUserWhoAdded + "_ScheduleYours",
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
+                BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle,
+                Size = new Size(390, 80),
+                Location = new Point(5, numberCountPanel)
+            };
+            ScheduleUserPanel2.Controls.Add(pan);
+
+            PictureBox pic = new PictureBox {
+                Name = NameUserWhoAdded + "_ScheduleYoursPic",
+                Image = Image.FromFile(ImageUserWhoAdded),
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(53, 39),
+                Location = new Point(5, 3),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pan.Controls.Add(pic);
+
+            Button bttnName = new Button
+            {
+                Name = NameUserWhoAdded + "_ScheduleYoursBttnName",
+                Text = NameUserWhoAdded,
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                ForeColor = System.Drawing.Color.CornflowerBlue,
+                TextAlign = ContentAlignment.MiddleLeft,
+                FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                Location = new Point(64, 3),
+                Size = new Size(314, 37)
+            };
+            bttnName.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#CD6155");
+            bttnName.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#1C2833");
+            bttnName.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#1C2833");
+            pan.Controls.Add(bttnName);
+
+            Button AdminOrUser = new Button
+            {
+                Name = "ADminOrUser",
+                Text = (HandlingAdmin != "ADMIN" ? "User:" : "Admin"),
+                Location = new Point(5, 48),
+                Size = new Size(53, 25),
+                Font = new Font("Microsoft Sans Serif", (HandlingAdmin != "ADMIN" ? 9 : 9), FontStyle.Regular),
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                FlatStyle = FlatStyle.Flat
+            };
+            AdminOrUser.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#CD6155");
+            AdminOrUser.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#1C2833");
+            AdminOrUser.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#1C2833");
+            pan.Controls.Add(AdminOrUser);
+
+
+            Button bttnSched = new Button
+            {
+                Name = NameUserWhoAdded + "_ScheduleYoursBttSched",
+                Text = DateTimeRange,
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                ForeColor = System.Drawing.Color.CornflowerBlue,
+                TextAlign = ContentAlignment.MiddleLeft,
+                FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                Location = new Point(64, 45),
+                Size = new Size(314, 28)
+            };
+            bttnSched.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#CD6155");
+            bttnSched.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#1C2833");
+            bttnSched.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#1C2833");
+            pan.Controls.Add(bttnSched);
+        }
+
+
+
+
+
         //CREATING Panel, PictureBox, Label for searching user calendar.....................
         private void CreatingControlUserSearchAndGet() {
             SchedulePanelBarSearch.Controls.Clear();
@@ -394,6 +728,7 @@ namespace WindowsFormUserGrading
         protected async void ClickedDataSearchToCalendar(object controls, EventArgs e) {
             NoAssignedAddSched.Controls.Clear();
             NoAssignedAddSched.AutoScroll = true;
+            SchedSetMess.Visible = true;
             int numberCountPanel = 8;
             int numberForAdmins = 0;
             int numberScanIfMax = 0;
@@ -474,6 +809,7 @@ namespace WindowsFormUserGrading
                                                     functionDelegateControls createCon = new functionDelegateControls(createControlsSched);
                                                     createCon.Invoke(showcalendar.NameUserWhoAdded, showcalendar.DateTimeRange,
                                                         showcalendar.ImageUserWhoAdded, numberCountPanel, "");
+
 
                                                     if (numberCountPanel == 8)
                                                     {

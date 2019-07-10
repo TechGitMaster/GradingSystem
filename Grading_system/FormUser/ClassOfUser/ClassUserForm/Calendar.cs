@@ -13,7 +13,78 @@ namespace ClassUserForm
     public class Calendar
     {
 
-        //THIS IS THE ARRIVED USER IN CALENDAR GET ALL DATA BEFORE IT LOADING....................................
+
+
+
+        //THIS IS THE ARRIVED DATA SHCEDULE OF THIS USER.....................................
+        public async Task<List<CalendarList>> GetAllSchedThisUser(string UserName) {
+            int numberCountCheck = 0;
+            List<CalendarList> getSched = new List<CalendarList>();
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=" +
+                "grading_accounts_{0};Uid=root;Pwd=", UserName));
+
+            try {
+                conn.Open();
+                void waitMoment()
+                {
+                    MySqlCommand comm = conn.CreateCommand();
+                    comm.CommandText = "SELECT * FROM `calendarsched`";
+                    using (MySqlDataReader reader = comm.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (numberCountCheck == 0)
+                            {
+                                numberCountCheck++;
+                            }
+
+                            getSched.Add(new CalendarList
+                            {
+                                ErrCheck = "",
+                                numberCount = numberCountCheck,
+                                NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
+                                ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
+                                DateTimeRangeAddHrs = (string)reader["HrsSched"],
+                                DateTimeRangeAddMnt = (string)reader["MntSched"],
+                                DateTimeRangeAddAP = (string)reader["APSched"],
+                                calendarRangeAddMonth = (string)reader["MonthSched"],
+                                calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
+                                calendarRangeAddDay = (string)reader["DaySched"],
+                                calendarRangeAddYear = (string)reader["YearSched"],
+                                SetDurationTimeAdd = (string)reader["SetDurationMint"],
+                                SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
+                                DateTimeRange = (string)reader["TimeDateSchedFinal"],
+                                HandlingAdmin = (string)reader["AdminCheck"]
+                            });
+                        }
+                    }
+                }
+
+                await Task.Run(waitMoment);
+                //THIS ISCHECK IF THERE IS NO SCHEDULE ASSIGNED FOR THIS USER...................
+                if (numberCountCheck == 0) {
+                    getSched.Add(new CalendarList {
+                        ErrCheck = "",
+                        numberCount = numberCountCheck
+                    });
+                }
+            }
+            catch (Exception e) {
+                string throwErr = e.ToString();
+                getSched.Add(new CalendarList
+                {
+                    ErrCheck = "Please Check YOur Connection"
+                });
+            }
+
+            return getSched;
+        }
+
+
+
+
+
+        //THIS IS THE ARRIVED USER IN SEARCH BOX CALENDAR GET ALL DATA BEFORE IT LOADING....................................
         public List<CalendarList> GetAllDataIn_searchbargradingaccounts() {
             List<CalendarList> calendarHandleData = new List<CalendarList>();
             int conditionToSee = 0;

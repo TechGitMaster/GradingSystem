@@ -24,7 +24,7 @@ namespace ClassUserForm
 
 
         //ITO YUNG MAG ADD NA SI USER NG SCHEDULE DUN SA PINILI NYANG IADD NA SCHED SA TEACHER
-        //AT GET THE DATA.........................
+        //AT GET THE DATA FIRST COME AND ALL.........................
         public int numberCount;
         public string ErrCheck;
         public string UsernameOfUserThatWillAdd;
