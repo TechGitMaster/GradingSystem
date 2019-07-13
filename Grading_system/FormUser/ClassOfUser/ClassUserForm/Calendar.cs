@@ -13,67 +13,235 @@ namespace ClassUserForm
     public class Calendar
     {
 
+        protected List<CalendarList> getSched;
+        protected List<CalendarList> getJarPermanent;
+        private string messageToErr = "";
+        private int numberCountToDone = 0;
 
+        //SCAN TASK IF THE SCHEDULE IS DONE..............................
+        private Task Scann(string NameUserWhoAdded, string ImageUserWhoAdded,string DateTimeRangeAddHrs,
+         string DateTimeRangeAddMnt, string DateTimeRangeAddAP, string calendarRangeAddMonth, string calendarRangeAddConvert,
+         string calendarRangeAddDay, string calendarRangeAddYear, string SetDurationTimeAdd, string SetDurationTimeAddHrs,
+         string DateTimeRange, string HandlingAdmin, MySqlConnection conn) {
+            string stringMesage = "";
+            int numberHandleHrs = 0;
+            if (messageToErr == "") {
+
+                if (DateTimeRangeAddAP == "PM")
+                {
+                    if (Convert.ToInt32(DateTimeRangeAddHrs) <= 12)
+                    {
+                        if (Convert.ToInt32(DateTimeRangeAddHrs) == 12)
+                        {
+                            numberHandleHrs = 12;
+                        }
+                        else
+                        {
+                            numberHandleHrs = Convert.ToInt32(DateTimeRangeAddHrs) + 12;
+                        }
+                    }
+                }
+                else {
+                    numberHandleHrs = Convert.ToInt32(DateTimeRangeAddHrs);
+                }
+
+                if (DateTime.Now.Year <= Convert.ToInt32(calendarRangeAddYear))
+                {
+                    if (DateTime.Now.Month <= Convert.ToInt32(calendarRangeAddMonth))
+                    {
+                        if (DateTime.Now.Month == Convert.ToInt32(calendarRangeAddMonth))
+                        {
+                            if (DateTime.Now.Day <= Convert.ToInt32(calendarRangeAddDay))
+                            {
+                                if (DateTime.Now.Day == Convert.ToInt32(calendarRangeAddDay))
+                                {
+                                    if (DateTime.Now.Hour <= Convert.ToInt32(numberHandleHrs))
+                                    {
+                                        if (DateTime.Now.Hour == Convert.ToInt32(numberHandleHrs))
+                                        {
+                                            if (DateTime.Now.Minute < Convert.ToInt32(DateTimeRangeAddMnt))
+                                            {
+                                                stringMesage = "This Sched is never done by now";
+                                            }
+                                            else
+                                            {
+                                                stringMesage = "This Sched is done";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            stringMesage = "This Sched is never done by now";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        stringMesage = "This Sched is done";
+                                    }
+                                }
+                                else {
+                                    stringMesage = "This Sched is never done by now";
+                                }
+                            }
+                            else {
+                                stringMesage = "This Sched is done";
+                            }
+                        }
+                        else {
+                            stringMesage = "This Sched is done";
+                        }
+                    }
+                    else {
+                        stringMesage = "This Sched is done";
+                    }
+                }
+                else {
+                    stringMesage = "This Sched is done";
+                }
+
+
+
+
+                //DETERMINE IF THE SCHEDULE IF NOT DONE OR DONE..............................
+                if (stringMesage == "This Sched is never done by now")
+                {
+                    getSched.Add(new CalendarList
+                    {
+                        ErrCheck = "",
+                        numberCount = 1,
+                        NameUserWhoAdded = NameUserWhoAdded,
+                        ImageUserWhoAdded = ImageUserWhoAdded,
+                        DateTimeRangeAddHrs = DateTimeRangeAddHrs,
+                        DateTimeRangeAddMnt = DateTimeRangeAddMnt,
+                        DateTimeRangeAddAP = DateTimeRangeAddAP,
+                        calendarRangeAddMonth = calendarRangeAddMonth,
+                        calendarRangeAddConvert = calendarRangeAddConvert,
+                        calendarRangeAddDay = calendarRangeAddDay,
+                        calendarRangeAddYear = calendarRangeAddYear,
+                        SetDurationTimeAdd = SetDurationTimeAdd,
+                        SetDurationTimeAddHrs = SetDurationTimeAddHrs,
+                        DateTimeRange = DateTimeRange,
+                        HandlingAdmin = HandlingAdmin
+                    });
+                }
+                else {
+                    numberCountToDone--;
+                    try
+                    {
+                        MySqlCommand comm = conn.CreateCommand();
+                        comm.CommandText = "UPDATE `calendarsched` SET `SchedDone`=@done WHERE `TimeDateSchedFinal`=@range";
+                        comm.Parameters.AddWithValue("@done", "DONE");
+                        comm.Parameters.AddWithValue("@range", DateTimeRange);
+                        comm.ExecuteNonQuery();
+
+                        if(numberCountToDone == 0)
+                        {
+                            getSched.Add(new CalendarList
+                            {
+                                ErrCheck = "",
+                                numberCount = 0
+                            });
+                        }
+                    }
+                    catch (Exception e) {
+                        string err = e.ToString();
+                        messageToErr = "No Internet";
+
+                        getSched.Add(new CalendarList {
+                            ErrCheck = "Please Check Your Connection."
+                        });
+                    }
+                }
+            }
+
+            return Task.CompletedTask;
+        }
 
 
         //THIS IS THE ARRIVED DATA SHCEDULE OF THIS USER.....................................
         public async Task<List<CalendarList>> GetAllSchedThisUser(string UserName) {
             int numberCountCheck = 0;
-            List<CalendarList> getSched = new List<CalendarList>();
+            getSched = new List<CalendarList>();
+            getJarPermanent = new List<CalendarList>();
+            List<Task> task = new List<Task>();
+            messageToErr = "";
+            numberCountToDone = 0;
+
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=" +
                 "grading_accounts_{0};Uid=root;Pwd=", UserName));
 
             try {
                 conn.Open();
-                void waitMoment()
+                string getData()
                 {
                     MySqlCommand comm = conn.CreateCommand();
                     comm.CommandText = "SELECT * FROM `calendarsched`";
-                    using (MySqlDataReader reader = comm.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if (numberCountCheck == 0)
-                            {
-                                numberCountCheck++;
+                    using (MySqlDataReader reader = comm.ExecuteReader()) {
+                        while (reader.Read()) {
+                            if (String.IsNullOrEmpty((string)reader["SchedDone"])) {
+                                numberCountToDone++;
+                                if (numberCountCheck == 0) {
+                                    numberCountCheck++;
+                                }
+                                getJarPermanent.Add(new CalendarList {
+                                    NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
+                                    ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
+                                    DateTimeRangeAddHrs = (string)reader["HrsSched"],
+                                    DateTimeRangeAddMnt = (string)reader["MntSched"],
+                                    DateTimeRangeAddAP = (string)reader["APSched"],
+                                    calendarRangeAddMonth = (string)reader["MonthSched"],
+                                    calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
+                                    calendarRangeAddDay = (string)reader["DaySched"],
+                                    calendarRangeAddYear = (string)reader["YearSched"],
+                                    SetDurationTimeAdd = (string)reader["SetDurationMint"],
+                                    SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
+                                    DateTimeRange = (string)reader["TimeDateSchedFinal"],
+                                    HandlingAdmin = (string)reader["AdminCheck"],
+                                    SchedDone = (string)reader["SchedDone"]
+                                });
                             }
-
-                            getSched.Add(new CalendarList
-                            {
-                                ErrCheck = "",
-                                numberCount = numberCountCheck,
-                                NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
-                                ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
-                                DateTimeRangeAddHrs = (string)reader["HrsSched"],
-                                DateTimeRangeAddMnt = (string)reader["MntSched"],
-                                DateTimeRangeAddAP = (string)reader["APSched"],
-                                calendarRangeAddMonth = (string)reader["MonthSched"],
-                                calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
-                                calendarRangeAddDay = (string)reader["DaySched"],
-                                calendarRangeAddYear = (string)reader["YearSched"],
-                                SetDurationTimeAdd = (string)reader["SetDurationMint"],
-                                SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
-                                DateTimeRange = (string)reader["TimeDateSchedFinal"],
-                                HandlingAdmin = (string)reader["AdminCheck"]
-                            });
                         }
                     }
+                        return "Done To get"; 
                 }
 
-                await Task.Run(waitMoment);
-                //THIS ISCHECK IF THERE IS NO SCHEDULE ASSIGNED FOR THIS USER...................
-                if (numberCountCheck == 0) {
-                    getSched.Add(new CalendarList {
-                        ErrCheck = "",
-                        numberCount = numberCountCheck
-                    });
+                Task<string> t = new Task<string>(() => getData());
+                t.Start();
+                if (await t.ConfigureAwait(false) == "Done To get") {
+                    if (numberCountCheck > 0)
+                    {
+                        foreach (var listCount in getJarPermanent) {
+                                task.Add(Scann(listCount.NameUserWhoAdded,
+                                    listCount.ImageUserWhoAdded,
+                                    listCount.DateTimeRangeAddHrs,
+                                    listCount.DateTimeRangeAddMnt,
+                                    listCount.DateTimeRangeAddAP,
+                                    listCount.calendarRangeAddMonth,
+                                    listCount.calendarRangeAddConvert,
+                                    listCount.calendarRangeAddDay,
+                                    listCount.calendarRangeAddYear,
+                                    listCount.SetDurationTimeAdd,
+                                    listCount.SetDurationTimeAddHrs,
+                                    listCount.DateTimeRange,
+                                    listCount.HandlingAdmin, conn
+                                    ));
+                        }
+
+                        await Task.WhenAll(task);
+                    }
+                    else {
+                        getSched.Add(new CalendarList
+                        {
+                            ErrCheck = "",
+                            numberCount = numberCountCheck
+                        });
+                    }
                 }
             }
             catch (Exception e) {
                 string throwErr = e.ToString();
                 getSched.Add(new CalendarList
                 {
-                    ErrCheck = "Please Check YOur Connection"
+                    ErrCheck = "Please Check Your Connection"
                 });
             }
 
@@ -201,14 +369,16 @@ namespace ClassUserForm
                 comm.CommandText = "SELECT * FROM `calendarsched`";
                 using (MySqlDataReader reader = comm.ExecuteReader()) {
                     while (reader.Read()) {
-                        if (numberCon == 0) {
-                            numberCon++;
+                        if (String.IsNullOrEmpty((string)reader["SchedDone"])) {
+                            if (numberCon == 0) {
+                                numberCon++;
 
-                            handleData.Add(new CalendarList
-                            {
-                                numberCount = numberCon,
-                                ErrCheck = ""
-                            });
+                                handleData.Add(new CalendarList
+                                {
+                                    numberCount = numberCon,
+                                    ErrCheck = ""
+                                });
+                            }
                         }
                     }
                 }
@@ -284,20 +454,22 @@ namespace ClassUserForm
                     {
                         while (reader.Read())
                         {
-                            scandforsched.Add(new CalendarList
-                            {
-                                NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
-                                DateTimeRangeAddHrs = (string)reader["HrsSched"],
-                                DateTimeRangeAddMnt = (string)reader["MntSched"],
-                                DateTimeRangeAddAP = (string)reader["APSched"],
-                                calendarRangeAddMonth = (string)reader["MonthSched"],
-                                calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
-                                calendarRangeAddDay = (string)reader["DaySched"],
-                                calendarRangeAddYear = (string)reader["YearSched"],
-                                SetDurationTimeAdd = (string)reader["SetDurationMint"],
-                                SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
-                                DateTimeRange = (string)reader["TimeDateSchedFinal"]
-                            });
+                            if (reader["SchedDone"].ToString() == "") {
+                                scandforsched.Add(new CalendarList
+                                {
+                                    NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
+                                    DateTimeRangeAddHrs = (string)reader["HrsSched"],
+                                    DateTimeRangeAddMnt = (string)reader["MntSched"],
+                                    DateTimeRangeAddAP = (string)reader["APSched"],
+                                    calendarRangeAddMonth = (string)reader["MonthSched"],
+                                    calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
+                                    calendarRangeAddDay = (string)reader["DaySched"],
+                                    calendarRangeAddYear = (string)reader["YearSched"],
+                                    SetDurationTimeAdd = (string)reader["SetDurationMint"],
+                                    SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
+                                    DateTimeRange = (string)reader["TimeDateSchedFinal"]
+                                });
+                            }
                         }
                     }
                     Thread.Sleep(2000);
@@ -891,9 +1063,9 @@ namespace ClassUserForm
                 MySqlCommand commAddSched = connAddSched.CreateCommand();
                 commAddSched.CommandText = "INSERT INTO `calendarsched` (`id`, `NameUserSchedWhoAdd`, `ImgUserSchedWhoAdd`, " +
                     "`HrsSched`, `MntSched`, `APSched`, `MonthSched`, `MonthSchedConvert`, `DaySched`," +
-                    " `YearSched`, `SetDurationHrs`, `SetDurationMint`, `TimeDateSchedFinal`, `AdminCheck`) VALUES " +
+                    " `YearSched`, `SetDurationHrs`, `SetDurationMint`, `TimeDateSchedFinal`, `AdminCheck`, `SchedDone`) VALUES " +
                     "('', @namewhoAdd, @imgwhoAdd, @hrsSched, @mntSched, @APsched, @monthSched, @MonthConvert," +
-                    "@daySched, @YearSched, @setDurationHrs, @setDurationMnt, @timeDateSchedFinal, @admin)";
+                    "@daySched, @YearSched, @setDurationHrs, @setDurationMnt, @timeDateSchedFinal, @admin, @schedDone)";
                 commAddSched.Parameters.AddWithValue("@namewhoAdd", arrayHandle[1]);
                 commAddSched.Parameters.AddWithValue("@imgwhoAdd", arrayHandle[2]);
                 commAddSched.Parameters.AddWithValue("@hrsSched", arrayHandle[3]);
@@ -907,6 +1079,7 @@ namespace ClassUserForm
                 commAddSched.Parameters.AddWithValue("@setDurationHrs", arrayHandle[11]);
                 commAddSched.Parameters.AddWithValue("@timeDateSchedFinal", arrayHandle[12]);
                 commAddSched.Parameters.AddWithValue("@admin", "");
+                commAddSched.Parameters.AddWithValue("@schedDone", "");
                 commAddSched.ExecuteNonQuery();
 
                 connAddSched.Close();
@@ -944,23 +1117,25 @@ namespace ClassUserForm
                 {
                     while (reader.Read())
                     {
-                        listSchedAdd.Add(new CalendarList
-                        {
-                            ErrCheck = "",
-                            NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
-                            ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
-                            DateTimeRangeAddHrs = (string)reader["HrsSched"],
-                            DateTimeRangeAddMnt = (string)reader["MntSched"],
-                            DateTimeRangeAddAP = (string)reader["APSched"],
-                            calendarRangeAddMonth = (string)reader["MonthSched"],
-                            calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
-                            calendarRangeAddDay = (string)reader["DaySched"],
-                            calendarRangeAddYear = (string)reader["YearSched"],
-                            SetDurationTimeAdd = (string)reader["SetDurationMint"],
-                            SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
-                            DateTimeRange = (string)reader["TimeDateSchedFinal"],
-                            HandlingAdmin = (string)reader["AdminCheck"]
-                        });
+                        if (String.IsNullOrEmpty((string)(reader["SchedDone"]))) {
+                            listSchedAdd.Add(new CalendarList
+                            {
+                                ErrCheck = "",
+                                NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
+                                ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
+                                DateTimeRangeAddHrs = (string)reader["HrsSched"],
+                                DateTimeRangeAddMnt = (string)reader["MntSched"],
+                                DateTimeRangeAddAP = (string)reader["APSched"],
+                                calendarRangeAddMonth = (string)reader["MonthSched"],
+                                calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
+                                calendarRangeAddDay = (string)reader["DaySched"],
+                                calendarRangeAddYear = (string)reader["YearSched"],
+                                SetDurationTimeAdd = (string)reader["SetDurationMint"],
+                                SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
+                                DateTimeRange = (string)reader["TimeDateSchedFinal"],
+                                HandlingAdmin = (string)reader["AdminCheck"]
+                            });
+                        }
                     }
                 }
 

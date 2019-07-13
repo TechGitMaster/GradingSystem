@@ -41,5 +41,6 @@ namespace ClassUserForm
         public string SetDurationTimeAdd;
         public string SetDurationTimeAddHrs;
         public string HandlingAdmin;
+        public string SchedDone;
     }
 }

@@ -85,7 +85,7 @@ namespace WindowsFormUserGrading
             //-Where ever the 'Reports' is there.......................
             DrawLine2Final.Paint += new System.Windows.Forms.PaintEventHandler(paintDrawLine2);
 
-            TimerSchedUserSelf.Interval = 5000;
+            TimerSchedUserSelf.Interval = 7000;
             TimerSchedUserSelf.Tick += async(object ob, EventArgs e) => {
                 System.Windows.Forms.Timer time = (System.Windows.Forms.Timer)ob;
 
@@ -508,7 +508,7 @@ namespace WindowsFormUserGrading
                     {
                         if (getData.numberCount > 0)
                         {
-                           if (conditionToShow == "")
+                            if (conditionToShow == "")
                            {
 
                                 conditionToShow = "Wait";
@@ -547,17 +547,25 @@ namespace WindowsFormUserGrading
                             }
                         }
                         else
-                        { 
-                            Label labelNoSched = new Label
+                        {
+                            Thread ths = new Thread(() =>
                             {
-                                Name = "UserNoSchedule",
-                                Location = new Point(156, 173),
-                                ForeColor = System.Drawing.Color.CornflowerBlue,
-                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
-                                Size = new Size(212, 16),
-                                Text = "No Schedule Yet."
-                            };
-                            ScheduleUserPanel2.Controls.Add(labelNoSched);
+                                Label labelNoSched = new Label
+                                {
+                                    Name = "UserNoSchedule",
+                                    Location = new Point(156, 173),
+                                    ForeColor = System.Drawing.Color.CornflowerBlue,
+                                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                    Size = new Size(212, 16),
+                                    Text = "No Schedule Yet."
+                                };
+
+                                Action ac = () => ScheduleUserPanel2.Controls.Add(labelNoSched); 
+                                ScheduleUserPanel2.BeginInvoke(ac);
+                            });
+
+                            ths.Start();
+
                         }
                     }
                     else
