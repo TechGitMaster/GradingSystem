@@ -138,13 +138,20 @@ namespace ClassUserForm
                         {
                             //ITO YUNG PARA MA REPORT SA DATABASE MO YUNG TAPOS NA SCHEDULE....................
                             MySqlCommand rep = conn.CreateCommand();
-                            rep.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `TimeMessage`," +
-                                "`MonthDateTime`) VALUE ('', @Name, @Message, @color, @timeMessage, '')";
+                            rep.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, " +
+                                "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) " +
+                                "VALUE ('', @Name, @Message, @color, @dayreport, @monthreport, @timeMessage, @monthSched)";
                             rep.Parameters.AddWithValue("@Name", NameUserWhoAdded);
-                            rep.Parameters.AddWithValue("@Message", "The time sched is done");
+                            rep.Parameters.AddWithValue("@Message", "The time sched who assigned to you is now done.");
                             rep.Parameters.AddWithValue("@color", "#17202A");
+                            rep.Parameters.AddWithValue("@dayreport", DateTime.Now.Day);
+                            rep.Parameters.AddWithValue("@MonthReport", DateTime.Now.Month);
                             rep.Parameters.AddWithValue("@timeMessage", ((DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour) + ":" + DateTime.Now.Minute + " " +
                                 (DateTime.Now.Hour < 11 ? "AM" : "PM")));
+                            rep.Parameters.AddWithValue("@monthSched", String.Format("{0}/{1}/{2} {3}:{4} {5}", 
+                                DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, 
+                                (DateTime.Now.Hour < 12 ? DateTime.Now.Hour:DateTime.Now.Hour-12)
+                                , DateTime.Now.Minute, (DateTime.Now.Hour < 11) ? "AM":"PM"));
                             rep.ExecuteNonQuery();
                             conn.Close();
 
@@ -178,13 +185,20 @@ namespace ClassUserForm
                                     {
                                     conn3.Open();
                                         MySqlCommand rep2 = conn3.CreateCommand();
-                                        rep2.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `TimeMessage`," +
-                                            "`MonthDateTime`) VALUE ('', @Name, @Message, @color, @timeMessage, '')";
+                                        rep2.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, " +
+                                        "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) " +
+                                        "VALUE ('', @Name, @Message, @color, @dayreport, @MonthReport, @timeMessage, @monthSched)";
                                         rep2.Parameters.AddWithValue("@Name", UserName);
-                                        rep2.Parameters.AddWithValue("@Message", "The time sched is done");
+                                        rep2.Parameters.AddWithValue("@Message", "The time sched that you assigned is now done.");
                                         rep2.Parameters.AddWithValue("@color", "#17202A");
+                                        rep2.Parameters.AddWithValue("@dayreport", DateTime.Now.Day);
+                                        rep2.Parameters.AddWithValue("@MonthReport", DateTime.Now.Month);
                                         rep2.Parameters.AddWithValue("@timeMessage", ((DateTime.Now.Hour > 12 ? DateTime.Now.Hour-12: DateTime.Now.Hour) + ":" + DateTime.Now.Minute + " " +
                                             (DateTime.Now.Hour < 11 ? "AM" : "PM")));
+                                        rep2.Parameters.AddWithValue("@monthSched", String.Format("{0}/{1}/{2} {3}:{4} {5}",
+                                        DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year,
+                                        (DateTime.Now.Hour < 12 ? DateTime.Now.Hour : DateTime.Now.Hour - 12)
+                                        , DateTime.Now.Minute, (DateTime.Now.Hour < 11) ? "AM" : "PM"));
                                         rep2.ExecuteNonQuery();
 
 
