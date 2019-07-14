@@ -259,7 +259,7 @@
             this.Reports.Name = "Reports";
             this.Reports.Size = new System.Drawing.Size(139, 31);
             this.Reports.TabIndex = 1;
-            this.Reports.Text = "Reports";
+            this.Reports.Text = "Report";
             this.Reports.UseVisualStyleBackColor = false;
             // 
             // Calendar

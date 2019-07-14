@@ -22,7 +22,7 @@ namespace ClassUserForm
         private Task Scann(string NameUserWhoAdded, string ImageUserWhoAdded,string DateTimeRangeAddHrs,
          string DateTimeRangeAddMnt, string DateTimeRangeAddAP, string calendarRangeAddMonth, string calendarRangeAddConvert,
          string calendarRangeAddDay, string calendarRangeAddYear, string SetDurationTimeAdd, string SetDurationTimeAddHrs,
-         string DateTimeRange, string HandlingAdmin, MySqlConnection conn) {
+         string DateTimeRange, string HandlingAdmin, MySqlConnection conn, string UserName) {
             string stringMesage = "";
             int numberHandleHrs = 0;
             if (messageToErr == "") {
@@ -127,18 +127,109 @@ namespace ClassUserForm
                     numberCountToDone--;
                     try
                     {
+                        //ITO YUNG PARA MAG LAGAY NG DONE DUN SA calendarshed MO PARA DUN SA SCHED SA MGA TAPOS NA..............
                         MySqlCommand comm = conn.CreateCommand();
                         comm.CommandText = "UPDATE `calendarsched` SET `SchedDone`=@done WHERE `TimeDateSchedFinal`=@range";
                         comm.Parameters.AddWithValue("@done", "DONE");
                         comm.Parameters.AddWithValue("@range", DateTimeRange);
                         comm.ExecuteNonQuery();
 
-                        if(numberCountToDone == 0)
+                        try
                         {
+                            //ITO YUNG PARA MA REPORT SA DATABASE MO YUNG TAPOS NA SCHEDULE....................
+                            MySqlCommand rep = conn.CreateCommand();
+                            rep.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `TimeMessage`," +
+                                "`MonthDateTime`) VALUE ('', @Name, @Message, @color, @timeMessage, '')";
+                            rep.Parameters.AddWithValue("@Name", NameUserWhoAdded);
+                            rep.Parameters.AddWithValue("@Message", "The time sched is done");
+                            rep.Parameters.AddWithValue("@color", "#17202A");
+                            rep.Parameters.AddWithValue("@timeMessage", ((DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour) + ":" + DateTime.Now.Minute + " " +
+                                (DateTime.Now.Hour < 11 ? "AM" : "PM")));
+                            rep.ExecuteNonQuery();
+                            conn.Close();
+
+
+                            //ITO YUNG KUKUNIN YUNG USERNAME NG INASIGN SAYONA SHCED......................
+                            string handleUser = "";
+                            MySqlConnection conn2 = new MySqlConnection("Server=localhost;Database=grading_accounts;" +
+                                "Uid=root;Pwd=");
+                            try {
+                                conn2.Open();
+                                MySqlCommand commGet = conn2.CreateCommand();
+                                commGet.CommandText = "SELECT `UserName` FROM `searchbargradingaccounts` WHERE " +
+                                    "`FirstLastName`= @UserName";
+                                commGet.Parameters.AddWithValue("@UserName", NameUserWhoAdded);
+                                using (MySqlDataReader reader = commGet.ExecuteReader()) {
+                                    while (reader.Read()) {
+                                        handleUser = (string)reader["UserName"];
+                                    }
+                                    reader.Close();
+                                }
+                                conn2.Close();
+
+
+
+
+
+                                //AFTER MAKUHA YUNG USERNAME ISASAVE NAMAN ITO DUN SA DATABASE NG INASIGN SAYO NA SCHED................
+                                MySqlConnection conn3 = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0};" +
+                               "Uid=root;Pwd=", handleUser));
+                                try
+                                    {
+                                    conn3.Open();
+                                        MySqlCommand rep2 = conn3.CreateCommand();
+                                        rep2.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `TimeMessage`," +
+                                            "`MonthDateTime`) VALUE ('', @Name, @Message, @color, @timeMessage, '')";
+                                        rep2.Parameters.AddWithValue("@Name", UserName);
+                                        rep2.Parameters.AddWithValue("@Message", "The time sched is done");
+                                        rep2.Parameters.AddWithValue("@color", "#17202A");
+                                        rep2.Parameters.AddWithValue("@timeMessage", ((DateTime.Now.Hour > 12 ? DateTime.Now.Hour-12: DateTime.Now.Hour) + ":" + DateTime.Now.Minute + " " +
+                                            (DateTime.Now.Hour < 11 ? "AM" : "PM")));
+                                        rep2.ExecuteNonQuery();
+
+
+                                        if (numberCountToDone == 0)
+                                        {
+                                            getSched.Add(new CalendarList
+                                            {
+                                                ErrCheck = "",
+                                                numberCount = 0
+                                            });
+                                        }
+                                    conn3.Close();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        string err = e.ToString();
+                                        messageToErr = "No Internet";
+
+                                        getSched.Add(new CalendarList
+                                        {
+                                            ErrCheck = "Please Check Your Connection."
+                                        });
+                                    }
+
+
+
+                            }
+                            catch (Exception e) {
+                                string err = e.ToString();
+                                messageToErr = "No Internet";
+
+                                getSched.Add(new CalendarList
+                                {
+                                    ErrCheck = "Please Check Your Connection."
+                                });
+                            }
+                   
+                        }
+                        catch (Exception e) {
+                            string err = e.ToString();
+                            messageToErr = "No Internet";
+
                             getSched.Add(new CalendarList
                             {
-                                ErrCheck = "",
-                                numberCount = 0
+                                ErrCheck = "Please Check Your Connection."
                             });
                         }
                     }
@@ -160,6 +251,8 @@ namespace ClassUserForm
         //THIS IS THE ARRIVED DATA SHCEDULE OF THIS USER.....................................
         public async Task<List<CalendarList>> GetAllSchedThisUser(string UserName) {
             int numberCountCheck = 0;
+            string messageErr2 = "";
+            string handleNameOfUser = "";
             getSched = new List<CalendarList>();
             getJarPermanent = new List<CalendarList>();
             List<Task> task = new List<Task>();
@@ -169,39 +262,66 @@ namespace ClassUserForm
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=" +
                 "grading_accounts_{0};Uid=root;Pwd=", UserName));
 
+            MySqlConnection connGetUser = new MySqlConnection("Server=localhost;Database=grading_accounts;" +
+                "Uid=root;Pwd=");
+
             try {
                 conn.Open();
+                connGetUser.Open();
                 string getData()
                 {
-                    MySqlCommand comm = conn.CreateCommand();
-                    comm.CommandText = "SELECT * FROM `calendarsched`";
-                    using (MySqlDataReader reader = comm.ExecuteReader()) {
-                        while (reader.Read()) {
-                            if (String.IsNullOrEmpty((string)reader["SchedDone"])) {
-                                numberCountToDone++;
-                                if (numberCountCheck == 0) {
-                                    numberCountCheck++;
-                                }
-                                getJarPermanent.Add(new CalendarList {
-                                    NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
-                                    ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
-                                    DateTimeRangeAddHrs = (string)reader["HrsSched"],
-                                    DateTimeRangeAddMnt = (string)reader["MntSched"],
-                                    DateTimeRangeAddAP = (string)reader["APSched"],
-                                    calendarRangeAddMonth = (string)reader["MonthSched"],
-                                    calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
-                                    calendarRangeAddDay = (string)reader["DaySched"],
-                                    calendarRangeAddYear = (string)reader["YearSched"],
-                                    SetDurationTimeAdd = (string)reader["SetDurationMint"],
-                                    SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
-                                    DateTimeRange = (string)reader["TimeDateSchedFinal"],
-                                    HandlingAdmin = (string)reader["AdminCheck"],
-                                    SchedDone = (string)reader["SchedDone"]
-                                });
+                    try {
+                        //ITO YUNG PARA MAKUHA YUNG NAME NG MISMONG ACCOUNT NITO...................
+                        MySqlCommand comm2 = connGetUser.CreateCommand();
+                        comm2.CommandText = "SELECT `FirstLastName` FROM `searchbargradingaccounts` WHERE Username=@name";
+                        comm2.Parameters.AddWithValue("@name", UserName);
+                        using (MySqlDataReader readsName = comm2.ExecuteReader()) {
+                            while (readsName.Read()) {
+                                handleNameOfUser = (string)readsName["FirstLastName"];
                             }
                         }
+                        connGetUser.Close();
+
+                        //ITO YUNG PARA MAKUHA YUNG SCHED NI USER LAHAT.............................
+                        MySqlCommand comm = conn.CreateCommand();
+                        comm.CommandText = "SELECT * FROM `calendarsched`";
+                        using (MySqlDataReader reader = comm.ExecuteReader()) {
+                            while (reader.Read()) {
+                                if (String.IsNullOrEmpty((string)reader["SchedDone"])) {
+                                    numberCountToDone++;
+                                    if (numberCountCheck == 0) {
+                                        numberCountCheck++;
+                                    }
+                                    getJarPermanent.Add(new CalendarList {
+                                        NameUserWhoAdded = (string)reader["NameUserSchedWhoAdd"],
+                                        ImageUserWhoAdded = (string)reader["ImgUserSchedWhoAdd"],
+                                        DateTimeRangeAddHrs = (string)reader["HrsSched"],
+                                        DateTimeRangeAddMnt = (string)reader["MntSched"],
+                                        DateTimeRangeAddAP = (string)reader["APSched"],
+                                        calendarRangeAddMonth = (string)reader["MonthSched"],
+                                        calendarRangeAddConvert = (string)reader["MonthSchedConvert"],
+                                        calendarRangeAddDay = (string)reader["DaySched"],
+                                        calendarRangeAddYear = (string)reader["YearSched"],
+                                        SetDurationTimeAdd = (string)reader["SetDurationMint"],
+                                        SetDurationTimeAddHrs = (string)reader["SetDurationHrs"],
+                                        DateTimeRange = (string)reader["TimeDateSchedFinal"],
+                                        HandlingAdmin = (string)reader["AdminCheck"],
+                                        SchedDone = (string)reader["SchedDone"]
+                                    });
+                                }
+                            }
+                        }
+                        messageErr2 = "Done To get";
                     }
-                        return "Done To get"; 
+                    catch (Exception e) {
+                        string throwErr = e.ToString();
+                        messageErr2 = "Have Error..";
+                        getSched.Add(new CalendarList
+                        {
+                            ErrCheck = "Please Check Your Connection"
+                        });
+                    }
+                        return messageErr2; 
                 }
 
                 Task<string> t = new Task<string>(() => getData());
@@ -222,7 +342,7 @@ namespace ClassUserForm
                                     listCount.SetDurationTimeAdd,
                                     listCount.SetDurationTimeAddHrs,
                                     listCount.DateTimeRange,
-                                    listCount.HandlingAdmin, conn
+                                    listCount.HandlingAdmin, conn, handleNameOfUser
                                     ));
                         }
 

@@ -85,7 +85,7 @@ namespace WindowsFormUserGrading
             //-Where ever the 'Reports' is there.......................
             DrawLine2Final.Paint += new System.Windows.Forms.PaintEventHandler(paintDrawLine2);
 
-            TimerSchedUserSelf.Interval = 7000;
+            TimerSchedUserSelf.Interval = 10000;
             TimerSchedUserSelf.Tick += async(object ob, EventArgs e) => {
                 System.Windows.Forms.Timer time = (System.Windows.Forms.Timer)ob;
 
@@ -155,6 +155,19 @@ namespace WindowsFormUserGrading
                     });
                 }
             }
+
+
+            //BACK TO NATURAL SCHED......................................
+            BackSched.Click += new System.EventHandler((object sender, EventArgs e) => {
+                TimerSchedUserSelf.Start();
+                Thread th = new Thread(() => {
+                    this.BeginInvoke((Action)delegate () {
+                        YourScheduleAndOther.Visible = true;
+                        SchedSetMess.Visible = false;
+                    });
+                });
+                th.Start();
+            });
 
 
 
@@ -768,14 +781,7 @@ namespace WindowsFormUserGrading
             string doneToScannAdmin = "";
             loadingOrWaiting.Show();
             this.Hide();
-
-            Thread th = new Thread(() => {
-                this.BeginInvoke((Action)delegate() {
-                   TimerSchedUserSelf.Stop();
-                    BackSched.Click += new System.EventHandler(BackSchedErase);
-                });
-            });
-            th.Start();
+            TimerSchedUserSelf.Stop();
 
             int numberCountScroll = 0;
              scroll = new VScrollBar() {
@@ -927,18 +933,6 @@ namespace WindowsFormUserGrading
         }
 
 
-        //BTTN TO BACK TO FIRST SEE OF SCHED........................................
-        protected void BackSchedErase(object control, EventArgs e) {
-            Thread th = new Thread(() => {
-                this.BeginInvoke((Action)delegate() {
-                    TimerSchedUserSelf.Start();
-                    YourScheduleAndOther.Visible = true;
-                    SchedSetMess.Visible = false;
-                    BackSched.Click -= new System.EventHandler(BackSchedErase);
-                });
-            });
-            th.Start();
-        }
 
 
         //ADMIN DETECT SHOWS FIRST FUNCTION................................................
