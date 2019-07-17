@@ -87,7 +87,7 @@ namespace ClassUserForm
                             }
                         }
                         else {
-                            stringMesage = "This Sched is done";
+                            stringMesage = "This Sched is never done by now";
                         }
                     }
                     else {
@@ -640,57 +640,66 @@ namespace ClassUserForm
                         {
                             if (DateTime.Now.Month <= Convert.ToInt32(handleData[3]))
                             {
-                                if (DateTime.Now.Day <= Convert.ToInt32(handleData[5]))
+                                if (DateTime.Now.Month == Convert.ToInt32(handleData[3]))
                                 {
-                                    if (DateTime.Now.Day == Convert.ToInt32(handleData[5]))
+                                    if (DateTime.Now.Day <= Convert.ToInt32(handleData[5]))
                                     {
-                                        int addingHandle = 0;
-                                        //THIS IS FOR ADDING HRS....................
-                                        if (handleData[9] == "PM")
+                                        if (DateTime.Now.Day == Convert.ToInt32(handleData[5]))
                                         {
-                                            if (handleData[7] == "12")
+                                            int addingHandle = 0;
+                                            //THIS IS FOR ADDING HRS....................
+                                            if (handleData[9] == "PM")
                                             {
-                                                addingHandle = 12;
-                                            }
-                                            else
-                                            {
-                                                addingHandle = 12 + Convert.ToInt32(handleData[7]);
-
-                                            }
-                                        }
-                                        else
-                                        {
-                                            addingHandle = Convert.ToInt32(handleData[7]);
-                                        }
-
-                                        if (DateTime.Now.Hour <= addingHandle)
-                                        {
-                                            if (DateTime.Now.Hour == addingHandle)
-                                            {
-                                                if (DateTime.Now.Minute <= Convert.ToInt32(handleData[8]))
+                                                if (handleData[7] == "12")
                                                 {
-                                                    handleMessage = "";
+                                                    addingHandle = 12;
                                                 }
                                                 else
                                                 {
-                                                    handleMessage = "The minute is done look at your dateTime.";
+                                                    addingHandle = 12 + Convert.ToInt32(handleData[7]);
+
                                                 }
                                             }
-                                            else {
-                                                handleMessage = "";
+                                            else
+                                            {
+                                                addingHandle = Convert.ToInt32(handleData[7]);
+                                            }
+
+                                            if (DateTime.Now.Hour <= addingHandle)
+                                            {
+                                                if (DateTime.Now.Hour == addingHandle)
+                                                {
+                                                    if (DateTime.Now.Minute <= Convert.ToInt32(handleData[8]))
+                                                    {
+                                                        handleMessage = "";
+                                                    }
+                                                    else
+                                                    {
+                                                        handleMessage = "The minute is done look at your dateTime.";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    handleMessage = "";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                handleMessage = "The Hrs is done look at your dateTime.";
                                             }
                                         }
                                         else
                                         {
-                                            handleMessage = "The Hrs is done look at your dateTime.";
+                                            handleMessage = "";
                                         }
                                     }
-                                    else {
-                                        handleMessage = "";
+                                    else
+                                    {
+                                        handleMessage = "This day is already passed.";
                                     }
                                 }
                                 else {
-                                    handleMessage = "This day is already passed.";
+                                    handleMessage = "";
                                 }
                             }
                             else {
@@ -1285,6 +1294,92 @@ namespace ClassUserForm
             }
         }
 
+
+
+
+        //THIS IS DELETED SCEHDULE FOR OWN USER..................................................
+        public string deletedOwnSchedule(string userUsername, string scheduleDelete, string WhoAddedUserNameSched) {
+            string errHandle = "", handleUserName = "", handleUserWho = "";
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0};" +
+                "Uid=root;Pwd=", userUsername));
+            MySqlConnection connUserName = new MySqlConnection("Server=localhost;Database=grading_accounts;" +
+                "Uid=root;Pwd=");
+            try
+            {
+
+                connUserName.Open();
+                MySqlCommand commUserGet = connUserName.CreateCommand();
+                commUserGet.CommandText = "SELECT * FROM `searchbargradingaccounts` WHERE `UserName`=@Name";
+                commUserGet.Parameters.AddWithValue("@Name", userUsername);
+                using (MySqlDataReader reader = commUserGet.ExecuteReader()) {
+                    while (reader.Read()) {
+                        handleUserName = (string)reader["FirstLastName"];
+                    }
+                    reader.Close();
+                }
+                connUserName.Close();
+
+                try
+                {
+                    connUserName.Open();
+                    MySqlCommand commUserGetNameWho = connUserName.CreateCommand();
+                    commUserGetNameWho.CommandText = "SELECT * FROM `searchbargradingaccounts` WHERE `FirstLastName`=@NameWho";
+                    commUserGetNameWho.Parameters.AddWithValue("@NameWho", WhoAddedUserNameSched);
+                    using (MySqlDataReader readers = commUserGetNameWho.ExecuteReader())
+                    {
+                        while (readers.Read())
+                        {
+                            handleUserWho = (string)readers["UserName"];
+                        }
+                        readers.Close();
+                        connUserName.Close();
+                    }
+
+                    try
+                    {
+                        conn.Open();
+                        MySqlCommand comm = conn.CreateCommand();
+                        comm.CommandText = "DELETE FROM `calendarsched` WHERE `TimeDateSchedFinal`=@range";
+                        comm.Parameters.AddWithValue("@range", scheduleDelete);
+                        comm.ExecuteNonQuery();
+
+                        MySqlConnection connInsert = new MySqlConnection("Server=localhost;Database=grading_accounts_" + handleUserWho + ";" +
+                        "Uid=root;Pwd=");
+                        try
+                        {
+                            connInsert.Open();
+                            MySqlCommand commInsert = connInsert.CreateCommand();
+                            commInsert.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `DayReport`, `MonthReport`," +
+                            "`TimeMessage`, `MonthDateTime`) VALUES ('', @NameFull, @Message, @ColorDeclared, '', '', '', '')";
+                            commInsert.Parameters.AddWithValue("@NameFull", handleUserName);
+                            commInsert.Parameters.AddWithValue("@Message", "The schedule you assigned to this user is no longer be assigned.");
+                            commInsert.Parameters.AddWithValue("@ColorDeclared", "#17202A");
+                            commInsert.ExecuteNonQuery();
+                        }
+                        catch (Exception e)
+                        {
+                            string err = e.ToString();
+                            errHandle = err;
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        string err = e.ToString();
+                        errHandle = "Check Your Connection";
+                    }
+                }
+                catch (Exception e) {
+                    string err = e.ToString();
+                    errHandle = err;
+                }
+            }
+            catch (Exception e) {
+                string err = e.ToString();
+                errHandle = "Check Your Connection";
+            }
+            return errHandle;
+        }
 
 
 

@@ -51,6 +51,7 @@
             this.CalendarTime = new System.Windows.Forms.Panel();
             this.TimeCalendarLabel = new System.Windows.Forms.Label();
             this.ScheduleUserPanel1 = new System.Windows.Forms.Panel();
+            this.deleteSchedYours = new System.Windows.Forms.PictureBox();
             this.ScheduleUserPanel2 = new System.Windows.Forms.Panel();
             this.ThisSchedule = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
@@ -112,6 +113,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxdeleteSchedYours = new System.Windows.Forms.CheckBox();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -123,6 +125,7 @@
             this.YourScheduleAndOther.SuspendLayout();
             this.CalendarTime.SuspendLayout();
             this.ScheduleUserPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteSchedYours)).BeginInit();
             this.ScheduleUserPanel2.SuspendLayout();
             this.ThisSchedule.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -436,6 +439,7 @@
             // ScheduleUserPanel1
             // 
             this.ScheduleUserPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.ScheduleUserPanel1.Controls.Add(this.deleteSchedYours);
             this.ScheduleUserPanel1.Controls.Add(this.ScheduleUserPanel2);
             this.ScheduleUserPanel1.Controls.Add(this.label15);
             this.ScheduleUserPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -443,6 +447,17 @@
             this.ScheduleUserPanel1.Name = "ScheduleUserPanel1";
             this.ScheduleUserPanel1.Size = new System.Drawing.Size(443, 411);
             this.ScheduleUserPanel1.TabIndex = 2;
+            // 
+            // deleteSchedYours
+            // 
+            this.deleteSchedYours.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteSchedYours.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
+            this.deleteSchedYours.Location = new System.Drawing.Point(406, 17);
+            this.deleteSchedYours.Name = "deleteSchedYours";
+            this.deleteSchedYours.Size = new System.Drawing.Size(25, 22);
+            this.deleteSchedYours.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.deleteSchedYours.TabIndex = 2;
+            this.deleteSchedYours.TabStop = false;
             // 
             // ScheduleUserPanel2
             // 
@@ -460,6 +475,7 @@
             // 
             this.ThisSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
             this.ThisSchedule.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ThisSchedule.Controls.Add(this.checkBoxdeleteSchedYours);
             this.ThisSchedule.Controls.Add(this.button6);
             this.ThisSchedule.Controls.Add(this.button3);
             this.ThisSchedule.Controls.Add(this.button2);
@@ -1149,6 +1165,15 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
+            // checkBoxdeleteSchedYours
+            // 
+            this.checkBoxdeleteSchedYours.AutoSize = true;
+            this.checkBoxdeleteSchedYours.Location = new System.Drawing.Point(354, 53);
+            this.checkBoxdeleteSchedYours.Name = "checkBoxdeleteSchedYours";
+            this.checkBoxdeleteSchedYours.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxdeleteSchedYours.TabIndex = 5;
+            this.checkBoxdeleteSchedYours.UseVisualStyleBackColor = true;
+            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1180,9 +1205,11 @@
             this.CalendarTime.PerformLayout();
             this.ScheduleUserPanel1.ResumeLayout(false);
             this.ScheduleUserPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteSchedYours)).EndInit();
             this.ScheduleUserPanel2.ResumeLayout(false);
             this.ScheduleUserPanel2.PerformLayout();
             this.ThisSchedule.ResumeLayout(false);
+            this.ThisSchedule.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.SchedulePanelBarSearch.ResumeLayout(false);
             this.SchedulePanelBarSearch.PerformLayout();
@@ -1307,6 +1334,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button SchedSetMess;
+        private System.Windows.Forms.PictureBox deleteSchedYours;
+        private System.Windows.Forms.CheckBox checkBoxdeleteSchedYours;
     }
 }
 

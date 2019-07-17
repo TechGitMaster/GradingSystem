@@ -120,5 +120,8 @@
   <ItemGroup>
     <None Include="Resources\philip-castillo-lol-jhin-vs-camille-awake-wallpaper-4k-2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-2-64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

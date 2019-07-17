@@ -85,16 +85,15 @@ namespace WindowsFormUserGrading
             //-Where ever the 'Reports' is there.......................
             DrawLine2Final.Paint += new System.Windows.Forms.PaintEventHandler(paintDrawLine2);
 
-            TimerSchedUserSelf.Interval = 10000;
+            TimerSchedUserSelf.Interval = 3000;
             TimerSchedUserSelf.Tick += async(object ob, EventArgs e) => {
                 System.Windows.Forms.Timer time = (System.Windows.Forms.Timer)ob;
-
                 time.Stop();
 
                 ListScheduleSelf = await Task.Run(() => calendarClass.GetAllSchedThisUser("vee")).ConfigureAwait(true);
 
                 Thread th = new Thread(() => {
-                    int number = 0;
+                   int number = 0;
                     foreach (var count in ListScheduleSelf)
                     {
                         if (count.ErrCheck == "")
@@ -116,7 +115,6 @@ namespace WindowsFormUserGrading
                     }
                 });
                 th.Start();
-
             };
             foreach (Control buttonsClick in navigator.Controls) {
                 if (buttonsClick.GetType() == typeof(Button)) {
@@ -174,6 +172,7 @@ namespace WindowsFormUserGrading
             //TIME SHOW IN CALENDAR CLASS.......................................
             string Hrs, Mmn, Sec, AP = "";
             System.Windows.Forms.Timer timerCalendar = new System.Windows.Forms.Timer();
+            deleteSchedYours.Click += new System.EventHandler(deleteSchedUserWhoAssigned);
             timerCalendar.Interval = 1000;
             timerCalendar.Start();
             timerCalendar.Tick += (object sender, EventArgs e) =>
@@ -362,16 +361,15 @@ namespace WindowsFormUserGrading
         }
 
 
-
-
-
-
+        //ITO YUNG PARA MAG SHOW ANG MGA SCHEDULE NI USER.......................................
         private static bool conditionFirst = true;
+        private static int EqualNumber;
         protected async void intervalVoidShowAndScanSched(string userName) {
             bool conditionSecond = true;
             string conditionToShow = "";
             string conditionToThisFinal = "";
-            int EqualNumber = 0, numberCountToRepeat = 0;
+            int numberCountToRepeat = 0;
+            EqualNumber = 0;
             LoadingScreen load = new LoadingScreen();
             List<CalendarList> handleDataSched = new List<CalendarList>();
             List<CalendarList> AdminAndUserHandle = new List<CalendarList>();
@@ -420,10 +418,16 @@ namespace WindowsFormUserGrading
                     //CHECK IF THERE IS HAVE ADMIN SCHED ASSIGNED AND COUNT IT..........................
                     foreach (var scanAdmin in handleDataSchedScan)
                     {
-                        numberCountHole++;
-                        if (scanAdmin.HandlingAdmin == "ADMIN")
+                        if (scanAdmin.numberCount > 0)
                         {
-                            numberCountAdmin = numberCountAdmin + 1;
+                            numberCountHole++;
+                            if (scanAdmin.HandlingAdmin == "ADMIN")
+                            {
+                                numberCountAdmin = numberCountAdmin + 1;
+                            }
+                        }
+                        else {
+                            numberCountHole = 0;
                         }
                     }
 
@@ -510,10 +514,14 @@ namespace WindowsFormUserGrading
 
             async void forEachShowSched() {
                 int locationY = 5;
-                ScheduleUserPanel2.BeginInvoke((Action)delegate ()
+                Thread thr = new Thread(() =>
                 {
-                    ScheduleUserPanel2.Controls.Clear();
+                    this.BeginInvoke((Action)delegate ()
+                    {
+                        ScheduleUserPanel2.Controls.Clear();
+                    });
                 });
+                thr.Start();
 
                 foreach (var getData in AdminAndUserHandle)
                 {
@@ -584,14 +592,106 @@ namespace WindowsFormUserGrading
                     else
                     {
                         MessageBox.Show(getData.ErrCheck);
+                        Thread ths = new Thread(() =>
+                        {
+                            Label labelNoSched = new Label
+                            {
+                                Name = "NoConnection",
+                                Location = new Point(156, 173),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                Size = new Size(212, 16),
+                                Text = "No Connection."
+                            };
+
+                            Action ac = () => ScheduleUserPanel2.Controls.Add(labelNoSched);
+                            ScheduleUserPanel2.BeginInvoke(ac);
+                        });
+
+                        ths.Start();
                     }
                 }
-                if (numberCountToRepeat == EqualNumber) {
+                if (numberCountToRepeat == EqualNumber)
+                {
                     conditionToThisFinal = "DoneShowSched";
                 }
             }
 
         }
+
+
+        //ITO YUNG DELETE SCHEDULE DUN KAY USER PARA MAKADILIT SIYA NG SHCEDULE NYA......................
+        string seeError = "";
+        string checkIfHaving = "";
+
+        protected async Task<string> DoDeleteSched(string scheduleDelete, string whoAddedName) {
+            checkIfHaving = "Have";
+            if (seeError == "")
+            {
+                seeError = await Task.Run(() => calendarClass.deletedOwnSchedule("vee", scheduleDelete, whoAddedName));
+                if (seeError != "") {
+                    MessageBox.Show(seeError);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The Sched of this "+ scheduleDelete+" ss not deleted");
+            }
+
+            return seeError;
+        }
+
+
+
+        public async void deleteSchedUserWhoAssigned(object control, EventArgs e)
+        {
+            checkIfHaving = "";
+            if (EqualNumber > 0)
+            {
+                List<Task> taskDelete = new List<Task>();
+                TimerSchedUserSelf.Stop();
+                foreach (Panel pan in ScheduleUserPanel2.Controls)
+                {
+                    foreach (Control checkbox in pan.Controls)
+                    {
+                        if (checkbox.GetType() == typeof(CheckBox))
+                        {
+                            if (checkbox.Visible == false)
+                            {
+                                checkbox.Visible = true;
+                            }
+                            else
+                            {
+                                if (checkbox.Text != "")
+                                {
+                                    //delete Statement.......................
+                                    taskDelete.Add(DoDeleteSched(checkbox.AccessibleDescription, checkbox.AccessibleName));
+                                }
+                                else
+                                {
+                                    checkbox.Visible = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                await Task.WhenAll(taskDelete);
+                if (checkIfHaving == "Have")
+                {
+                    if (String.IsNullOrEmpty(seeError) == true)
+                    {
+                        conditionFirst = true;
+                        ScheduleUserPanel2.Controls.Clear();
+                        this.intervalVoidShowAndScanSched("vee");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("You had no schedule.");
+            }
+        }
+
 
 
         //SHOW CONTROLS DATA SCHEDULE....................
@@ -636,7 +736,7 @@ namespace WindowsFormUserGrading
 
             Button AdminOrUser = new Button
             {
-                Name = "ADminOrUser",
+                Name = "AdminOrUser",
                 Text = (HandlingAdmin != "ADMIN" ? "User:" : "Admin"),
                 Location = new Point(5, 48),
                 Size = new Size(53, 25),
@@ -650,6 +750,29 @@ namespace WindowsFormUserGrading
             AdminOrUser.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#1C2833");
             pan.Controls.Add(AdminOrUser);
 
+
+            CheckBox deletedBox = new CheckBox
+            {
+                Name = "DeleteBoxSchedule",
+                AccessibleDescription = DateTimeRange,
+                AccessibleName = NameUserWhoAdded,
+                Text = "",
+                Size = new Size(15, 14),
+                Location = new Point(354, 53),
+                Visible = false
+            };
+            deletedBox.Click += new System.EventHandler((object control, EventArgs e) =>
+            {
+                CheckBox checkdelete = (CheckBox)control;
+                if (String.IsNullOrEmpty(checkdelete.Text))
+                {
+                    checkdelete.Text = "DeleteSched";
+                }
+                else {
+                    checkdelete.Text = "";
+                }
+            });
+            pan.Controls.Add(deletedBox);
 
             Button bttnSched = new Button
             {
@@ -665,6 +788,7 @@ namespace WindowsFormUserGrading
             bttnSched.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#CD6155");
             bttnSched.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#1C2833");
             bttnSched.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#1C2833");
+
             pan.Controls.Add(bttnSched);
         }
 
