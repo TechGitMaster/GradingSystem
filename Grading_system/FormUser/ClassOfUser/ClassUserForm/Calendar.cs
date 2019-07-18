@@ -55,11 +55,17 @@ namespace ClassUserForm
                             {
                                 if (DateTime.Now.Day == Convert.ToInt32(calendarRangeAddDay))
                                 {
-                                    if (DateTime.Now.Hour <= Convert.ToInt32(numberHandleHrs))
+                                    if (DateTime.Now.Hour <= ((Convert.ToInt32(DateTimeRangeAddMnt) + Convert.ToInt32(SetDurationTimeAdd)) < 59 
+                                        ? (Convert.ToInt32(numberHandleHrs) + Convert.ToInt32(SetDurationTimeAddHrs)):
+                                        (Convert.ToInt32(numberHandleHrs) + Convert.ToInt32(SetDurationTimeAddHrs))+ 1))
                                     {
-                                        if (DateTime.Now.Hour == Convert.ToInt32(numberHandleHrs))
+                                        if (DateTime.Now.Hour == ((Convert.ToInt32(DateTimeRangeAddMnt) + Convert.ToInt32(SetDurationTimeAdd)) < 59
+                                        ? (Convert.ToInt32(numberHandleHrs) + Convert.ToInt32(SetDurationTimeAddHrs)) :
+                                        (Convert.ToInt32(numberHandleHrs) + Convert.ToInt32(SetDurationTimeAddHrs)) + 1))
                                         {
-                                            if (DateTime.Now.Minute < Convert.ToInt32(DateTimeRangeAddMnt))
+                                            if (DateTime.Now.Minute < ((Convert.ToInt32(DateTimeRangeAddMnt)+Convert.ToInt32(SetDurationTimeAdd)) < 59 ? 
+                                                (Convert.ToInt32(DateTimeRangeAddMnt) + Convert.ToInt32(SetDurationTimeAdd)):
+                                                (Convert.ToInt32(DateTimeRangeAddMnt) + Convert.ToInt32(SetDurationTimeAdd)) / 60))
                                             {
                                                 stringMesage = "This Sched is never done by now";
                                             }

@@ -620,7 +620,7 @@ namespace WindowsFormUserGrading
         }
 
 
-        //ITO YUNG DELETE SCHEDULE DUN KAY USER PARA MAKADILIT SIYA NG SHCEDULE NYA......................
+        //THIS IS THE TASK STRING THAT DO TO DELETE THE SCHEDULE...............................................
         string seeError = "";
         string checkIfHaving = "";
 
@@ -642,7 +642,7 @@ namespace WindowsFormUserGrading
         }
 
 
-
+        //ITO YUNG DELETE SCHEDULE DUN KAY USER PARA MAKADILIT SIYA NG SHCEDULE NYA......................
         public async void deleteSchedUserWhoAssigned(object control, EventArgs e)
         {
             checkIfHaving = "";
