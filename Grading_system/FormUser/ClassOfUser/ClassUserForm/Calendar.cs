@@ -733,8 +733,8 @@ namespace ClassUserForm
                 ) {
                 string MessageManaged = "";
                 string handleAwait = "";
-                //if (NameUserWhoAdded != handleData[1])
-               // {
+               // if (NameUserWhoAdded != handleData[1])
+                //{
                     if (DateTimeRange != handleData[2])
                     {
                         if (DateTime.Now.Year == Convert.ToInt32(handleData[6]))
@@ -749,74 +749,107 @@ namespace ClassUserForm
 
                                     if (Convert.ToInt32(calendarRangeAddDay) == Convert.ToInt32(handleData[5]))
                                     {
-                                        
-                                                if (handleAwait == "")
-                                                {
-                                                    handleAwait = "Awaited";
-                                                    int addingHandle = 0;
-                                                    int currentSchedHandle = 0;
 
-                                                    //THIS IS FOR ADDING HRS....................
-                                                    if (handleData[9] == "PM")
-                                                    {
-                                                        if (handleData[7] == "12")
-                                                        {
-                                                            addingHandle = 12;
-                                                        }
-                                                        else
-                                                        {
-                                                            addingHandle = 12 + Convert.ToInt32(handleData[7]);
+                                        if (handleAwait == "")
+                                        {
+                                            handleAwait = "Awaited";
+                                            int addingHandle = 0;
+                                            int currentSchedHandle = 0;
 
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        addingHandle = Convert.ToInt32(handleData[7]);
-                                                    }
-
-                                                    //THIS IS FOR CURRENT HRS SCHED.........................
-                                                    if (DateTimeRangeAddAP == "PM")
-                                                    {
-                                                        if (DateTimeRangeAddHrs == "12")
-                                                        {
-                                                            currentSchedHandle = 12;
-                                                        }
-                                                        else
-                                                        {
-                                                            currentSchedHandle = 12 + Convert.ToInt32(DateTimeRangeAddHrs);
-
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        currentSchedHandle = Convert.ToInt32(DateTimeRangeAddHrs);
-                                                    }
-
-                                            if (DateTime.Now.Hour <= addingHandle)
+                                            //THIS IS FOR ADDING HRS....................
+                                            if (handleData[9] == "PM")
                                             {
-                                                if (DateTime.Now.Minute <= Convert.ToInt32(handleData[8]))
+                                                if (handleData[7] == "12")
                                                 {
-                                                    //AFTER CONVERT THE PM EXAMPLE 1 PM TO 13 PM OR NOT THIS SHOULD DO 
-                                                    //SCANNING HRS AND MNT........
-                                                    Task<string> functionScanTask = new Task<string>(() => scanningFinalForSched(
-                                                        currentSchedHandle.ToString(),
-                                                        DateTimeRangeAddMnt, SetDurationTimeAdd, SetDurationTimeAddHrs,
-                                                        addingHandle.ToString(), handleData[8], handleData[10], handleData[11]));
-                                                    functionScanTask.Start();
-
-                                                    //HANDLING MESSAGE KUNG MAY MA AATTACH BA SIYANG SCHED NG IBA OR HINDI...
-                                                    MessageManaged = await functionScanTask.ConfigureAwait(false);
-
-                                                    handleAwait = "";
+                                                    addingHandle = 12;
                                                 }
                                                 else
                                                 {
-                                                    MessageManaged = "The minute is done look at your dateTime.";
+                                                    addingHandle = 12 + Convert.ToInt32(handleData[7]);
+
                                                 }
                                             }
                                             else
                                             {
-                                                MessageManaged = "The Hrs is done look at your dateTime.";
+                                                addingHandle = Convert.ToInt32(handleData[7]);
+                                            }
+
+                                            //THIS IS FOR CURRENT HRS SCHED.........................
+                                            if (DateTimeRangeAddAP == "PM")
+                                            {
+                                                if (DateTimeRangeAddHrs == "12")
+                                                {
+                                                    currentSchedHandle = 12;
+                                                }
+                                                else
+                                                {
+                                                    currentSchedHandle = 12 + Convert.ToInt32(DateTimeRangeAddHrs);
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                currentSchedHandle = Convert.ToInt32(DateTimeRangeAddHrs);
+                                            }
+                                            if (DateTime.Now.Day == Convert.ToInt32(handleData[5]))
+                                            {
+                                                if (DateTime.Now.Hour <= addingHandle)
+                                                {
+                                                    if (DateTime.Now.Hour == addingHandle)
+                                                    {
+                                                        if (DateTime.Now.Minute <= Convert.ToInt32(handleData[8]))
+                                                        {
+                                                            //AFTER CONVERT THE PM EXAMPLE 1 PM TO 13 PM OR NOT THIS SHOULD DO 
+                                                            //SCANNING HRS AND MNT........
+                                                            Task<string> functionScanTask = new Task<string>(() => scanningFinalForSched(
+                                                                currentSchedHandle.ToString(),
+                                                                DateTimeRangeAddMnt, SetDurationTimeAdd, SetDurationTimeAddHrs,
+                                                                addingHandle.ToString(), handleData[8], handleData[10], handleData[11]));
+                                                            functionScanTask.Start();
+
+                                                            //HANDLING MESSAGE KUNG MAY MA AATTACH BA SIYANG SCHED NG IBA OR HINDI...
+                                                            MessageManaged = await functionScanTask.ConfigureAwait(false);
+
+                                                            handleAwait = "";
+                                                        }
+                                                        else
+                                                        {
+                                                            MessageManaged = "The minute is done look at your dateTime.";
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        Task<string> functionScanTask = new Task<string>(() => scanningFinalForSched(
+                                                                currentSchedHandle.ToString(),
+                                                                DateTimeRangeAddMnt, SetDurationTimeAdd, SetDurationTimeAddHrs,
+                                                                addingHandle.ToString(), handleData[8], handleData[10], handleData[11]));
+                                                        functionScanTask.Start();
+
+                                                        //HANDLING MESSAGE KUNG MAY MA AATTACH BA SIYANG SCHED NG IBA OR HINDI...
+                                                        MessageManaged = await functionScanTask.ConfigureAwait(false);
+
+                                                        handleAwait = "";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    MessageManaged = "The Hrs is done look at your dateTime.";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                //AFTER CONVERT THE PM EXAMPLE 1 PM TO 13 PM OR NOT THIS SHOULD DO 
+                                                //SCANNING HRS AND MNT........
+                                                Task<string> functionScanTask = new Task<string>(() => scanningFinalForSched(
+                                                    currentSchedHandle.ToString(),
+                                                    DateTimeRangeAddMnt, SetDurationTimeAdd, SetDurationTimeAddHrs,
+                                                    addingHandle.ToString(), handleData[8], handleData[10], handleData[11]));
+                                                functionScanTask.Start();
+
+                                                //HANDLING MESSAGE KUNG MAY MA AATTACH BA SIYANG SCHED NG IBA OR HINDI...
+                                                MessageManaged = await functionScanTask.ConfigureAwait(false);
+
+                                                handleAwait = "";
                                             }
                                         }
                                     }
@@ -916,10 +949,10 @@ namespace ClassUserForm
                     else {
                         MessageManaged = "The current schedule has already have in this user.";
                     }
-               // }
-               // else {
-               //     MessageManaged = "You have only 'ONE' add schedule from this user.";
-               // }
+             //   }
+             //   else {
+             //       MessageManaged = "You have only 'ONE' add schedule from this user.";
+             //   }
                 return MessageManaged;
             }
 
@@ -1304,7 +1337,8 @@ namespace ClassUserForm
 
 
         //THIS IS DELETED SCEHDULE FOR OWN USER..................................................
-        public string deletedOwnSchedule(string userUsername, string scheduleDelete, string WhoAddedUserNameSched) {
+        public string deletedOwnSchedule(string userUsername, string scheduleDelete, string WhoAddedUserNameSched,
+            string HandleMessage) {
             string errHandle = "", handleUserName = "", handleUserWho = "";
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0};" +
                 "Uid=root;Pwd=", userUsername));
@@ -1356,9 +1390,29 @@ namespace ClassUserForm
                             connInsert.Open();
                             MySqlCommand commInsert = connInsert.CreateCommand();
                             commInsert.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `DayReport`, `MonthReport`," +
-                            "`TimeMessage`, `MonthDateTime`) VALUES ('', @NameFull, @Message, @ColorDeclared, '', '', '', '')";
+                            "`TimeMessage`, `MonthDateTime`) VALUES ('', @NameFull, @Message, @ColorDeclared, @reportDay, " +
+                            "@monthReport, @TimeMess, @MonthDateTimeFull)";
                             commInsert.Parameters.AddWithValue("@NameFull", handleUserName);
-                            commInsert.Parameters.AddWithValue("@Message", "The schedule you assigned to this user is no longer be assigned.");
+                            commInsert.Parameters.AddWithValue("@Message", HandleMessage);
+                            commInsert.Parameters.AddWithValue("@reportDay", DateTime.Now.Day);
+                            commInsert.Parameters.AddWithValue("@monthReport", DateTime.Now.Month);
+                            calculateTimes();
+                            void calculateTimes()
+                            {
+                                string calculateHour = (DateTime.Now.Hour > 11 ? (DateTime.Now.Hour == 12) ? DateTime.Now.Hour.ToString():
+                                "0"+(DateTime.Now.Hour-12).ToString(): (DateTime.Now.Hour > 9)? DateTime.Now.Hour.ToString(): 
+                                "0"+DateTime.Now.Hour.ToString());
+                                string calculateTime = (DateTime.Now.Minute > 9 ? DateTime.Now.Minute.ToString(): "0"+DateTime.Now.Minute.ToString())+" "
+                                +(DateTime.Now.Hour > 11 ?"PM":"AM");
+
+                                commInsert.Parameters.AddWithValue("@TimeMess", calculateHour+":"+calculateTime);
+                                commInsert.Parameters.AddWithValue("@MonthDateTimeFull", 
+                                    DateTime.Now.Month+"/"+DateTime.Now.Day+"/"+DateTime.Now.Year+" "+
+                                    calculateHour + ":" + calculateTime);
+
+                            }
+                            
+
                             commInsert.Parameters.AddWithValue("@ColorDeclared", "#17202A");
                             commInsert.ExecuteNonQuery();
                         }

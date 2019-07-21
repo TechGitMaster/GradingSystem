@@ -260,6 +260,8 @@ namespace WindowsFormUserGrading
             NextToSeeRange.Click += new System.EventHandler(clickNextAndBack);
             BackToSeeTimeDate.Click += new System.EventHandler(clickNextAndBack);
 
+            DeleteScheduleOwnUser.Click += new System.EventHandler(deleteScheduleOwnUser);
+
             monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(MonthCalendar1_DateChanged);
 
             SearchBoxCalender.KeyUp += new System.Windows.Forms.KeyEventHandler(returnDataCalendar);
@@ -621,21 +623,24 @@ namespace WindowsFormUserGrading
 
 
         //THIS IS THE TASK STRING THAT DO TO DELETE THE SCHEDULE...............................................
-        string seeError = "";
-        string checkIfHaving = "";
+        protected static string checkIfHavings = "", thatWillDelete = "false", seeError = "";
+        protected static List<string> handleDataMessage = new List<string>();
+        protected static string[] handleMessageinarrayConvert;
+        protected static int numberFinalForMessage = -1;
 
-        protected async Task<string> DoDeleteSched(string scheduleDelete, string whoAddedName) {
-            checkIfHaving = "Have";
-            if (seeError == "")
-            {
-                seeError = await Task.Run(() => calendarClass.deletedOwnSchedule("vee", scheduleDelete, whoAddedName));
-                if (seeError != "") {
-                    MessageBox.Show(seeError);
+        protected async Task<string> DoDeleteSched(string scheduleDelete, string whoAddedName, string[] messageDelete,
+            int numberFinalForMessages) {
+            checkIfHavings = "Have";
+            if (thatWillDelete == "true") {
+                if (seeError == "")
+                {
+                    seeError = await Task.Run(() => calendarClass.deletedOwnSchedule("vee", scheduleDelete, whoAddedName,
+                        messageDelete[numberFinalForMessages]));
+                    if (seeError != "")
+                    {
+                        MessageBox.Show(seeError);
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("The Sched of this "+ scheduleDelete+" ss not deleted");
             }
 
             return seeError;
@@ -643,12 +648,25 @@ namespace WindowsFormUserGrading
 
 
         //ITO YUNG DELETE SCHEDULE DUN KAY USER PARA MAKADILIT SIYA NG SHCEDULE NYA......................
-        public async void deleteSchedUserWhoAssigned(object control, EventArgs e)
+        protected static int CountToDetect = 0;
+        protected static List<List<string>> datahandleDateName = new List<List<string>>();
+        protected static List<List<string>> handleDataForVoid = new List<List<string>>();
+        protected static int numberCountToSectionCom = 0;
+        protected static int numberCountsDelete = 0;
+
+        public void deleteSchedUserWhoAssigned(object control, EventArgs e)
         {
-            checkIfHaving = "";
+            checkIfHavings = "";
+            CountToDetect = 0;
+            numberCountToSectionCom = 0;
+            numberFinalForMessage = -1;
+            numberCountsDelete = 0;
+            datahandleDateName = new List<List<string>>();
+            handleDataMessage = new List<string>();
+            handleDataForVoid = new List<List<string>>();
+
             if (EqualNumber > 0)
             {
-                List<Task> taskDelete = new List<Task>();
                 TimerSchedUserSelf.Stop();
                 foreach (Panel pan in ScheduleUserPanel2.Controls)
                 {
@@ -664,8 +682,20 @@ namespace WindowsFormUserGrading
                             {
                                 if (checkbox.Text != "")
                                 {
-                                    //delete Statement.......................
-                                    taskDelete.Add(DoDeleteSched(checkbox.AccessibleDescription, checkbox.AccessibleName));
+                                    //DETERMINE IF THE USER WANT TO DELETE SCHED.................
+                                    CountToDetect++;
+
+                                    //ADD DATA LIST DATE AND NAME...................................
+                                    datahandleDateName.Add(new List<string> {
+                                           CountToDetect.ToString(),
+                                           checkbox.AccessibleDescription,
+                                           checkbox.AccessibleName
+                                    });
+
+                                    handleDataForVoid.Add(new List<string> {
+                                        checkbox.AccessibleDescription, checkbox.AccessibleName
+                                    });
+                                  
                                 }
                                 else
                                 {
@@ -675,20 +705,102 @@ namespace WindowsFormUserGrading
                         }
                     }
                 }
-                await Task.WhenAll(taskDelete);
-                if (checkIfHaving == "Have")
-                {
-                    if (String.IsNullOrEmpty(seeError) == true)
-                    {
-                        conditionFirst = true;
-                        ScheduleUserPanel2.Controls.Clear();
-                        this.intervalVoidShowAndScanSched("vee");
-                    }
+
+                if (CountToDetect > 0) {
+                    thatWillDelete = "false";
+                    CommentSectionSchedDelete.Visible = true;
+                    this.showNameDateCommentSec();
                 }
             }
             else
             {
                 MessageBox.Show("You had no schedule.");
+            }
+        }
+
+
+        //SHOW THE NAME AND DATE OF OTHER USER MEssage STATEMENT........
+        protected void showNameDateCommentSec() {
+            numberCountToSectionCom++;
+            bool conditionBool = false;
+            foreach (var stringCount in datahandleDateName) {
+                if (conditionBool != true)
+                {
+                    int numbercountToDisplay = 0;
+                    int numbercountToDisplays = 0;
+                    foreach (var equalCount in stringCount) {
+                        if (conditionBool != true)
+                        {
+                            if (numbercountToDisplays != 1) {
+                                numbercountToDisplays++;
+                                if (Convert.ToInt32(equalCount) == numberCountToSectionCom)
+                                {
+                                    conditionBool = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            numbercountToDisplay++;
+                            if (numbercountToDisplay <= 1)
+                            {
+                                DateScheduleDelete.Text = equalCount;
+                            }
+                            else
+                            {
+                                NameScheduleDelete.Text = equalCount;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //BUTTON ADD MESSAGE AND AFTER REACH THE NUMBER OF SELECTED IT WILL DELETE..................
+        public async void deleteScheduleOwnUser(object controls, EventArgs e) {
+            if (messageDeleteSchedule.Text.Length > 0)
+            {
+                numberCountsDelete++;
+                handleDataMessage.Add(messageDeleteSchedule.Text);
+                messageDeleteSchedule.Text = "";
+
+                if (numberCountsDelete == CountToDetect)
+                {
+                    List<Task> taskDelete = new List<Task>();
+                    thatWillDelete = "true";
+                    handleMessageinarrayConvert = handleDataMessage.ToArray();
+                    CommentSectionSchedDelete.Visible = false;
+
+                    foreach (List<string> stringData in handleDataForVoid) {
+                        string[] arrayConvert = stringData.ToArray();
+                        numberFinalForMessage++;
+                        taskDelete.Add(DoDeleteSched(arrayConvert[0], arrayConvert[1], handleMessageinarrayConvert,
+                            numberFinalForMessage));
+                    }
+
+                    await Task.WhenAll(taskDelete);
+
+                    if (checkIfHavings == "Have")
+                    {
+                        if (String.IsNullOrEmpty(seeError) == true)
+                        {
+                            conditionFirst = true;
+                            ScheduleUserPanel2.Controls.Clear();
+                            this.intervalVoidShowAndScanSched("vee");
+                        }
+                        else
+                        {
+                            MessageBox.Show("The Schedule you want to delete is unnable.");
+                        }
+                    }
+
+                }
+                else {
+                    this.showNameDateCommentSec();
+                }
+            }
+            else {
+                MessageBox.Show("You must to say something........");
             }
         }
 
