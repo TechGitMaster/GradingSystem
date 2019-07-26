@@ -22,9 +22,13 @@ namespace WindowsFormUserGrading
         protected static string[] arrComboBox = new string[] { "comboBoxHrs", "comboBoxMnt", "comboBoxAP", "TimeRangeHrs", "TimeRangeMnt" };
         protected int handlingIdInToProtected;
         protected LoadingScreen loadingOrWaiting = new LoadingScreen();
-        private static string conditionToCLick = "CalendarLoaded";
         protected static List<CalendarList> ListScheduleSelf = new List<CalendarList>();
+        protected static string[] arrayInNavigator = new string[] { "", "", "", ""};
         protected System.Windows.Forms.Timer TimerSchedUserSelf = new System.Windows.Forms.Timer();
+        protected System.Windows.Forms.Timer TimerReportSelf = new System.Windows.Forms.Timer();
+        protected System.Windows.Forms.Timer TimerGrading = new System.Windows.Forms.Timer();
+        protected System.Windows.Forms.Timer TimerControls = new System.Windows.Forms.Timer();
+
         private int NumberHandleCondition = 0;
         protected Calendar calendarClass = new Calendar();
         protected override CreateParams CreateParams {
@@ -42,7 +46,6 @@ namespace WindowsFormUserGrading
         public GradingFormUser()
         {
             InitializeComponent();
-
 
             using (System.Drawing.Drawing2D.GraphicsPath pathGrap = new System.Drawing.Drawing2D.GraphicsPath()) {
                 pathGrap.AddEllipse(7, 0, pictureUserBox.Width - 15, pictureUserBox.Height);
@@ -125,29 +128,95 @@ namespace WindowsFormUserGrading
                     }
 
                     buttonsClick.Click += new System.EventHandler((object sender, EventArgs e) => {
+                        int numberDetectIf = 0, numberCountToBack = 0;
                         Button bttn = (Button)sender;
                         DrawLine2Final.Location = new Point(0, bttn.Location.Y);
-
-                        if (buttonsClick.Name != "Calendar")
-                        {
-                            conditionToCLick = "";
-                            TimerSchedUserSelf.Stop();
-                        }
-                        else {
-                            if (conditionToCLick != "CalendarLoaded") {
-                                TimerSchedUserSelf.Start();
-                            }
-                        }
 
                         foreach (Panel panelBoxs in PanelBox.Controls)
                         {
                             if (bttn.Name != panelBoxs.AccessibleDescription.ToString())
                             {
                                 panelBoxs.Visible = false;
+                                numberDetectIf++;
                             }
                             else
                             {
                                 panelBoxs.Visible = true;
+                                switch (numberDetectIf){
+                                    case 1:
+                                        if (arrayInNavigator[numberDetectIf] == "")
+                                        {
+                                            arrayInNavigator[numberDetectIf] = "Have";
+                                            TimerSchedUserSelf.Stop();
+                                            TimerReportSelf.Stop();
+                                            TimerControls.Stop();
+                                            TimerGrading.Start();
+                                            while (numberCountToBack < arrayInNavigator.Length)
+                                            {
+                                                if (numberDetectIf != numberCountToBack)
+                                                {
+                                                    arrayInNavigator[numberCountToBack] = "";
+                                                }
+                                                numberCountToBack++;
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+                                        if (arrayInNavigator[numberDetectIf] == "")
+                                        {
+                                            arrayInNavigator[numberDetectIf] = "Have";
+                                            TimerSchedUserSelf.Stop();
+                                            TimerGrading.Stop();
+                                            TimerControls.Stop();
+                                            TimerReportSelf.Start();
+                                            while (numberCountToBack < arrayInNavigator.Length)
+                                            {
+                                                if (numberDetectIf != numberCountToBack)
+                                                {
+                                                    arrayInNavigator[numberCountToBack] = "";
+                                                }
+                                                numberCountToBack++;
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                        if (arrayInNavigator[numberDetectIf] == "")
+                                        {
+                                            arrayInNavigator[numberDetectIf] = "Have";
+                                            TimerSchedUserSelf.Stop();
+                                            TimerReportSelf.Stop();
+                                            TimerControls.Start();
+                                            TimerGrading.Stop();
+                                            while (numberCountToBack < arrayInNavigator.Length)
+                                            {
+                                                if (numberDetectIf != numberCountToBack)
+                                                {
+                                                    arrayInNavigator[numberCountToBack] = "";
+                                                }
+                                                numberCountToBack++;
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        if (arrayInNavigator[numberDetectIf] == "")
+                                        {
+                                            arrayInNavigator[numberDetectIf] = "Have";
+                                            TimerSchedUserSelf.Start();
+                                            TimerGrading.Stop();
+                                            TimerControls.Stop();
+                                            TimerReportSelf.Stop();
+
+                                            while (numberCountToBack < arrayInNavigator.Length)
+                                            {
+                                                if (numberDetectIf != numberCountToBack)
+                                                {
+                                                    arrayInNavigator[numberCountToBack] = "";
+                                                }
+                                                numberCountToBack++;
+                                            }
+                                        }
+                                        break;
+                                }
                             }
                         }
                     });
