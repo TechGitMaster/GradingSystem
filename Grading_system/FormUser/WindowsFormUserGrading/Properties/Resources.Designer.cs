@@ -133,6 +133,16 @@ namespace WindowsFormUserGrading.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_21 {
+            get {
+                object obj = ResourceManager.GetObject("philip-castillo-lol-jhin-vs-camille-awake-wallpaper-4k-21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap trash_2_64 {
             get {
                 object obj = ResourceManager.GetObject("trash-2-64", resourceCulture);

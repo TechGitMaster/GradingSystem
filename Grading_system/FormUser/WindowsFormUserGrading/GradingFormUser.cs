@@ -388,6 +388,31 @@ namespace WindowsFormUserGrading
             //For Searching Box Calender BTTN.........................................
             BttnSearchBar.Click += new System.EventHandler(SearchBttnCalenderToSched);
             this.LoadParseDataInSchedulePanelBarSearch();
+
+
+            //CALENDAR END FOR FORM LOAD..............................................
+
+
+
+
+
+            //REPORT START...........................................................
+
+            //SHOW EVERY SINGLE CLICK IN SELECETED..................................
+            foreach (Panel panReport in NavigatorReport.Controls)
+            {
+                panReport.Click += new System.EventHandler(ReportFunctionShow);
+                foreach (Control label in panReport.Controls)
+                {
+                    if (label.GetType() == typeof(Label))
+                    {
+                        label.Click += new System.EventHandler(ReportFunctionShow);
+                    }
+                }
+            }
+
+
+
         }
 
 
@@ -1778,6 +1803,7 @@ namespace WindowsFormUserGrading
         protected static string conditionNameCheck;
         protected static string conditionToHaveInCheck = "";
         private static int conditionToEndCheck = 0;
+
         public async void DeleteScheduleCalendarForAdd(object controls, EventArgs e) {
             int conditionToFinalCheckEnd = 0;
             if (condition_checkHideShow != true)
@@ -1969,5 +1995,66 @@ namespace WindowsFormUserGrading
                 conditionToEndCheck -= 1;
             }
         }
+
+        //END OF CALENDAR SCHED............................................................
+        //...........................................................
+
+
+
+
+
+
+
+
+        //REPORT START..........................................................................................
+
+
+
+
+
+
+
+        //SHOW REPORT EVERY SINGLE CLICK ALL, C AND G....................................................
+        public void ReportFunctionShow(object controls, EventArgs e)
+        {
+            string textCon = "";
+            Control Con = (Control)controls;
+            Panel pans = null;
+            Label label = null;
+
+            if (Con is Panel)
+            {
+                textCon = "asd";
+                pans = (Panel)Con;
+            }
+            else if (Con is Label)
+            {
+                textCon = "as";
+                label = (Label)Con;
+            }
+
+            foreach (Control pan in PanelShowReports.Controls)
+            {
+                if (pan is Panel)
+                {
+                    if (pan.AccessibleName != "LineCost")
+                    {
+                        if ((textCon == "asd" ? pans.Name : label.AccessibleName) == pan.AccessibleName)
+                        {
+                            pan.Visible = true;
+                        }
+                        else
+                        {
+                            pan.Visible = false;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
     }
 }
