@@ -164,19 +164,29 @@ namespace WindowsFormUserGrading
                                     case 2:
                                         if (arrayInNavigator[numberDetectIf] == "")
                                         {
-                                            arrayInNavigator[numberDetectIf] = "Have";
-                                            TimerSchedUserSelf.Stop();
-                                            TimerGrading.Stop();
-                                            TimerControls.Stop();
-                                            TimerReportSelf.Start();
-                                            while (numberCountToBack < arrayInNavigator.Length)
-                                            {
-                                                if (numberDetectIf != numberCountToBack)
+
+                                            bttn.Enabled = false;
+
+                                            Thread th = new Thread(() => {
+
+                                                arrayInNavigator[numberDetectIf] = "Have";
+                                                TimerSchedUserSelf.Stop();
+                                                TimerGrading.Stop();
+                                                TimerControls.Stop();
+                                                TimerReportSelf.Start();
+                                                while (numberCountToBack < arrayInNavigator.Length)
                                                 {
-                                                    arrayInNavigator[numberCountToBack] = "";
+                                                    if (numberDetectIf != numberCountToBack)
+                                                    {
+                                                        arrayInNavigator[numberCountToBack] = "";
+                                                    }
+                                                    numberCountToBack++;
                                                 }
-                                                numberCountToBack++;
-                                            }
+                                            });
+                                            th.Start();
+
+                                            this.DataGatherListOfReport(bttn);
+
                                         }
                                         break;
                                     case 3:
@@ -2011,7 +2021,7 @@ namespace WindowsFormUserGrading
 
 
 
-
+        protected List<ReportList> reportListGetAllData = new List<ReportList>(); 
 
 
         //SHOW REPORT EVERY SINGLE CLICK ALL, C AND G....................................................
@@ -2053,6 +2063,10 @@ namespace WindowsFormUserGrading
         }
 
 
+
+        protected void DataGatherListOfReport(Button bttn){
+            
+        }
 
 
 

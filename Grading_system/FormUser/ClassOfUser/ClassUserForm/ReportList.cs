@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassUserForm
 {
-    class ReportList
+    public class ReportList
     {
     }
 }
