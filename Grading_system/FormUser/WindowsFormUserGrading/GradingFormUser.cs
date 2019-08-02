@@ -2079,10 +2079,11 @@ namespace WindowsFormUserGrading
         }
 
 
-
+        //REPORT VOID THAT WILL START FROM THIS...................................................
         protected async void DataGatherListOfReport(Button bttn){
             int numberCountList = 0, ConditionToGet = 0;
             numberCountPanel = -1;
+            condition_to_Paint = "false";
 
             for (int numberCountPercent = 0; handleForPercent.Length > numberCountPercent; numberCountPercent++)
             {
@@ -2144,9 +2145,10 @@ namespace WindowsFormUserGrading
             }
         }
 
-
+        //DELEGATE TYPE COUNT.................................
         protected delegate void delegateflowPercent(int[] PercentArray, List<ReportList> ListOfDataReport);
 
+        //COUNT THE NUMBER THAT WILL PERCENT AND THE PAINT FLOW................................
         protected void calendarPercentReport(int[] PercentArray, List<ReportList> ListOfDataReport) {
             for (int ArrayLength = 0; ArrayLength < 3; ArrayLength++) {
                 if (condition_to_Paint != "true")
@@ -2181,6 +2183,7 @@ namespace WindowsFormUserGrading
             }
         }
 
+        //ONPAINT THAT ALSWAYS REAL TIME AUPDATE THE PAINT.....................................
         protected override void OnPaint(PaintEventArgs e)
         {
                 base.OnPaint(e);
@@ -2188,6 +2191,7 @@ namespace WindowsFormUserGrading
         }
 
 
+        //PAINT AREA FLOW SEE.......................
         public void flowPaintPercent(object controls, PaintEventArgs e)
         {
             Panel pan = (Panel)controls;
