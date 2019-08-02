@@ -8,5 +8,17 @@ namespace ClassUserForm
 {
     public class ReportList
     {
+
+        public string ErrCatch;
+        public int countNumber;
+        public int id;
+        public string NameWhoMessage;
+        public string Message;
+        public string ColorDeclared;
+        public string DayReport;
+        public string MonthReport;
+        public string TimeMessage;
+        public string FullTimeMessage;
+
     }
 }

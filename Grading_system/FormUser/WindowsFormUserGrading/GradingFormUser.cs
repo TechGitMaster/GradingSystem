@@ -408,6 +408,11 @@ namespace WindowsFormUserGrading
 
             //REPORT START...........................................................
 
+
+            foreach (Panel flowPanel in FlowPercentagePanel.Controls) {
+                flowPanel.Paint += new System.Windows.Forms.PaintEventHandler(flowPaintPercent);
+            }
+
             //SHOW EVERY SINGLE CLICK IN SELECETED..................................
             foreach (Panel panReport in NavigatorReport.Controls)
             {
@@ -2021,7 +2026,18 @@ namespace WindowsFormUserGrading
 
 
 
-        protected List<ReportList> reportListGetAllData = new List<ReportList>(); 
+        protected List<ReportList> reportListGetAllData = new List<ReportList>();
+        protected Report reportClass = new Report();
+        protected static int[] handleForPercent = new int[] { 0, 0, 0 };
+        private int numberCountForListReport = 0, numberCountPanel = 0;
+        private static bool conditionToGetData = true;
+        public string[] LabelArr = new string[] { "GradingLabelPercent", "CalendarLabelPercent", "OALabelPercent"  };
+        public string[] PanelFlowPercent = new string[] { "GradingFlowReport", "CalendarFlowReport", "OverAllFlowReport"};
+        protected static string condition_to_Paint = "false";
+
+
+
+
 
 
         //SHOW REPORT EVERY SINGLE CLICK ALL, C AND G....................................................
@@ -2064,11 +2080,147 @@ namespace WindowsFormUserGrading
 
 
 
-        protected void DataGatherListOfReport(Button bttn){
-            
+        protected async void DataGatherListOfReport(Button bttn){
+            int numberCountList = 0, ConditionToGet = 0;
+            numberCountPanel = -1;
+
+            for (int numberCountPercent = 0; handleForPercent.Length > numberCountPercent; numberCountPercent++)
+            {
+                handleForPercent[numberCountPercent] = 0;
+            }
+
+            if (conditionToGetData != false) {
+                conditionToGetData = false;
+                ConditionToGet = 1;
+                reportListGetAllData = await Task.Run(() => reportClass.getAllDatainReport("vee")).ConfigureAwait(true);
+                ConditionToGet = 2;
+
+                if (ConditionToGet != 1) {
+                    int AwaitGetCount()
+                    {
+                        foreach (var GetData in reportListGetAllData)
+                        {
+                            if (String.IsNullOrEmpty(GetData.ErrCatch))
+                            {
+                                if (GetData.countNumber == 1)
+                                {
+                                    numberCountList++;
+
+                                    switch(GetData.ColorDeclared)
+                                    {
+                                        //CALENDAR COUNT........................
+                                        case "#17202A":
+                                            handleForPercent[1]++;
+                                            break;
+                                        case "Coral":
+                                            handleForPercent[0]++;
+                                            break;
+                                    }
+                                    handleForPercent[2] = numberCountList;
+                                }
+                                else
+                                {
+                                    conditionToGetData = true;
+                                }
+                            }
+                            else
+                            {
+                                conditionToGetData = true;
+                                MessageBox.Show("Check Your Internet.");
+                            }
+                        }
+                        return numberCountList;
+                    }
+
+                    Task<int> intGetCounts = new Task<int>(() => AwaitGetCount());
+                    intGetCounts.Start();
+                    numberCountForListReport = await intGetCounts.ConfigureAwait(true);
+                    if (numberCountForListReport != 0) {
+                        delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
+                        delegateCount.Invoke(handleForPercent, reportListGetAllData);
+                    }
+                }
+
+            }
         }
 
 
+        protected delegate void delegateflowPercent(int[] PercentArray, List<ReportList> ListOfDataReport);
+
+        protected void calendarPercentReport(int[] PercentArray, List<ReportList> ListOfDataReport) {
+            for (int ArrayLength = 0; ArrayLength < 3; ArrayLength++) {
+                if (condition_to_Paint != "true")
+                {
+                    Label label = (Label)(PercentagePanel.Controls[LabelArr[ArrayLength]]);
+                    if (ArrayLength <= 2)
+                    {
+                        if (ArrayLength == 2)
+                        {
+                            label.Text = ((PercentArray[ArrayLength] * 100) / 2000.0).ToString() + "%";
+
+                            condition_to_Paint = "true";
+                            delegateflowPercent delegateFlowReturnAgain = new delegateflowPercent(calendarPercentReport);
+                            delegateFlowReturnAgain.Invoke(PercentArray, ListOfDataReport);
+
+                        }
+                        else
+                        {
+                            label.Text = ((PercentArray[ArrayLength] * 100) / 1000.0).ToString() + "%";
+                        }
+                    }
+                }
+                else {
+                    numberCountPanel--;
+                    Panel pan = (Panel)(FlowPercentagePanel.Controls[PanelFlowPercent[ArrayLength]]);
+                    pan.Invalidate();
+
+                    if (ArrayLength+1 >= 3) {
+                        MessageBox.Show("asd");
+                    }
+                }
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+                base.OnPaint(e);
+                this.flowPaintPercent((FlowPercentagePanel.Controls[PanelFlowPercent[numberCountPanel]]), e);
+        }
+
+
+        public void flowPaintPercent(object controls, PaintEventArgs e)
+        {
+            Panel pan = (Panel)controls;
+            if (condition_to_Paint != "false")
+            {
+                if (pan.Name == "CalendarFlowReport")
+                {
+                    Graphics grap = e.Graphics;
+                    Pen penShadow = new Pen(System.Drawing.ColorTranslator.FromHtml("#212F3C"), 30);
+                    grap.DrawLine(penShadow, 0, 0, 110, 0);
+                    Pen pen = new Pen(System.Drawing.ColorTranslator.FromHtml("#1ABC9C"), 30);
+                    grap.DrawLine(pen, 0, 0, ((handleForPercent[1] * 110) / 1000), 0);
+                    grap.Dispose();
+                }
+                else if (pan.Name == "GradingFlowReport")
+                {
+                    Graphics grap = e.Graphics;
+                    Pen penShadow = new Pen(System.Drawing.ColorTranslator.FromHtml("#212F3C"), 30);
+                    grap.DrawLine(penShadow, 0, 0, 110, 0);
+                    Pen pen = new Pen(System.Drawing.ColorTranslator.FromHtml("Coral"), 30);
+                    grap.DrawLine(pen, 0, 0, ((handleForPercent[0] * 110) / 1000), 0);
+                    grap.Dispose();
+                }
+                else {
+                    Graphics grap = e.Graphics;
+                    Pen penShadow = new Pen(System.Drawing.ColorTranslator.FromHtml("#212F3C"), 30);
+                    grap.DrawLine(penShadow, 0, 0, 110, 0);
+                    Pen pen = new Pen(System.Drawing.ColorTranslator.FromHtml("#B3B6B7"), 30);
+                    grap.DrawLine(pen, 0, 0, ((handleForPercent[2] * 110) / 2000), 0);
+                    grap.Dispose();
+                }
+            }
+        }
 
     }
 }
