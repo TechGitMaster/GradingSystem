@@ -22,7 +22,7 @@ namespace ClassUserForm
         private Task Scann(string NameUserWhoAdded, string ImageUserWhoAdded,string DateTimeRangeAddHrs,
          string DateTimeRangeAddMnt, string DateTimeRangeAddAP, string calendarRangeAddMonth, string calendarRangeAddConvert,
          string calendarRangeAddDay, string calendarRangeAddYear, string SetDurationTimeAdd, string SetDurationTimeAddHrs,
-         string DateTimeRange, string HandlingAdmin, MySqlConnection conn, string UserName) {
+         string DateTimeRange, string HandlingAdmin, MySqlConnection conn, string UserName, string handleImageOwnUser) {
             string stringMesage = "";
             int numberHandleHrs = 0;
             if (messageToErr == "") {
@@ -140,48 +140,50 @@ namespace ClassUserForm
                         comm.Parameters.AddWithValue("@range", DateTimeRange);
                         comm.ExecuteNonQuery();
 
+
+                        //ITO YUNG KUKUNIN YUNG USERNAME NG INASIGN SAYONA SHCED......................
+                        string handleUser = "", handleImage = "";
+                        MySqlConnection conn2 = new MySqlConnection("Server=localhost;Database=grading_accounts;" +
+                            "Uid=root;Pwd=");
+
                         try
                         {
-                            //ITO YUNG PARA MA REPORT SA DATABASE MO YUNG TAPOS NA SCHEDULE....................
-                            MySqlCommand rep = conn.CreateCommand();
-                            rep.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, " +
-                                "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) " +
-                                "VALUE ('', @Name, @Message, @color, @dayreport, @monthreport, @timeMessage, @monthSched)";
-                            rep.Parameters.AddWithValue("@Name", NameUserWhoAdded);
-                            rep.Parameters.AddWithValue("@Message", "The time sched who assigned to you is now done.");
-                            rep.Parameters.AddWithValue("@color", "#17202A");
-                            rep.Parameters.AddWithValue("@dayreport", DateTime.Now.Day);
-                            rep.Parameters.AddWithValue("@MonthReport", DateTime.Now.Month);
-                            rep.Parameters.AddWithValue("@timeMessage", ((DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour) + ":" + DateTime.Now.Minute + " " +
-                                (DateTime.Now.Hour < 11 ? "AM" : "PM")));
-                            rep.Parameters.AddWithValue("@monthSched", String.Format("{0}/{1}/{2} {3}:{4} {5}", 
-                                DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year, 
-                                (DateTime.Now.Hour < 12 ? DateTime.Now.Hour:DateTime.Now.Hour-12)
-                                , DateTime.Now.Minute, (DateTime.Now.Hour < 11) ? "AM":"PM"));
-                            rep.ExecuteNonQuery();
-                            conn.Close();
-
-
-                            //ITO YUNG KUKUNIN YUNG USERNAME NG INASIGN SAYONA SHCED......................
-                            string handleUser = "";
-                            MySqlConnection conn2 = new MySqlConnection("Server=localhost;Database=grading_accounts;" +
-                                "Uid=root;Pwd=");
-                            try {
-                                conn2.Open();
-                                MySqlCommand commGet = conn2.CreateCommand();
-                                commGet.CommandText = "SELECT `UserName` FROM `searchbargradingaccounts` WHERE " +
-                                    "`FirstLastName`= @UserName";
-                                commGet.Parameters.AddWithValue("@UserName", NameUserWhoAdded);
-                                using (MySqlDataReader reader = commGet.ExecuteReader()) {
-                                    while (reader.Read()) {
-                                        handleUser = (string)reader["UserName"];
-                                    }
-                                    reader.Close();
+                            conn2.Open();
+                            MySqlCommand commGet = conn2.CreateCommand();
+                            commGet.CommandText = "SELECT `UserName`, `ImageUser` FROM `searchbargradingaccounts` WHERE " +
+                                "`FirstLastName`= @UserName";
+                            commGet.Parameters.AddWithValue("@UserName", NameUserWhoAdded);
+                            using (MySqlDataReader reader = commGet.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    handleUser = (string)reader["UserName"];
+                                    handleImage = (string)reader["ImageUser"];
                                 }
-                                conn2.Close();
+                                reader.Close();
+                            }
+                            conn2.Close();
+                            try {
 
-
-
+                                //ITO YUNG PARA MA REPORT SA DATABASE MO YUNG TAPOS NA SCHEDULE....................
+                                MySqlCommand rep = conn.CreateCommand();
+                                rep.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
+                                    "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) " +
+                                    "VALUE ('', @Name, @ImageUser, @Message, @color, @dayreport, @monthreport, @timeMessage, @monthSched)";
+                                rep.Parameters.AddWithValue("@Name", NameUserWhoAdded);
+                                rep.Parameters.AddWithValue("@ImageUser", handleImage);
+                                rep.Parameters.AddWithValue("@Message", "The time sched who assigned to you is now done.");
+                                rep.Parameters.AddWithValue("@color", "#17202A");
+                                rep.Parameters.AddWithValue("@dayreport", DateTime.Now.Day);
+                                rep.Parameters.AddWithValue("@MonthReport", DateTime.Now.Month);
+                                rep.Parameters.AddWithValue("@timeMessage", ((DateTime.Now.Hour > 12 ? DateTime.Now.Hour - 12 : DateTime.Now.Hour) + ":" + DateTime.Now.Minute + " " +
+                                    (DateTime.Now.Hour < 11 ? "AM" : "PM")));
+                                rep.Parameters.AddWithValue("@monthSched", String.Format("{0}/{1}/{2} {3}:{4} {5}",
+                                    DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Year,
+                                    (DateTime.Now.Hour < 12 ? DateTime.Now.Hour : DateTime.Now.Hour - 12)
+                                    , DateTime.Now.Minute, (DateTime.Now.Hour < 11) ? "AM" : "PM"));
+                                rep.ExecuteNonQuery();
+                                conn.Close();
 
 
                                 //AFTER MAKUHA YUNG USERNAME ISASAVE NAMAN ITO DUN SA DATABASE NG INASIGN SAYO NA SCHED................
@@ -191,10 +193,11 @@ namespace ClassUserForm
                                     {
                                     conn3.Open();
                                         MySqlCommand rep2 = conn3.CreateCommand();
-                                        rep2.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, " +
+                                        rep2.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
                                         "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) " +
-                                        "VALUE ('', @Name, @Message, @color, @dayreport, @MonthReport, @timeMessage, @monthSched)";
+                                        "VALUE ('', @Name, @ImageUser, @Message, @color, @dayreport, @MonthReport, @timeMessage, @monthSched)";
                                         rep2.Parameters.AddWithValue("@Name", UserName);
+                                        rep2.Parameters.AddWithValue("@ImageUser", handleImageOwnUser);
                                         rep2.Parameters.AddWithValue("@Message", "The time sched that you assigned is now done.");
                                         rep2.Parameters.AddWithValue("@color", "#17202A");
                                         rep2.Parameters.AddWithValue("@dayreport", DateTime.Now.Day);
@@ -272,7 +275,7 @@ namespace ClassUserForm
         public async Task<List<CalendarList>> GetAllSchedThisUser(string UserName) {
             int numberCountCheck = 0;
             string messageErr2 = "";
-            string handleNameOfUser = "";
+            string handleNameOfUser = "", handleImageOwnUser = "";
             getSched = new List<CalendarList>();
             getJarPermanent = new List<CalendarList>();
             List<Task> task = new List<Task>();
@@ -293,11 +296,12 @@ namespace ClassUserForm
                     try {
                         //ITO YUNG PARA MAKUHA YUNG NAME NG MISMONG ACCOUNT NITO...................
                         MySqlCommand comm2 = connGetUser.CreateCommand();
-                        comm2.CommandText = "SELECT `FirstLastName` FROM `searchbargradingaccounts` WHERE Username=@name";
+                        comm2.CommandText = "SELECT `FirstLastName`, `ImageUser` FROM `searchbargradingaccounts` WHERE Username=@name";
                         comm2.Parameters.AddWithValue("@name", UserName);
-                        using (MySqlDataReader readsName = comm2.ExecuteReader()) {
-                            while (readsName.Read()) {
-                                handleNameOfUser = (string)readsName["FirstLastName"];
+                        using (MySqlDataReader reads = comm2.ExecuteReader()) {
+                            while (reads.Read()) {
+                                handleNameOfUser = (string)reads["FirstLastName"];
+                                handleImageOwnUser = (string)reads["ImageUser"];
                             }
                         }
                         connGetUser.Close();
@@ -362,7 +366,7 @@ namespace ClassUserForm
                                     listCount.SetDurationTimeAdd,
                                     listCount.SetDurationTimeAddHrs,
                                     listCount.DateTimeRange,
-                                    listCount.HandlingAdmin, conn, handleNameOfUser
+                                    listCount.HandlingAdmin, conn, handleNameOfUser, handleImageOwnUser
                                     ));
                         }
 
@@ -1339,7 +1343,7 @@ namespace ClassUserForm
         //THIS IS DELETED SCEHDULE FOR OWN USER..................................................
         public string deletedOwnSchedule(string userUsername, string scheduleDelete, string WhoAddedUserNameSched,
             string HandleMessage) {
-            string errHandle = "", handleUserName = "", handleUserWho = "";
+            string errHandle = "", handleUserName = "", handleImageUser = "", handleUserWho = "";
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0};" +
                 "Uid=root;Pwd=", userUsername));
             MySqlConnection connUserName = new MySqlConnection("Server=localhost;Database=grading_accounts;" +
@@ -1354,6 +1358,7 @@ namespace ClassUserForm
                 using (MySqlDataReader reader = commUserGet.ExecuteReader()) {
                     while (reader.Read()) {
                         handleUserName = (string)reader["FirstLastName"];
+                        handleImageUser = (string)reader["ImageUser"];
                     }
                     reader.Close();
                 }
@@ -1389,10 +1394,12 @@ namespace ClassUserForm
                         {
                             connInsert.Open();
                             MySqlCommand commInsert = connInsert.CreateCommand();
-                            commInsert.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `Message`, `ColorDeclared`, `DayReport`, `MonthReport`," +
-                            "`TimeMessage`, `MonthDateTime`) VALUES ('', @NameFull, @Message, @ColorDeclared, @reportDay, " +
-                            "@monthReport, @TimeMess, @MonthDateTimeFull)";
+                            commInsert.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
+                                "`DayReport`, `MonthReport`," +
+                                "`TimeMessage`, `MonthDateTime`) VALUES ('', @NameFull, @ImageUser, @Message, @ColorDeclared, @reportDay, " +
+                                "@monthReport, @TimeMess, @MonthDateTimeFull)";
                             commInsert.Parameters.AddWithValue("@NameFull", handleUserName);
+                            commInsert.Parameters.AddWithValue("@ImageUser", handleImageUser);
                             commInsert.Parameters.AddWithValue("@Message", HandleMessage);
                             commInsert.Parameters.AddWithValue("@reportDay", DateTime.Now.Day);
                             commInsert.Parameters.AddWithValue("@monthReport", DateTime.Now.Month);

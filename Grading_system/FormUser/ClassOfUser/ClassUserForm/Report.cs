@@ -32,6 +32,7 @@ namespace ClassUserForm
                             countNumber = numberCountHave,
                             id = (int)reader["id"],
                             NameWhoMessage = (string)reader["NameWho"],
+                            ImageAssest = (string)reader["ImageUser"],
                             Message = (string)reader["Message"],
                             ColorDeclared = (string)reader["ColorDeclared"],
                             DayReport = (string)reader["DayReport"],

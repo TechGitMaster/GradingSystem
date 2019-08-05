@@ -13,6 +13,7 @@ namespace ClassUserForm
         public int countNumber;
         public int id;
         public string NameWhoMessage;
+        public string ImageAssest;
         public string Message;
         public string ColorDeclared;
         public string DayReport;

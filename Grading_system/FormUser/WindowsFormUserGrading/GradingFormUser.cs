@@ -150,7 +150,6 @@ namespace WindowsFormUserGrading
                                             TimerSchedUserSelf.Stop();
                                             TimerReportSelf.Stop();
                                             TimerControls.Stop();
-                                            TimerGrading.Start();
                                             while (numberCountToBack < arrayInNavigator.Length)
                                             {
                                                 if (numberDetectIf != numberCountToBack)
@@ -173,7 +172,6 @@ namespace WindowsFormUserGrading
                                                 TimerSchedUserSelf.Stop();
                                                 TimerGrading.Stop();
                                                 TimerControls.Stop();
-                                                TimerReportSelf.Start();
                                                 while (numberCountToBack < arrayInNavigator.Length)
                                                 {
                                                     if (numberDetectIf != numberCountToBack)
@@ -195,7 +193,6 @@ namespace WindowsFormUserGrading
                                             arrayInNavigator[numberDetectIf] = "Have";
                                             TimerSchedUserSelf.Stop();
                                             TimerReportSelf.Stop();
-                                            TimerControls.Start();
                                             TimerGrading.Stop();
                                             while (numberCountToBack < arrayInNavigator.Length)
                                             {
@@ -211,7 +208,6 @@ namespace WindowsFormUserGrading
                                         if (arrayInNavigator[numberDetectIf] == "")
                                         {
                                             arrayInNavigator[numberDetectIf] = "Have";
-                                            TimerSchedUserSelf.Start();
                                             TimerGrading.Stop();
                                             TimerControls.Stop();
                                             TimerReportSelf.Stop();
@@ -245,6 +241,18 @@ namespace WindowsFormUserGrading
                 });
                 th.Start();
             });
+
+
+
+
+            //INTERVAL SECTION....................................................
+
+            //REPORT INTERVAL..........................................
+            TimerReportSelf.Interval = 5000;
+            TimerReportSelf.Tick += new System.EventHandler((object controls, EventArgs e) => {
+                this.DataGatherListOfReport(Reports);
+            });
+
 
 
 
@@ -627,10 +635,12 @@ namespace WindowsFormUserGrading
                 int locationY = 5;
                 Thread thr = new Thread(() =>
                 {
-                    this.BeginInvoke((Action)delegate ()
-                    {
-                        ScheduleUserPanel2.Controls.Clear();
-                    });
+                    if (Application.OpenForms.OfType<GradingFormUser>().Count() == 1) {
+                        ScheduleUserPanel2.BeginInvoke((Action)delegate ()
+                        {
+                            ScheduleUserPanel2.Controls.Clear();
+                        });
+                    }
                 });
                 thr.Start();
 
@@ -715,8 +725,10 @@ namespace WindowsFormUserGrading
                                 Text = "No Connection."
                             };
 
-                            Action ac = () => ScheduleUserPanel2.Controls.Add(labelNoSched);
-                            ScheduleUserPanel2.BeginInvoke(ac);
+                            if (Application.OpenForms.OfType<GradingFormUser>().Count() == 1) {
+                                Action ac = () => ScheduleUserPanel2.Controls.Add(labelNoSched);
+                                ScheduleUserPanel2.BeginInvoke(ac);
+                            }
                         });
 
                         ths.Start();
@@ -2029,14 +2041,20 @@ namespace WindowsFormUserGrading
         protected List<ReportList> reportListGetAllData = new List<ReportList>();
         protected Report reportClass = new Report();
         protected static int[] handleForPercent = new int[] { 0, 0, 0 };
-        private int numberCountForListReport = 0, numberCountPanel = 0;
+        private int numberCountForListReport = 0, numberCountPanel = 0, CalendarNumberCount = 0, GradingNumberCountList = 0;
         private static bool conditionToGetData = true;
+        private static string reportErr = "false", reportNoHaving = "false";
         public string[] LabelArr = new string[] { "GradingLabelPercent", "CalendarLabelPercent", "OALabelPercent"  };
         public string[] PanelFlowPercent = new string[] { "GradingFlowReport", "CalendarFlowReport", "OverAllFlowReport"};
-        protected static string condition_to_Paint = "false";
-
-
-
+        protected static string condition_to_Paint = "false", HandlingSeeIfHavingError = "Null";
+        public static List<Task> taskVoidShowData = new List<Task>();
+        public static string conditionifEqual = "false";
+        //DELEGATE TYPE COUNT PERCENT.................................
+        protected delegate void delegateflowPercent(int[] PercentArray, List<ReportList> ListOfDataReport);
+        //DELEGATE TYPE SHOW DATA.............................
+        protected delegate void delegateFlowShowData(int id, string NameWhoMessage, string ImageUser, string Message,
+                                string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
+                                string FullTimeMessage, int HeightTopOfPanel);
 
 
 
@@ -2082,21 +2100,27 @@ namespace WindowsFormUserGrading
         //REPORT VOID THAT WILL START FROM THIS...................................................
         protected async void DataGatherListOfReport(Button bttn){
             int numberCountList = 0, ConditionToGet = 0;
-            numberCountPanel = -1;
+            numberCountPanel = 0;
             condition_to_Paint = "false";
+            taskVoidShowData = new List<Task>();
+            TimerReportSelf.Stop();
+            HandlingSeeIfHavingError = "Null";
+            conditionifEqual = "false";
 
             for (int numberCountPercent = 0; handleForPercent.Length > numberCountPercent; numberCountPercent++)
             {
                 handleForPercent[numberCountPercent] = 0;
             }
 
-            if (conditionToGetData != false) {
+            if (conditionToGetData != false)
+            {
                 conditionToGetData = false;
                 ConditionToGet = 1;
                 reportListGetAllData = await Task.Run(() => reportClass.getAllDatainReport("vee")).ConfigureAwait(true);
                 ConditionToGet = 2;
 
-                if (ConditionToGet != 1) {
+                if (ConditionToGet != 1)
+                {
                     int AwaitGetCount()
                     {
                         foreach (var GetData in reportListGetAllData)
@@ -2107,7 +2131,7 @@ namespace WindowsFormUserGrading
                                 {
                                     numberCountList++;
 
-                                    switch(GetData.ColorDeclared)
+                                    switch (GetData.ColorDeclared)
                                     {
                                         //CALENDAR COUNT........................
                                         case "#17202A":
@@ -2118,6 +2142,8 @@ namespace WindowsFormUserGrading
                                             break;
                                     }
                                     handleForPercent[2] = numberCountList;
+                                    CalendarNumberCount = handleForPercent[1];
+                                    GradingNumberCountList = handleForPercent[0];
                                 }
                                 else
                                 {
@@ -2127,29 +2153,481 @@ namespace WindowsFormUserGrading
                             else
                             {
                                 conditionToGetData = true;
+                                HandlingSeeIfHavingError = "Have";
                                 MessageBox.Show("Check Your Internet.");
                             }
                         }
                         return numberCountList;
                     }
 
+
                     Task<int> intGetCounts = new Task<int>(() => AwaitGetCount());
                     intGetCounts.Start();
                     numberCountForListReport = await intGetCounts.ConfigureAwait(true);
-                    if (numberCountForListReport != 0) {
-                        delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
-                        delegateCount.Invoke(handleForPercent, reportListGetAllData);
+                    if (HandlingSeeIfHavingError == "Null")
+                    {
+                        if (numberCountForListReport != 0)
+                        {
+                            PanelOverAll.Controls.Clear();
+
+                            bool conditionIf() {
+
+                                if (CalendarNumberCount == 0)
+                                {
+                                    Thread th = new Thread(() => ths());
+                                    void ths()
+                                    {
+                                        var labelReports = new Label
+                                        {
+                                            Name = "ReportNoHaving",
+                                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                                            Size = new Size(233, 16),
+                                            Location = new Point(265, 117)
+                                        };
+                                        labelReports.Text = "No Reports The Calendar For Now.";
+                                        Action ac = new Action(() =>
+                                        {
+                                            panelCalendarShow.Controls.Clear();
+                                            panelCalendarShow.Controls.Add(labelReports);
+                                        });
+                                        panelCalendarShow.BeginInvoke(ac);
+                                    }
+                                }
+                                else
+                                {
+                                    panelCalendarShow.Controls.Clear();
+                                }
+
+                                if (GradingNumberCountList == 0)
+                                {
+                                    Thread th = new Thread(() =>
+                                    {
+                                        var labelReport = new Label
+                                        {
+                                            Name = "ReportNoHaving",
+                                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                                            Size = new Size(233, 16),
+                                            Location = new Point(265, 117)
+                                        };
+
+                                        labelReport.Text = "No Reports The Grading For Now.";
+                                        GradingShowReports.BeginInvoke((Action)delegate ()
+                                        {
+                                            GradingShowReports.Controls.Clear();
+                                            GradingShowReports.Controls.Add(labelReport);
+                                        });
+                                    });
+                                    th.Start();
+                                }
+                                else {
+                                    GradingShowReports.Controls.Clear();
+                                }
+                                return true;
+                            }
+
+                            Task<bool> taskBool = new Task<bool>(conditionIf);
+                            taskBool.Start();                            
+
+                            if ((await taskBool.ConfigureAwait(true)) == true) {
+                                delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
+                                delegateCount.Invoke(handleForPercent, reportListGetAllData);
+                            }
+                        }
+                        else
+                        {
+                            //WALA PANG REPORT SA LAHAT.......................... 
+                            //DO MESSAGE HERE THAT THE REPORT HAD NO REPORTS...........
+
+                            PanelOverAll.Controls.Clear();
+                            panelCalendarShow.Controls.Clear();
+                            GradingShowReports.Controls.Clear();
+                            var labelReport = new Label
+                            {
+                                Name = "ReportNoHaving",
+                                Text = "No Reports For Now.",
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Size = new Size(233, 16),
+                                Location = new Point(265, 117)
+                            };
+
+                            var labelReports = new Label
+                            {
+                                Name = "ReportNoHaving",
+                                Text = "No Reports For Now.",
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Size = new Size(233, 16),
+                                Location = new Point(265, 117)
+                            };
+
+                            var labelReportss = new Label
+                            {
+                                Name = "ReportNoHaving",
+                                Text = "No Reports For Now.",
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Size = new Size(233, 16),
+                                Location = new Point(265, 117)
+                            };
+
+                            PanelOverAll.Controls.Add(labelReport);
+                            panelCalendarShow.Controls.Add(labelReports);
+                            GradingShowReports.Controls.Add(labelReportss);
+
+                            delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
+                            delegateCount.Invoke(handleForPercent, reportListGetAllData);
+
+                        }
                     }
+                    else {
+
+                        //PLEASE CHECK YOUR INTERNET CONNECTION......................................
+
+                        bttn.Enabled = true;
+                        PanelOverAll.Controls.Clear();
+                        panelCalendarShow.Controls.Clear();
+                        GradingShowReports.Controls.Clear();
+                        var labelReportError = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        var labelReportErrors = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+                        var labelReportErrorss = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        PanelOverAll.Controls.Add(labelReportError);
+                        panelCalendarShow.Controls.Add(labelReportErrors);
+                        GradingShowReports.Controls.Add(labelReportErrorss);
+                        CalendarLabelPercent.Text = "Error";
+                        GradingLabelPercent.Text = "Error";
+                        OALabelPercent.Text = "Error";
+                        TimerReportSelf.Start();
+                    }
+                }
+
+            }
+            else {
+                reportListGetAllData = await Task.Run(() => reportClass.getAllDatainReport("vee")).ConfigureAwait(true);
+
+                int returnDataNumber()
+                {
+                    foreach (var handleData in reportListGetAllData)
+                    {
+                        if (String.IsNullOrEmpty(handleData.ErrCatch))
+                        {
+                            if (handleData.countNumber == 1)
+                            {
+                                numberCountList++;
+                                if (handleData.ColorDeclared != "Coral")
+                                {
+                                    handleForPercent[1] = handleForPercent[1] + 1;
+                                }
+                                else
+                                {
+                                    handleForPercent[0]++;
+                                }
+                                handleForPercent[2] = numberCountList;
+                            }
+                            else
+                            {
+                                //No Reports......Message
+                                reportNoHaving = "true";
+                            }
+                        }
+                        else
+                        {
+                            reportErr = "true";
+                            MessageBox.Show("Please Check Your Internet");
+                        }
+                    }
+
+                    return numberCountList;
+                }
+                Task<int> returnData = new Task<int>(returnDataNumber);
+                returnData.Start();
+
+                if (numberCountForListReport != (await returnData))
+                {
+                    if (reportErr == "false")
+                    {
+                        numberCountForListReport = numberCountList;
+                        if (reportNoHaving != "true")
+                        {
+                            if (numberCountList != 0)
+                            {
+                                PanelOverAll.Controls.Clear();
+                                if (CalendarNumberCount != handleForPercent[1]) {
+                                    if (handleForPercent[1] != 0)
+                                    {
+                                        CalendarNumberCount = handleForPercent[1];
+                                        panelCalendarShow.Controls.Clear();
+                                    }
+                                    else {
+                                        CalendarNumberCount = handleForPercent[1];
+                                        panelCalendarShow.Controls.Clear();
+                                        var labelReport = new Label
+                                        {
+                                            Name = "ReportNoHaving",
+                                            Text = "No Reports The Calendar For Now.",
+                                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                                            Size = new Size(233, 16),
+                                            Location = new Point(265, 117)
+                                        };
+                                        panelCalendarShow.Controls.Add(labelReport);
+                                    }
+                                }
+
+
+                                if (GradingNumberCountList != handleForPercent[0])
+                                {
+                                    if (handleForPercent[0] != 0)
+                                    {
+                                        GradingNumberCountList = handleForPercent[0];
+                                        GradingShowReports.Controls.Clear();
+                                    }
+                                    else
+                                    {
+                                        GradingNumberCountList = handleForPercent[0];
+                                        GradingShowReports.Controls.Clear();
+                                        var labelReport = new Label
+                                        {
+                                            Name = "ReportNoHaving",
+                                            Text = "No Reports The Calendar For Now.",
+                                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                                            Size = new Size(233, 16),
+                                            Location = new Point(265, 117)
+                                        };
+                                        GradingShowReports.Controls.Add(labelReport);
+                                    }
+                                }
+
+
+                                delegateflowPercent delegates = new delegateflowPercent(calendarPercentReport);
+                                delegates.Invoke(handleForPercent, reportListGetAllData);
+                            }
+                        }
+                        else {
+                            PanelOverAll.Controls.Clear();
+                            panelCalendarShow.Controls.Clear();
+                            GradingShowReports.Controls.Clear();
+                            var labelReport = new Label
+                            {
+                                Name = "ReportNoHaving",
+                                Text = "No Reports For Now.",
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Size = new Size(233, 16),
+                                Location = new Point(265, 117)
+                            };
+
+                            var labelReports = new Label
+                            {
+                                Name = "ReportNoHaving",
+                                Text = "No Reports For Now.",
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Size = new Size(233, 16),
+                                Location = new Point(265, 117)
+                            };
+
+                            var labelReportss = new Label
+                            {
+                                Name = "ReportNoHaving",
+                                Text = "No Reports For Now.",
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                ForeColor = System.Drawing.Color.CornflowerBlue,
+                                Size = new Size(233, 16),
+                                Location = new Point(265, 117)
+                            };
+
+                            PanelOverAll.Controls.Add(labelReport);
+                            GradingShowReports.Controls.Add(labelReports);
+                            panelCalendarShow.Controls.Add(labelReportss);
+
+                            delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
+                            delegateCount.Invoke(handleForPercent, reportListGetAllData);
+                        }
+                    }
+                    else {
+                        reportNoHaving = "false";
+                        bttn.Enabled = true;
+                        PanelOverAll.Controls.Clear();
+                        panelCalendarShow.Controls.Clear();
+                        GradingShowReports.Controls.Clear();
+                        var labelReportError = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        var labelReportErrors = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        var labelReportErrorss = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        PanelOverAll.Controls.Add(labelReportError);
+                        GradingShowReports.Controls.Add(labelReportErrors);
+                        panelCalendarShow.Controls.Add(labelReportErrorss);
+
+                        CalendarLabelPercent.Text = "Error";
+                        GradingLabelPercent.Text = "Error";
+                        OALabelPercent.Text = "Error";
+                        TimerReportSelf.Start();
+                    }
+                }
+                else {
+                    // Start the interval.........................
+                    bttn.Enabled = true;
+
+                    if (reportErr != "false") {
+
+                        PanelOverAll.Controls.Clear();
+                        panelCalendarShow.Controls.Clear();
+                        GradingShowReports.Controls.Clear();
+                        var labelReportError = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        var labelReportErrors = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        var labelReportErrorss = new Label
+                        {
+                            Name = "ReportError",
+                            Text = "Please Check Your Internet.",
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.Color.CornflowerBlue,
+                            Size = new Size(290, 16),
+                            Location = new Point(267, 117)
+                        };
+
+                        CalendarLabelPercent.Text = "Error";
+                        GradingLabelPercent.Text = "Error";
+                        OALabelPercent.Text = "Error";
+
+                        if (reportNoHaving == "false")
+                        {
+                            reportErr = "false";
+                            conditionifEqual = "false";
+
+
+                            if (CalendarNumberCount == 0)
+                            {
+                                panelCalendarShow.Controls.Clear();
+                                var labelReports = new Label
+                                {
+                                    Name = "ReportNoHaving",
+                                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                    ForeColor = System.Drawing.Color.CornflowerBlue,
+                                    Size = new Size(233, 16),
+                                    Location = new Point(265, 117)
+                                };
+                                labelReports.Text = "No Reports The Calendar For Now.";
+                                panelCalendarShow.Controls.Add(labelReports);
+                            }
+                            else
+                            {
+                                panelCalendarShow.Controls.Clear();
+                            }
+
+                            if (GradingNumberCountList == 0)
+                            {
+                                var labelReport = new Label
+                                {
+                                    Name = "ReportNoHaving",
+                                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                                    ForeColor = System.Drawing.Color.CornflowerBlue,
+                                    Size = new Size(233, 16),
+                                    Location = new Point(265, 117)
+                                };
+                                GradingShowReports.Controls.Clear();
+                                labelReport.Text = "No Reports The Grading For Now.";
+                                GradingShowReports.Controls.Add(labelReport);
+                            }
+                            else
+                            {
+                                GradingShowReports.Controls.Clear();
+                            }
+
+                        }
+                        else {
+                            PanelOverAll.Controls.Add(labelReportError);
+                            GradingShowReports.Controls.Add(labelReportErrors);
+                            panelCalendarShow.Controls.Add(labelReportErrorss);
+                            conditionifEqual = "true";
+                        }
+
+                    }
+
+                    delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
+                    delegateCount.Invoke(handleForPercent, reportListGetAllData);
+
+                    TimerReportSelf.Start();
                 }
 
             }
         }
 
-        //DELEGATE TYPE COUNT.................................
-        protected delegate void delegateflowPercent(int[] PercentArray, List<ReportList> ListOfDataReport);
-
         //COUNT THE NUMBER THAT WILL PERCENT AND THE PAINT FLOW................................
-        protected void calendarPercentReport(int[] PercentArray, List<ReportList> ListOfDataReport) {
+        protected async void calendarPercentReport(int[] PercentArray, List<ReportList> ListOfDataReport) {
             for (int ArrayLength = 0; ArrayLength < 3; ArrayLength++) {
                 if (condition_to_Paint != "true")
                 {
@@ -2177,7 +2655,38 @@ namespace WindowsFormUserGrading
                     pan.Invalidate();
 
                     if (ArrayLength+1 >= 3) {
-                        MessageBox.Show("asd");
+                        int HeightTopOfPanel = 13, numberCount = 0;
+                        if (PercentArray[2] != 0) {
+                            if (conditionifEqual != "true") {
+                                foreach (var DataGather in reportListGetAllData) {
+                                    numberCount++;
+
+                                    if (numberCount <= 4)
+                                    {
+                                        if (HeightTopOfPanel != 13)
+                                        {
+                                            HeightTopOfPanel += 60;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        numberCount = 0;
+                                        HeightTopOfPanel += 90;
+                                    }
+                                    taskVoidShowData.Add(WayToShow(DataGather.id, DataGather.NameWhoMessage, DataGather.ImageAssest,
+                                        DataGather.Message, DataGather.ColorDeclared, DataGather.DayReport,
+                                        DataGather.MonthReport, DataGather.TimeMessage, DataGather.FullTimeMessage, HeightTopOfPanel));
+                                    if (HeightTopOfPanel == 13) {
+                                        HeightTopOfPanel = 14;
+                                    }
+                                }
+
+                                await Task.WhenAll(taskVoidShowData);
+                            }
+                        }
+
+                        Reports.Enabled = true;
+                        TimerReportSelf.Start();
                     }
                 }
             }
@@ -2187,7 +2696,16 @@ namespace WindowsFormUserGrading
         protected override void OnPaint(PaintEventArgs e)
         {
                 base.OnPaint(e);
-                this.flowPaintPercent((FlowPercentagePanel.Controls[PanelFlowPercent[numberCountPanel]]), e);
+            try
+            {
+                if (numberCountPanel >= 0) {
+                    this.flowPaintPercent((FlowPercentagePanel.Controls[PanelFlowPercent[numberCountPanel]]), e);
+                }
+            }
+            catch (Exception es) {
+                MessageBox.Show(numberCountPanel.ToString());
+                MessageBox.Show(es.ToString());
+            }
         }
 
 
@@ -2225,6 +2743,279 @@ namespace WindowsFormUserGrading
                 }
             }
         }
+
+
+
+
+
+        protected async Task<int> WayToShow(int id, string NameWhoMessage, string ImageAssest, string Message,
+                                string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
+                                string FullTimeMessage, int HeightTopOfPanel) {
+
+            delegateFlowShowData result = new delegateFlowShowData(showDataGather);
+            string ShowData()
+            {
+                result.Invoke(id, NameWhoMessage, ImageAssest, Message,
+                             ColorDeclared, DayReport, MonthReport, TimeMessage, FullTimeMessage, HeightTopOfPanel);
+                return "";
+            }
+
+            Task<string> task = new Task<string>(() => ShowData());
+            task.Start();
+
+            await task.ConfigureAwait(true);
+            
+            return 0;
+        }
+
+
+        //SHOW ALL DATA IN REPORT..............................................................
+        protected void showDataGather(int id, string NameWhoMessage, string ImageUser, string Message,
+                                string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
+                                string FullTimeMessage, int HeightTopOfPanel) {
+
+            //FOR SCPECIFIC GRADING AND CALENDAR....................................
+            Panel pan = new Panel {
+                Name = "NameWhoMessage",
+                Size = new Size(634, 45),
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
+                Location = new Point(12, HeightTopOfPanel)
+            };
+
+            PictureBox boxPic = new PictureBox {
+                Image = Image.FromFile(ImageUser),
+                Size = new Size(56, 35),
+                Location = new Point(3, 5),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+
+            Panel panName = new Panel {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(152, 35),
+                Location = new Point(67, 5)
+            };
+
+            Panel panName2 = new Panel {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(145, 28),
+                Location = new Point(2, 4)
+            };
+
+            Label nameLabel = new Label
+            {
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                Text = NameWhoMessage,
+                Location = new Point(1, 6),
+                Size = new Size(200, 18)
+            };
+
+
+
+            Panel panMessage = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(250, 34),
+                Location = new Point(226, 5)
+            };
+
+            Panel panMessage2 = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(232, 28),
+                Location = new Point(8, 3)
+            };
+
+            Label nameMessage = new Label
+            {
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                Text = Message,
+                Location = new Point(1, 6),
+                Size = new Size(200, 18)
+            };
+
+            Button bttnColor = new Button {
+                BackColor = ColorTranslator.FromHtml((ColorDeclared != "#17202A" ? "Coral" : "#1ABC9C")),
+                FlatStyle = FlatStyle.Flat,
+                Location = new Point(483, 15),
+                Size = new Size(15, 17)
+            };
+
+            Panel panDate = new Panel {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Location = new Point(505, 5),
+                Size = new Size(121, 35)
+            };
+
+            Label labelDate = new Label
+            {
+                Size = new Size(150, 15),
+                Location = new Point(3, 11),
+                Text = FullTimeMessage,
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                Font = new Font("Microsoft Sans Serif", 9, FontStyle.Regular)
+            };
+
+
+
+
+            //FOR OVAERALL CONTROLS ADD..............................
+            Panel pans = new Panel
+            {
+                Name = "NameWhoMessage",
+                Size = new Size(634, 45),
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
+                Location = new Point(12, HeightTopOfPanel)
+            };
+
+            PictureBox boxPics = new PictureBox
+            {
+                Image = Image.FromFile(ImageUser),
+                Size = new Size(56, 35),
+                Location = new Point(3, 5),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+
+            Panel panNames = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(152, 35),
+                Location = new Point(67, 5)
+            };
+
+            Panel panName2s = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(145, 28),
+                Location = new Point(2, 4)
+            };
+
+            Label nameLabels = new Label
+            {
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                Text = NameWhoMessage,
+                Location = new Point(1, 6),
+                Size = new Size(200, 18)
+            };
+
+
+
+            Panel panMessages = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(250, 34),
+                Location = new Point(226, 5)
+            };
+
+            Panel panMessage2s = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(232, 28),
+                Location = new Point(8, 3)
+            };
+
+            Label nameMessages = new Label
+            {
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                Text = Message,
+                Location = new Point(1, 6),
+                Size = new Size(200, 18)
+            };
+
+            Button bttnColors = new Button
+            {
+                BackColor = ColorTranslator.FromHtml((ColorDeclared != "#17202A" ? "Coral" : "#1ABC9C")),
+                FlatStyle = FlatStyle.Flat,
+                Location = new Point(483, 15),
+                Size = new Size(15, 17)
+            };
+
+            Panel panDates = new Panel
+            {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Location = new Point(505, 5),
+                Size = new Size(121, 35)
+            };
+
+            Label labelDates = new Label
+            {
+                Size = new Size(150, 15),
+                Location = new Point(3, 11),
+                Text = FullTimeMessage,
+                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                Font = new Font("Microsoft Sans Serif", 9, FontStyle.Regular)
+            };
+
+
+
+
+            Thread th = new Thread(() =>
+            {
+
+                //FOR SCPECIFIC GRADING AND CALENDAR....................................
+                pan.Controls.Add(boxPic);
+
+                pan.Controls.Add(panName);
+                panName.Controls.Add(panName2);
+                panName2.Controls.Add(nameLabel);
+
+                pan.Controls.Add(panMessage);
+                panMessage.Controls.Add(panMessage2);
+                panMessage2.Controls.Add(nameMessage);
+
+                pan.Controls.Add(bttnColor);
+
+                pan.Controls.Add(panDate);
+                panDate.Controls.Add(labelDate);
+
+
+
+
+                //FOR OVAERALL CONTROLS ADD..............................
+                pans.Controls.Add(boxPics);
+
+                pans.Controls.Add(panNames);
+                panNames.Controls.Add(panName2s);
+                panName2s.Controls.Add(nameLabels);
+
+                pans.Controls.Add(panMessages);
+                panMessages.Controls.Add(panMessage2s);
+                panMessage2s.Controls.Add(nameMessages);
+
+                pans.Controls.Add(bttnColors);
+
+                pans.Controls.Add(panDates);
+                panDates.Controls.Add(labelDates);
+
+
+                //FOR OVAERALL CONTROLS ADD..............................
+                PanelOverAll.BeginInvoke((Action)delegate () {
+                    PanelOverAll.Controls.Add(pans);
+                });
+
+
+                //FOR SCPECIFIC GRADING AND CALENDAR....................................
+                Action ac = new Action(() => {
+
+                    if (ColorDeclared != "Coral") {
+                        panelCalendarShow.Controls.Add(pan);
+                    }
+                    else {
+                        GradingShowReports.Controls.Add(pan);
+                    }
+
+                });
+                this.BeginInvoke(ac);
+
+            });
+            th.Start();
+        }
+
+
+
 
     }
 }
