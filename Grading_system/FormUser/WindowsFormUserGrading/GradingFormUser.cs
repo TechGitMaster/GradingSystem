@@ -2774,7 +2774,7 @@ namespace WindowsFormUserGrading
 
 
 
-
+        //SHOW NA YUNG CONTROLS SA REPORTS.........................................
         protected async Task<int> WayToShow(int id, string NameWhoMessage, string ImageAssest, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
                                 string FullTimeMessage, int HeightTopOfPanel) {

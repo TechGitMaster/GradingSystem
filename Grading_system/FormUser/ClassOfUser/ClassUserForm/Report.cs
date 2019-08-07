@@ -97,6 +97,8 @@ namespace ClassUserForm
         }
 
 
+
+        //DELETE PANEL IN REPORT.................................................
         public static string handleDataReturnBack = "";
         public string deletePanelSection {
             get { return handleDataReturnBack; }
