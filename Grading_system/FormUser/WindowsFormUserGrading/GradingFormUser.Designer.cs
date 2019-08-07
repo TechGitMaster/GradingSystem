@@ -37,7 +37,6 @@
             this.Grading = new System.Windows.Forms.Button();
             this.Reports = new System.Windows.Forms.Button();
             this.Calendar = new System.Windows.Forms.Button();
-            this.pictureUserBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelSecond = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -60,14 +59,12 @@
             this.label23 = new System.Windows.Forms.Label();
             this.NameScheduleDelete = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.deleteSchedYours = new System.Windows.Forms.PictureBox();
             this.ScheduleUserPanel2 = new System.Windows.Forms.Panel();
             this.ThisSchedule = new System.Windows.Forms.Panel();
             this.checkBoxdeleteSchedYours = new System.Windows.Forms.CheckBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.UserNoSchedule = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.SchedulePanelBarSearch = new System.Windows.Forms.Panel();
@@ -75,7 +72,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.SearchBoxCalender = new System.Windows.Forms.TextBox();
-            this.BttnSearchBar = new System.Windows.Forms.PictureBox();
             this.BackSched = new System.Windows.Forms.Button();
             this.UserSchedAddPanelAdd = new System.Windows.Forms.Panel();
             this.NameOfUserAddCalendar = new System.Windows.Forms.Button();
@@ -87,16 +83,12 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.PictureBoxScheduleAddCalendar = new System.Windows.Forms.PictureBox();
             this.DeleteBttnScedule = new System.Windows.Forms.Button();
             this.StartBttnSchedule = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.CheckingDataSchedule = new System.Windows.Forms.Button();
             this.TimeForDateRange = new System.Windows.Forms.Panel();
-            this.NextToSeeRange = new System.Windows.Forms.PictureBox();
-            this.BackToSeeTimeDate = new System.Windows.Forms.PictureBox();
             this.rangeTimePan = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.TimeRangeMnt = new System.Windows.Forms.ComboBox();
@@ -121,26 +113,15 @@
             this.LineCostReport = new System.Windows.Forms.Panel();
             this.NavigatorReport = new System.Windows.Forms.Panel();
             this.GradingReport = new System.Windows.Forms.Panel();
-            this.GLabel = new System.Windows.Forms.Label();
+            this.GradingLabel = new System.Windows.Forms.Label();
             this.CalendarReport = new System.Windows.Forms.Panel();
-            this.CLabel = new System.Windows.Forms.Label();
+            this.CalendarLabel = new System.Windows.Forms.Label();
             this.AllReport = new System.Windows.Forms.Panel();
             this.AllLabel = new System.Windows.Forms.Label();
             this.PanelShowReports = new System.Windows.Forms.Panel();
             this.OverAllShowReport = new System.Windows.Forms.Panel();
             this.PanelOverAll = new System.Windows.Forms.Panel();
             this.ReportError = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label24 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel17 = new System.Windows.Forms.Panel();
             this.panel18 = new System.Windows.Forms.Panel();
             this.label26 = new System.Windows.Forms.Label();
@@ -153,17 +134,6 @@
             this.CalendarShowReport = new System.Windows.Forms.Panel();
             this.panelCalendarShow = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
-            this.panel25 = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.panel26 = new System.Windows.Forms.Panel();
-            this.label31 = new System.Windows.Forms.Label();
-            this.panel27 = new System.Windows.Forms.Panel();
-            this.panel28 = new System.Windows.Forms.Panel();
-            this.label32 = new System.Windows.Forms.Label();
-            this.panel29 = new System.Windows.Forms.Panel();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.label33 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel31 = new System.Windows.Forms.Panel();
             this.panel32 = new System.Windows.Forms.Panel();
             this.label34 = new System.Windows.Forms.Label();
@@ -176,17 +146,6 @@
             this.GradingShowReport = new System.Windows.Forms.Panel();
             this.GradingShowReports = new System.Windows.Forms.Panel();
             this.label38 = new System.Windows.Forms.Label();
-            this.panel36 = new System.Windows.Forms.Panel();
-            this.button9 = new System.Windows.Forms.Button();
-            this.panel37 = new System.Windows.Forms.Panel();
-            this.label39 = new System.Windows.Forms.Label();
-            this.panel38 = new System.Windows.Forms.Panel();
-            this.panel39 = new System.Windows.Forms.Panel();
-            this.label40 = new System.Windows.Forms.Label();
-            this.panel40 = new System.Windows.Forms.Panel();
-            this.panel41 = new System.Windows.Forms.Panel();
-            this.label41 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel42 = new System.Windows.Forms.Panel();
             this.panel43 = new System.Windows.Forms.Panel();
             this.label42 = new System.Windows.Forms.Label();
@@ -217,10 +176,26 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.deleteSchedYours = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.BttnSearchBar = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBoxScheduleAddCalendar = new System.Windows.Forms.PictureBox();
+            this.NextToSeeRange = new System.Windows.Forms.PictureBox();
+            this.BackToSeeTimeDate = new System.Windows.Forms.PictureBox();
+            this.pictureBoxRead = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDeleteReports = new System.Windows.Forms.PictureBox();
+            this.pictureUserBox = new System.Windows.Forms.PictureBox();
+            this.panelReadingStation = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nameReadStation = new System.Windows.Forms.Label();
+            this.DateReadStation = new System.Windows.Forms.Label();
+            this.messageReadStation = new System.Windows.Forms.Label();
+            this.TextReadStation = new System.Windows.Forms.RichTextBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.EraseHideReportReadStation = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
             this.panelSecond.SuspendLayout();
             this.panelDrawLine2.SuspendLayout();
             this.PanelBox.SuspendLayout();
@@ -231,25 +206,18 @@
             this.ScheduleUserPanel1.SuspendLayout();
             this.CommentSectionSchedDelete.SuspendLayout();
             this.Scheddss.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteSchedYours)).BeginInit();
             this.ScheduleUserPanel2.SuspendLayout();
             this.ThisSchedule.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SchedulePanelBarSearch.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).BeginInit();
             this.UserSchedAddPanelAdd.SuspendLayout();
             this.NoAssignedAddSched.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxScheduleAddCalendar)).BeginInit();
             this.panel5.SuspendLayout();
             this.TimeForDateRange.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NextToSeeRange)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BackToSeeTimeDate)).BeginInit();
             this.rangeTimePan.SuspendLayout();
             this.DateTime.SuspendLayout();
             this.GradingPanel.SuspendLayout();
@@ -262,13 +230,6 @@
             this.PanelShowReports.SuspendLayout();
             this.OverAllShowReport.SuspendLayout();
             this.PanelOverAll.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel17.SuspendLayout();
             this.panel18.SuspendLayout();
             this.panel19.SuspendLayout();
@@ -276,13 +237,6 @@
             this.panel21.SuspendLayout();
             this.CalendarShowReport.SuspendLayout();
             this.panelCalendarShow.SuspendLayout();
-            this.panel25.SuspendLayout();
-            this.panel26.SuspendLayout();
-            this.panel27.SuspendLayout();
-            this.panel28.SuspendLayout();
-            this.panel29.SuspendLayout();
-            this.panel30.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel31.SuspendLayout();
             this.panel32.SuspendLayout();
             this.panel33.SuspendLayout();
@@ -290,13 +244,6 @@
             this.panel35.SuspendLayout();
             this.GradingShowReport.SuspendLayout();
             this.GradingShowReports.SuspendLayout();
-            this.panel36.SuspendLayout();
-            this.panel37.SuspendLayout();
-            this.panel38.SuspendLayout();
-            this.panel39.SuspendLayout();
-            this.panel40.SuspendLayout();
-            this.panel41.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel42.SuspendLayout();
             this.panel43.SuspendLayout();
             this.panel44.SuspendLayout();
@@ -307,7 +254,18 @@
             this.FlowPercentagePanel.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteSchedYours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxScheduleAddCalendar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NextToSeeRange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BackToSeeTimeDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRead)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteReports)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
+            this.panelReadingStation.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMoveForm
@@ -444,16 +402,6 @@
             this.Calendar.Text = "Calendar";
             this.Calendar.UseVisualStyleBackColor = false;
             // 
-            // pictureUserBox
-            // 
-            this.pictureUserBox.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_2;
-            this.pictureUserBox.Location = new System.Drawing.Point(12, 16);
-            this.pictureUserBox.Name = "pictureUserBox";
-            this.pictureUserBox.Size = new System.Drawing.Size(142, 124);
-            this.pictureUserBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureUserBox.TabIndex = 3;
-            this.pictureUserBox.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(174, 13);
@@ -516,16 +464,16 @@
             this.PanelBox.Controls.Add(this.ControlsPanel);
             this.PanelBox.Location = new System.Drawing.Point(192, 65);
             this.PanelBox.Name = "PanelBox";
-            this.PanelBox.Size = new System.Drawing.Size(779, 570);
+            this.PanelBox.Size = new System.Drawing.Size(779, 512);
             this.PanelBox.TabIndex = 3;
             // 
             // panel3
             // 
             this.panel3.AccessibleDescription = "Calendar";
             this.panel3.Controls.Add(this.SetScheduleForOtherUser);
-            this.panel3.Location = new System.Drawing.Point(1, 506);
+            this.panel3.Location = new System.Drawing.Point(0, 1);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(776, 127);
+            this.panel3.Size = new System.Drawing.Size(776, 502);
             this.panel3.TabIndex = 17;
             // 
             // SetScheduleForOtherUser
@@ -540,9 +488,9 @@
             this.SetScheduleForOtherUser.Controls.Add(this.panel5);
             this.SetScheduleForOtherUser.Controls.Add(this.TimeForDateRange);
             this.SetScheduleForOtherUser.Controls.Add(this.monthCalendar1);
-            this.SetScheduleForOtherUser.Location = new System.Drawing.Point(-1, 0);
+            this.SetScheduleForOtherUser.Location = new System.Drawing.Point(-1, -1);
             this.SetScheduleForOtherUser.Name = "SetScheduleForOtherUser";
-            this.SetScheduleForOtherUser.Size = new System.Drawing.Size(779, 497);
+            this.SetScheduleForOtherUser.Size = new System.Drawing.Size(779, 500);
             this.SetScheduleForOtherUser.TabIndex = 1;
             // 
             // SchedSetMess
@@ -564,7 +512,7 @@
             // 
             // YourScheduleAndOther
             // 
-            this.YourScheduleAndOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.YourScheduleAndOther.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.YourScheduleAndOther.Controls.Add(this.CalendarTime);
             this.YourScheduleAndOther.Controls.Add(this.ScheduleUserPanel1);
             this.YourScheduleAndOther.Controls.Add(this.SchedulePanelBarSearch);
@@ -572,7 +520,7 @@
             this.YourScheduleAndOther.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.YourScheduleAndOther.Location = new System.Drawing.Point(-1, 0);
             this.YourScheduleAndOther.Name = "YourScheduleAndOther";
-            this.YourScheduleAndOther.Size = new System.Drawing.Size(779, 497);
+            this.YourScheduleAndOther.Size = new System.Drawing.Size(779, 503);
             this.YourScheduleAndOther.TabIndex = 31;
             // 
             // CalendarTime
@@ -712,17 +660,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Name:";
             // 
-            // deleteSchedYours
-            // 
-            this.deleteSchedYours.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteSchedYours.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
-            this.deleteSchedYours.Location = new System.Drawing.Point(406, 17);
-            this.deleteSchedYours.Name = "deleteSchedYours";
-            this.deleteSchedYours.Size = new System.Drawing.Size(25, 22);
-            this.deleteSchedYours.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.deleteSchedYours.TabIndex = 2;
-            this.deleteSchedYours.TabStop = false;
-            // 
             // ScheduleUserPanel2
             // 
             this.ScheduleUserPanel2.AutoScroll = true;
@@ -806,16 +743,6 @@
             this.button2.Text = "Admin:";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_2;
-            this.pictureBox2.Location = new System.Drawing.Point(5, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(53, 39);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
             // UserNoSchedule
             // 
             this.UserNoSchedule.AutoSize = true;
@@ -886,17 +813,6 @@
             this.SearchBoxCalender.Name = "SearchBoxCalender";
             this.SearchBoxCalender.Size = new System.Drawing.Size(232, 21);
             this.SearchBoxCalender.TabIndex = 1;
-            // 
-            // BttnSearchBar
-            // 
-            this.BttnSearchBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BttnSearchBar.Image = global::WindowsFormUserGrading.Properties.Resources.icons8_google_web_search_26;
-            this.BttnSearchBar.Location = new System.Drawing.Point(3, 3);
-            this.BttnSearchBar.Name = "BttnSearchBar";
-            this.BttnSearchBar.Size = new System.Drawing.Size(25, 24);
-            this.BttnSearchBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BttnSearchBar.TabIndex = 0;
-            this.BttnSearchBar.TabStop = false;
             // 
             // BackSched
             // 
@@ -1026,27 +942,6 @@
             this.button4.Text = "Sched:";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::WindowsFormUserGrading.Properties.Resources.Code_Vein;
-            this.pictureBox1.InitialImage = global::WindowsFormUserGrading.Properties.Resources.Code_Vein;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(55, 32);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // PictureBoxScheduleAddCalendar
-            // 
-            this.PictureBoxScheduleAddCalendar.Image = global::WindowsFormUserGrading.Properties.Resources._8130871;
-            this.PictureBoxScheduleAddCalendar.Location = new System.Drawing.Point(189, 12);
-            this.PictureBoxScheduleAddCalendar.Name = "PictureBoxScheduleAddCalendar";
-            this.PictureBoxScheduleAddCalendar.Size = new System.Drawing.Size(93, 80);
-            this.PictureBoxScheduleAddCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBoxScheduleAddCalendar.TabIndex = 0;
-            this.PictureBoxScheduleAddCalendar.TabStop = false;
-            // 
             // DeleteBttnScedule
             // 
             this.DeleteBttnScedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
@@ -1128,29 +1023,6 @@
             this.TimeForDateRange.Name = "TimeForDateRange";
             this.TimeForDateRange.Size = new System.Drawing.Size(267, 112);
             this.TimeForDateRange.TabIndex = 23;
-            // 
-            // NextToSeeRange
-            // 
-            this.NextToSeeRange.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.NextToSeeRange.Image = global::WindowsFormUserGrading.Properties.Resources.next_1;
-            this.NextToSeeRange.Location = new System.Drawing.Point(228, 15);
-            this.NextToSeeRange.Name = "NextToSeeRange";
-            this.NextToSeeRange.Size = new System.Drawing.Size(27, 16);
-            this.NextToSeeRange.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.NextToSeeRange.TabIndex = 21;
-            this.NextToSeeRange.TabStop = false;
-            // 
-            // BackToSeeTimeDate
-            // 
-            this.BackToSeeTimeDate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BackToSeeTimeDate.Image = global::WindowsFormUserGrading.Properties.Resources.back;
-            this.BackToSeeTimeDate.Location = new System.Drawing.Point(10, 15);
-            this.BackToSeeTimeDate.Name = "BackToSeeTimeDate";
-            this.BackToSeeTimeDate.Size = new System.Drawing.Size(23, 16);
-            this.BackToSeeTimeDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BackToSeeTimeDate.TabIndex = 20;
-            this.BackToSeeTimeDate.TabStop = false;
-            this.BackToSeeTimeDate.Visible = false;
             // 
             // rangeTimePan
             // 
@@ -1381,7 +1253,8 @@
             // 
             this.ReportPanel.AccessibleDescription = "Calendar";
             this.ReportPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.ReportPanel.Controls.Add(this.pictureBox6);
+            this.ReportPanel.Controls.Add(this.pictureBoxRead);
+            this.ReportPanel.Controls.Add(this.pictureBoxDeleteReports);
             this.ReportPanel.Controls.Add(this.LineCostReport);
             this.ReportPanel.Controls.Add(this.NavigatorReport);
             this.ReportPanel.Controls.Add(this.PanelShowReports);
@@ -1416,7 +1289,7 @@
             // GradingReport
             // 
             this.GradingReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.GradingReport.Controls.Add(this.GLabel);
+            this.GradingReport.Controls.Add(this.GradingLabel);
             this.GradingReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.GradingReport.ForeColor = System.Drawing.Color.Coral;
             this.GradingReport.Location = new System.Drawing.Point(162, 3);
@@ -1424,43 +1297,43 @@
             this.GradingReport.Size = new System.Drawing.Size(49, 40);
             this.GradingReport.TabIndex = 3;
             // 
-            // GLabel
+            // GradingLabel
             // 
-            this.GLabel.AccessibleName = "GradingReport";
-            this.GLabel.AutoSize = true;
-            this.GLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.GLabel.Location = new System.Drawing.Point(14, 10);
-            this.GLabel.Name = "GLabel";
-            this.GLabel.Size = new System.Drawing.Size(22, 20);
-            this.GLabel.TabIndex = 1;
-            this.GLabel.Text = "G";
+            this.GradingLabel.AccessibleName = "GradingReport";
+            this.GradingLabel.AutoSize = true;
+            this.GradingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GradingLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.GradingLabel.Location = new System.Drawing.Point(14, 10);
+            this.GradingLabel.Name = "GradingLabel";
+            this.GradingLabel.Size = new System.Drawing.Size(22, 20);
+            this.GradingLabel.TabIndex = 1;
+            this.GradingLabel.Text = "G";
             // 
             // CalendarReport
             // 
             this.CalendarReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.CalendarReport.Controls.Add(this.CLabel);
+            this.CalendarReport.Controls.Add(this.CalendarLabel);
             this.CalendarReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CalendarReport.Location = new System.Drawing.Point(87, 3);
             this.CalendarReport.Name = "CalendarReport";
             this.CalendarReport.Size = new System.Drawing.Size(49, 40);
             this.CalendarReport.TabIndex = 1;
             // 
-            // CLabel
+            // CalendarLabel
             // 
-            this.CLabel.AccessibleName = "CalendarReport";
-            this.CLabel.AutoSize = true;
-            this.CLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.CLabel.Location = new System.Drawing.Point(14, 10);
-            this.CLabel.Name = "CLabel";
-            this.CLabel.Size = new System.Drawing.Size(20, 20);
-            this.CLabel.TabIndex = 1;
-            this.CLabel.Text = "C";
+            this.CalendarLabel.AccessibleName = "CalendarReport";
+            this.CalendarLabel.AutoSize = true;
+            this.CalendarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalendarLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.CalendarLabel.Location = new System.Drawing.Point(14, 10);
+            this.CalendarLabel.Name = "CalendarLabel";
+            this.CalendarLabel.Size = new System.Drawing.Size(20, 20);
+            this.CalendarLabel.TabIndex = 1;
+            this.CalendarLabel.Text = "C";
             // 
             // AllReport
             // 
-            this.AllReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.AllReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.AllReport.Controls.Add(this.AllLabel);
             this.AllReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AllReport.Location = new System.Drawing.Point(8, 3);
@@ -1485,6 +1358,7 @@
             // 
             this.PanelShowReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.PanelShowReports.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelShowReports.Controls.Add(this.panelReadingStation);
             this.PanelShowReports.Controls.Add(this.OverAllShowReport);
             this.PanelShowReports.Controls.Add(this.CalendarShowReport);
             this.PanelShowReports.Controls.Add(this.GradingShowReport);
@@ -1511,7 +1385,6 @@
             this.PanelOverAll.AutoScroll = true;
             this.PanelOverAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.PanelOverAll.Controls.Add(this.ReportError);
-            this.PanelOverAll.Controls.Add(this.panel11);
             this.PanelOverAll.Location = new System.Drawing.Point(12, 49);
             this.PanelOverAll.Name = "PanelOverAll";
             this.PanelOverAll.Size = new System.Drawing.Size(675, 234);
@@ -1528,115 +1401,6 @@
             this.ReportError.TabIndex = 1;
             this.ReportError.Text = "Please Check Your Internet.";
             this.ReportError.Visible = false;
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.panel11.Controls.Add(this.button7);
-            this.panel11.Controls.Add(this.panel13);
-            this.panel11.Controls.Add(this.panel12);
-            this.panel11.Controls.Add(this.panel15);
-            this.panel11.Controls.Add(this.pictureBox3);
-            this.panel11.Location = new System.Drawing.Point(10, 13);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(634, 41);
-            this.panel11.TabIndex = 0;
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(485, 12);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(25, 17);
-            this.button7.TabIndex = 4;
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel13.Controls.Add(this.label5);
-            this.panel13.Location = new System.Drawing.Point(519, 3);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(111, 35);
-            this.panel13.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label5.Location = new System.Drawing.Point(3, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "6/23/19 8:30 PM";
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel12.Controls.Add(this.panel14);
-            this.panel12.Location = new System.Drawing.Point(226, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(250, 34);
-            this.panel12.TabIndex = 2;
-            // 
-            // panel14
-            // 
-            this.panel14.Controls.Add(this.label22);
-            this.panel14.Location = new System.Drawing.Point(8, 3);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(232, 28);
-            this.panel14.TabIndex = 3;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label22.Location = new System.Drawing.Point(1, 7);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(295, 16);
-            this.label22.TabIndex = 1;
-            this.label22.Text = "Sample sample sample sample sample sample";
-            // 
-            // panel15
-            // 
-            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel15.Controls.Add(this.panel16);
-            this.panel15.Location = new System.Drawing.Point(67, 3);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(152, 35);
-            this.panel15.TabIndex = 1;
-            // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.label24);
-            this.panel16.Location = new System.Drawing.Point(3, 4);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(145, 28);
-            this.panel16.TabIndex = 0;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label24.Location = new System.Drawing.Point(1, 7);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(85, 16);
-            this.label24.TabIndex = 1;
-            this.label24.Text = "Kyle Velarde";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_21;
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(56, 35);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
             // 
             // panel17
             // 
@@ -1736,9 +1500,9 @@
             this.CalendarShowReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
             this.CalendarShowReport.Controls.Add(this.panelCalendarShow);
             this.CalendarShowReport.Controls.Add(this.panel31);
-            this.CalendarShowReport.Location = new System.Drawing.Point(7, 9);
+            this.CalendarShowReport.Location = new System.Drawing.Point(7, 10);
             this.CalendarShowReport.Name = "CalendarShowReport";
-            this.CalendarShowReport.Size = new System.Drawing.Size(702, 299);
+            this.CalendarShowReport.Size = new System.Drawing.Size(702, 298);
             this.CalendarShowReport.TabIndex = 0;
             this.CalendarShowReport.Visible = false;
             // 
@@ -1747,7 +1511,6 @@
             this.panelCalendarShow.AutoScroll = true;
             this.panelCalendarShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.panelCalendarShow.Controls.Add(this.label30);
-            this.panelCalendarShow.Controls.Add(this.panel25);
             this.panelCalendarShow.Location = new System.Drawing.Point(14, 54);
             this.panelCalendarShow.Name = "panelCalendarShow";
             this.panelCalendarShow.Size = new System.Drawing.Size(675, 234);
@@ -1764,115 +1527,6 @@
             this.label30.TabIndex = 1;
             this.label30.Text = "Please Check Your Internet.";
             this.label30.Visible = false;
-            // 
-            // panel25
-            // 
-            this.panel25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.panel25.Controls.Add(this.button8);
-            this.panel25.Controls.Add(this.panel26);
-            this.panel25.Controls.Add(this.panel27);
-            this.panel25.Controls.Add(this.panel29);
-            this.panel25.Controls.Add(this.pictureBox4);
-            this.panel25.Location = new System.Drawing.Point(10, 13);
-            this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(634, 41);
-            this.panel25.TabIndex = 0;
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(485, 12);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(25, 17);
-            this.button8.TabIndex = 4;
-            this.button8.UseVisualStyleBackColor = false;
-            // 
-            // panel26
-            // 
-            this.panel26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel26.Controls.Add(this.label31);
-            this.panel26.Location = new System.Drawing.Point(519, 3);
-            this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(111, 35);
-            this.panel26.TabIndex = 3;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label31.Location = new System.Drawing.Point(3, 11);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(97, 15);
-            this.label31.TabIndex = 0;
-            this.label31.Text = "6/23/19 8:30 PM";
-            // 
-            // panel27
-            // 
-            this.panel27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel27.Controls.Add(this.panel28);
-            this.panel27.Location = new System.Drawing.Point(226, 3);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(250, 34);
-            this.panel27.TabIndex = 2;
-            // 
-            // panel28
-            // 
-            this.panel28.Controls.Add(this.label32);
-            this.panel28.Location = new System.Drawing.Point(8, 3);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(232, 28);
-            this.panel28.TabIndex = 3;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label32.Location = new System.Drawing.Point(1, 7);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(295, 16);
-            this.label32.TabIndex = 1;
-            this.label32.Text = "Sample sample sample sample sample sample";
-            // 
-            // panel29
-            // 
-            this.panel29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel29.Controls.Add(this.panel30);
-            this.panel29.Location = new System.Drawing.Point(67, 3);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(152, 35);
-            this.panel29.TabIndex = 1;
-            // 
-            // panel30
-            // 
-            this.panel30.Controls.Add(this.label33);
-            this.panel30.Location = new System.Drawing.Point(3, 4);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(145, 28);
-            this.panel30.TabIndex = 0;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label33.Location = new System.Drawing.Point(1, 7);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(85, 16);
-            this.label33.TabIndex = 1;
-            this.label33.Text = "Kyle Velarde";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_21;
-            this.pictureBox4.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(56, 35);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
             // 
             // panel31
             // 
@@ -1983,7 +1637,6 @@
             this.GradingShowReports.AutoScroll = true;
             this.GradingShowReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.GradingShowReports.Controls.Add(this.label38);
-            this.GradingShowReports.Controls.Add(this.panel36);
             this.GradingShowReports.Location = new System.Drawing.Point(14, 56);
             this.GradingShowReports.Name = "GradingShowReports";
             this.GradingShowReports.Size = new System.Drawing.Size(675, 234);
@@ -2000,115 +1653,6 @@
             this.label38.TabIndex = 1;
             this.label38.Text = "Please Check Your Internet.";
             this.label38.Visible = false;
-            // 
-            // panel36
-            // 
-            this.panel36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.panel36.Controls.Add(this.button9);
-            this.panel36.Controls.Add(this.panel37);
-            this.panel36.Controls.Add(this.panel38);
-            this.panel36.Controls.Add(this.panel40);
-            this.panel36.Controls.Add(this.pictureBox5);
-            this.panel36.Location = new System.Drawing.Point(10, 13);
-            this.panel36.Name = "panel36";
-            this.panel36.Size = new System.Drawing.Size(634, 41);
-            this.panel36.TabIndex = 0;
-            // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(485, 12);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(25, 17);
-            this.button9.TabIndex = 4;
-            this.button9.UseVisualStyleBackColor = false;
-            // 
-            // panel37
-            // 
-            this.panel37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel37.Controls.Add(this.label39);
-            this.panel37.Location = new System.Drawing.Point(519, 3);
-            this.panel37.Name = "panel37";
-            this.panel37.Size = new System.Drawing.Size(111, 35);
-            this.panel37.TabIndex = 3;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label39.Location = new System.Drawing.Point(3, 11);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(97, 15);
-            this.label39.TabIndex = 0;
-            this.label39.Text = "6/23/19 8:30 PM";
-            // 
-            // panel38
-            // 
-            this.panel38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel38.Controls.Add(this.panel39);
-            this.panel38.Location = new System.Drawing.Point(226, 3);
-            this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(250, 34);
-            this.panel38.TabIndex = 2;
-            // 
-            // panel39
-            // 
-            this.panel39.Controls.Add(this.label40);
-            this.panel39.Location = new System.Drawing.Point(8, 3);
-            this.panel39.Name = "panel39";
-            this.panel39.Size = new System.Drawing.Size(232, 28);
-            this.panel39.TabIndex = 3;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label40.Location = new System.Drawing.Point(1, 7);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(295, 16);
-            this.label40.TabIndex = 1;
-            this.label40.Text = "Sample sample sample sample sample sample";
-            // 
-            // panel40
-            // 
-            this.panel40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel40.Controls.Add(this.panel41);
-            this.panel40.Location = new System.Drawing.Point(67, 3);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(152, 35);
-            this.panel40.TabIndex = 1;
-            // 
-            // panel41
-            // 
-            this.panel41.Controls.Add(this.label41);
-            this.panel41.Location = new System.Drawing.Point(3, 4);
-            this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(145, 28);
-            this.panel41.TabIndex = 0;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label41.Location = new System.Drawing.Point(1, 7);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(85, 16);
-            this.label41.TabIndex = 1;
-            this.label41.Text = "Kyle Velarde";
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_21;
-            this.pictureBox5.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(56, 35);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
             // 
             // panel42
             // 
@@ -2236,9 +1780,9 @@
             this.OALabelPercent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
             this.OALabelPercent.Location = new System.Drawing.Point(119, 49);
             this.OALabelPercent.Name = "OALabelPercent";
-            this.OALabelPercent.Size = new System.Drawing.Size(34, 16);
+            this.OALabelPercent.Size = new System.Drawing.Size(44, 16);
             this.OALabelPercent.TabIndex = 8;
-            this.OALabelPercent.Text = "10%";
+            this.OALabelPercent.Text = "00.0%";
             // 
             // GradingLabelPercent
             // 
@@ -2247,9 +1791,9 @@
             this.GradingLabelPercent.ForeColor = System.Drawing.Color.Coral;
             this.GradingLabelPercent.Location = new System.Drawing.Point(119, 32);
             this.GradingLabelPercent.Name = "GradingLabelPercent";
-            this.GradingLabelPercent.Size = new System.Drawing.Size(34, 16);
+            this.GradingLabelPercent.Size = new System.Drawing.Size(44, 16);
             this.GradingLabelPercent.TabIndex = 7;
-            this.GradingLabelPercent.Text = "40%";
+            this.GradingLabelPercent.Text = "00.0%";
             // 
             // CalendarLabelPercent
             // 
@@ -2260,7 +1804,7 @@
             this.CalendarLabelPercent.Name = "CalendarLabelPercent";
             this.CalendarLabelPercent.Size = new System.Drawing.Size(44, 16);
             this.CalendarLabelPercent.TabIndex = 6;
-            this.CalendarLabelPercent.Text = "90.1%";
+            this.CalendarLabelPercent.Text = "00.0%";
             // 
             // PercentOALabel
             // 
@@ -2416,15 +1960,208 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
-            // pictureBox6
+            // deleteSchedYours
             // 
-            this.pictureBox6.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
-            this.pictureBox6.Location = new System.Drawing.Point(727, 142);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(25, 25);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 4;
-            this.pictureBox6.TabStop = false;
+            this.deleteSchedYours.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteSchedYours.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
+            this.deleteSchedYours.Location = new System.Drawing.Point(406, 17);
+            this.deleteSchedYours.Name = "deleteSchedYours";
+            this.deleteSchedYours.Size = new System.Drawing.Size(25, 22);
+            this.deleteSchedYours.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.deleteSchedYours.TabIndex = 2;
+            this.deleteSchedYours.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_2;
+            this.pictureBox2.Location = new System.Drawing.Point(5, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(53, 39);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
+            // BttnSearchBar
+            // 
+            this.BttnSearchBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BttnSearchBar.Image = global::WindowsFormUserGrading.Properties.Resources.icons8_google_web_search_26;
+            this.BttnSearchBar.Location = new System.Drawing.Point(3, 3);
+            this.BttnSearchBar.Name = "BttnSearchBar";
+            this.BttnSearchBar.Size = new System.Drawing.Size(25, 24);
+            this.BttnSearchBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BttnSearchBar.TabIndex = 0;
+            this.BttnSearchBar.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WindowsFormUserGrading.Properties.Resources.Code_Vein;
+            this.pictureBox1.InitialImage = global::WindowsFormUserGrading.Properties.Resources.Code_Vein;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(55, 32);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // PictureBoxScheduleAddCalendar
+            // 
+            this.PictureBoxScheduleAddCalendar.Image = global::WindowsFormUserGrading.Properties.Resources._8130871;
+            this.PictureBoxScheduleAddCalendar.Location = new System.Drawing.Point(189, 12);
+            this.PictureBoxScheduleAddCalendar.Name = "PictureBoxScheduleAddCalendar";
+            this.PictureBoxScheduleAddCalendar.Size = new System.Drawing.Size(93, 80);
+            this.PictureBoxScheduleAddCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBoxScheduleAddCalendar.TabIndex = 0;
+            this.PictureBoxScheduleAddCalendar.TabStop = false;
+            // 
+            // NextToSeeRange
+            // 
+            this.NextToSeeRange.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.NextToSeeRange.Image = global::WindowsFormUserGrading.Properties.Resources.next_1;
+            this.NextToSeeRange.Location = new System.Drawing.Point(228, 15);
+            this.NextToSeeRange.Name = "NextToSeeRange";
+            this.NextToSeeRange.Size = new System.Drawing.Size(27, 16);
+            this.NextToSeeRange.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.NextToSeeRange.TabIndex = 21;
+            this.NextToSeeRange.TabStop = false;
+            // 
+            // BackToSeeTimeDate
+            // 
+            this.BackToSeeTimeDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BackToSeeTimeDate.Image = global::WindowsFormUserGrading.Properties.Resources.back;
+            this.BackToSeeTimeDate.Location = new System.Drawing.Point(10, 15);
+            this.BackToSeeTimeDate.Name = "BackToSeeTimeDate";
+            this.BackToSeeTimeDate.Size = new System.Drawing.Size(23, 16);
+            this.BackToSeeTimeDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BackToSeeTimeDate.TabIndex = 20;
+            this.BackToSeeTimeDate.TabStop = false;
+            this.BackToSeeTimeDate.Visible = false;
+            // 
+            // pictureBoxRead
+            // 
+            this.pictureBoxRead.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxRead.Image = global::WindowsFormUserGrading.Properties.Resources.agenda;
+            this.pictureBoxRead.Location = new System.Drawing.Point(695, 142);
+            this.pictureBoxRead.Name = "pictureBoxRead";
+            this.pictureBoxRead.Size = new System.Drawing.Size(25, 25);
+            this.pictureBoxRead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxRead.TabIndex = 5;
+            this.pictureBoxRead.TabStop = false;
+            this.pictureBoxRead.Click += new System.EventHandler(this.PictureBox6_Click);
+            // 
+            // pictureBoxDeleteReports
+            // 
+            this.pictureBoxDeleteReports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxDeleteReports.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
+            this.pictureBoxDeleteReports.Location = new System.Drawing.Point(727, 142);
+            this.pictureBoxDeleteReports.Name = "pictureBoxDeleteReports";
+            this.pictureBoxDeleteReports.Size = new System.Drawing.Size(25, 25);
+            this.pictureBoxDeleteReports.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxDeleteReports.TabIndex = 4;
+            this.pictureBoxDeleteReports.TabStop = false;
+            this.pictureBoxDeleteReports.Click += new System.EventHandler(this.PictureBox6_Click);
+            // 
+            // pictureUserBox
+            // 
+            this.pictureUserBox.Image = global::WindowsFormUserGrading.Properties.Resources.philip_castillo_lol_jhin_vs_camille_awake_wallpaper_4k_2;
+            this.pictureUserBox.Location = new System.Drawing.Point(12, 16);
+            this.pictureUserBox.Name = "pictureUserBox";
+            this.pictureUserBox.Size = new System.Drawing.Size(142, 124);
+            this.pictureUserBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureUserBox.TabIndex = 3;
+            this.pictureUserBox.TabStop = false;
+            // 
+            // panelReadingStation
+            // 
+            this.panelReadingStation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panelReadingStation.Controls.Add(this.EraseHideReportReadStation);
+            this.panelReadingStation.Controls.Add(this.panel10);
+            this.panelReadingStation.Controls.Add(this.messageReadStation);
+            this.panelReadingStation.Controls.Add(this.DateReadStation);
+            this.panelReadingStation.Controls.Add(this.nameReadStation);
+            this.panelReadingStation.Controls.Add(this.label5);
+            this.panelReadingStation.Location = new System.Drawing.Point(7, 10);
+            this.panelReadingStation.Name = "panelReadingStation";
+            this.panelReadingStation.Size = new System.Drawing.Size(699, 301);
+            this.panelReadingStation.TabIndex = 6;
+            this.panelReadingStation.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label5.Location = new System.Drawing.Point(24, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(121, 24);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Read Station:";
+            // 
+            // nameReadStation
+            // 
+            this.nameReadStation.AutoSize = true;
+            this.nameReadStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameReadStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.nameReadStation.Location = new System.Drawing.Point(31, 59);
+            this.nameReadStation.Name = "nameReadStation";
+            this.nameReadStation.Size = new System.Drawing.Size(48, 16);
+            this.nameReadStation.TabIndex = 1;
+            this.nameReadStation.Text = "Name:";
+            // 
+            // DateReadStation
+            // 
+            this.DateReadStation.AutoSize = true;
+            this.DateReadStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateReadStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.DateReadStation.Location = new System.Drawing.Point(32, 90);
+            this.DateReadStation.Name = "DateReadStation";
+            this.DateReadStation.Size = new System.Drawing.Size(68, 16);
+            this.DateReadStation.TabIndex = 2;
+            this.DateReadStation.Text = "Last Date:";
+            // 
+            // messageReadStation
+            // 
+            this.messageReadStation.AutoSize = true;
+            this.messageReadStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.messageReadStation.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.messageReadStation.Location = new System.Drawing.Point(32, 121);
+            this.messageReadStation.Name = "messageReadStation";
+            this.messageReadStation.Size = new System.Drawing.Size(113, 18);
+            this.messageReadStation.TabIndex = 3;
+            this.messageReadStation.Text = "Message From:";
+            // 
+            // TextReadStation
+            // 
+            this.TextReadStation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.TextReadStation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextReadStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextReadStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.TextReadStation.Location = new System.Drawing.Point(9, 8);
+            this.TextReadStation.Name = "TextReadStation";
+            this.TextReadStation.ReadOnly = true;
+            this.TextReadStation.Size = new System.Drawing.Size(641, 124);
+            this.TextReadStation.TabIndex = 4;
+            this.TextReadStation.Text = "";
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel10.Controls.Add(this.TextReadStation);
+            this.panel10.Location = new System.Drawing.Point(28, 151);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(659, 141);
+            this.panel10.TabIndex = 5;
+            // 
+            // EraseHideReportReadStation
+            // 
+            this.EraseHideReportReadStation.AutoSize = true;
+            this.EraseHideReportReadStation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EraseHideReportReadStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EraseHideReportReadStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.EraseHideReportReadStation.Location = new System.Drawing.Point(672, 6);
+            this.EraseHideReportReadStation.Name = "EraseHideReportReadStation";
+            this.EraseHideReportReadStation.Size = new System.Drawing.Size(24, 24);
+            this.EraseHideReportReadStation.TabIndex = 6;
+            this.EraseHideReportReadStation.Text = "X";
             // 
             // GradingFormUser
             // 
@@ -2432,7 +2169,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.ClientSize = new System.Drawing.Size(983, 662);
+            this.ClientSize = new System.Drawing.Size(983, 602);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDrawLine2);
             this.Controls.Add(this.PanelBox);
@@ -2446,7 +2183,6 @@
             this.panelFirst.ResumeLayout(false);
             this.panelFirst.PerformLayout();
             this.navigator.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).EndInit();
             this.panelSecond.ResumeLayout(false);
             this.panelDrawLine2.ResumeLayout(false);
             this.PanelBox.ResumeLayout(false);
@@ -2461,18 +2197,15 @@
             this.CommentSectionSchedDelete.PerformLayout();
             this.Scheddss.ResumeLayout(false);
             this.Scheddss.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deleteSchedYours)).EndInit();
             this.ScheduleUserPanel2.ResumeLayout(false);
             this.ScheduleUserPanel2.PerformLayout();
             this.ThisSchedule.ResumeLayout(false);
             this.ThisSchedule.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.SchedulePanelBarSearch.ResumeLayout(false);
             this.SchedulePanelBarSearch.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).EndInit();
             this.UserSchedAddPanelAdd.ResumeLayout(false);
             this.NoAssignedAddSched.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -2480,14 +2213,10 @@
             this.panel9.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxScheduleAddCalendar)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.TimeForDateRange.ResumeLayout(false);
             this.TimeForDateRange.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NextToSeeRange)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BackToSeeTimeDate)).EndInit();
             this.rangeTimePan.ResumeLayout(false);
             this.rangeTimePan.PerformLayout();
             this.DateTime.ResumeLayout(false);
@@ -2508,16 +2237,6 @@
             this.OverAllShowReport.ResumeLayout(false);
             this.PanelOverAll.ResumeLayout(false);
             this.PanelOverAll.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel17.ResumeLayout(false);
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
@@ -2530,16 +2249,6 @@
             this.CalendarShowReport.ResumeLayout(false);
             this.panelCalendarShow.ResumeLayout(false);
             this.panelCalendarShow.PerformLayout();
-            this.panel25.ResumeLayout(false);
-            this.panel26.ResumeLayout(false);
-            this.panel26.PerformLayout();
-            this.panel27.ResumeLayout(false);
-            this.panel28.ResumeLayout(false);
-            this.panel28.PerformLayout();
-            this.panel29.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
-            this.panel30.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel31.ResumeLayout(false);
             this.panel32.ResumeLayout(false);
             this.panel32.PerformLayout();
@@ -2552,16 +2261,6 @@
             this.GradingShowReport.ResumeLayout(false);
             this.GradingShowReports.ResumeLayout(false);
             this.GradingShowReports.PerformLayout();
-            this.panel36.ResumeLayout(false);
-            this.panel37.ResumeLayout(false);
-            this.panel37.PerformLayout();
-            this.panel38.ResumeLayout(false);
-            this.panel39.ResumeLayout(false);
-            this.panel39.PerformLayout();
-            this.panel40.ResumeLayout(false);
-            this.panel41.ResumeLayout(false);
-            this.panel41.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel42.ResumeLayout(false);
             this.panel43.ResumeLayout(false);
             this.panel43.PerformLayout();
@@ -2579,7 +2278,19 @@
             this.ControlsPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteSchedYours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BttnSearchBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxScheduleAddCalendar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NextToSeeRange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BackToSeeTimeDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRead)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDeleteReports)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).EndInit();
+            this.panelReadingStation.ResumeLayout(false);
+            this.panelReadingStation.PerformLayout();
+            this.panel10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2684,25 +2395,14 @@
         private System.Windows.Forms.Panel LineCostReport;
         private System.Windows.Forms.Panel NavigatorReport;
         private System.Windows.Forms.Panel GradingReport;
-        private System.Windows.Forms.Label GLabel;
+        private System.Windows.Forms.Label GradingLabel;
         private System.Windows.Forms.Panel CalendarReport;
-        private System.Windows.Forms.Label CLabel;
+        private System.Windows.Forms.Label CalendarLabel;
         private System.Windows.Forms.Panel AllReport;
         private System.Windows.Forms.Label AllLabel;
         private System.Windows.Forms.Panel PanelShowReports;
         private System.Windows.Forms.Panel OverAllShowReport;
         private System.Windows.Forms.Panel PanelOverAll;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Label label26;
@@ -2733,17 +2433,6 @@
         private System.Windows.Forms.Label ReportError;
         private System.Windows.Forms.Panel panelCalendarShow;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Panel panel25;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Panel panel26;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Panel panel27;
-        private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Panel panel29;
-        private System.Windows.Forms.Panel panel30;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Panel panel31;
         private System.Windows.Forms.Panel panel32;
         private System.Windows.Forms.Label label34;
@@ -2755,17 +2444,6 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Panel GradingShowReports;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Panel panel36;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Panel panel37;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Panel panel38;
-        private System.Windows.Forms.Panel panel39;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Panel panel41;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Panel panel42;
         private System.Windows.Forms.Panel panel43;
         private System.Windows.Forms.Label label42;
@@ -2775,7 +2453,16 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Panel panel46;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBoxDeleteReports;
+        private System.Windows.Forms.PictureBox pictureBoxRead;
+        private System.Windows.Forms.Panel panelReadingStation;
+        private System.Windows.Forms.Label nameReadStation;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label DateReadStation;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.RichTextBox TextReadStation;
+        private System.Windows.Forms.Label messageReadStation;
+        private System.Windows.Forms.Label EraseHideReportReadStation;
     }
 }
 

@@ -82,6 +82,12 @@ namespace WindowsFormUserGrading
                 pointHandleFirst = new Point(e.X, e.Y);
             });
 
+            //CLICK TO VISIBLE THE READ STATION IN REPORT.................................
+            EraseHideReportReadStation.Click += new System.EventHandler(
+                (object controls, EventArgs e) => {
+                    panelReadingStation.Visible = false; TimerReportSelf.Start();
+                });
+
 
             //HIDE AND OUT THE PANELS IN PANELBOX and
             //Click the button for example 'Reports' the Paint Graphics will follow-
@@ -2049,13 +2055,13 @@ namespace WindowsFormUserGrading
         protected static string condition_to_Paint = "false", HandlingSeeIfHavingError = "Null";
         public static List<Task> taskVoidShowData = new List<Task>();
         public static string conditionifEqual = "false";
+        private static string conditionToDeleteReport = "", conditionToReadReport = "";
         //DELEGATE TYPE COUNT PERCENT.................................
         protected delegate void delegateflowPercent(int[] PercentArray, List<ReportList> ListOfDataReport);
         //DELEGATE TYPE SHOW DATA.............................
         protected delegate void delegateFlowShowData(int id, string NameWhoMessage, string ImageUser, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
                                 string FullTimeMessage, int HeightTopOfPanel);
-
 
 
         //SHOW REPORT EVERY SINGLE CLICK ALL, C AND G....................................................
@@ -2070,11 +2076,24 @@ namespace WindowsFormUserGrading
             {
                 textCon = "asd";
                 pans = (Panel)Con;
+                pans.BackColor = System.Drawing.ColorTranslator.FromHtml("#2A2728");
             }
             else if (Con is Label)
             {
                 textCon = "as";
                 label = (Label)Con;
+
+                switch (label.Name) {
+                    case "AllLabel":
+                        AllReport.BackColor = System.Drawing.ColorTranslator.FromHtml("#2A2728");
+                        break;
+                    case "CalendarLabel":
+                        CalendarReport.BackColor = System.Drawing.ColorTranslator.FromHtml("#2A2728");
+                        break;
+                    case "GradingLabel":
+                        GradingReport.BackColor = System.Drawing.ColorTranslator.FromHtml("#2A2728");
+                        break;
+                }
             }
 
             foreach (Control pan in PanelShowReports.Controls)
@@ -2090,6 +2109,13 @@ namespace WindowsFormUserGrading
                         else
                         {
                             pan.Visible = false;
+                            foreach (Control panel in NavigatorReport.Controls) {
+                                if (panel.GetType() == typeof(Panel)) {
+                                    if (pan.AccessibleName == panel.Name) {
+                                        panel.BackColor = System.Drawing.ColorTranslator.FromHtml("28, 40, 51");
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -2106,6 +2132,7 @@ namespace WindowsFormUserGrading
             TimerReportSelf.Stop();
             HandlingSeeIfHavingError = "Null";
             conditionifEqual = "false";
+            reportNoHaving = "false";
 
             for (int numberCountPercent = 0; handleForPercent.Length > numberCountPercent; numberCountPercent++)
             {
@@ -2836,11 +2863,13 @@ namespace WindowsFormUserGrading
             };
 
             Button bttnColor = new Button {
+                AccessibleDescription = id.ToString(),
                 BackColor = ColorTranslator.FromHtml((ColorDeclared != "#17202A" ? "Coral" : "#1ABC9C")),
                 FlatStyle = FlatStyle.Flat,
                 Location = new Point(483, 15),
                 Size = new Size(15, 17)
             };
+            bttnColor.Click += new System.EventHandler(BttnDeleteReports);
 
             Panel panDate = new Panel {
                 BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
@@ -2927,11 +2956,13 @@ namespace WindowsFormUserGrading
 
             Button bttnColors = new Button
             {
+                AccessibleDescription = id.ToString(),
                 BackColor = ColorTranslator.FromHtml((ColorDeclared != "#17202A" ? "Coral" : "#1ABC9C")),
                 FlatStyle = FlatStyle.Flat,
                 Location = new Point(483, 15),
                 Size = new Size(15, 17)
             };
+            bttnColors.Click += new System.EventHandler(BttnDeleteReports);
 
             Panel panDates = new Panel
             {
@@ -3014,6 +3045,91 @@ namespace WindowsFormUserGrading
             th.Start();
         }
 
+
+        //CLICK THE RECYLE ICON AND READ ICON TO PAST DELETE AND READ EACH PANEL IN REPORTS..........................
+        private void PictureBox6_Click(object sender, EventArgs e)
+        {
+            PictureBox pic = (PictureBox)sender;
+            if (pic.Name is "pictureBoxDeleteReports")
+            {
+                if (conditionToReadReport == "")
+                {
+                    if (String.IsNullOrEmpty(pic.AccessibleName))
+                    {
+                        pic.AccessibleName = "Have";
+                        conditionToDeleteReport = "Have";
+                        MessageBox.Show("Start Delete");
+                    }
+                    else
+                    {
+                        pic.AccessibleName = "";
+                        conditionToDeleteReport = "";
+                        MessageBox.Show("Stop Delete");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You Need to unClick the Read Icon To Access the Delete Icon");
+                }
+            }
+            else {
+                if (conditionToDeleteReport == "")
+                {
+                    if (String.IsNullOrEmpty(pic.AccessibleName))
+                    {
+                        pic.AccessibleName = "Have";
+                        conditionToReadReport = "Have";
+                        MessageBox.Show("Start to Read");
+                    }
+                    else
+                    {
+                        pic.AccessibleName = "";
+                        conditionToReadReport = "";
+                        MessageBox.Show("Stop to Read");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You Need to unClick the Delete Icon To Acces the Read Icon");
+                }
+            }
+
+        }
+
+        //CLICK THE COLOR TO DELETE OR READ THE PANEL IN REPORT................................
+        public async void BttnDeleteReports(object controls, EventArgs e) {
+            Control bttn = (Control)controls;
+            Report rep = new Report();
+            Button bttns = null;
+            List<ReportList> reportList = new List<ReportList>();
+            if (bttn.GetType() == typeof(Button)) {
+                bttns = (Button)bttn;
+                if (String.IsNullOrEmpty(conditionToReadReport) != true)
+                {
+                    TimerReportSelf.Stop();
+                    panelReadingStation.Visible = true;
+
+                    reportList = await Task.Run(() => rep.getStringById(bttns.AccessibleDescription, "vee")).ConfigureAwait(true);
+                    foreach (var dataHandle in reportList) {
+                        nameReadStation.Text = String.Format("Name: {0}", dataHandle.NameWhoMessage);
+                        DateReadStation.Text = String.Format("Last Date: {0}", dataHandle.FullTimeMessage);
+                        TextReadStation.Text = String.Format("{0}", dataHandle.Message);
+                    }
+                }
+                else if (String.IsNullOrEmpty(conditionToDeleteReport) != true)
+                {
+                    TimerReportSelf.Stop();
+                    rep.deletePanelSection = bttns.AccessibleDescription + " " + "vee";
+                    if (rep.deletePanelSection == "success")
+                    {
+                        DataGatherListOfReport((Button)(navigator.Controls["Reports"]));
+                    }
+                    else {
+                        MessageBox.Show("Please Check Your Internet");
+                    }
+                }
+            }
+        }
 
 
 
