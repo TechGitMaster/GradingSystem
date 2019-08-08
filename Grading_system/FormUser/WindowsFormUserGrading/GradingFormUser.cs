@@ -2061,7 +2061,8 @@ namespace WindowsFormUserGrading
         //DELEGATE TYPE SHOW DATA.............................
         protected delegate void delegateFlowShowData(int id, string NameWhoMessage, string ImageUser, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
-                                string FullTimeMessage, int HeightTopOfPanel);
+                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar, 
+                                int HeightTopOfPanelGrading);
 
 
         //SHOW REPORT EVERY SINGLE CLICK ALL, C AND G....................................................
@@ -2682,29 +2683,90 @@ namespace WindowsFormUserGrading
                     pan.Invalidate();
 
                     if (ArrayLength+1 >= 3) {
-                        int HeightTopOfPanel = 13, numberCount = 0;
+                        int HeightTopOfPanelOverALl = 13, HeightTopOfPanelCalendar = 13, numberCountCalendar = 0,
+                            HeightTopOfPanelGrading = 13, numberCountGrading = 0, numberCount = 0;
                         if (PercentArray[2] != 0) {
                             if (conditionifEqual != "true") {
                                 foreach (var DataGather in reportListGetAllData) {
                                     numberCount++;
 
+                                    //OVER ALL LOCATION Y IN SHOW REPORTS............................
                                     if (numberCount <= 4)
                                     {
-                                        if (HeightTopOfPanel != 13)
+                                        if (HeightTopOfPanelOverALl != 13)
                                         {
-                                            HeightTopOfPanel += 60;
+                                            HeightTopOfPanelOverALl += 60;
                                         }
                                     }
                                     else
                                     {
                                         numberCount = 0;
-                                        HeightTopOfPanel += 90;
+                                        HeightTopOfPanelOverALl += 90;
                                     }
+
+
+                                    //CALENDAR LOCATION Y IN SHOW REPORTS............................
+                                    if (DataGather.ColorDeclared != "Coral") {
+                                        numberCountCalendar++;
+                                        if (numberCountCalendar <= 4)
+                                        {
+                                            if (HeightTopOfPanelCalendar != 13)
+                                            {
+                                                HeightTopOfPanelCalendar += 60;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            numberCountCalendar = 0;
+                                            HeightTopOfPanelCalendar += 90;
+                                        }
+                                    }
+
+
+
+                                    //GRADING LOCATION Y IN SHOW REPORTS............................
+                                    if (DataGather.ColorDeclared != "#17202A")
+                                    {
+                                        numberCountGrading++;
+                                        if (numberCountGrading <= 4)
+                                        {
+                                            if (HeightTopOfPanelGrading != 13)
+                                            {
+                                                HeightTopOfPanelGrading += 60;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            numberCountGrading = 0;
+                                            HeightTopOfPanelGrading += 90;
+                                        }
+                                    }
+
+
                                     taskVoidShowData.Add(WayToShow(DataGather.id, DataGather.NameWhoMessage, DataGather.ImageAssest,
                                         DataGather.Message, DataGather.ColorDeclared, DataGather.DayReport,
-                                        DataGather.MonthReport, DataGather.TimeMessage, DataGather.FullTimeMessage, HeightTopOfPanel));
-                                    if (HeightTopOfPanel == 13) {
-                                        HeightTopOfPanel = 14;
+                                        DataGather.MonthReport, DataGather.TimeMessage, DataGather.FullTimeMessage,
+                                        HeightTopOfPanelOverALl, HeightTopOfPanelCalendar, HeightTopOfPanelGrading));
+
+                                    //GRADING LOCATION Y IN SHOW REPORTS............................
+                                    if (DataGather.ColorDeclared != "#17202A")
+                                    {
+                                        if (HeightTopOfPanelGrading == 13)
+                                        {
+                                            HeightTopOfPanelGrading = 14;
+                                        }
+                                    }
+
+                                    //CALENDAR LOCATION Y IN SHOW REPORTS............................
+                                    if (DataGather.ColorDeclared != "Coral") {
+                                        if (HeightTopOfPanelCalendar == 13)
+                                        {
+                                            HeightTopOfPanelCalendar = 14;
+                                        }
+                                    }
+                                    //OVER ALL LOCATION Y IN SHOW REPORTS............................
+                                    if (HeightTopOfPanelOverALl == 13) {
+                                        HeightTopOfPanelOverALl = 14;
                                     }
                                 }
 
@@ -2777,13 +2839,15 @@ namespace WindowsFormUserGrading
         //SHOW NA YUNG CONTROLS SA REPORTS.........................................
         protected async Task<int> WayToShow(int id, string NameWhoMessage, string ImageAssest, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
-                                string FullTimeMessage, int HeightTopOfPanel) {
+                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar, 
+                                int HeightTopOfPanelGrading) {
 
             delegateFlowShowData result = new delegateFlowShowData(showDataGather);
             string ShowData()
             {
                 result.Invoke(id, NameWhoMessage, ImageAssest, Message,
-                             ColorDeclared, DayReport, MonthReport, TimeMessage, FullTimeMessage, HeightTopOfPanel);
+                             ColorDeclared, DayReport, MonthReport, TimeMessage, FullTimeMessage, HeightTopOfPanel, 
+                             HeightTopOfPanelCalendar, HeightTopOfPanelGrading);
                 return "";
             }
 
@@ -2799,14 +2863,15 @@ namespace WindowsFormUserGrading
         //SHOW ALL DATA IN REPORT..............................................................
         protected void showDataGather(int id, string NameWhoMessage, string ImageUser, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
-                                string FullTimeMessage, int HeightTopOfPanel) {
+                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar,
+                                int HeightTopOfPanelGrading) {
 
             //FOR SCPECIFIC GRADING AND CALENDAR....................................
             Panel pan = new Panel {
                 Name = "NameWhoMessage",
                 Size = new Size(634, 45),
                 BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
-                Location = new Point(12, HeightTopOfPanel)
+                Location = new Point(12, ((ColorDeclared == "Coral") ? HeightTopOfPanelGrading: HeightTopOfPanelCalendar))
             };
 
             PictureBox boxPic = new PictureBox {
