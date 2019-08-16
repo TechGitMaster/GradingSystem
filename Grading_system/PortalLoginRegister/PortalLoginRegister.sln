@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassUserForm", "..\FormUse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingStateMentForGradingAccount", "..\LoadingStatement\LoadingStateMentForGradingAccount\LoadingStateMentForGradingAccount.csproj", "{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditingFromForGradingSystem", "..\..\..\Grading_system\EditingSectionForm\EditingFromForGradingSystem\EditingFromForGradingSystem.csproj", "{181C198F-EEFF-4586-A7A2-8F213ECC0813}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27AFAFE9-A8C1-4C9A-A120-E87487C035E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181C198F-EEFF-4586-A7A2-8F213ECC0813}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

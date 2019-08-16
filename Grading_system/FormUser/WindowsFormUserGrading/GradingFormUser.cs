@@ -440,6 +440,34 @@ namespace WindowsFormUserGrading
                 }
             }
 
+            //END OF REPORT..................................................................
+            // .................................................................
+            // .................................................................
+            // .................................................................
+            //  .................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //GRADING START..........................................................
+            //..........................................................................................
+            //..........................................................................................
+            //..........................................................................................
+            //..........................................................................................
+
+
+
+            this.gettingDataSearch();
+
 
 
         }
@@ -2029,9 +2057,12 @@ namespace WindowsFormUserGrading
             }
         }
 
-        //END OF CALENDAR SCHED............................................................
-        //...........................................................
-
+        //END OF CALENDAR SCHED.....................................................................
+        //..........................................................................................
+        //..........................................................................................
+        //..........................................................................................
+        //..........................................................................................
+        //..........................................................................................
 
 
 
@@ -2040,9 +2071,10 @@ namespace WindowsFormUserGrading
 
 
         //REPORT START..........................................................................................
-
-
-
+        //..........................................................................................
+        //..........................................................................................
+        //..........................................................................................
+        //..........................................................................................
 
         protected List<ReportList> reportListGetAllData = new List<ReportList>();
         protected Report reportClass = new Report();
@@ -3196,6 +3228,170 @@ namespace WindowsFormUserGrading
             }
         }
 
+
+        //END OF REPORT.....................................................................................................................
+        //..................................................................................................................................
+        //..................................................................................................................................
+        //..................................................................................................................................
+        //..................................................................................................................................
+
+
+
+
+
+
+        //START GRADING..................................................................................................................
+        //..................................................................................................................
+        //.................................................................................................................
+        //..................................................................................................................
+
+
+
+        private static Grading grading = new Grading();
+        private List<GradingList> listSearchBar = new List<GradingList>();
+        private static List<Task> taskDoSeeSearch = new List<Task>();
+        private static string handleUsername = "", handleFirsLastName = "", handleImage = "";
+
+
+
+        private async void gettingDataSearch() {
+            int numberCountTopPanel = 9;
+            listSearchBar = new List<GradingList>();
+            taskDoSeeSearch = new List<Task>();
+
+            SearchPanGrading.Controls.Clear();
+
+            listSearchBar = await Task.Run(() => grading.gettingData()).ConfigureAwait(true);
+
+            foreach (var dataSearch in listSearchBar) {
+                if (String.IsNullOrEmpty(dataSearch.err) != false)
+                {
+                    taskDoSeeSearch.Add(doTheTashSeeSearch(dataSearch.id, dataSearch.UserName, dataSearch.FirstLastName,
+                        dataSearch.ImageUser, numberCountTopPanel));
+
+                    numberCountTopPanel += 53;
+                }
+                else {
+                    MessageBox.Show("having Err");
+                    Thread th = new Thread(() =>
+                    {
+                        Label labelErr = new Label
+                        {
+                            Name = "LabelNoSearchGrading",
+                            Text = "Please Check Your Internet.",
+                            Size = new Size(200, 16),
+                            Location = new Point(68, 193),
+                            Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                            ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue")
+                        };
+
+                        Action ac = new Action(() => SearchPanGrading.Controls.Add(labelErr));
+                        SearchPanGrading.BeginInvoke(ac);
+                    });
+                    th.Start();
+                }
+            }
+
+            await Task.WhenAll(taskDoSeeSearch);
+        }
+
+        private async Task<string> doTheTashSeeSearch(int id, string Username, string FirstLastname, string ImageUser, 
+            int numberCountTopPanel) {
+
+            Task<string> taskReturn = new Task<string>(() => SeeSearch(id, Username, FirstLastname, ImageUser, numberCountTopPanel));
+            taskReturn.Start();
+
+            string awaitStringDone = await taskReturn.ConfigureAwait(true);
+
+            return awaitStringDone;
+        }
+
+
+        protected string SeeSearch(int id, string Username, string FirstLastname, string ImageUser, int numberCountTopPanel) {
+            Thread th = new Thread(ThreadUsing);
+
+           void ThreadUsing()
+            {
+                Panel pan = new Panel
+                {
+                    Name = Username,
+                    AccessibleName = FirstLastname,
+                    AccessibleDescription = ImageUser,
+                    Size = new Size(276, 50),
+                    Location = new Point(12, numberCountTopPanel),
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A")
+                };
+                pan.Click += new System.EventHandler(ClickSearched);
+
+                PictureBox pic = new PictureBox
+                {
+                    Name = Username,
+                    AccessibleName = FirstLastname,
+                    AccessibleDescription = ImageUser,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Image = Image.FromFile(ImageUser),
+                    Size = new Size(48, 42),
+                    Location = new Point(5, 4)
+                };
+                pic.Click += new System.EventHandler(ClickSearched);
+
+                Label label = new Label {
+                    Name = Username,
+                    AccessibleName = FirstLastname,
+                    AccessibleDescription = ImageUser,
+                    Text = FirstLastname,
+                    Location = new Point(57, 24),
+                    ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                    Size = new Size(200, 16)
+                };
+                label.Click += new System.EventHandler(ClickSearched);
+
+                Action ac = () => {
+                    pan.Controls.Add(pic);
+                    using (System.Drawing.Drawing2D.GraphicsPath pathDraw = new System.Drawing.Drawing2D.GraphicsPath())
+                    {
+                        pathDraw.AddEllipse(0, 0, 48, 42);
+                        Region rg = new Region(pathDraw);
+                        pic.Region = rg;
+                    }
+                    pan.Controls.Add(label);
+                    SearchPanGrading.Controls.Add(pan);
+                };
+
+                SearchPanGrading.BeginInvoke(ac);
+            }
+            th.Start();
+
+            return "Done";
+        }
+
+
+        private void ClickSearched(object control, EventArgs e) {
+            Control con = (Control)control;
+            PictureBox pic = null;
+            Label label = null;
+            Panel panel = null;
+            if (con.GetType() == typeof(Panel)) {
+                panel = (Panel)con;
+                handleUsername = panel.Name;
+                handleFirsLastName = panel.AccessibleName;
+                handleImage = panel.AccessibleDescription;
+            } else if (con.GetType() == typeof(Label)) {
+                label = (Label)con;
+                handleUsername = label.Name;
+                handleFirsLastName = label.AccessibleName;
+                handleImage = label.AccessibleDescription;
+            }
+            else {
+                pic = (PictureBox)con;
+                handleUsername = pic.Name;
+                handleFirsLastName = pic.AccessibleName;
+                handleImage = pic.AccessibleDescription;
+            }
+
+            MessageBox.Show(handleUsername+" "+ handleFirsLastName+" "+ handleImage);
+        }
 
 
     }
