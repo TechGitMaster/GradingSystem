@@ -3248,12 +3248,15 @@ namespace WindowsFormUserGrading
 
 
         private static Grading grading = new Grading();
+
         private List<GradingList> listSearchBar = new List<GradingList>();
+        private List<GradingList> listHandleSubjectAndName = new List<GradingList>();
         private static List<Task> taskDoSeeSearch = new List<Task>();
-        private static string handleUsername = "", handleFirsLastName = "", handleImage = "";
+        private static string handleUsername = "", handleFirsLastName = "", handleImage = "", handleFirstNameOwn = "",
+            handleImageOwnUser = "";
 
 
-
+        //STARTING TO GET THE DATA SEARCH.........................................................
         private async void gettingDataSearch() {
             int numberCountTopPanel = 9;
             listSearchBar = new List<GradingList>();
@@ -3266,6 +3269,13 @@ namespace WindowsFormUserGrading
             foreach (var dataSearch in listSearchBar) {
                 if (String.IsNullOrEmpty(dataSearch.err) != false)
                 {
+
+                    //TEMPORARY................................
+                    if (dataSearch.UserName == "vee") {
+                        handleFirstNameOwn = dataSearch.FirstLastName;
+                        handleImageOwnUser = dataSearch.ImageUser;
+                    }
+
                     taskDoSeeSearch.Add(doTheTashSeeSearch(dataSearch.id, dataSearch.UserName, dataSearch.FirstLastName,
                         dataSearch.ImageUser, numberCountTopPanel));
 
@@ -3295,6 +3305,7 @@ namespace WindowsFormUserGrading
             await Task.WhenAll(taskDoSeeSearch);
         }
 
+        //DO THE TASK TO SHOW ONE BY ONE USER IN SEARCH......................................................
         private async Task<string> doTheTashSeeSearch(int id, string Username, string FirstLastname, string ImageUser, 
             int numberCountTopPanel) {
 
@@ -3307,6 +3318,7 @@ namespace WindowsFormUserGrading
         }
 
 
+        //FINAL SHOW THE USER IN SEARCH.............................................................................
         protected string SeeSearch(int id, string Username, string FirstLastname, string ImageUser, int numberCountTopPanel) {
             Thread th = new Thread(ThreadUsing);
 
@@ -3367,6 +3379,7 @@ namespace WindowsFormUserGrading
         }
 
 
+        //BUTTON OF EVERY USER IN SEARCHED BOX..........................................................
         private void ClickSearched(object control, EventArgs e) {
             Control con = (Control)control;
             PictureBox pic = null;
@@ -3377,22 +3390,96 @@ namespace WindowsFormUserGrading
                 handleUsername = panel.Name;
                 handleFirsLastName = panel.AccessibleName;
                 handleImage = panel.AccessibleDescription;
+                this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             } else if (con.GetType() == typeof(Label)) {
                 label = (Label)con;
                 handleUsername = label.Name;
                 handleFirsLastName = label.AccessibleName;
                 handleImage = label.AccessibleDescription;
+                this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             }
             else {
                 pic = (PictureBox)con;
                 handleUsername = pic.Name;
                 handleFirsLastName = pic.AccessibleName;
                 handleImage = pic.AccessibleDescription;
+                this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             }
-
-            MessageBox.Show(handleUsername+" "+ handleFirsLastName+" "+ handleImage);
         }
 
+
+
+        //AFTER CLICK THE BUTTON THE CURRENT VALUE WILL RUN THIS FUNCTION AND SHOW TO OTHER PANEL..................................
+        private async void showClickedInfoUserGradingSearch(string UsernameSelected, string FirstLastName, string ImageUser) {
+            List<GradingList> listHandle = new List<GradingList>();
+            grading = new Grading();
+            SubjectJarPanel.Controls.Clear();
+            NameTeachSubject.Controls.Clear();
+            listHandle = await Task.Run(() => grading.getDataAccordingSelectedUser(UsernameSelected));
+
+            foreach (var doList in listHandle) {
+                if (String.IsNullOrEmpty(doList.errGrade) != false)
+                {
+                    if (doList.numberGrade != 0)
+                    {
+
+
+                        Thread th = new Thread(() => ThreadSee());
+                        void ThreadSee(){
+
+                            Label labelMessageSubject = new Label();
+                            labelMessageSubject.Text = "No Subject For Now";
+                            labelMessageSubject.Size = new Size(160, 20);
+                            labelMessageSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+                            labelMessageSubject.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular);
+                            labelMessageSubject.Location = new Point(163, 145);
+
+
+                            Label NameTeachsSubject = new Label();
+                            NameTeachsSubject.Text = "No Teachers Created";
+                            NameTeachsSubject.Size = new Size(160, 20);
+                            NameTeachsSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+                            NameTeachsSubject.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+                            NameTeachsSubject.Location = new Point(70, 120);
+
+                            this.BeginInvoke((Action)delegate() {
+                                pictureGradingSet.Image = Image.FromFile(ImageUser);
+                                labelnameSet.Text = FirstLastName;
+                                CreateSubject.AccessibleDescription = "vee";
+
+                                NameTeachSubject.Controls.Add(NameTeachsSubject);
+                                SubjectJarPanel.Controls.Add(labelMessageSubject);
+                                GradingCreateSubject.Visible = true;
+                            });
+                        }
+
+                        th.Start();
+                    }
+                }
+                else {
+                    MessageBox.Show("Please Check Your Internet");
+                }
+            }
+            return;
+        }
+
+        //CLICK THE LETTER X TO HIDE THE CREATE SUBJECT.............................................
+        private void Label41_Click(object sender, EventArgs e)
+        {
+            CreateSubject.AccessibleDescription = "";
+            GradingCreateSubject.Visible = false;
+        }
+
+        private async void CreateSubject_Click(object sender, EventArgs e)
+        {
+            if (textBox1CreateSub.Text.Length != 0) {
+                listHandleSubjectAndName = new List<GradingList>();
+                listHandleSubjectAndName = await Task.Run(() => grading.savingCreateSubAndReturn(
+                    textBox1CreateSub.Text, handleFirstNameOwn, handleImageOwnUser,
+                    CreateSubject.AccessibleDescription, handleUsername));
+
+            }
+        }
 
     }
 }

@@ -17,5 +17,17 @@ namespace ClassUserForm
         public string ImageUser;
 
 
+        //GRADING HANDLING DATA SELECTED.........................................................
+        public string errGrade;
+        public int numberGrade;
+        public int idGrade;
+        public string UserNameOwner;
+        public string UserNameCreator;
+        public string NameCreator;
+        public string ImageCreator;
+        public string SubjectCreator;
+        public string ColorCreator;
+        public string DateTimeCreated;
+
     }
 }
