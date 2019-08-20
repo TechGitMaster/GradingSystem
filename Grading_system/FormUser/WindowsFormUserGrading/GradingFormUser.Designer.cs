@@ -241,6 +241,8 @@
             this.panel30 = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label41 = new System.Windows.Forms.Label();
+            this.panel40 = new System.Windows.Forms.Panel();
+            this.label51 = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -338,6 +340,7 @@
             this.panel29.SuspendLayout();
             this.panel30.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.panel40.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMoveForm
@@ -733,6 +736,7 @@
             // SubjectJarPanel
             // 
             this.SubjectJarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.SubjectJarPanel.Controls.Add(this.panel40);
             this.SubjectJarPanel.Controls.Add(this.panel29);
             this.SubjectJarPanel.Controls.Add(this.panel11);
             this.SubjectJarPanel.Controls.Add(this.label46);
@@ -2740,6 +2744,26 @@
             this.label41.TabIndex = 1;
             this.label41.Text = "Kyle Matthew S. Velarde";
             // 
+            // panel40
+            // 
+            this.panel40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel40.Controls.Add(this.label51);
+            this.panel40.Location = new System.Drawing.Point(6, 48);
+            this.panel40.Name = "panel40";
+            this.panel40.Size = new System.Drawing.Size(372, 32);
+            this.panel40.TabIndex = 3;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label51.Location = new System.Drawing.Point(9, 9);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(151, 16);
+            this.label51.TabIndex = 0;
+            this.label51.Text = "Introduction of Computer";
+            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2907,6 +2931,8 @@
             this.panel30.ResumeLayout(false);
             this.panel30.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.panel40.ResumeLayout(false);
+            this.panel40.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3126,6 +3152,8 @@
         private System.Windows.Forms.Panel panel30;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Panel panel40;
+        private System.Windows.Forms.Label label51;
     }
 }
 

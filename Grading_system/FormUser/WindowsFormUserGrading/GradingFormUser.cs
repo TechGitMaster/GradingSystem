@@ -23,7 +23,7 @@ namespace WindowsFormUserGrading
         protected int handlingIdInToProtected;
         protected LoadingScreen loadingOrWaiting = new LoadingScreen();
         protected static List<CalendarList> ListScheduleSelf = new List<CalendarList>();
-        protected static string[] arrayInNavigator = new string[] { "", "", "", ""};
+        protected static string[] arrayInNavigator = new string[] { "", "", "", "" };
         private static string handleUsername = "", handleFirsLastName = "", handleImage = "", handleFirstNameOwn = "",
         handleImageOwnUser = "";
         protected System.Windows.Forms.Timer TimerSchedUserSelf = new System.Windows.Forms.Timer();
@@ -98,14 +98,14 @@ namespace WindowsFormUserGrading
             DrawLine2Final.Paint += new System.Windows.Forms.PaintEventHandler(paintDrawLine2);
 
             TimerSchedUserSelf.Interval = 3000;
-            TimerSchedUserSelf.Tick += async(object ob, EventArgs e) => {
+            TimerSchedUserSelf.Tick += async (object ob, EventArgs e) => {
                 System.Windows.Forms.Timer time = (System.Windows.Forms.Timer)ob;
                 time.Stop();
 
                 ListScheduleSelf = await Task.Run(() => calendarClass.GetAllSchedThisUser("vee")).ConfigureAwait(true);
 
                 Thread th = new Thread(() => {
-                   int number = 0;
+                    int number = 0;
                     foreach (var count in ListScheduleSelf)
                     {
                         if (count.ErrCheck == "")
@@ -151,7 +151,7 @@ namespace WindowsFormUserGrading
                             else
                             {
                                 panelBoxs.Visible = true;
-                                switch (numberDetectIf){
+                                switch (numberDetectIf) {
                                     case 1:
                                         if (arrayInNavigator[numberDetectIf] == "")
                                         {
@@ -689,7 +689,7 @@ namespace WindowsFormUserGrading
                         if (getData.numberCount > 0)
                         {
                             if (conditionToShow == "")
-                           {
+                            {
 
                                 conditionToShow = "Wait";
 
@@ -698,7 +698,7 @@ namespace WindowsFormUserGrading
                                 string wait()
                                 {
                                     //THREAD THAT IGNORING THE ERROR..............................
-                                    Thread th = new Thread(async() =>
+                                    Thread th = new Thread(async () =>
                                     {
                                         if (ScheduleUserPanel2.InvokeRequired != false)
                                         {
@@ -740,7 +740,7 @@ namespace WindowsFormUserGrading
                                     Text = "No Schedule Yet."
                                 };
 
-                                Action ac = () => ScheduleUserPanel2.Controls.Add(labelNoSched); 
+                                Action ac = () => ScheduleUserPanel2.Controls.Add(labelNoSched);
                                 ScheduleUserPanel2.BeginInvoke(ac);
                             });
 
@@ -854,7 +854,7 @@ namespace WindowsFormUserGrading
                                     handleDataForVoid.Add(new List<string> {
                                         checkbox.AccessibleDescription, checkbox.AccessibleName
                                     });
-                                  
+
                                 }
                                 else
                                 {
@@ -966,7 +966,7 @@ namespace WindowsFormUserGrading
 
 
         //SHOW CONTROLS DATA SCHEDULE....................
-        protected void ControlsLoadSHow(string NameUserWhoAdded, string DateTimeRange, string ImageUserWhoAdded, 
+        protected void ControlsLoadSHow(string NameUserWhoAdded, string DateTimeRange, string ImageUserWhoAdded,
                                         int numberCountPanel, string HandlingAdmin) {
 
             Panel pan = new Panel
@@ -1179,7 +1179,7 @@ namespace WindowsFormUserGrading
             TimerSchedUserSelf.Stop();
 
             int numberCountScroll = 0;
-             scroll = new VScrollBar() {
+            scroll = new VScrollBar() {
                 Name = "scrollCalendarSchedAdd",
                 Dock = DockStyle.Right,
                 Enabled = false,
@@ -1271,7 +1271,7 @@ namespace WindowsFormUserGrading
                                             //SHOW FIRST THE ADMIN SCHEDULE...............................
                                             //Task<string> messageTask = new Task<string>(() => adminShowAndEtc(GetTheScheduleOfUserClicked,
                                             //   numberForAdmins, numberScanMinAdmin, numberScanIfMax));
-                                           // messageTask.Start();
+                                            // messageTask.Start();
                                             string message = adminShowAndEtc(GetTheScheduleOfUserClicked,
                                                numberForAdmins, numberScanMinAdmin, numberScanIfMax, scroll);
 
@@ -1280,7 +1280,7 @@ namespace WindowsFormUserGrading
                                                 loadingOrWaiting.Hide();
                                                 this.Show();
                                             }
-                                            else if(message is "Please Check Your Connection.")
+                                            else if (message is "Please Check Your Connection.")
                                             {
                                                 loadingOrWaiting.Show();
                                                 this.Hide();
@@ -1360,7 +1360,7 @@ namespace WindowsFormUserGrading
             {
                 //SHOW THE LEAST OF THE HOLE DATABASE SCHEDULE FOR THE USER YOU CLICKED....
                 if (numberScanMinAdmin != numberScanIfMax)
-                { 
+                {
                     string waiting = "";
                     //SHOW AND DESIGN OF SCHEDULE OF USER ARRIVED..............
                     foreach (var showcalendar in GetTheScheduleOfUserClicked)
@@ -1489,7 +1489,7 @@ namespace WindowsFormUserGrading
                 ForeColor = ColorTranslator.FromHtml("#B3B6B7"),
                 Size = new Size(55, 32),
                 Text = (HandlingAdmin != "ADMIN") ? "User:" : "Admin:",
-                Font = new Font("Microsoft Sans Serif", ((HandlingAdmin != "ADMIN") ? 10:9), FontStyle.Regular),
+                Font = new Font("Microsoft Sans Serif", ((HandlingAdmin != "ADMIN") ? 10 : 9), FontStyle.Regular),
                 Location = new Point(10, 46),
                 BackColor = ColorTranslator.FromHtml("#1C2833")
             };
@@ -1510,7 +1510,7 @@ namespace WindowsFormUserGrading
         protected static string[] CalendarRange = new string[3] { "", "", "" };
         protected static string[] DateTimeRange = new string[] { "", "", "", "", "" };
         protected static string handlingConverterMonth = "";
-        public static string[] CalendarConverter = new string[] { "Januany", "February", "March", "April", "May", 
+        public static string[] CalendarConverter = new string[] { "Januany", "February", "March", "April", "May",
         "June", "July", "August", "September", "October", "November", "December" };
         public static string checkTime = "";
         public static string checkDate = "";
@@ -1539,8 +1539,8 @@ namespace WindowsFormUserGrading
 
             checkTime = DateTimeRange[0] + ":" + DateTimeRange[1] + " " + DateTimeRange[2] + " "
                 + (String.IsNullOrEmpty(DateTimeRange[3]) && String.IsNullOrEmpty(DateTimeRange[4]) ? "" : "/ ")
-                + DateTimeRange[3]+":"+ DateTimeRange[4]+" "+(DateTimeRange[3] == "0" || 
-                DateTimeRange[3] == "" ? "Mnts": (DateTimeRange[3] == "1" ? "Hr":"Hrs"));
+                + DateTimeRange[3] + ":" + DateTimeRange[4] + " " + (DateTimeRange[3] == "0" ||
+                DateTimeRange[3] == "" ? "Mnts" : (DateTimeRange[3] == "1" ? "Hr" : "Hrs"));
             CheckingWay();
         }
 
@@ -1554,7 +1554,7 @@ namespace WindowsFormUserGrading
                 picCon.Visible = false;
                 BackToSeeTimeDate.Visible = true;
             }
-            else if(picCon.Name == "BackToSeeTimeDate")
+            else if (picCon.Name == "BackToSeeTimeDate")
             {
                 rangeTimePan.Visible = false;
                 DateTime.Visible = true;
@@ -1592,10 +1592,10 @@ namespace WindowsFormUserGrading
                     }
                 }
 
-                if (CountSelection >= stringSelectionRange.Length-1) {
-                    for (int numberCountConverter = CalendarConverter.Length;numberCountConverter > 0; numberCountConverter--) {
+                if (CountSelection >= stringSelectionRange.Length - 1) {
+                    for (int numberCountConverter = CalendarConverter.Length; numberCountConverter > 0; numberCountConverter--) {
                         if (numberCountConverter == Convert.ToInt32(CalendarRange[0])) {
-                            handlingConverterMonth = CalendarConverter[numberCountConverter-1];
+                            handlingConverterMonth = CalendarConverter[numberCountConverter - 1];
                         }
                     }
                 }
@@ -1781,9 +1781,9 @@ namespace WindowsFormUserGrading
                                                                     else {
                                                                         int numberScanMinAdmin = 0;
                                                                         //SHOW FIRST THE ADMIN SCHEDULE...............................
-                                                                       // Task<string> messageTask = new Task<string>(() => adminShowAndEtc(calenListSched,
-                                                                      //     numberForAdmins, numberScanMinAdmin, numberScanIfMax));
-                                                                      //  messageTask.Start();
+                                                                        // Task<string> messageTask = new Task<string>(() => adminShowAndEtc(calenListSched,
+                                                                        //     numberForAdmins, numberScanMinAdmin, numberScanIfMax));
+                                                                        //  messageTask.Start();
 
                                                                         string message = adminShowAndEtc(calenListSched,
                                                                            numberForAdmins, numberScanMinAdmin, numberScanIfMax, scroll);
@@ -1830,7 +1830,7 @@ namespace WindowsFormUserGrading
                                             "The Hrs is done look at your dateTime."
                                         };
 
-                                        for (int scanningMessageErr = messageErr.Length-1; scanningMessageErr >= 0; scanningMessageErr-=1) {
+                                        for (int scanningMessageErr = messageErr.Length - 1; scanningMessageErr >= 0; scanningMessageErr -= 1) {
                                             if (CheckScanningSched == messageErr[scanningMessageErr]) {
                                                 MessageBox.Show(messageErr[scanningMessageErr]);
                                                 loadingOrWaiting.Hide();
@@ -2086,8 +2086,8 @@ namespace WindowsFormUserGrading
         private int numberCountForListReport = 0, numberCountPanel = 0, CalendarNumberCount = 0, GradingNumberCountList = 0;
         private static bool conditionToGetData = true;
         private static string reportErr = "false", reportNoHaving = "false";
-        public string[] LabelArr = new string[] { "GradingLabelPercent", "CalendarLabelPercent", "OALabelPercent"  };
-        public string[] PanelFlowPercent = new string[] { "GradingFlowReport", "CalendarFlowReport", "OverAllFlowReport"};
+        public string[] LabelArr = new string[] { "GradingLabelPercent", "CalendarLabelPercent", "OALabelPercent" };
+        public string[] PanelFlowPercent = new string[] { "GradingFlowReport", "CalendarFlowReport", "OverAllFlowReport" };
         protected static string condition_to_Paint = "false", HandlingSeeIfHavingError = "Null";
         public static List<Task> taskVoidShowData = new List<Task>();
         public static string conditionifEqual = "false";
@@ -2097,7 +2097,7 @@ namespace WindowsFormUserGrading
         //DELEGATE TYPE SHOW DATA.............................
         protected delegate void delegateFlowShowData(int id, string NameWhoMessage, string ImageUser, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
-                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar, 
+                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar,
                                 int HeightTopOfPanelGrading);
 
 
@@ -2161,7 +2161,7 @@ namespace WindowsFormUserGrading
 
 
         //REPORT VOID THAT WILL START FROM THIS...................................................
-        protected async void DataGatherListOfReport(Button bttn){
+        protected async void DataGatherListOfReport(Button bttn) {
             int numberCountList = 0, ConditionToGet = 0;
             numberCountPanel = 0;
             condition_to_Paint = "false";
@@ -2292,7 +2292,7 @@ namespace WindowsFormUserGrading
                             }
 
                             Task<bool> taskBool = new Task<bool>(conditionIf);
-                            taskBool.Start();                            
+                            taskBool.Start();
 
                             if ((await taskBool.ConfigureAwait(true)) == true) {
                                 delegateflowPercent delegateCount = new delegateflowPercent(calendarPercentReport);
@@ -2718,7 +2718,7 @@ namespace WindowsFormUserGrading
                     Panel pan = (Panel)(FlowPercentagePanel.Controls[PanelFlowPercent[ArrayLength]]);
                     pan.Invalidate();
 
-                    if (ArrayLength+1 >= 3) {
+                    if (ArrayLength + 1 >= 3) {
                         int HeightTopOfPanelOverALl = 13, HeightTopOfPanelCalendar = 13, numberCountCalendar = 0,
                             HeightTopOfPanelGrading = 13, numberCountGrading = 0, numberCount = 0;
                         if (PercentArray[2] != 0) {
@@ -2820,7 +2820,7 @@ namespace WindowsFormUserGrading
         //ONPAINT THAT ALSWAYS REAL TIME AUPDATE THE PAINT.....................................
         protected override void OnPaint(PaintEventArgs e)
         {
-                base.OnPaint(e);
+            base.OnPaint(e);
             try
             {
                 if (numberCountPanel >= 0) {
@@ -2875,14 +2875,14 @@ namespace WindowsFormUserGrading
         //SHOW NA YUNG CONTROLS SA REPORTS.........................................
         protected async Task<int> WayToShow(int id, string NameWhoMessage, string ImageAssest, string Message,
                                 string ColorDeclared, string DayReport, string MonthReport, string TimeMessage,
-                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar, 
+                                string FullTimeMessage, int HeightTopOfPanel, int HeightTopOfPanelCalendar,
                                 int HeightTopOfPanelGrading) {
 
             delegateFlowShowData result = new delegateFlowShowData(showDataGather);
             string ShowData()
             {
                 result.Invoke(id, NameWhoMessage, ImageAssest, Message,
-                             ColorDeclared, DayReport, MonthReport, TimeMessage, FullTimeMessage, HeightTopOfPanel, 
+                             ColorDeclared, DayReport, MonthReport, TimeMessage, FullTimeMessage, HeightTopOfPanel,
                              HeightTopOfPanelCalendar, HeightTopOfPanelGrading);
                 return "";
             }
@@ -2891,7 +2891,7 @@ namespace WindowsFormUserGrading
             task.Start();
 
             await task.ConfigureAwait(true);
-            
+
             return 0;
         }
 
@@ -2907,7 +2907,7 @@ namespace WindowsFormUserGrading
                 Name = "NameWhoMessage",
                 Size = new Size(634, 45),
                 BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
-                Location = new Point(12, ((ColorDeclared == "Coral") ? HeightTopOfPanelGrading: HeightTopOfPanelCalendar))
+                Location = new Point(12, ((ColorDeclared == "Coral") ? HeightTopOfPanelGrading : HeightTopOfPanelCalendar))
             };
 
             PictureBox boxPic = new PictureBox {
@@ -3253,11 +3253,14 @@ namespace WindowsFormUserGrading
 
         private static Grading grading = new Grading();
         private List<GradingList> listSearchBar = new List<GradingList>();
-
+        private delegate void handlingDataShows(string UserNameOwner, string UserNameCreator,
+            string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
+            int numberCountForTopPanel);
         private List<GradingList> listHandleSubjectAndName = new List<GradingList>();
         private static List<Task> taskDoSeeSearch = new List<Task>();
         private static bool conditionToFirstCome = false, conditionToSeeSub = false;
         private static int handleDataSub = 0;
+
 
 
         //STARTING TO GET THE DATA SEARCH.........................................................
@@ -3309,8 +3312,14 @@ namespace WindowsFormUserGrading
             await Task.WhenAll(taskDoSeeSearch);
         }
 
+
+
+
+
+
+        //TASK DO.....................................
         //DO THE TASK TO SHOW ONE BY ONE USER IN SEARCH......................................................
-        private async Task<string> doTheTashSeeSearch(int id, string Username, string FirstLastname, string ImageUser, 
+        private async Task<string> doTheTashSeeSearch(int id, string Username, string FirstLastname, string ImageUser,
             int numberCountTopPanel) {
 
             Task<string> taskReturn = new Task<string>(() => SeeSearch(id, Username, FirstLastname, ImageUser, numberCountTopPanel));
@@ -3321,6 +3330,41 @@ namespace WindowsFormUserGrading
             return awaitStringDone;
         }
 
+
+
+
+
+        //DO THE TASK AND PAST IT INTO DELEGATE TO SHOW THE SUBJECT AND WHO'S CREATED THAT.........................
+        protected Task taskSHowSubAndNameTeach(int idGrade, string UserNameOwner, string UserNameCreator,
+            string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated, int numberCount,
+            int numberCountForTopPanel)
+        {
+
+            handlingDataShows delegateHandle = new handlingDataShows(this.subjectShowHandle);
+            delegateHandle.Invoke(UserNameOwner, UserNameCreator,
+            NameCreator, ImageCreator, SubjectCreator, ColorCreator,DateTimeCreated, numberCountForTopPanel);
+
+            if (numberCount == handleDataSub) {
+                GradingCreateSubject.Visible = true;
+                timerGradingSub.Start();
+            }
+
+            return Task.CompletedTask;
+        }
+
+
+        //....................................................
+
+
+
+
+
+
+
+
+
+
+        //THIS IS THE ZONE TO SHOW ALL THE INFORMATIONS.............................................................
 
         //FINAL SHOW THE USER IN SEARCH.............................................................................
         protected string SeeSearch(int id, string Username, string FirstLastname, string ImageUser, int numberCountTopPanel) {
@@ -3383,6 +3427,129 @@ namespace WindowsFormUserGrading
         }
 
 
+
+        private void subjectShowHandle(string UserNameOwner, string UserNameCreator,
+            string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
+            int numberCountForTopPanel) {
+            int[] handleColorByEach = new int[] { 0, 0, 0 };
+            string HandleStringColor = "";
+            int handleCountCondition = 0;
+
+            for (int handle = 0;handle < ColorCreator.Length;handle++) {
+                if (ColorCreator[handle].ToString() != "," && ColorCreator[handle].ToString() != " ")
+                {
+                    HandleStringColor = HandleStringColor + ColorCreator[handle].ToString();
+                }
+                else {
+                    if (ColorCreator[handle].ToString() == " ") {
+                        handleColorByEach[handleCountCondition] = Convert.ToInt32(HandleStringColor);
+                        handleCountCondition = handleCountCondition + 1;
+                        HandleStringColor = "";
+                    }
+                }
+
+                if (handle >= ColorCreator.Length-1) {
+                    handleColorByEach[2] = Convert.ToInt32(HandleStringColor);
+                }
+            }
+
+
+
+            Thread th = new Thread(() => {
+                Panel pansub = new Panel{
+                    Size = new Size(372, 32),
+                    Location = new Point(6, numberCountForTopPanel),
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A")
+                };
+
+                Label labelsub = new Label
+                {
+                    Size = new Size(372, 16),
+                    Location = new Point(9, 9),
+                    Text = SubjectCreator,
+                    ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+                };
+
+                Panel pancolor = new Panel
+                {
+                    Size = new Size(60, 32),
+                    Location = new Point(384, numberCountForTopPanel),
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A")
+                };
+
+                Button bttnColor = new Button {
+                    Name = "BttnColor",
+                    Size = new Size(31, 23),
+                    Location = new Point(15, 4),
+                    BackColor = System.Drawing.Color.FromArgb(handleColorByEach[0], handleColorByEach[1], handleColorByEach[2])
+                };
+                bttnColor.FlatStyle = FlatStyle.Flat;
+
+               Action ac = () => {
+                    SubjectJarPanel.Controls.Add(pansub);
+                    pansub.Controls.Add(labelsub);
+                    SubjectJarPanel.Controls.Add(pancolor);
+                    pancolor.Controls.Add(bttnColor);
+                };
+                SubjectJarPanel.BeginInvoke(ac);
+
+                NameTeachSubject.BeginInvoke((Action)delegate {
+                    handlingDataShows delegateHandle = new handlingDataShows(this.subjectShowNameOfTeacher);
+                    delegateHandle.Invoke("", "",
+                    NameCreator, ImageCreator, "", "", DateTimeCreated, numberCountForTopPanel);
+                });
+            });
+            th.Start();
+
+        }
+
+        private void subjectShowNameOfTeacher(string UserNameOwner, string UserNameCreator,
+            string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
+            int numberCountForTopPanel)
+        {
+            Panel pan = new Panel {
+                BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
+                Size = new Size(255, 33),
+                Location = new Point(8, numberCountForTopPanel-1)
+            };
+
+            PictureBox boxPic = new PictureBox {
+                Size = new Size(33, 28),
+                Location = new Point(6, 2),
+                Image = Image.FromFile(ImageCreator),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+
+            Label label = new Label();
+            label.Text = NameCreator;
+            label.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+            label.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+            label.Size = new Size(290, 16);
+            label.Location = new Point(44, 11);
+
+            Thread th = new Thread(() => {
+                NameTeachSubject.BeginInvoke((Action)delegate
+                {
+                    NameTeachSubject.Controls.Add(pan);
+                    pan.Controls.Add(boxPic);
+                    pan.Controls.Add(label);
+                });
+            });
+            th.Start();
+        }
+
+
+        //......................................................................................
+
+
+
+
+
+
+
+
+
         //BUTTON OF EVERY USER IN SEARCHED BOX..........................................................
         private void ClickSearched(object control, EventArgs e) {
             Control con = (Control)control;
@@ -3424,9 +3591,11 @@ namespace WindowsFormUserGrading
 
         //AFTER CLICK THE BUTTON THE CURRENT VALUE WILL RUN THIS FUNCTION AND SHOW TO OTHER PANEL..................................
         private async void showClickedInfoUserGradingSearch(string UsernameSelected, string FirstLastName, string ImageUser) {
-            List<GradingList> listHandle = new List<GradingList>();
             grading = new Grading();
             timerGradingSub.Stop();
+            int numberCount = 0, numberHandleTopPanel = 11;
+            List<GradingList> listHandle = new List<GradingList>();
+            List<Task> taskSHowSubAndNameTeach = new List<Task>();
             listHandle = await Task.Run(() => grading.getDataAccordingSelectedUser(UsernameSelected)).ConfigureAwait(true);
 
             if ((Int32)(listHandle.Count) != 0) {
@@ -3444,10 +3613,12 @@ namespace WindowsFormUserGrading
                         timerGradingSub.Start();
                         conditionToSeeSub = true;
                         foreach (var checknumber in listHandle) {
-                            if (checknumber.numberGrade == 0) {
+                            if (checknumber.numberGrade == 0)
+                            {
                                 conditionToSeeSub = false;
                                 SubjectJarPanel.Controls.Clear();
                                 NameTeachSubject.Controls.Clear();
+
                             }
                         }
                     }
@@ -3505,7 +3676,16 @@ namespace WindowsFormUserGrading
                                 }
                                 else
                                 {
-                                    
+                                    numberCount++;
+                                    taskSHowSubAndNameTeach.Add(this.taskSHowSubAndNameTeach(doList.idGrade, doList.UserNameOwner, 
+                                        doList.UserNameCreator, doList.NameCreator, doList.ImageCreator, 
+                                        doList.SubjectCreator, doList.ColorCreator, doList.DateTimeCreated, numberCount, numberHandleTopPanel));
+                                    numberHandleTopPanel = numberHandleTopPanel + 37;
+
+                                if (numberCount == (Int32)(listHandle.Count)) {
+                                    labelnameSet.Text = FirstLastName;
+                                    await Task.WhenAll(taskSHowSubAndNameTeach);
+                                }
                                 }
                             }
                         }
