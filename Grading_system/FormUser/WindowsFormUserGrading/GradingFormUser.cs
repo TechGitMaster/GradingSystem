@@ -24,8 +24,11 @@ namespace WindowsFormUserGrading
         protected LoadingScreen loadingOrWaiting = new LoadingScreen();
         protected static List<CalendarList> ListScheduleSelf = new List<CalendarList>();
         protected static string[] arrayInNavigator = new string[] { "", "", "", ""};
+        private static string handleUsername = "", handleFirsLastName = "", handleImage = "", handleFirstNameOwn = "",
+        handleImageOwnUser = "";
         protected System.Windows.Forms.Timer TimerSchedUserSelf = new System.Windows.Forms.Timer();
         protected System.Windows.Forms.Timer TimerReportSelf = new System.Windows.Forms.Timer();
+        protected System.Windows.Forms.Timer timerGradingSub = new System.Windows.Forms.Timer();
         protected System.Windows.Forms.Timer TimerGrading = new System.Windows.Forms.Timer();
         protected System.Windows.Forms.Timer TimerControls = new System.Windows.Forms.Timer();
 
@@ -468,7 +471,8 @@ namespace WindowsFormUserGrading
 
             this.gettingDataSearch();
 
-
+            timerGradingSub.Tick += new System.EventHandler(gradingInterval);
+            timerGradingSub.Interval = 3000;
 
         }
 
@@ -3248,12 +3252,12 @@ namespace WindowsFormUserGrading
 
 
         private static Grading grading = new Grading();
-
         private List<GradingList> listSearchBar = new List<GradingList>();
+
         private List<GradingList> listHandleSubjectAndName = new List<GradingList>();
         private static List<Task> taskDoSeeSearch = new List<Task>();
-        private static string handleUsername = "", handleFirsLastName = "", handleImage = "", handleFirstNameOwn = "",
-            handleImageOwnUser = "";
+        private static bool conditionToFirstCome = false, conditionToSeeSub = false;
+        private static int handleDataSub = 0;
 
 
         //STARTING TO GET THE DATA SEARCH.........................................................
@@ -3409,57 +3413,127 @@ namespace WindowsFormUserGrading
 
 
 
+
+        //INTERVAL IN GRADING SUBJECT CREATE....................................
+        protected void gradingInterval(object control, EventArgs e) {
+            this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
+        }
+
+
+
+
         //AFTER CLICK THE BUTTON THE CURRENT VALUE WILL RUN THIS FUNCTION AND SHOW TO OTHER PANEL..................................
         private async void showClickedInfoUserGradingSearch(string UsernameSelected, string FirstLastName, string ImageUser) {
             List<GradingList> listHandle = new List<GradingList>();
             grading = new Grading();
-            SubjectJarPanel.Controls.Clear();
-            NameTeachSubject.Controls.Clear();
-            listHandle = await Task.Run(() => grading.getDataAccordingSelectedUser(UsernameSelected));
+            timerGradingSub.Stop();
+            listHandle = await Task.Run(() => grading.getDataAccordingSelectedUser(UsernameSelected)).ConfigureAwait(true);
 
-            foreach (var doList in listHandle) {
-                if (String.IsNullOrEmpty(doList.errGrade) != false)
+            if ((Int32)(listHandle.Count) != 0) {
+                Int32 count = listHandle.Count();
+                if (conditionToFirstCome != true)
                 {
-                    if (doList.numberGrade != 0)
-                    {
-
-
-                        Thread th = new Thread(() => ThreadSee());
-                        void ThreadSee(){
-
-                            Label labelMessageSubject = new Label();
-                            labelMessageSubject.Text = "No Subject For Now";
-                            labelMessageSubject.Size = new Size(160, 20);
-                            labelMessageSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
-                            labelMessageSubject.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular);
-                            labelMessageSubject.Location = new Point(163, 145);
-
-
-                            Label NameTeachsSubject = new Label();
-                            NameTeachsSubject.Text = "No Teachers Created";
-                            NameTeachsSubject.Size = new Size(160, 20);
-                            NameTeachsSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
-                            NameTeachsSubject.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
-                            NameTeachsSubject.Location = new Point(70, 120);
-
-                            this.BeginInvoke((Action)delegate() {
-                                pictureGradingSet.Image = Image.FromFile(ImageUser);
-                                labelnameSet.Text = FirstLastName;
-                                CreateSubject.AccessibleDescription = "vee";
-
-                                NameTeachSubject.Controls.Add(NameTeachsSubject);
-                                SubjectJarPanel.Controls.Add(labelMessageSubject);
-                                GradingCreateSubject.Visible = true;
-                            });
-                        }
-
-                        th.Start();
-                    }
+                    handleDataSub = count;
+                    conditionToFirstCome = true;
+                    SubjectJarPanel.Controls.Clear();
+                    NameTeachSubject.Controls.Clear();
                 }
                 else {
-                    MessageBox.Show("Please Check Your Internet");
+                    if (handleDataSub == count)
+                    {
+                        timerGradingSub.Start();
+                        conditionToSeeSub = true;
+                        foreach (var checknumber in listHandle) {
+                            if (checknumber.numberGrade == 0) {
+                                conditionToSeeSub = false;
+                                SubjectJarPanel.Controls.Clear();
+                                NameTeachSubject.Controls.Clear();
+                            }
+                        }
+                    }
+                    else {
+                        handleDataSub = count;
+                        conditionToSeeSub = false;
+                        SubjectJarPanel.Controls.Clear();
+                        NameTeachSubject.Controls.Clear();
+                    }
                 }
-            }
+
+                foreach (var doList in listHandle) {
+                        if (String.IsNullOrEmpty(doList.errGrade) != false)
+                        {
+                            if (conditionToSeeSub != true)
+                            {
+                                if (doList.numberGrade == 0)
+                                {
+
+
+                                    Thread th = new Thread(() => ThreadSee());
+                                    void ThreadSee()
+                                    {
+
+                                        Label labelMessageSubject = new Label();
+                                        labelMessageSubject.Text = "No Subject For Now";
+                                        labelMessageSubject.Size = new Size(160, 20);
+                                        labelMessageSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+                                        labelMessageSubject.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular);
+                                        labelMessageSubject.Location = new Point(163, 145);
+
+
+                                        Label NameTeachsSubject = new Label();
+                                        NameTeachsSubject.Text = "No Teachers Created";
+                                        NameTeachsSubject.Size = new Size(160, 20);
+                                        NameTeachsSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+                                        NameTeachsSubject.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+                                        NameTeachsSubject.Location = new Point(70, 120);
+
+                                        this.BeginInvoke((Action)delegate ()
+                                        {
+                                            pictureGradingSet.Image = Image.FromFile(ImageUser);
+                                            labelnameSet.Text = FirstLastName;
+                                            CreateSubject.AccessibleDescription = "vee";
+
+                                            NameTeachSubject.Controls.Add(NameTeachsSubject);
+                                            SubjectJarPanel.Controls.Add(labelMessageSubject);
+                                            GradingCreateSubject.Visible = true;
+                                            timerGradingSub.Start();
+                                        });
+                                    }
+
+                                    th.Start();
+                                    handleDataSub = 0;
+                                }
+                                else
+                                {
+                                    
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Thread th = new Thread(ths);
+                            MessageBox.Show("Please Check Your Internet Connection");
+                            void ths() {
+                            Label labelErrSub = new Label {
+                                Text = "Please Check Your Internet Connection.",
+                                ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
+                                Size = new Size(280, 20),
+                                Location = new Point(103, 145),
+                                Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular)
+                            };
+                            SubjectJarPanel.BeginInvoke((Action)delegate() {
+                                labelnameSet.Text = "Undefined name";
+                                GradingCreateSubject.Visible = true;
+                                SubjectJarPanel.Controls.Add(labelErrSub);
+
+                                handleDataSub = 0;
+                                timerGradingSub.Start();
+                            });
+                        }
+                            th.Start();
+                    }
+                    }
+                }
             return;
         }
 
@@ -3468,16 +3542,22 @@ namespace WindowsFormUserGrading
         {
             CreateSubject.AccessibleDescription = "";
             GradingCreateSubject.Visible = false;
+            timerGradingSub.Stop();
         }
 
         private async void CreateSubject_Click(object sender, EventArgs e)
         {
             if (textBox1CreateSub.Text.Length != 0) {
+                timerGradingSub.Stop();
                 listHandleSubjectAndName = new List<GradingList>();
                 listHandleSubjectAndName = await Task.Run(() => grading.savingCreateSubAndReturn(
                     textBox1CreateSub.Text, handleFirstNameOwn, handleImageOwnUser,
                     CreateSubject.AccessibleDescription, handleUsername));
+                foreach (var handleDataSub in listHandleSubjectAndName) {
+                    MessageBox.Show(handleDataSub.errGrade);
+                }
 
+                this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             }
         }
 

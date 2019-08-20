@@ -46,8 +46,8 @@ namespace ClassUserForm
 
 
 
-        //CHECKING WHEN THE USER CLICKED THE SELECTED USER IN SEARCH....................................................
-        public List<GradingList> getDataAccordingSelectedUser(string UsernameSelected) {
+        //CHECKING WHEN THE SELFUSER CLICKED THE SELECTED USER IN SEARCH....................................................
+        public async Task<List<GradingList>> getDataAccordingSelectedUser(string UsernameSelected) {
             List<GradingList> handleGradeData = new List<GradingList>();
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0};Uid=root;" +
                 "Pwd=", UsernameSelected));
@@ -56,25 +56,33 @@ namespace ClassUserForm
                 conn.Open();
                 MySqlCommand comm = conn.CreateCommand();
                 comm.CommandText = "SELECT * FROM `gradinghandlingdata`";
-                using (MySqlDataReader reader = comm.ExecuteReader()) {
-                    while (reader.Read()) {
-                        handleGradeData.Add(new GradingList {
-                               errGrade = "",
-                               numberGrade = 1,
-                               idGrade = (int)reader["id"],
-                               UserNameOwner = (string)reader["UserNameOwner"],
-                               UserNameCreator = (string)reader["UserNameCreator"],
-                               NameCreator = (string)reader["NameCreator"],
-                               ImageCreator = (string)reader["ImageCreator"],
-                               SubjectCreator = (string)reader["SubjectCreator"],
-                               ColorCreator = (string)reader["ColorCreator"],
-                               DateTimeCreated = (string)reader["DateTimeCreated"]
+                Task<int> returnInt = new Task<int>(() => returnCountList());
+                int returnCountList()
+                {
+                    using (MySqlDataReader reader = comm.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            handleGradeData.Add(new GradingList
+                            {
+                                errGrade = "",
+                                numberGrade = 1,
+                                idGrade = (int)reader["id"],
+                                UserNameOwner = (string)reader["UserNameOwner"],
+                                UserNameCreator = (string)reader["UserNameCreator"],
+                                NameCreator = (string)reader["NameCreator"],
+                                ImageCreator = (string)reader["ImageCreator"],
+                                SubjectCreator = (string)reader["SubjectCreator"],
+                                ColorCreator = (string)reader["ColorCreator"],
+                                DateTimeCreated = (string)reader["DateTimeCreated"]
                             });
+                        }
                     }
+                    Int32 length = handleGradeData.Count;
+                    return length;
                 }
-
-                Int32 length = handleGradeData.Count;
-                if (length == 0)
+                returnInt.Start();
+                if ((await returnInt.ConfigureAwait(false)) == 0)
                 {
                     handleGradeData.Add(new GradingList {
                         errGrade = "",
@@ -135,6 +143,31 @@ namespace ClassUserForm
                         (ran.Next(134).ToString()), (ran.Next(100).ToString())));
                     comm.Parameters.AddWithValue("@DateTimeCreated", handlingDate);
                     comm.ExecuteNonQuery();
+
+                    comm.CommandText = String.Format("CREATE DATABASE `grading_accounts_{0}_{1}`", textBoxCreateSub, UsernameOther);
+                    comm.ExecuteNonQuery();
+                    conn.Close();
+
+                    MySqlConnection connSubject = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_" +
+                        "{0}_{1};Uid=root;Pwd=", textBoxCreateSub, UsernameOther));
+                    try {
+                        connSubject.Open();
+                        MySqlCommand commSubject = connSubject.CreateCommand();
+                        commSubject.CommandText = "CREATE TABLE `gradingHandleSem`(" +
+                            "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+                            "GradingName varchar(225) NOT NULL," +
+                            "subjectName varchar(100) NOT NULL," +
+                            "userOther varchar(225) NOT NULL," +
+                            "DateTime varchar(225) NOT NULL" +
+                            ")";
+                        commSubject.ExecuteNonQuery();
+                    } catch (Exception e) {
+                        string ee = e.ToString();
+
+                        listHandle.Add(new GradingList {
+                             errGrade = ee
+                        });
+                    }
                 }
 
             } catch (Exception e) {

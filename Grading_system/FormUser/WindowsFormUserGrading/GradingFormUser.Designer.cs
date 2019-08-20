@@ -234,6 +234,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label31 = new System.Windows.Forms.Label();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label41 = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -327,6 +334,10 @@
             this.rangeTimePan.SuspendLayout();
             this.DateTime.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel29.SuspendLayout();
+            this.panel30.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMoveForm
@@ -722,6 +733,8 @@
             // SubjectJarPanel
             // 
             this.SubjectJarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.SubjectJarPanel.Controls.Add(this.panel29);
+            this.SubjectJarPanel.Controls.Add(this.panel11);
             this.SubjectJarPanel.Controls.Add(this.label46);
             this.SubjectJarPanel.Location = new System.Drawing.Point(7, 42);
             this.SubjectJarPanel.Name = "SubjectJarPanel";
@@ -742,6 +755,7 @@
             // NameTeachSubject
             // 
             this.NameTeachSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.NameTeachSubject.Controls.Add(this.panel30);
             this.NameTeachSubject.Controls.Add(this.label47);
             this.NameTeachSubject.Location = new System.Drawing.Point(476, 42);
             this.NameTeachSubject.Name = "NameTeachSubject";
@@ -2656,6 +2670,76 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel11.Controls.Add(this.label31);
+            this.panel11.Location = new System.Drawing.Point(6, 11);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(372, 32);
+            this.panel11.TabIndex = 1;
+            // 
+            // panel29
+            // 
+            this.panel29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel29.Controls.Add(this.button7);
+            this.panel29.Location = new System.Drawing.Point(384, 11);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(60, 32);
+            this.panel29.TabIndex = 2;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(172)))), ((int)(((byte)(13)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(15, 4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(31, 23);
+            this.button7.TabIndex = 0;
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label31.Location = new System.Drawing.Point(9, 9);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(151, 16);
+            this.label31.TabIndex = 0;
+            this.label31.Text = "Introduction of Computer";
+            // 
+            // panel30
+            // 
+            this.panel30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel30.Controls.Add(this.label41);
+            this.panel30.Controls.Add(this.pictureBox4);
+            this.panel30.Location = new System.Drawing.Point(8, 10);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(255, 33);
+            this.panel30.TabIndex = 2;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::WindowsFormUserGrading.Properties.Resources.user_16;
+            this.pictureBox4.Location = new System.Drawing.Point(6, 2);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(33, 28);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label41.Location = new System.Drawing.Point(44, 11);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(152, 16);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "Kyle Matthew S. Velarde";
+            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2817,6 +2901,12 @@
             this.DateTime.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.panel29.ResumeLayout(false);
+            this.panel30.ResumeLayout(false);
+            this.panel30.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3029,6 +3119,13 @@
         private System.Windows.Forms.TextBox textBox1CreateSub;
         private System.Windows.Forms.Button CreateSubject;
         private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Panel panel29;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Panel panel30;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label41;
     }
 }
 
