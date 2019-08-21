@@ -135,8 +135,8 @@ namespace ClassUserForm
                     comm.CommandText = "INSERT INTO `gradinghandlingdata` (`id`, `UserNameOwner`, `UserNameCreator`, `NameCreator`, " +
                         "`ImageCreator`, `SubjectCreator`, `ColorCreator`, `DateTimeCreated`) VALUES ('', @UserNameOwner, @UserNameCreator," +
                         "@NameCreator, @ImageCreator, @SubjectCreator, @ColorCreator, @DateTimeCreated)";
-                    comm.Parameters.AddWithValue("@UserNameOwner", UsernameOther);
-                    comm.Parameters.AddWithValue("@UserNameCreator", UsernameOwn);
+                    comm.Parameters.AddWithValue("@UserNameOwner", UsernameOwn);
+                    comm.Parameters.AddWithValue("@UserNameCreator", UsernameOther);
                     comm.Parameters.AddWithValue("@NameCreator", fullNameOwn);
                     comm.Parameters.AddWithValue("@ImageCreator", ImageOwnUser);
                     comm.Parameters.AddWithValue("@SubjectCreator", textBoxCreateSub);
@@ -173,6 +173,9 @@ namespace ClassUserForm
 
             } catch (Exception e) {
                 string err = e.ToString();
+                listHandle.Add(new GradingList {
+                    errGrade = err
+                });
             }
 
             return listHandle;

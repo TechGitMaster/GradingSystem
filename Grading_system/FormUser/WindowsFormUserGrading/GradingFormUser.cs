@@ -3276,13 +3276,6 @@ namespace WindowsFormUserGrading
             foreach (var dataSearch in listSearchBar) {
                 if (String.IsNullOrEmpty(dataSearch.err) != false)
                 {
-
-                    //TEMPORARY................................
-                    if (dataSearch.UserName == "vee") {
-                        handleFirstNameOwn = dataSearch.FirstLastName;
-                        handleImageOwnUser = dataSearch.ImageUser;
-                    }
-
                     taskDoSeeSearch.Add(doTheTashSeeSearch(dataSearch.id, dataSearch.UserName, dataSearch.FirstLastName,
                         dataSearch.ImageUser, numberCountTopPanel));
 
@@ -3552,6 +3545,7 @@ namespace WindowsFormUserGrading
 
         //BUTTON OF EVERY USER IN SEARCHED BOX..........................................................
         private void ClickSearched(object control, EventArgs e) {
+            CreateSubject.AccessibleDescription = "vee";
             Control con = (Control)control;
             PictureBox pic = null;
             Label label = null;
@@ -3561,12 +3555,17 @@ namespace WindowsFormUserGrading
                 handleUsername = panel.Name;
                 handleFirsLastName = panel.AccessibleName;
                 handleImage = panel.AccessibleDescription;
+                handleDataSub = 0;
+                conditionToFirstCome = true;
+                MessageBox.Show(handleUsername);
                 this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             } else if (con.GetType() == typeof(Label)) {
                 label = (Label)con;
                 handleUsername = label.Name;
                 handleFirsLastName = label.AccessibleName;
                 handleImage = label.AccessibleDescription;
+                handleDataSub = 0;
+                conditionToFirstCome = true;
                 this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             }
             else {
@@ -3574,6 +3573,8 @@ namespace WindowsFormUserGrading
                 handleUsername = pic.Name;
                 handleFirsLastName = pic.AccessibleName;
                 handleImage = pic.AccessibleDescription;
+                handleDataSub = 0;
+                conditionToFirstCome = true;
                 this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             }
         }
@@ -3662,7 +3663,6 @@ namespace WindowsFormUserGrading
                                         {
                                             pictureGradingSet.Image = Image.FromFile(ImageUser);
                                             labelnameSet.Text = FirstLastName;
-                                            CreateSubject.AccessibleDescription = "vee";
 
                                             NameTeachSubject.Controls.Add(NameTeachsSubject);
                                             SubjectJarPanel.Controls.Add(labelMessageSubject);
@@ -3731,7 +3731,7 @@ namespace WindowsFormUserGrading
                 timerGradingSub.Stop();
                 listHandleSubjectAndName = new List<GradingList>();
                 listHandleSubjectAndName = await Task.Run(() => grading.savingCreateSubAndReturn(
-                    textBox1CreateSub.Text, handleFirstNameOwn, handleImageOwnUser,
+                    textBox1CreateSub.Text, "kyle velarde", handleImage,
                     CreateSubject.AccessibleDescription, handleUsername));
                 foreach (var handleDataSub in listHandleSubjectAndName) {
                     MessageBox.Show(handleDataSub.errGrade);
