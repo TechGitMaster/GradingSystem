@@ -110,75 +110,141 @@ namespace ClassUserForm
             string UsernameOwn, string UsernameOther) {
             Random ran = new Random();
             List<GradingList> listHandle = new List<GradingList>();
-            string handlingDate = "";
+            string handlingDate = "", handleConditionScanIfHave = "";
+            int numberCountSee = 0;
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}" +
                 ";Uid=root;Pwd=", UsernameOther));
-            try {
-                string dateTime() {
-                    string handleReturnDate = String.Format("{0}/{1}/{2} {3}:{4} {5}",
-                        DateTime.Now.Month.ToString(), DateTime.Now.Day.ToString(), 
-                        DateTime.Now.Year.ToString(), (DateTime.Now.Hour <= 9 ? "0"+ DateTime.Now.Hour.ToString() :
-                        (DateTime.Now.Hour > 12 ? ("0"+(DateTime.Now.Hour-12)).ToString():DateTime.Now.Hour.ToString())), 
-                        (DateTime.Now.Minute <= 9 ? "0"+ DateTime.Now.Minute.ToString() : 
-                        DateTime.Now.Minute.ToString()), (DateTime.Now.Hour < 11 ? "AM":"PM"));
 
-                    return handleReturnDate;
-                }
 
-                Task<string> taskdo = new Task<string>(dateTime);
-                taskdo.Start();
-                handlingDate = await taskdo.ConfigureAwait(false);
+            Task<string> taskDo = new Task<string>(() => returnIfSuccessOrNo());
 
-                if (handlingDate.Length != 0) {
+            //SCANNING IF HAVING OR NOT............................................
+            string returnIfSuccessOrNo() {
+                try {
                     conn.Open();
                     MySqlCommand comm = conn.CreateCommand();
-                    comm.CommandText = "INSERT INTO `gradinghandlingdata` (`id`, `UserNameOwner`, `UserNameCreator`, `NameCreator`, " +
-                        "`ImageCreator`, `SubjectCreator`, `ColorCreator`, `DateTimeCreated`) VALUES ('', @UserNameOwner, @UserNameCreator," +
-                        "@NameCreator, @ImageCreator, @SubjectCreator, @ColorCreator, @DateTimeCreated)";
-                    comm.Parameters.AddWithValue("@UserNameOwner", UsernameOwn);
-                    comm.Parameters.AddWithValue("@UserNameCreator", UsernameOther);
-                    comm.Parameters.AddWithValue("@NameCreator", fullNameOwn);
-                    comm.Parameters.AddWithValue("@ImageCreator", ImageOwnUser);
-                    comm.Parameters.AddWithValue("@SubjectCreator", textBoxCreateSub);
-                    comm.Parameters.AddWithValue("@ColorCreator", String.Format("{0}, {1}, {2}", (ran.Next(234).ToString()),
-                        (ran.Next(134).ToString()), (ran.Next(100).ToString())));
-                    comm.Parameters.AddWithValue("@DateTimeCreated", handlingDate);
-                    comm.ExecuteNonQuery();
+                    comm.CommandText = "SELECT `SubjectCreator` FROM gradinghandlingdata";
+                    using (MySqlDataReader reader = comm.ExecuteReader()) {
+                        while (reader.Read()) {
+                            numberCountSee = numberCountSee + 1;
+                            if (handleConditionScanIfHave != "Sorry_It_have") {
+                                if (((string)reader["SubjectCreator"]) != textBoxCreateSub)
+                                {
+                                    handleConditionScanIfHave = "No_Same";
+                                }
+                                else {
+                                    handleConditionScanIfHave = "Sorry_It_have";
+                                }
+                            }
+                        }
 
-                    comm.CommandText = String.Format("CREATE DATABASE `grading_accounts_{0}_{1}`", textBoxCreateSub, UsernameOther);
-                    comm.ExecuteNonQuery();
-                    conn.Close();
-
-                    MySqlConnection connSubject = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_" +
-                        "{0}_{1};Uid=root;Pwd=", textBoxCreateSub, UsernameOther));
-                    try {
-                        connSubject.Open();
-                        MySqlCommand commSubject = connSubject.CreateCommand();
-                        commSubject.CommandText = "CREATE TABLE `gradingHandleSem`(" +
-                            "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
-                            "GradingName varchar(225) NOT NULL," +
-                            "subjectName varchar(100) NOT NULL," +
-                            "userOther varchar(225) NOT NULL," +
-                            "DateTime varchar(225) NOT NULL" +
-                            ")";
-                        commSubject.ExecuteNonQuery();
-                    } catch (Exception e) {
-                        string ee = e.ToString();
-
-                        listHandle.Add(new GradingList {
-                             errGrade = ee
-                        });
+                        conn.Close();
                     }
-                }
 
-            } catch (Exception e) {
-                string err = e.ToString();
+                    if (numberCountSee == 0) {
+                        handleConditionScanIfHave = "No_Same";
+                    }
+
+                } catch (Exception e) {
+                    string err = e.ToString();
+                    listHandle.Add(new GradingList {
+                        SubjectCreator = "",
+                        errGrade = "Conn"
+                    });
+                }
+                return handleConditionScanIfHave;
+            }
+            taskDo.Start();
+
+            handleConditionScanIfHave = await taskDo.ConfigureAwait(false);
+
+            if (handleConditionScanIfHave == "No_Same")
+            {
+                try
+                {
+                    string dateTime()
+                    {
+                        string handleReturnDate = String.Format("{0}/{1}/{2} {3}:{4} {5}",
+                            DateTime.Now.Month.ToString(), DateTime.Now.Day.ToString(),
+                            DateTime.Now.Year.ToString(), (DateTime.Now.Hour <= 9 ? "0" + DateTime.Now.Hour.ToString() :
+                            (DateTime.Now.Hour > 12 ? ("0" + (DateTime.Now.Hour - 12)).ToString() : DateTime.Now.Hour.ToString())),
+                            (DateTime.Now.Minute <= 9 ? "0" + DateTime.Now.Minute.ToString() :
+                            DateTime.Now.Minute.ToString()), (DateTime.Now.Hour < 11 ? "AM" : "PM"));
+
+                        return handleReturnDate;
+                    }
+
+                    Task<string> taskdo = new Task<string>(dateTime);
+                    taskdo.Start();
+                    handlingDate = await taskdo.ConfigureAwait(false);
+
+                    if (handlingDate.Length != 0)
+                    {
+                        conn.Open();
+                        MySqlCommand comm = conn.CreateCommand();
+                        comm.CommandText = "INSERT INTO `gradinghandlingdata` (`id`, `UserNameOwner`, `UserNameCreator`, `NameCreator`, " +
+                            "`ImageCreator`, `SubjectCreator`, `ColorCreator`, `DateTimeCreated`) VALUES ('', @UserNameOwner, @UserNameCreator," +
+                            "@NameCreator, @ImageCreator, @SubjectCreator, @ColorCreator, @DateTimeCreated)";
+                        comm.Parameters.AddWithValue("@UserNameOwner", UsernameOwn);
+                        comm.Parameters.AddWithValue("@UserNameCreator", UsernameOther);
+                        comm.Parameters.AddWithValue("@NameCreator", fullNameOwn);
+                        comm.Parameters.AddWithValue("@ImageCreator", ImageOwnUser);
+                        comm.Parameters.AddWithValue("@SubjectCreator", textBoxCreateSub);
+                        comm.Parameters.AddWithValue("@ColorCreator", String.Format("{0}, {1}, {2}", (ran.Next(234).ToString()),
+                            (ran.Next(134).ToString()), (ran.Next(100).ToString())));
+                        comm.Parameters.AddWithValue("@DateTimeCreated", handlingDate);
+                        comm.ExecuteNonQuery();
+
+                        comm.CommandText = String.Format("CREATE DATABASE `grading_accounts_{0}_{1}`", textBoxCreateSub, UsernameOther);
+                        comm.ExecuteNonQuery();
+                        conn.Close();
+
+                        MySqlConnection connSubject = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_" +
+                            "{0}_{1};Uid=root;Pwd=", textBoxCreateSub, UsernameOther));
+                        try
+                        {
+                            connSubject.Open();
+                            MySqlCommand commSubject = connSubject.CreateCommand();
+                            commSubject.CommandText = "CREATE TABLE `gradingHandleSem`(" +
+                                "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+                                "GradingName varchar(225) NOT NULL," +
+                                "subjectName varchar(100) NOT NULL," +
+                                "userOther varchar(225) NOT NULL," +
+                                "DateTime varchar(225) NOT NULL" +
+                                ")";
+                            commSubject.ExecuteNonQuery();
+                            connSubject.Close();
+                        }
+                        catch (Exception e)
+                        {
+                            string ee = e.ToString();
+
+                            listHandle.Add(new GradingList
+                            {
+                                SubjectCreator = "",
+                                errGrade = "Conn"
+                            });
+                        }
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    string err = e.ToString();
+                    listHandle.Add(new GradingList
+                    {
+                        SubjectCreator = "",
+                        errGrade = "Conn"
+                    });
+                }
+            }
+            else {
                 listHandle.Add(new GradingList {
-                    errGrade = err
+                    errGrade = "",
+                    SubjectCreator = "Same"
                 });
             }
-
-            return listHandle;
+                return listHandle;
         }
 
     }

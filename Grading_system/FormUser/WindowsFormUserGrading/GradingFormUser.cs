@@ -345,7 +345,11 @@ namespace WindowsFormUserGrading
 
 
 
-            //Calender Controls.................................
+            //CALENDAR CONTROLS...............................................................................
+            //.......................................................................
+
+
+
             //Items Add the Hrs number, Minutes Number and AM PM AND DATE.................................
             comboBoxHrs.SelectedIndexChanged += new System.EventHandler(SelectedIndex_AllComboBoxCalenderSet);
             comboBoxMnt.SelectedIndexChanged += new System.EventHandler(SelectedIndex_AllComboBoxCalenderSet);
@@ -423,6 +427,8 @@ namespace WindowsFormUserGrading
 
 
 
+
+
             //REPORT START...........................................................
 
 
@@ -473,6 +479,10 @@ namespace WindowsFormUserGrading
 
             timerGradingSub.Tick += new System.EventHandler(gradingInterval);
             timerGradingSub.Interval = 3000;
+
+
+            ReadSubjects.Click += new System.EventHandler(StartReadSubjects);
+            DeleteSubjects.Click += new System.EventHandler(StartDeleteSubjects);
 
         }
 
@@ -3260,8 +3270,7 @@ namespace WindowsFormUserGrading
         private static List<Task> taskDoSeeSearch = new List<Task>();
         private static bool conditionToFirstCome = false, conditionToSeeSub = false;
         private static int handleDataSub = 0;
-
-
+        protected static string deleteSubject = "", ReadSubject = "";
 
         //STARTING TO GET THE DATA SEARCH.........................................................
         private async void gettingDataSearch() {
@@ -3335,7 +3344,7 @@ namespace WindowsFormUserGrading
 
             handlingDataShows delegateHandle = new handlingDataShows(this.subjectShowHandle);
             delegateHandle.Invoke(UserNameOwner, UserNameCreator,
-            NameCreator, ImageCreator, SubjectCreator, ColorCreator,DateTimeCreated, numberCountForTopPanel);
+            NameCreator, ImageCreator, SubjectCreator, ColorCreator, DateTimeCreated, numberCountForTopPanel);
 
             if (numberCount == handleDataSub) {
                 GradingCreateSubject.Visible = true;
@@ -3363,7 +3372,7 @@ namespace WindowsFormUserGrading
         protected string SeeSearch(int id, string Username, string FirstLastname, string ImageUser, int numberCountTopPanel) {
             Thread th = new Thread(ThreadUsing);
 
-           void ThreadUsing()
+            void ThreadUsing()
             {
                 Panel pan = new Panel
                 {
@@ -3420,7 +3429,7 @@ namespace WindowsFormUserGrading
         }
 
 
-
+        //THIS IS TO SHOW THE SUBJECT OF THE USER OTHER.....................................
         private void subjectShowHandle(string UserNameOwner, string UserNameCreator,
             string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
             int numberCountForTopPanel) {
@@ -3428,7 +3437,8 @@ namespace WindowsFormUserGrading
             string HandleStringColor = "";
             int handleCountCondition = 0;
 
-            for (int handle = 0;handle < ColorCreator.Length;handle++) {
+            //SEPERATE THE BOND OF STRING IT WILL TURN INTO INT.....................................
+            for (int handle = 0; handle < ColorCreator.Length; handle++) {
                 if (ColorCreator[handle].ToString() != "," && ColorCreator[handle].ToString() != " ")
                 {
                     HandleStringColor = HandleStringColor + ColorCreator[handle].ToString();
@@ -3441,7 +3451,7 @@ namespace WindowsFormUserGrading
                     }
                 }
 
-                if (handle >= ColorCreator.Length-1) {
+                if (handle >= ColorCreator.Length - 1) {
                     handleColorByEach[2] = Convert.ToInt32(HandleStringColor);
                 }
             }
@@ -3449,7 +3459,7 @@ namespace WindowsFormUserGrading
 
 
             Thread th = new Thread(() => {
-                Panel pansub = new Panel{
+                Panel pansub = new Panel {
                     Size = new Size(372, 32),
                     Location = new Point(6, numberCountForTopPanel),
                     BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A")
@@ -3473,13 +3483,16 @@ namespace WindowsFormUserGrading
 
                 Button bttnColor = new Button {
                     Name = "BttnColor",
+                    AccessibleName = SubjectCreator,
+                    AccessibleDescription = UserNameCreator,
                     Size = new Size(31, 23),
                     Location = new Point(15, 4),
-                    BackColor = System.Drawing.Color.FromArgb(handleColorByEach[0], handleColorByEach[1], handleColorByEach[2])
+                    BackColor = System.Drawing.Color.FromArgb(handleColorByEach[0], handleColorByEach[1], handleColorByEach[2]),
                 };
+                bttnColor.Click += new System.EventHandler((object controls, EventArgs e) => clickColorsSub(controls, e));
                 bttnColor.FlatStyle = FlatStyle.Flat;
 
-               Action ac = () => {
+                Action ac = () => {
                     SubjectJarPanel.Controls.Add(pansub);
                     pansub.Controls.Add(labelsub);
                     SubjectJarPanel.Controls.Add(pancolor);
@@ -3497,6 +3510,9 @@ namespace WindowsFormUserGrading
 
         }
 
+
+
+        //THIS IS THE NAME OF EVERY USER IN SUBJET CREATED.......................................
         private void subjectShowNameOfTeacher(string UserNameOwner, string UserNameCreator,
             string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
             int numberCountForTopPanel)
@@ -3504,7 +3520,7 @@ namespace WindowsFormUserGrading
             Panel pan = new Panel {
                 BackColor = System.Drawing.ColorTranslator.FromHtml("#17202A"),
                 Size = new Size(255, 33),
-                Location = new Point(8, numberCountForTopPanel-1)
+                Location = new Point(8, numberCountForTopPanel - 1)
             };
 
             PictureBox boxPic = new PictureBox {
@@ -3557,7 +3573,6 @@ namespace WindowsFormUserGrading
                 handleImage = panel.AccessibleDescription;
                 handleDataSub = 0;
                 conditionToFirstCome = true;
-                MessageBox.Show(handleUsername);
                 this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             } else if (con.GetType() == typeof(Label)) {
                 label = (Label)con;
@@ -3632,68 +3647,68 @@ namespace WindowsFormUserGrading
                 }
 
                 foreach (var doList in listHandle) {
-                        if (String.IsNullOrEmpty(doList.errGrade) != false)
+                    if (String.IsNullOrEmpty(doList.errGrade) != false)
+                    {
+                        if (conditionToSeeSub != true)
                         {
-                            if (conditionToSeeSub != true)
+                            if (doList.numberGrade == 0)
                             {
-                                if (doList.numberGrade == 0)
+
+
+                                Thread th = new Thread(() => ThreadSee());
+                                void ThreadSee()
                                 {
 
+                                    Label labelMessageSubject = new Label();
+                                    labelMessageSubject.Text = "No Subject For Now";
+                                    labelMessageSubject.Size = new Size(160, 20);
+                                    labelMessageSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+                                    labelMessageSubject.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular);
+                                    labelMessageSubject.Location = new Point(163, 145);
 
-                                    Thread th = new Thread(() => ThreadSee());
-                                    void ThreadSee()
+
+                                    Label NameTeachsSubject = new Label();
+                                    NameTeachsSubject.Text = "No Teachers Created";
+                                    NameTeachsSubject.Size = new Size(160, 20);
+                                    NameTeachsSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
+                                    NameTeachsSubject.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+                                    NameTeachsSubject.Location = new Point(70, 120);
+
+                                    this.BeginInvoke((Action)delegate ()
                                     {
+                                        pictureGradingSet.Image = Image.FromFile(ImageUser);
+                                        labelnameSet.Text = FirstLastName;
 
-                                        Label labelMessageSubject = new Label();
-                                        labelMessageSubject.Text = "No Subject For Now";
-                                        labelMessageSubject.Size = new Size(160, 20);
-                                        labelMessageSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
-                                        labelMessageSubject.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular);
-                                        labelMessageSubject.Location = new Point(163, 145);
-
-
-                                        Label NameTeachsSubject = new Label();
-                                        NameTeachsSubject.Text = "No Teachers Created";
-                                        NameTeachsSubject.Size = new Size(160, 20);
-                                        NameTeachsSubject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7");
-                                        NameTeachsSubject.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
-                                        NameTeachsSubject.Location = new Point(70, 120);
-
-                                        this.BeginInvoke((Action)delegate ()
-                                        {
-                                            pictureGradingSet.Image = Image.FromFile(ImageUser);
-                                            labelnameSet.Text = FirstLastName;
-
-                                            NameTeachSubject.Controls.Add(NameTeachsSubject);
-                                            SubjectJarPanel.Controls.Add(labelMessageSubject);
-                                            GradingCreateSubject.Visible = true;
-                                            timerGradingSub.Start();
-                                        });
-                                    }
-
-                                    th.Start();
-                                    handleDataSub = 0;
+                                        NameTeachSubject.Controls.Add(NameTeachsSubject);
+                                        SubjectJarPanel.Controls.Add(labelMessageSubject);
+                                        GradingCreateSubject.Visible = true;
+                                        timerGradingSub.Start();
+                                    });
                                 }
-                                else
-                                {
-                                    numberCount++;
-                                    taskSHowSubAndNameTeach.Add(this.taskSHowSubAndNameTeach(doList.idGrade, doList.UserNameOwner, 
-                                        doList.UserNameCreator, doList.NameCreator, doList.ImageCreator, 
-                                        doList.SubjectCreator, doList.ColorCreator, doList.DateTimeCreated, numberCount, numberHandleTopPanel));
-                                    numberHandleTopPanel = numberHandleTopPanel + 37;
+
+                                th.Start();
+                                handleDataSub = 0;
+                            }
+                            else
+                            {
+                                numberCount++;
+                                taskSHowSubAndNameTeach.Add(this.taskSHowSubAndNameTeach(doList.idGrade, doList.UserNameOwner,
+                                    doList.UserNameCreator, doList.NameCreator, doList.ImageCreator,
+                                    doList.SubjectCreator, doList.ColorCreator, doList.DateTimeCreated, numberCount, numberHandleTopPanel));
+                                numberHandleTopPanel = numberHandleTopPanel + 37;
 
                                 if (numberCount == (Int32)(listHandle.Count)) {
                                     labelnameSet.Text = FirstLastName;
                                     await Task.WhenAll(taskSHowSubAndNameTeach);
                                 }
-                                }
                             }
                         }
-                        else
-                        {
-                            Thread th = new Thread(ths);
-                            MessageBox.Show("Please Check Your Internet Connection");
-                            void ths() {
+                    }
+                    else
+                    {
+                        Thread th = new Thread(ths);
+                        MessageBox.Show("Please Check Your Internet Connection");
+                        void ths() {
                             Label labelErrSub = new Label {
                                 Text = "Please Check Your Internet Connection.",
                                 ForeColor = System.Drawing.ColorTranslator.FromHtml("#B3B6B7"),
@@ -3701,7 +3716,7 @@ namespace WindowsFormUserGrading
                                 Location = new Point(103, 145),
                                 Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular)
                             };
-                            SubjectJarPanel.BeginInvoke((Action)delegate() {
+                            SubjectJarPanel.BeginInvoke((Action)delegate () {
                                 labelnameSet.Text = "Undefined name";
                                 GradingCreateSubject.Visible = true;
                                 SubjectJarPanel.Controls.Add(labelErrSub);
@@ -3710,10 +3725,10 @@ namespace WindowsFormUserGrading
                                 timerGradingSub.Start();
                             });
                         }
-                            th.Start();
-                    }
+                        th.Start();
                     }
                 }
+            }
             return;
         }
 
@@ -3734,12 +3749,87 @@ namespace WindowsFormUserGrading
                     textBox1CreateSub.Text, "kyle velarde", handleImage,
                     CreateSubject.AccessibleDescription, handleUsername));
                 foreach (var handleDataSub in listHandleSubjectAndName) {
-                    MessageBox.Show(handleDataSub.errGrade);
+                    if (handleDataSub.errGrade == "")
+                    {
+                        if (handleDataSub.SubjectCreator == "Same") {
+                            MessageBox.Show(String.Format("The '{0}' has already have in database sorry.", textBox1CreateSub.Text));
+                        }
+                    }
+                    else {
+                        MessageBox.Show("Please Check Your Connection.");
+                    }
                 }
 
                 this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
             }
         }
+
+
+
+        //deleteSubject
+      //      ReadSubject
+        //BUTTON DELETE SUBJECTS...................................................
+        private static void StartDeleteSubjects(object control, EventArgs e)
+        {
+            if (ReadSubject == "")
+            {
+                if (deleteSubject == "")
+                {
+                    deleteSubject = "Start Delete Subjects";
+                    MessageBox.Show("Start delete");
+                }
+                else
+                {
+                    deleteSubject = "";
+                    MessageBox.Show("Stop deleting");
+                }
+            }
+            else {
+                MessageBox.Show("Please Unclick the Read Icon");
+            }
+        }
+
+
+
+        //BUTTON READ THE SUBJECTS............................................
+        private static void StartReadSubjects(object control, EventArgs e)
+        {
+            if (deleteSubject == "")
+            {
+                if (ReadSubject == "")
+                {
+                    ReadSubject = "Start Read Subjects";
+                    MessageBox.Show("Start read");
+                }
+                else
+                {
+                    ReadSubject = "";
+                    MessageBox.Show("Stop reading");
+                }
+            }
+            else {
+                MessageBox.Show("Please Unclick the Delete Icon");
+            }
+        }
+
+
+
+
+
+
+
+        private void clickColorsSub(object controls, EventArgs e) {
+            if (ReadSubject != "")
+            {
+                Control con = (Control)(controls);
+                if (con.GetType() == typeof(Button)) {
+                }
+            } else if (String.IsNullOrEmpty(deleteSubject) != true) {
+            }
+        }
+
+
+
 
     }
 }

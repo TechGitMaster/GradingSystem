@@ -47,7 +47,7 @@
             this.GradingPanel = new System.Windows.Forms.Panel();
             this.GradingBoxFinal = new System.Windows.Forms.Panel();
             this.GradingCreateSubject = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.DeleteSubjects = new System.Windows.Forms.PictureBox();
             this.HideBoxCreate = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
@@ -61,8 +61,15 @@
             this.panel36 = new System.Windows.Forms.Panel();
             this.label40 = new System.Windows.Forms.Label();
             this.SubjectJarPanel = new System.Windows.Forms.Panel();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label31 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.NameTeachSubject = new System.Windows.Forms.Panel();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.label41 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label47 = new System.Windows.Forms.Label();
             this.panel27 = new System.Windows.Forms.Panel();
             this.CreateSubject = new System.Windows.Forms.Button();
@@ -234,15 +241,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel29 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label41 = new System.Windows.Forms.Label();
+            this.ReadSubjects = new System.Windows.Forms.PictureBox();
             this.panel40 = new System.Windows.Forms.Panel();
             this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -252,14 +254,18 @@
             this.GradingPanel.SuspendLayout();
             this.GradingBoxFinal.SuspendLayout();
             this.GradingCreateSubject.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DeleteSubjects)).BeginInit();
             this.panel28.SuspendLayout();
             this.panel37.SuspendLayout();
             this.panel39.SuspendLayout();
             this.panel38.SuspendLayout();
             this.panel36.SuspendLayout();
             this.SubjectJarPanel.SuspendLayout();
+            this.panel29.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.NameTeachSubject.SuspendLayout();
+            this.panel30.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel27.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureGradingSet)).BeginInit();
             this.panel12.SuspendLayout();
@@ -336,10 +342,7 @@
             this.rangeTimePan.SuspendLayout();
             this.DateTime.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel29.SuspendLayout();
-            this.panel30.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).BeginInit();
             this.panel40.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -576,7 +579,9 @@
             // GradingCreateSubject
             // 
             this.GradingCreateSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.GradingCreateSubject.Controls.Add(this.pictureBox5);
+            this.GradingCreateSubject.Controls.Add(this.panel40);
+            this.GradingCreateSubject.Controls.Add(this.ReadSubjects);
+            this.GradingCreateSubject.Controls.Add(this.DeleteSubjects);
             this.GradingCreateSubject.Controls.Add(this.HideBoxCreate);
             this.GradingCreateSubject.Controls.Add(this.label39);
             this.GradingCreateSubject.Controls.Add(this.label33);
@@ -591,15 +596,16 @@
             this.GradingCreateSubject.TabIndex = 6;
             this.GradingCreateSubject.Visible = false;
             // 
-            // pictureBox5
+            // DeleteSubjects
             // 
-            this.pictureBox5.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
-            this.pictureBox5.Location = new System.Drawing.Point(10, 113);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(27, 25);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 11;
-            this.pictureBox5.TabStop = false;
+            this.DeleteSubjects.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteSubjects.Image = global::WindowsFormUserGrading.Properties.Resources.trash_2_64;
+            this.DeleteSubjects.Location = new System.Drawing.Point(10, 113);
+            this.DeleteSubjects.Name = "DeleteSubjects";
+            this.DeleteSubjects.Size = new System.Drawing.Size(27, 25);
+            this.DeleteSubjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DeleteSubjects.TabIndex = 11;
+            this.DeleteSubjects.TabStop = false;
             // 
             // HideBoxCreate
             // 
@@ -736,7 +742,6 @@
             // SubjectJarPanel
             // 
             this.SubjectJarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.SubjectJarPanel.Controls.Add(this.panel40);
             this.SubjectJarPanel.Controls.Add(this.panel29);
             this.SubjectJarPanel.Controls.Add(this.panel11);
             this.SubjectJarPanel.Controls.Add(this.label46);
@@ -744,6 +749,45 @@
             this.SubjectJarPanel.Name = "SubjectJarPanel";
             this.SubjectJarPanel.Size = new System.Drawing.Size(451, 301);
             this.SubjectJarPanel.TabIndex = 1;
+            // 
+            // panel29
+            // 
+            this.panel29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel29.Controls.Add(this.button7);
+            this.panel29.Location = new System.Drawing.Point(384, 11);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(60, 32);
+            this.panel29.TabIndex = 2;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(172)))), ((int)(((byte)(13)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(15, 4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(31, 23);
+            this.button7.TabIndex = 0;
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel11.Controls.Add(this.label31);
+            this.panel11.Location = new System.Drawing.Point(6, 11);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(372, 32);
+            this.panel11.TabIndex = 1;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label31.Location = new System.Drawing.Point(9, 9);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(151, 16);
+            this.label31.TabIndex = 0;
+            this.label31.Text = "Introduction of Computer";
             // 
             // label46
             // 
@@ -765,6 +809,37 @@
             this.NameTeachSubject.Name = "NameTeachSubject";
             this.NameTeachSubject.Size = new System.Drawing.Size(270, 301);
             this.NameTeachSubject.TabIndex = 0;
+            // 
+            // panel30
+            // 
+            this.panel30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel30.Controls.Add(this.label41);
+            this.panel30.Controls.Add(this.pictureBox4);
+            this.panel30.Location = new System.Drawing.Point(8, 10);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(255, 33);
+            this.panel30.TabIndex = 2;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label41.Location = new System.Drawing.Point(44, 11);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(152, 16);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "Kyle Matthew S. Velarde";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::WindowsFormUserGrading.Properties.Resources.user_16;
+            this.pictureBox4.Location = new System.Drawing.Point(6, 2);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(33, 28);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
             // 
             // label47
             // 
@@ -2674,95 +2749,47 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
-            // panel11
+            // ReadSubjects
             // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel11.Controls.Add(this.label31);
-            this.panel11.Location = new System.Drawing.Point(6, 11);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(372, 32);
-            this.panel11.TabIndex = 1;
-            // 
-            // panel29
-            // 
-            this.panel29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel29.Controls.Add(this.button7);
-            this.panel29.Location = new System.Drawing.Point(384, 11);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(60, 32);
-            this.panel29.TabIndex = 2;
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(172)))), ((int)(((byte)(13)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(15, 4);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(31, 23);
-            this.button7.TabIndex = 0;
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label31.Location = new System.Drawing.Point(9, 9);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(151, 16);
-            this.label31.TabIndex = 0;
-            this.label31.Text = "Introduction of Computer";
-            // 
-            // panel30
-            // 
-            this.panel30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel30.Controls.Add(this.label41);
-            this.panel30.Controls.Add(this.pictureBox4);
-            this.panel30.Location = new System.Drawing.Point(8, 10);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(255, 33);
-            this.panel30.TabIndex = 2;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::WindowsFormUserGrading.Properties.Resources.user_16;
-            this.pictureBox4.Location = new System.Drawing.Point(6, 2);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(33, 28);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label41.Location = new System.Drawing.Point(44, 11);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(152, 16);
-            this.label41.TabIndex = 1;
-            this.label41.Text = "Kyle Matthew S. Velarde";
+            this.ReadSubjects.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ReadSubjects.Image = global::WindowsFormUserGrading.Properties.Resources.agenda;
+            this.ReadSubjects.Location = new System.Drawing.Point(45, 113);
+            this.ReadSubjects.Name = "ReadSubjects";
+            this.ReadSubjects.Size = new System.Drawing.Size(27, 25);
+            this.ReadSubjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ReadSubjects.TabIndex = 13;
+            this.ReadSubjects.TabStop = false;
             // 
             // panel40
             // 
-            this.panel40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel40.Controls.Add(this.label52);
             this.panel40.Controls.Add(this.label51);
-            this.panel40.Location = new System.Drawing.Point(6, 48);
+            this.panel40.Location = new System.Drawing.Point(2, 1);
             this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(372, 32);
-            this.panel40.TabIndex = 3;
+            this.panel40.Size = new System.Drawing.Size(770, 502);
+            this.panel40.TabIndex = 14;
             // 
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label51.Location = new System.Drawing.Point(9, 9);
+            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ForeColor = System.Drawing.Color.Coral;
+            this.label51.Location = new System.Drawing.Point(17, 13);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(151, 16);
+            this.label51.Size = new System.Drawing.Size(88, 15);
             this.label51.TabIndex = 0;
-            this.label51.Text = "Introduction of Computer";
+            this.label51.Text = "Subject Name:";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label52.Location = new System.Drawing.Point(38, 34);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(121, 18);
+            this.label52.TabIndex = 1;
+            this.label52.Text = "Intro to computer";
             // 
             // GradingFormUser
             // 
@@ -2794,7 +2821,7 @@
             this.GradingBoxFinal.PerformLayout();
             this.GradingCreateSubject.ResumeLayout(false);
             this.GradingCreateSubject.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DeleteSubjects)).EndInit();
             this.panel28.ResumeLayout(false);
             this.panel37.ResumeLayout(false);
             this.panel39.ResumeLayout(false);
@@ -2805,8 +2832,14 @@
             this.panel36.PerformLayout();
             this.SubjectJarPanel.ResumeLayout(false);
             this.SubjectJarPanel.PerformLayout();
+            this.panel29.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.NameTeachSubject.ResumeLayout(false);
             this.NameTeachSubject.PerformLayout();
+            this.panel30.ResumeLayout(false);
+            this.panel30.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel27.ResumeLayout(false);
             this.panel27.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureGradingSet)).EndInit();
@@ -2925,12 +2958,7 @@
             this.DateTime.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel29.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
-            this.panel30.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).EndInit();
             this.panel40.ResumeLayout(false);
             this.panel40.PerformLayout();
             this.ResumeLayout(false);
@@ -3134,7 +3162,7 @@
         private System.Windows.Forms.Panel panel36;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label HideBoxCreate;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox DeleteSubjects;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Panel panel37;
@@ -3152,7 +3180,9 @@
         private System.Windows.Forms.Panel panel30;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.PictureBox ReadSubjects;
         private System.Windows.Forms.Panel panel40;
+        private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label51;
     }
 }
