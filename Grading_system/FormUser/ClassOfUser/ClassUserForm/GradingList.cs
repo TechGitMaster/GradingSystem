@@ -17,7 +17,7 @@ namespace ClassUserForm
         public string ImageUser;
 
 
-        //GRADING HANDLING DATA SELECTED.........................................................
+        //SUBJET HANDLING DATA SELECTED.........................................................
         public string errGrade;
         public int numberGrade;
         public int idGrade;
@@ -28,6 +28,17 @@ namespace ClassUserForm
         public string SubjectCreator;
         public string ColorCreator;
         public string DateTimeCreated;
+
+
+        //QUATER HANDLING AND COMMENTS BY QUATER...................................................
+        public string errQuaterFetch;
+        public string handlingIfHaveQuater;
+        public int idQuater;
+        public string quatername;
+        public string commentsQuater;
+        public string tableNameQuater;
+        public string dateTimeQuater;
+
 
     }
 }

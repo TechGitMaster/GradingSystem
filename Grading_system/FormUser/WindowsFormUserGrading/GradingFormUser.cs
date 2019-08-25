@@ -3271,6 +3271,7 @@ namespace WindowsFormUserGrading
         private static bool conditionToFirstCome = false, conditionToSeeSub = false;
         private static int handleDataSub = 0;
         protected static string deleteSubject = "", ReadSubject = "";
+        private static string[] handleDataClickedSub = new string[] { "", "", ""};
 
         //STARTING TO GET THE DATA SEARCH.........................................................
         private async void gettingDataSearch() {
@@ -3331,6 +3332,7 @@ namespace WindowsFormUserGrading
 
             return awaitStringDone;
         }
+
 
 
 
@@ -3483,6 +3485,7 @@ namespace WindowsFormUserGrading
 
                 Button bttnColor = new Button {
                     Name = "BttnColor",
+                    Tag = UserNameOwner,
                     AccessibleName = SubjectCreator,
                     AccessibleDescription = UserNameCreator,
                     Size = new Size(31, 23),
@@ -3742,6 +3745,7 @@ namespace WindowsFormUserGrading
 
         private async void CreateSubject_Click(object sender, EventArgs e)
         {
+            bool condition_to_clear = false;
             if (textBox1CreateSub.Text.Length != 0) {
                 timerGradingSub.Stop();
                 listHandleSubjectAndName = new List<GradingList>();
@@ -3751,13 +3755,19 @@ namespace WindowsFormUserGrading
                 foreach (var handleDataSub in listHandleSubjectAndName) {
                     if (handleDataSub.errGrade == "")
                     {
-                        if (handleDataSub.SubjectCreator == "Same") {
-                            MessageBox.Show(String.Format("The '{0}' has already have in database sorry.", textBox1CreateSub.Text));
+                        if (handleDataSub.SubjectCreator == "Same")
+                        {
+                            MessageBox.Show(String.Format("The '{0}' has already had in database sorry.", textBox1CreateSub.Text));
+                            condition_to_clear = true;
                         }
                     }
                     else {
                         MessageBox.Show("Please Check Your Connection.");
                     }
+                }
+
+                if (condition_to_clear != true) {
+                    textBox1CreateSub.Text = "";
                 }
 
                 this.showClickedInfoUserGradingSearch(handleUsername, handleFirsLastName, handleImage);
@@ -3766,8 +3776,6 @@ namespace WindowsFormUserGrading
 
 
 
-        //deleteSubject
-      //      ReadSubject
         //BUTTON DELETE SUBJECTS...................................................
         private static void StartDeleteSubjects(object control, EventArgs e)
         {
@@ -3815,20 +3823,140 @@ namespace WindowsFormUserGrading
 
 
 
+       // AccessibleName = SubjectCreator,
+       // AccessibleDescription = UserNameCreator,
 
-
-
+        //BTTN OF SUBJECT TO CLICK...........................................................
         private void clickColorsSub(object controls, EventArgs e) {
-            if (ReadSubject != "")
-            {
-                Control con = (Control)(controls);
-                if (con.GetType() == typeof(Button)) {
+            handleDataClickedSub = new string[] { "", "", ""};
+              if (ReadSubject != "")
+              {
+                  Control con = (Control)(controls);
+                  if (con.GetType() == typeof(Button)) {
+                    if (con.Tag.ToString() == "vee")
+                    {
+                        handleDataClickedSub[0] = con.AccessibleName;
+                        handleDataClickedSub[1] = con.AccessibleDescription;
+                        JarSubjectLabel.Text = con.AccessibleName;
+
+                        //CALL METHOD TO SHOW THE QUATERS..........................
+                        this.getDataClickedSubject();
+                    }
+                    else {
+                        MessageBox.Show("Sorry but this is not yours");
+                    }
+                  }
+
+              } else if (String.IsNullOrEmpty(deleteSubject) != true) {
+                 //STATEMENT HERE......................
+              }
+        }
+
+
+
+        //THIS IS WHEN THE USER CLICKED THE SUBJECTS AND THIS WILL HAPPEND.........................
+        private async void getDataClickedSubject(){
+            List<GradingList> gradingListHandleQuater = new List<GradingList>();
+
+            gradingListHandleQuater = await Task.Run(() => grading.gettingDataQuaters(handleDataClickedSub[0], handleDataClickedSub[1]));
+
+            foreach (var handleData in gradingListHandleQuater) {
+                if (handleData.errQuaterFetch == "") {
+                    if (handleData.handlingIfHaveQuater == "false") {
+                        Thread th = new Thread(thFun);
+                        void thFun() {
+                            Label labelQuater = new Label() {
+                                Text = "No Quater by Now.",
+                                Location = new Point(109, 145),
+                                Size = new Size(140, 16),
+                                ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue"),
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+                            };
+
+                            Label labelComments = new Label()
+                            {
+                                Text = "No Comments By Now.",
+                                Location = new Point(96, 145),
+                                Size = new Size(160, 145),
+                                ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue"),
+                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+                            };
+
+
+                            Action ac = () => {
+                                QuaterPanel.Controls.Clear();
+                                QuaterPanel.Controls.Add(labelQuater);
+                                PanelCreateQuaterOrEdit.Visible = true;
+                            };
+                            QuaterPanel.BeginInvoke(ac);
+
+                            Action acs = new Action(() => {
+                                CommetsQuater.Controls.Clear();
+                                CommetsQuater.Controls.Add(labelComments);
+                            });
+                            CommetsQuater.BeginInvoke(acs);
+
+                        };
+                        th.Start();
+                    }
                 }
-            } else if (String.IsNullOrEmpty(deleteSubject) != true) {
+            }
+
+
+        }
+
+
+        private async void CreateQuaters_Click(object sender, EventArgs e)
+        {
+            string dataHandle = "";
+            if (Quatername.Text != "" && DatabaseQuater.Text != "")
+            {
+                if (Quatername.Text == DatabaseQuater.Text)
+                {
+                    Task<string> func = new Task<string>(dataCheck);
+                    string dataCheck()
+                    {
+                        grading.checkingHad4 = handleDataClickedSub[0] + "," + handleDataClickedSub[1];
+                        return grading.checkingHad4;
+                    }
+                    func.Start();
+
+                    dataHandle = (await func.ConfigureAwait(true));
+                    switch (dataHandle) {
+                        case "true":
+                            
+                            break;
+                        case "false":
+                            MessageBox.Show("You reach the maximum of Quaters.");
+                            break;
+                        default:
+                            MessageBox.Show(dataHandle);
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please Write a Same name Between Quater and Database name");
+                }
+            }
+            else {
+                if (Quatername.Text == "")
+                {
+                    MessageBox.Show("The Quater TextBox is Empty!");
+                }
+                else {
+                    MessageBox.Show("The Database TextBox is Empty!");
+                }
             }
         }
 
 
+
+        //ERASE THE CREATE AND EDIT QUATER......................................................
+        private void EraseCreateEditQuater_Click(object sender, EventArgs e)
+        {
+            PanelCreateQuaterOrEdit.Visible = false;
+        }
 
 
     }

@@ -105,7 +105,7 @@ namespace ClassUserForm
 
 
 
-
+        //SAVING ANG CREATING NEW SUBJECTS.......................................................................
         public async Task<List<GradingList>> savingCreateSubAndReturn(string textBoxCreateSub, string fullNameOwn, string ImageOwnUser,
             string UsernameOwn, string UsernameOther) {
             Random ran = new Random();
@@ -207,9 +207,9 @@ namespace ClassUserForm
                             MySqlCommand commSubject = connSubject.CreateCommand();
                             commSubject.CommandText = "CREATE TABLE `gradingHandleSem`(" +
                                 "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
-                                "GradingName varchar(225) NOT NULL," +
-                                "subjectName varchar(100) NOT NULL," +
-                                "userOther varchar(225) NOT NULL," +
+                                "QuaterName varchar(225) NOT NULL," +
+                                "Comments varchar(100) NOT NULL," +
+                                "TableName varchar(225) NOT NULL," +
                                 "DateTime varchar(225) NOT NULL" +
                                 ")";
                             commSubject.ExecuteNonQuery();
@@ -246,6 +246,123 @@ namespace ClassUserForm
             }
                 return listHandle;
         }
+
+
+
+
+
+        //CHECKING IF THE QUATER HAD 4 GRADES.........................................................
+        private string conditionQuaterCheck = "false";
+        public string checkingHad4 {
+            get { return conditionQuaterCheck;  }
+            set {
+                conditionQuaterCheck = value;
+
+                //CALL METHOD.......................
+                conditionQuaterCheck = this.ReturnCon(conditionQuaterCheck);
+            }
+        }
+
+        //METHOD THAT CHECK IF HE/SHE REACH THE MAXIMUM 4 OF QUATERS...................................
+        private string ReturnCon(string conditionQuaterChecks) {
+            string handleSubject = "", handleCreator = "", handleReturnValue = "";
+            int numcountData = 0;
+            for (int numCount = 0;numCount < conditionQuaterChecks.Length;numCount++) {
+                if (conditionQuaterChecks[numCount] != ',')
+                {
+                    handleCreator = handleCreator + conditionQuaterChecks[numCount].ToString();
+                }
+                else {
+                    handleSubject = handleCreator;
+                    handleCreator = "";
+                }
+            }
+
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};" +
+                "Uid=root;Pwd=", handleSubject, handleCreator));
+
+            try {
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "SELECT * FROM `gradinghandlesem`";
+                using (MySqlDataReader reader = comm.ExecuteReader()) {
+                    while (reader.Read()) {
+                        numcountData++;
+                    }
+                }
+                conn.Close();
+                if (numcountData == 4)
+                {
+                    handleReturnValue = "false";
+                }
+                else {
+                    handleReturnValue = "true";
+                }
+            } catch (Exception e) {
+                string err = e.ToString();
+                handleReturnValue = "Please Check your Internet Connection.";
+            }
+            return handleReturnValue;
+        }
+
+
+
+
+        //GETTING DATA IN QUATER...................................................................
+        public async Task<List<GradingList>> gettingDataQuaters(string handleNameOfSubject, string handleUserCreator) {
+            List<GradingList> gradingHandleQuater = new List<GradingList>();
+            string CheckIfHave = "false";
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_" +
+                "{0}_{1};Uid=root;Pwd=", handleNameOfSubject.ToLower(), handleUserCreator));
+
+            try {
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "SELECT * FROM `gradinghandlesem`";
+                Task<string> returnTask = new Task<string>(() => returnCon());
+                string returnCon()
+                {
+                    using (MySqlDataReader reader = comm.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            CheckIfHave = "true";
+                            gradingHandleQuater.Add(new GradingList
+                            {
+                                errQuaterFetch = "",
+                                handlingIfHaveQuater = CheckIfHave,
+                                idQuater = (int)(reader["id"]),
+                                quatername = (string)(reader["QuaterName"]),
+                                commentsQuater = (string)(reader["Comments"]),
+                                tableNameQuater = (string)(reader["TableName"]),
+                                dateTimeQuater = (string)(reader["DateTime"])
+                            });
+                        }
+                    }
+                    return CheckIfHave;
+                }
+                returnTask.Start();
+
+                if ((await returnTask.ConfigureAwait(false)) != "true") {
+                    gradingHandleQuater.Add(new GradingList {
+                        errQuaterFetch = "",
+                        handlingIfHaveQuater = CheckIfHave
+                    });
+                }
+            } catch (Exception e) {
+                string err = e.ToString();
+                gradingHandleQuater.Add(new GradingList
+                {
+                    errQuaterFetch = err,
+                });
+            }
+
+            return gradingHandleQuater;
+        }
+
+
+
+
 
     }
 }

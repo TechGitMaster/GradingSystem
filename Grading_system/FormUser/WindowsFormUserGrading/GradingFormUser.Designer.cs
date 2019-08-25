@@ -47,6 +47,34 @@
             this.GradingPanel = new System.Windows.Forms.Panel();
             this.GradingBoxFinal = new System.Windows.Forms.Panel();
             this.GradingCreateSubject = new System.Windows.Forms.Panel();
+            this.PanelCreateQuaterOrEdit = new System.Windows.Forms.Panel();
+            this.EraseCreateEditQuater = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.panel50 = new System.Windows.Forms.Panel();
+            this.CreateQuaters = new System.Windows.Forms.Button();
+            this.label57 = new System.Windows.Forms.Label();
+            this.DatabaseQuater = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.Quatername = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.panel49 = new System.Windows.Forms.Panel();
+            this.label54 = new System.Windows.Forms.Label();
+            this.panel48 = new System.Windows.Forms.Panel();
+            this.label53 = new System.Windows.Forms.Label();
+            this.CommetsQuater = new System.Windows.Forms.Panel();
+            this.label60 = new System.Windows.Forms.Label();
+            this.panel55 = new System.Windows.Forms.Panel();
+            this.label61 = new System.Windows.Forms.Label();
+            this.QuaterPanel = new System.Windows.Forms.Panel();
+            this.label52 = new System.Windows.Forms.Label();
+            this.panel54 = new System.Windows.Forms.Panel();
+            this.panel53 = new System.Windows.Forms.Panel();
+            this.panel52 = new System.Windows.Forms.Panel();
+            this.panel51 = new System.Windows.Forms.Panel();
+            this.JarSubjectLabel = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.ReadSubjects = new System.Windows.Forms.PictureBox();
             this.DeleteSubjects = new System.Windows.Forms.PictureBox();
             this.HideBoxCreate = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -241,10 +269,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.ReadSubjects = new System.Windows.Forms.PictureBox();
-            this.panel40 = new System.Windows.Forms.Panel();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -254,6 +278,14 @@
             this.GradingPanel.SuspendLayout();
             this.GradingBoxFinal.SuspendLayout();
             this.GradingCreateSubject.SuspendLayout();
+            this.PanelCreateQuaterOrEdit.SuspendLayout();
+            this.panel50.SuspendLayout();
+            this.panel49.SuspendLayout();
+            this.panel48.SuspendLayout();
+            this.CommetsQuater.SuspendLayout();
+            this.panel55.SuspendLayout();
+            this.QuaterPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DeleteSubjects)).BeginInit();
             this.panel28.SuspendLayout();
             this.panel37.SuspendLayout();
@@ -342,8 +374,6 @@
             this.rangeTimePan.SuspendLayout();
             this.DateTime.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).BeginInit();
-            this.panel40.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMoveForm
@@ -579,7 +609,7 @@
             // GradingCreateSubject
             // 
             this.GradingCreateSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.GradingCreateSubject.Controls.Add(this.panel40);
+            this.GradingCreateSubject.Controls.Add(this.PanelCreateQuaterOrEdit);
             this.GradingCreateSubject.Controls.Add(this.ReadSubjects);
             this.GradingCreateSubject.Controls.Add(this.DeleteSubjects);
             this.GradingCreateSubject.Controls.Add(this.HideBoxCreate);
@@ -595,6 +625,312 @@
             this.GradingCreateSubject.Size = new System.Drawing.Size(776, 506);
             this.GradingCreateSubject.TabIndex = 6;
             this.GradingCreateSubject.Visible = false;
+            // 
+            // PanelCreateQuaterOrEdit
+            // 
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.EraseCreateEditQuater);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.label58);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.label59);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.panel50);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.panel49);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.panel48);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.CommetsQuater);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.QuaterPanel);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.JarSubjectLabel);
+            this.PanelCreateQuaterOrEdit.Controls.Add(this.label51);
+            this.PanelCreateQuaterOrEdit.Location = new System.Drawing.Point(2, 1);
+            this.PanelCreateQuaterOrEdit.Name = "PanelCreateQuaterOrEdit";
+            this.PanelCreateQuaterOrEdit.Size = new System.Drawing.Size(770, 502);
+            this.PanelCreateQuaterOrEdit.TabIndex = 14;
+            this.PanelCreateQuaterOrEdit.Visible = false;
+            // 
+            // EraseCreateEditQuater
+            // 
+            this.EraseCreateEditQuater.AutoSize = true;
+            this.EraseCreateEditQuater.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EraseCreateEditQuater.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.EraseCreateEditQuater.Location = new System.Drawing.Point(741, 7);
+            this.EraseCreateEditQuater.Name = "EraseCreateEditQuater";
+            this.EraseCreateEditQuater.Size = new System.Drawing.Size(20, 20);
+            this.EraseCreateEditQuater.TabIndex = 12;
+            this.EraseCreateEditQuater.Text = "X";
+            this.EraseCreateEditQuater.Click += new System.EventHandler(this.EraseCreateEditQuater_Click);
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label58.Location = new System.Drawing.Point(41, 96);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(116, 18);
+            this.label58.TabIndex = 11;
+            this.label58.Text = "All rights reserve";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.ForeColor = System.Drawing.Color.Coral;
+            this.label59.Location = new System.Drawing.Point(20, 75);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(104, 15);
+            this.label59.TabIndex = 10;
+            this.label59.Text = "Creating and Edit:";
+            // 
+            // panel50
+            // 
+            this.panel50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel50.Controls.Add(this.CreateQuaters);
+            this.panel50.Controls.Add(this.label57);
+            this.panel50.Controls.Add(this.DatabaseQuater);
+            this.panel50.Controls.Add(this.label56);
+            this.panel50.Controls.Add(this.Quatername);
+            this.panel50.Controls.Add(this.label55);
+            this.panel50.Location = new System.Drawing.Point(383, 35);
+            this.panel50.Name = "panel50";
+            this.panel50.Size = new System.Drawing.Size(325, 102);
+            this.panel50.TabIndex = 7;
+            // 
+            // CreateQuaters
+            // 
+            this.CreateQuaters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.CreateQuaters.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.CreateQuaters.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CreateQuaters.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(112)))), ((int)(((byte)(99)))));
+            this.CreateQuaters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreateQuaters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.CreateQuaters.Location = new System.Drawing.Point(126, 70);
+            this.CreateQuaters.Name = "CreateQuaters";
+            this.CreateQuaters.Size = new System.Drawing.Size(75, 23);
+            this.CreateQuaters.TabIndex = 5;
+            this.CreateQuaters.Text = "Create";
+            this.CreateQuaters.UseVisualStyleBackColor = false;
+            this.CreateQuaters.Click += new System.EventHandler(this.CreateQuaters_Click);
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.ForeColor = System.Drawing.Color.Coral;
+            this.label57.Location = new System.Drawing.Point(119, 38);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(85, 15);
+            this.label57.TabIndex = 4;
+            this.label57.Text = "-Same Name-";
+            // 
+            // DatabaseQuater
+            // 
+            this.DatabaseQuater.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.DatabaseQuater.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DatabaseQuater.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.DatabaseQuater.Location = new System.Drawing.Point(208, 36);
+            this.DatabaseQuater.Name = "DatabaseQuater";
+            this.DatabaseQuater.Size = new System.Drawing.Size(96, 20);
+            this.DatabaseQuater.TabIndex = 3;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label56.Location = new System.Drawing.Point(206, 13);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(100, 15);
+            this.label56.TabIndex = 2;
+            this.label56.Text = "Database Name:";
+            // 
+            // Quatername
+            // 
+            this.Quatername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.Quatername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Quatername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.Quatername.Location = new System.Drawing.Point(18, 35);
+            this.Quatername.Name = "Quatername";
+            this.Quatername.Size = new System.Drawing.Size(96, 20);
+            this.Quatername.TabIndex = 1;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label55.Location = new System.Drawing.Point(24, 12);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(84, 15);
+            this.label55.TabIndex = 0;
+            this.label55.Text = "Quater Name:";
+            // 
+            // panel49
+            // 
+            this.panel49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel49.Controls.Add(this.label54);
+            this.panel49.Location = new System.Drawing.Point(383, 149);
+            this.panel49.Name = "panel49";
+            this.panel49.Size = new System.Drawing.Size(179, 35);
+            this.panel49.TabIndex = 6;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label54.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label54.Location = new System.Drawing.Point(7, 9);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(156, 18);
+            this.label54.TabIndex = 4;
+            this.label54.Text = "Comments By Quater:";
+            // 
+            // panel48
+            // 
+            this.panel48.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel48.Controls.Add(this.label53);
+            this.panel48.Location = new System.Drawing.Point(51, 149);
+            this.panel48.Name = "panel48";
+            this.panel48.Size = new System.Drawing.Size(84, 35);
+            this.panel48.TabIndex = 5;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label53.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label53.Location = new System.Drawing.Point(7, 9);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(57, 18);
+            this.label53.TabIndex = 4;
+            this.label53.Text = "Quater:";
+            // 
+            // CommetsQuater
+            // 
+            this.CommetsQuater.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.CommetsQuater.Controls.Add(this.label60);
+            this.CommetsQuater.Controls.Add(this.panel55);
+            this.CommetsQuater.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CommetsQuater.Location = new System.Drawing.Point(383, 188);
+            this.CommetsQuater.Name = "CommetsQuater";
+            this.CommetsQuater.Size = new System.Drawing.Size(325, 302);
+            this.CommetsQuater.TabIndex = 3;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label60.Location = new System.Drawing.Point(96, 145);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(145, 16);
+            this.label60.TabIndex = 5;
+            this.label60.Text = "No Comments By Now.";
+            // 
+            // panel55
+            // 
+            this.panel55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel55.Controls.Add(this.label61);
+            this.panel55.Location = new System.Drawing.Point(10, 14);
+            this.panel55.Name = "panel55";
+            this.panel55.Size = new System.Drawing.Size(305, 49);
+            this.panel55.TabIndex = 1;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label61.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label61.Location = new System.Drawing.Point(1, 18);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(381, 16);
+            this.label61.TabIndex = 0;
+            this.label61.Text = "This is the first quarter of this year and also checking if the tuden";
+            // 
+            // QuaterPanel
+            // 
+            this.QuaterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.QuaterPanel.Controls.Add(this.label52);
+            this.QuaterPanel.Controls.Add(this.panel54);
+            this.QuaterPanel.Controls.Add(this.panel53);
+            this.QuaterPanel.Controls.Add(this.panel52);
+            this.QuaterPanel.Controls.Add(this.panel51);
+            this.QuaterPanel.Location = new System.Drawing.Point(51, 188);
+            this.QuaterPanel.Name = "QuaterPanel";
+            this.QuaterPanel.Size = new System.Drawing.Size(325, 302);
+            this.QuaterPanel.TabIndex = 2;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label52.Location = new System.Drawing.Point(109, 145);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(120, 16);
+            this.label52.TabIndex = 4;
+            this.label52.Text = "No Quater by Now.";
+            // 
+            // panel54
+            // 
+            this.panel54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel54.Location = new System.Drawing.Point(10, 235);
+            this.panel54.Name = "panel54";
+            this.panel54.Size = new System.Drawing.Size(305, 49);
+            this.panel54.TabIndex = 3;
+            // 
+            // panel53
+            // 
+            this.panel53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel53.Location = new System.Drawing.Point(10, 161);
+            this.panel53.Name = "panel53";
+            this.panel53.Size = new System.Drawing.Size(305, 49);
+            this.panel53.TabIndex = 2;
+            // 
+            // panel52
+            // 
+            this.panel52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel52.Location = new System.Drawing.Point(10, 87);
+            this.panel52.Name = "panel52";
+            this.panel52.Size = new System.Drawing.Size(305, 49);
+            this.panel52.TabIndex = 1;
+            // 
+            // panel51
+            // 
+            this.panel51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel51.Location = new System.Drawing.Point(10, 15);
+            this.panel51.Name = "panel51";
+            this.panel51.Size = new System.Drawing.Size(305, 49);
+            this.panel51.TabIndex = 0;
+            // 
+            // JarSubjectLabel
+            // 
+            this.JarSubjectLabel.AutoSize = true;
+            this.JarSubjectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JarSubjectLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.JarSubjectLabel.Location = new System.Drawing.Point(38, 49);
+            this.JarSubjectLabel.Name = "JarSubjectLabel";
+            this.JarSubjectLabel.Size = new System.Drawing.Size(223, 18);
+            this.JarSubjectLabel.TabIndex = 1;
+            this.JarSubjectLabel.Text = "Mathematic in the Modern World";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ForeColor = System.Drawing.Color.Coral;
+            this.label51.Location = new System.Drawing.Point(17, 28);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(88, 15);
+            this.label51.TabIndex = 0;
+            this.label51.Text = "Subject Name:";
+            // 
+            // ReadSubjects
+            // 
+            this.ReadSubjects.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ReadSubjects.Image = global::WindowsFormUserGrading.Properties.Resources.agenda;
+            this.ReadSubjects.Location = new System.Drawing.Point(45, 113);
+            this.ReadSubjects.Name = "ReadSubjects";
+            this.ReadSubjects.Size = new System.Drawing.Size(27, 25);
+            this.ReadSubjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ReadSubjects.TabIndex = 13;
+            this.ReadSubjects.TabStop = false;
             // 
             // DeleteSubjects
             // 
@@ -2749,48 +3085,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
-            // ReadSubjects
-            // 
-            this.ReadSubjects.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ReadSubjects.Image = global::WindowsFormUserGrading.Properties.Resources.agenda;
-            this.ReadSubjects.Location = new System.Drawing.Point(45, 113);
-            this.ReadSubjects.Name = "ReadSubjects";
-            this.ReadSubjects.Size = new System.Drawing.Size(27, 25);
-            this.ReadSubjects.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ReadSubjects.TabIndex = 13;
-            this.ReadSubjects.TabStop = false;
-            // 
-            // panel40
-            // 
-            this.panel40.Controls.Add(this.label52);
-            this.panel40.Controls.Add(this.label51);
-            this.panel40.Location = new System.Drawing.Point(2, 1);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(770, 502);
-            this.panel40.TabIndex = 14;
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.ForeColor = System.Drawing.Color.Coral;
-            this.label51.Location = new System.Drawing.Point(17, 13);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(88, 15);
-            this.label51.TabIndex = 0;
-            this.label51.Text = "Subject Name:";
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label52.Location = new System.Drawing.Point(38, 34);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(121, 18);
-            this.label52.TabIndex = 1;
-            this.label52.Text = "Intro to computer";
-            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2821,6 +3115,21 @@
             this.GradingBoxFinal.PerformLayout();
             this.GradingCreateSubject.ResumeLayout(false);
             this.GradingCreateSubject.PerformLayout();
+            this.PanelCreateQuaterOrEdit.ResumeLayout(false);
+            this.PanelCreateQuaterOrEdit.PerformLayout();
+            this.panel50.ResumeLayout(false);
+            this.panel50.PerformLayout();
+            this.panel49.ResumeLayout(false);
+            this.panel49.PerformLayout();
+            this.panel48.ResumeLayout(false);
+            this.panel48.PerformLayout();
+            this.CommetsQuater.ResumeLayout(false);
+            this.CommetsQuater.PerformLayout();
+            this.panel55.ResumeLayout(false);
+            this.panel55.PerformLayout();
+            this.QuaterPanel.ResumeLayout(false);
+            this.QuaterPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DeleteSubjects)).EndInit();
             this.panel28.ResumeLayout(false);
             this.panel37.ResumeLayout(false);
@@ -2958,9 +3267,6 @@
             this.DateTime.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).EndInit();
-            this.panel40.ResumeLayout(false);
-            this.panel40.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3181,9 +3487,33 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.PictureBox ReadSubjects;
-        private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Panel PanelCreateQuaterOrEdit;
+        private System.Windows.Forms.Label JarSubjectLabel;
         private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Panel CommetsQuater;
+        private System.Windows.Forms.Panel QuaterPanel;
+        private System.Windows.Forms.Panel panel48;
+        private System.Windows.Forms.Panel panel49;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Panel panel50;
+        private System.Windows.Forms.TextBox Quatername;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox DatabaseQuater;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Button CreateQuaters;
+        private System.Windows.Forms.Panel panel54;
+        private System.Windows.Forms.Panel panel53;
+        private System.Windows.Forms.Panel panel52;
+        private System.Windows.Forms.Panel panel51;
+        private System.Windows.Forms.Panel panel55;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label EraseCreateEditQuater;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label60;
     }
 }
 
