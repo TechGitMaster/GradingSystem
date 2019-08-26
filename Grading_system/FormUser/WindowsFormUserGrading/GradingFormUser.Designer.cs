@@ -47,11 +47,29 @@
             this.GradingPanel = new System.Windows.Forms.Panel();
             this.GradingBoxFinal = new System.Windows.Forms.Panel();
             this.GradingCreateSubject = new System.Windows.Forms.Panel();
-            this.PanelCreateQuaterOrEdit = new System.Windows.Forms.Panel();
+            this.TableEditing = new System.Windows.Forms.Panel();
+            this.PanelEditingTable = new System.Windows.Forms.Panel();
+            this.EditingAndSaveTable = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label65 = new System.Windows.Forms.Label();
+            this.DeleteTableIcon = new System.Windows.Forms.PictureBox();
+            this.panel56 = new System.Windows.Forms.Panel();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.AddTableIcon = new System.Windows.Forms.PictureBox();
+            this.PendingTablePanel = new System.Windows.Forms.Panel();
+            this.TableCountLabel = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.NameLabelEditingtable = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.panel41 = new System.Windows.Forms.Panel();
+            this.label62 = new System.Windows.Forms.Label();
             this.EraseCreateEditQuater = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
-            this.panel50 = new System.Windows.Forms.Panel();
+            this.CreatingDatabase = new System.Windows.Forms.Panel();
             this.CreateQuaters = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.DatabaseQuater = new System.Windows.Forms.TextBox();
@@ -269,6 +287,25 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.textBox19 = new System.Windows.Forms.TextBox();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -278,8 +315,15 @@
             this.GradingPanel.SuspendLayout();
             this.GradingBoxFinal.SuspendLayout();
             this.GradingCreateSubject.SuspendLayout();
-            this.PanelCreateQuaterOrEdit.SuspendLayout();
-            this.panel50.SuspendLayout();
+            this.TableEditing.SuspendLayout();
+            this.PanelEditingTable.SuspendLayout();
+            this.EditingAndSaveTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DeleteTableIcon)).BeginInit();
+            this.panel56.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddTableIcon)).BeginInit();
+            this.PendingTablePanel.SuspendLayout();
+            this.panel41.SuspendLayout();
+            this.CreatingDatabase.SuspendLayout();
             this.panel49.SuspendLayout();
             this.panel48.SuspendLayout();
             this.CommetsQuater.SuspendLayout();
@@ -609,7 +653,7 @@
             // GradingCreateSubject
             // 
             this.GradingCreateSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
-            this.GradingCreateSubject.Controls.Add(this.PanelCreateQuaterOrEdit);
+            this.GradingCreateSubject.Controls.Add(this.TableEditing);
             this.GradingCreateSubject.Controls.Add(this.ReadSubjects);
             this.GradingCreateSubject.Controls.Add(this.DeleteSubjects);
             this.GradingCreateSubject.Controls.Add(this.HideBoxCreate);
@@ -626,23 +670,250 @@
             this.GradingCreateSubject.TabIndex = 6;
             this.GradingCreateSubject.Visible = false;
             // 
-            // PanelCreateQuaterOrEdit
+            // TableEditing
             // 
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.EraseCreateEditQuater);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.label58);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.label59);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.panel50);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.panel49);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.panel48);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.CommetsQuater);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.QuaterPanel);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.JarSubjectLabel);
-            this.PanelCreateQuaterOrEdit.Controls.Add(this.label51);
-            this.PanelCreateQuaterOrEdit.Location = new System.Drawing.Point(2, 1);
-            this.PanelCreateQuaterOrEdit.Name = "PanelCreateQuaterOrEdit";
-            this.PanelCreateQuaterOrEdit.Size = new System.Drawing.Size(770, 502);
-            this.PanelCreateQuaterOrEdit.TabIndex = 14;
-            this.PanelCreateQuaterOrEdit.Visible = false;
+            this.TableEditing.Controls.Add(this.PanelEditingTable);
+            this.TableEditing.Controls.Add(this.EraseCreateEditQuater);
+            this.TableEditing.Controls.Add(this.label58);
+            this.TableEditing.Controls.Add(this.label59);
+            this.TableEditing.Controls.Add(this.CreatingDatabase);
+            this.TableEditing.Controls.Add(this.panel49);
+            this.TableEditing.Controls.Add(this.panel48);
+            this.TableEditing.Controls.Add(this.CommetsQuater);
+            this.TableEditing.Controls.Add(this.QuaterPanel);
+            this.TableEditing.Controls.Add(this.JarSubjectLabel);
+            this.TableEditing.Controls.Add(this.label51);
+            this.TableEditing.Location = new System.Drawing.Point(2, 1);
+            this.TableEditing.Name = "TableEditing";
+            this.TableEditing.Size = new System.Drawing.Size(770, 502);
+            this.TableEditing.TabIndex = 14;
+            this.TableEditing.Visible = false;
+            // 
+            // PanelEditingTable
+            // 
+            this.PanelEditingTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.PanelEditingTable.Controls.Add(this.EditingAndSaveTable);
+            this.PanelEditingTable.Controls.Add(this.PendingTablePanel);
+            this.PanelEditingTable.Controls.Add(this.TableCountLabel);
+            this.PanelEditingTable.Controls.Add(this.label71);
+            this.PanelEditingTable.Controls.Add(this.label68);
+            this.PanelEditingTable.Controls.Add(this.label69);
+            this.PanelEditingTable.Controls.Add(this.NameLabelEditingtable);
+            this.PanelEditingTable.Controls.Add(this.label66);
+            this.PanelEditingTable.Controls.Add(this.panel41);
+            this.PanelEditingTable.Location = new System.Drawing.Point(49, 148);
+            this.PanelEditingTable.Name = "PanelEditingTable";
+            this.PanelEditingTable.Size = new System.Drawing.Size(665, 346);
+            this.PanelEditingTable.TabIndex = 13;
+            this.PanelEditingTable.Visible = false;
+            // 
+            // EditingAndSaveTable
+            // 
+            this.EditingAndSaveTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.EditingAndSaveTable.Controls.Add(this.button8);
+            this.EditingAndSaveTable.Controls.Add(this.label65);
+            this.EditingAndSaveTable.Controls.Add(this.DeleteTableIcon);
+            this.EditingAndSaveTable.Controls.Add(this.panel56);
+            this.EditingAndSaveTable.Controls.Add(this.label63);
+            this.EditingAndSaveTable.Controls.Add(this.AddTableIcon);
+            this.EditingAndSaveTable.Location = new System.Drawing.Point(323, 18);
+            this.EditingAndSaveTable.Name = "EditingAndSaveTable";
+            this.EditingAndSaveTable.Size = new System.Drawing.Size(325, 102);
+            this.EditingAndSaveTable.TabIndex = 8;
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(112)))), ((int)(((byte)(99)))));
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.button8.Location = new System.Drawing.Point(204, 19);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 12;
+            this.button8.Text = "Save";
+            this.button8.UseVisualStyleBackColor = false;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label65.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label65.Location = new System.Drawing.Point(230, 68);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(50, 18);
+            this.label65.TabIndex = 11;
+            this.label65.Text = "Delete";
+            // 
+            // DeleteTableIcon
+            // 
+            this.DeleteTableIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteTableIcon.Image = global::WindowsFormUserGrading.Properties.Resources.error;
+            this.DeleteTableIcon.Location = new System.Drawing.Point(193, 57);
+            this.DeleteTableIcon.Name = "DeleteTableIcon";
+            this.DeleteTableIcon.Size = new System.Drawing.Size(31, 30);
+            this.DeleteTableIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DeleteTableIcon.TabIndex = 10;
+            this.DeleteTableIcon.TabStop = false;
+            this.DeleteTableIcon.Click += new System.EventHandler(this.DeleteTableIcon_Click);
+            // 
+            // panel56
+            // 
+            this.panel56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel56.Controls.Add(this.label64);
+            this.panel56.Location = new System.Drawing.Point(10, 11);
+            this.panel56.Name = "panel56";
+            this.panel56.Size = new System.Drawing.Size(160, 34);
+            this.panel56.TabIndex = 1;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label64.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label64.Location = new System.Drawing.Point(8, 9);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(135, 16);
+            this.label64.TabIndex = 0;
+            this.label64.Text = "Add and Delete table";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label63.Location = new System.Drawing.Point(87, 68);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(33, 18);
+            this.label63.TabIndex = 3;
+            this.label63.Text = "Add";
+            // 
+            // AddTableIcon
+            // 
+            this.AddTableIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddTableIcon.Image = global::WindowsFormUserGrading.Properties.Resources.plus;
+            this.AddTableIcon.Location = new System.Drawing.Point(50, 58);
+            this.AddTableIcon.Name = "AddTableIcon";
+            this.AddTableIcon.Size = new System.Drawing.Size(31, 30);
+            this.AddTableIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AddTableIcon.TabIndex = 1;
+            this.AddTableIcon.TabStop = false;
+            this.AddTableIcon.Click += new System.EventHandler(this.AddTableIcons_Click);
+            // 
+            // PendingTablePanel
+            // 
+            this.PendingTablePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.PendingTablePanel.Controls.Add(this.textBox19);
+            this.PendingTablePanel.Controls.Add(this.textBox18);
+            this.PendingTablePanel.Controls.Add(this.textBox10);
+            this.PendingTablePanel.Controls.Add(this.textBox11);
+            this.PendingTablePanel.Controls.Add(this.textBox12);
+            this.PendingTablePanel.Controls.Add(this.textBox13);
+            this.PendingTablePanel.Controls.Add(this.textBox14);
+            this.PendingTablePanel.Controls.Add(this.textBox15);
+            this.PendingTablePanel.Controls.Add(this.textBox16);
+            this.PendingTablePanel.Controls.Add(this.textBox17);
+            this.PendingTablePanel.Controls.Add(this.textBox9);
+            this.PendingTablePanel.Controls.Add(this.textBox8);
+            this.PendingTablePanel.Controls.Add(this.textBox7);
+            this.PendingTablePanel.Controls.Add(this.textBox6);
+            this.PendingTablePanel.Controls.Add(this.textBox5);
+            this.PendingTablePanel.Controls.Add(this.textBox4);
+            this.PendingTablePanel.Controls.Add(this.textBox3);
+            this.PendingTablePanel.Controls.Add(this.textBox2);
+            this.PendingTablePanel.Controls.Add(this.textBox1);
+            this.PendingTablePanel.Location = new System.Drawing.Point(22, 171);
+            this.PendingTablePanel.Name = "PendingTablePanel";
+            this.PendingTablePanel.Size = new System.Drawing.Size(627, 163);
+            this.PendingTablePanel.TabIndex = 7;
+            // 
+            // TableCountLabel
+            // 
+            this.TableCountLabel.AutoSize = true;
+            this.TableCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TableCountLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.TableCountLabel.Location = new System.Drawing.Point(104, 127);
+            this.TableCountLabel.Name = "TableCountLabel";
+            this.TableCountLabel.Size = new System.Drawing.Size(77, 16);
+            this.TableCountLabel.TabIndex = 6;
+            this.TableCountLabel.Text = "Not for now.";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label71.ForeColor = System.Drawing.Color.Coral;
+            this.label71.Location = new System.Drawing.Point(22, 127);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(82, 16);
+            this.label71.TabIndex = 5;
+            this.label71.Text = "Table count:";
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label68.Location = new System.Drawing.Point(152, 95);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(15, 16);
+            this.label68.TabIndex = 4;
+            this.label68.Text = "0";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.ForeColor = System.Drawing.Color.Coral;
+            this.label69.Location = new System.Drawing.Point(22, 96);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(126, 16);
+            this.label69.TabIndex = 3;
+            this.label69.Text = "Found same Name:";
+            // 
+            // NameLabelEditingtable
+            // 
+            this.NameLabelEditingtable.AutoSize = true;
+            this.NameLabelEditingtable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameLabelEditingtable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.NameLabelEditingtable.Location = new System.Drawing.Point(106, 64);
+            this.NameLabelEditingtable.Name = "NameLabelEditingtable";
+            this.NameLabelEditingtable.Size = new System.Drawing.Size(74, 16);
+            this.NameLabelEditingtable.TabIndex = 2;
+            this.NameLabelEditingtable.Text = "1st grading";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label66.ForeColor = System.Drawing.Color.Coral;
+            this.label66.Location = new System.Drawing.Point(19, 65);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(82, 16);
+            this.label66.TabIndex = 1;
+            this.label66.Text = "Your Quater:";
+            // 
+            // panel41
+            // 
+            this.panel41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel41.Controls.Add(this.label62);
+            this.panel41.Location = new System.Drawing.Point(16, 15);
+            this.panel41.Name = "panel41";
+            this.panel41.Size = new System.Drawing.Size(131, 34);
+            this.panel41.TabIndex = 0;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label62.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label62.Location = new System.Drawing.Point(10, 9);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(96, 18);
+            this.label62.TabIndex = 0;
+            this.label62.Text = "Create Table:";
             // 
             // EraseCreateEditQuater
             // 
@@ -678,19 +949,19 @@
             this.label59.TabIndex = 10;
             this.label59.Text = "Creating and Edit:";
             // 
-            // panel50
+            // CreatingDatabase
             // 
-            this.panel50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.panel50.Controls.Add(this.CreateQuaters);
-            this.panel50.Controls.Add(this.label57);
-            this.panel50.Controls.Add(this.DatabaseQuater);
-            this.panel50.Controls.Add(this.label56);
-            this.panel50.Controls.Add(this.Quatername);
-            this.panel50.Controls.Add(this.label55);
-            this.panel50.Location = new System.Drawing.Point(383, 35);
-            this.panel50.Name = "panel50";
-            this.panel50.Size = new System.Drawing.Size(325, 102);
-            this.panel50.TabIndex = 7;
+            this.CreatingDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.CreatingDatabase.Controls.Add(this.CreateQuaters);
+            this.CreatingDatabase.Controls.Add(this.label57);
+            this.CreatingDatabase.Controls.Add(this.DatabaseQuater);
+            this.CreatingDatabase.Controls.Add(this.label56);
+            this.CreatingDatabase.Controls.Add(this.Quatername);
+            this.CreatingDatabase.Controls.Add(this.label55);
+            this.CreatingDatabase.Location = new System.Drawing.Point(383, 35);
+            this.CreatingDatabase.Name = "CreatingDatabase";
+            this.CreatingDatabase.Size = new System.Drawing.Size(325, 102);
+            this.CreatingDatabase.TabIndex = 7;
             // 
             // CreateQuaters
             // 
@@ -733,7 +1004,7 @@
             // 
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label56.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label56.Location = new System.Drawing.Point(206, 13);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(100, 15);
@@ -754,7 +1025,7 @@
             // 
             this.label55.AutoSize = true;
             this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label55.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label55.Location = new System.Drawing.Point(24, 12);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(84, 15);
@@ -3085,6 +3356,199 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox1.Location = new System.Drawing.Point(13, 14);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(132, 21);
+            this.textBox1.TabIndex = 0;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox2.Location = new System.Drawing.Point(155, 14);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(48, 21);
+            this.textBox2.TabIndex = 1;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox3.Location = new System.Drawing.Point(215, 14);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(48, 20);
+            this.textBox3.TabIndex = 2;
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox4.Location = new System.Drawing.Point(277, 14);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(48, 20);
+            this.textBox4.TabIndex = 3;
+            // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox5.Location = new System.Drawing.Point(337, 14);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(48, 20);
+            this.textBox5.TabIndex = 4;
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox6.Location = new System.Drawing.Point(398, 14);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(48, 20);
+            this.textBox6.TabIndex = 5;
+            // 
+            // textBox7
+            // 
+            this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox7.Location = new System.Drawing.Point(456, 14);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(48, 20);
+            this.textBox7.TabIndex = 6;
+            // 
+            // textBox8
+            // 
+            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox8.Location = new System.Drawing.Point(513, 14);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(48, 20);
+            this.textBox8.TabIndex = 7;
+            // 
+            // textBox9
+            // 
+            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox9.Location = new System.Drawing.Point(569, 14);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(48, 20);
+            this.textBox9.TabIndex = 8;
+            // 
+            // textBox10
+            // 
+            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox10.Location = new System.Drawing.Point(427, 55);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(48, 20);
+            this.textBox10.TabIndex = 16;
+            // 
+            // textBox11
+            // 
+            this.textBox11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox11.Location = new System.Drawing.Point(371, 55);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(48, 20);
+            this.textBox11.TabIndex = 15;
+            // 
+            // textBox12
+            // 
+            this.textBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox12.Location = new System.Drawing.Point(314, 55);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(48, 20);
+            this.textBox12.TabIndex = 14;
+            // 
+            // textBox13
+            // 
+            this.textBox13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox13.Location = new System.Drawing.Point(256, 55);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(48, 20);
+            this.textBox13.TabIndex = 13;
+            // 
+            // textBox14
+            // 
+            this.textBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox14.Location = new System.Drawing.Point(195, 55);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(48, 20);
+            this.textBox14.TabIndex = 12;
+            // 
+            // textBox15
+            // 
+            this.textBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox15.Location = new System.Drawing.Point(135, 55);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(48, 20);
+            this.textBox15.TabIndex = 11;
+            // 
+            // textBox16
+            // 
+            this.textBox16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox16.Location = new System.Drawing.Point(73, 55);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(48, 20);
+            this.textBox16.TabIndex = 10;
+            // 
+            // textBox17
+            // 
+            this.textBox17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox17.Location = new System.Drawing.Point(13, 55);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(48, 21);
+            this.textBox17.TabIndex = 9;
+            // 
+            // textBox18
+            // 
+            this.textBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox18.Location = new System.Drawing.Point(486, 55);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(48, 20);
+            this.textBox18.TabIndex = 17;
+            // 
+            // textBox19
+            // 
+            this.textBox19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.textBox19.Location = new System.Drawing.Point(545, 55);
+            this.textBox19.Name = "textBox19";
+            this.textBox19.Size = new System.Drawing.Size(48, 20);
+            this.textBox19.TabIndex = 18;
+            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3115,10 +3579,22 @@
             this.GradingBoxFinal.PerformLayout();
             this.GradingCreateSubject.ResumeLayout(false);
             this.GradingCreateSubject.PerformLayout();
-            this.PanelCreateQuaterOrEdit.ResumeLayout(false);
-            this.PanelCreateQuaterOrEdit.PerformLayout();
-            this.panel50.ResumeLayout(false);
-            this.panel50.PerformLayout();
+            this.TableEditing.ResumeLayout(false);
+            this.TableEditing.PerformLayout();
+            this.PanelEditingTable.ResumeLayout(false);
+            this.PanelEditingTable.PerformLayout();
+            this.EditingAndSaveTable.ResumeLayout(false);
+            this.EditingAndSaveTable.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DeleteTableIcon)).EndInit();
+            this.panel56.ResumeLayout(false);
+            this.panel56.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddTableIcon)).EndInit();
+            this.PendingTablePanel.ResumeLayout(false);
+            this.PendingTablePanel.PerformLayout();
+            this.panel41.ResumeLayout(false);
+            this.panel41.PerformLayout();
+            this.CreatingDatabase.ResumeLayout(false);
+            this.CreatingDatabase.PerformLayout();
             this.panel49.ResumeLayout(false);
             this.panel49.PerformLayout();
             this.panel48.ResumeLayout(false);
@@ -3487,7 +3963,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.PictureBox ReadSubjects;
-        private System.Windows.Forms.Panel PanelCreateQuaterOrEdit;
+        private System.Windows.Forms.Panel TableEditing;
         private System.Windows.Forms.Label JarSubjectLabel;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label53;
@@ -3496,7 +3972,7 @@
         private System.Windows.Forms.Panel panel48;
         private System.Windows.Forms.Panel panel49;
         private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Panel panel50;
+        private System.Windows.Forms.Panel CreatingDatabase;
         private System.Windows.Forms.TextBox Quatername;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label57;
@@ -3514,6 +3990,43 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Panel PanelEditingTable;
+        private System.Windows.Forms.Panel panel41;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.PictureBox AddTableIcon;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Panel EditingAndSaveTable;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.PictureBox DeleteTableIcon;
+        private System.Windows.Forms.Panel panel56;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label NameLabelEditingtable;
+        private System.Windows.Forms.Label TableCountLabel;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Panel PendingTablePanel;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.TextBox textBox19;
+        private System.Windows.Forms.TextBox textBox18;
     }
 }
 

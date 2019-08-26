@@ -3514,7 +3514,6 @@ namespace WindowsFormUserGrading
         }
 
 
-
         //THIS IS THE NAME OF EVERY USER IN SUBJET CREATED.......................................
         private void subjectShowNameOfTeacher(string UserNameOwner, string UserNameCreator,
             string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
@@ -3886,7 +3885,7 @@ namespace WindowsFormUserGrading
                             Action ac = () => {
                                 QuaterPanel.Controls.Clear();
                                 QuaterPanel.Controls.Add(labelQuater);
-                                PanelCreateQuaterOrEdit.Visible = true;
+                                TableEditing.Visible = true;
                             };
                             QuaterPanel.BeginInvoke(ac);
 
@@ -3908,11 +3907,13 @@ namespace WindowsFormUserGrading
 
         private async void CreateQuaters_Click(object sender, EventArgs e)
         {
-            string dataHandle = "";
+            string dataHandle = "", datahandleCheckHaveName = "";
             if (Quatername.Text != "" && DatabaseQuater.Text != "")
             {
                 if (Quatername.Text == DatabaseQuater.Text)
                 {
+
+                    //CHECKING IF THE USER REACHED THE MAXIMUM OF QUATERS........................................
                     Task<string> func = new Task<string>(dataCheck);
                     string dataCheck()
                     {
@@ -3924,7 +3925,34 @@ namespace WindowsFormUserGrading
                     dataHandle = (await func.ConfigureAwait(true));
                     switch (dataHandle) {
                         case "true":
-                            
+
+                            //CHECKING IF THE PENDING NAME HAD ALREADY IN DATABASE MUST NOT THE SAME.....................................
+                            Task<string> returnFunc = new Task<string>(() => funcSeeIFHave());
+                            string funcSeeIFHave() {
+                                grading.checkingHaveName = Quatername.Text + "," + handleDataClickedSub[0] + "," + handleDataClickedSub[1];
+                                return grading.checkingHaveName;
+                            }
+                            returnFunc.Start();
+
+                            datahandleCheckHaveName = await (returnFunc.ConfigureAwait(true));
+
+
+                            if (datahandleCheckHaveName == "false")
+                            {
+                                //DO STATEMENT HERE SAVING NAME DATABASE..................
+                                NameLabelEditingtable.Text = Quatername.Text;
+                                PendingTablePanel.Controls.Clear();
+                                this.PanelEditingTable.Visible = true;
+                                this.CreatingDatabase.Visible = false;
+                            }
+                            else if (datahandleCheckHaveName == "false")
+                            {
+                                MessageBox.Show("Sorry your Quater name is now taken.");
+                            }
+                            else {
+                                MessageBox.Show(datahandleCheckHaveName);
+                            }
+
                             break;
                         case "false":
                             MessageBox.Show("You reach the maximum of Quaters.");
@@ -3951,11 +3979,139 @@ namespace WindowsFormUserGrading
         }
 
 
+        //BUTTON ADD TABLE IN EDIT AND ADD TABLES..................................
+        protected static int numberCountTable = 0, numberLeft = 13, numberTop = 14, numberCountBack = 0;
+        private void AddTableIcons_Click(object sender, EventArgs e)
+        {
+            numberCountTable = numberCountTable + 1;
+            this.TableCountLabel.Text = numberCountTable.ToString();
+            if (numberCountTable == 1)
+            {
+                TextBox textName = new TextBox
+                {
+                    Size = new Size(132, 21),
+                    Location = new Point(numberLeft, numberTop),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833")
+                };
+                PendingTablePanel.Controls.Add(textName);
+                numberLeft = numberLeft + 145;
+            }
+            else if (numberCountTable <= 9 && numberCountTable > 1)
+            {
+                TextBox textNames = new TextBox
+                {
+                    Size = new Size(48, 21),
+                    Location = new Point(numberLeft, numberTop),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833")
+                };
+                PendingTablePanel.Controls.Add(textNames);
+                numberLeft = numberLeft + 59;
+            }
+            else {
+                if (numberCountTable <= 39)
+                {
+                    if (numberTop == 14)
+                    {
+                        numberTop += 40;
+                        numberLeft = 13;
+                        numberCountBack = 1;
+                    }
+                    else
+                    {
+                        if (numberCountBack == 10)
+                        {
+                            numberTop += 40;
+                            numberLeft = 13;
+                            numberCountBack = 0;
+                        }
+                        numberCountBack++;
+                    }
+
+                    TextBox textNames = new TextBox
+                    {
+                        Size = new Size(48, 21),
+                        Location = new Point(numberLeft, numberTop),
+                        BorderStyle = BorderStyle.FixedSingle,
+                        BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833")
+                    };
+                    PendingTablePanel.Controls.Add(textNames);
+                    numberLeft = numberLeft + 59;
+                }
+                else {
+                    if (numberCountTable == 40) {
+                        numberCountTable -= 1;
+                    }
+                    MessageBox.Show("Sorry the maximum table is just 39 tables");
+                }
+
+            }
+        }
+
+
+        //BUTTON DELETE TALBE IN EDIT AND ADD TABLES.............................................................
+        private void DeleteTableIcon_Click(object sender, EventArgs e)
+        {
+            int numberAdd = 0;
+
+            foreach (Control con in PendingTablePanel.Controls) {
+                if ((con.GetType() == typeof(TextBox)) || (con is TextBox)) {
+                    numberAdd++;
+                    if (numberAdd == numberCountTable) {
+                        ((TextBox)con).Dispose();
+
+                        if (numberCountTable <= 9)
+                        {
+                            if (numberCountTable > 1)
+                            {
+                                numberTop = 14;
+                                numberLeft -= 59;
+                            }
+                            else
+                            {
+                                numberTop = 14;
+                                numberLeft = 13;
+                            }
+                        }
+                        else {
+                            if (numberCountTable <= 19) {
+                                if (numberCountTable == 10) {
+                                    
+                                }
+                            }
+                        }
+
+                        numberCountTable = numberCountTable - 1;
+                        this.TableCountLabel.Text = numberCountTable.ToString();
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
 
         //ERASE THE CREATE AND EDIT QUATER......................................................
         private void EraseCreateEditQuater_Click(object sender, EventArgs e)
         {
-            PanelCreateQuaterOrEdit.Visible = false;
+            Thread th = new Thread(() =>
+            {
+                this.BeginInvoke((Action)delegate
+                {
+                    TableEditing.Visible = false;
+                    this.PanelEditingTable.Visible = false;
+                    this.CreatingDatabase.Visible = true;
+                    Quatername.Text = "";
+                    DatabaseQuater.Text = "";
+                });
+            });
+            th.Start();
+            
         }
 
 

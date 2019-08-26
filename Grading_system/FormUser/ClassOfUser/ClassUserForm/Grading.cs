@@ -252,17 +252,45 @@ namespace ClassUserForm
 
 
         //CHECKING IF THE QUATER HAD 4 GRADES.........................................................
-        private string conditionQuaterCheck = "false";
+        private string conditionQuaterCheck = "false", conditionCheckingHaveDatabase = "false";
+        private delegate string funcDataMethod(string conditionQuaterCheckss);
+
+
+
+        //CHECKING IF HE/SHE REACH THE MAXIMUM OF 4 QUATER THORUGH GETTER AND SETTER 
         public string checkingHad4 {
             get { return conditionQuaterCheck;  }
             set {
                 conditionQuaterCheck = value;
 
                 //CALL METHOD.......................
-                conditionQuaterCheck = this.ReturnCon(conditionQuaterCheck);
+                funcDataMethod handleFs = new funcDataMethod(this.ReturnCon);
+                conditionQuaterCheck = handleFs.Invoke(conditionQuaterCheck);
             }
         }
 
+
+        //CHECKING IF HAVE A SAME NAME IN QUATER THOUGH GETTER AND SETTER......................................
+        public string checkingHaveName {
+            get { return conditionCheckingHaveDatabase; }
+            set {
+                conditionCheckingHaveDatabase = value;
+
+                //CALL METHOD....................................
+                var delegateFunc = new funcDataMethod(this.handleCheckHaveName);
+                conditionCheckingHaveDatabase = delegateFunc.Invoke(conditionCheckingHaveDatabase);
+            }
+        }
+
+        
+
+
+
+
+
+
+
+        //METHOD OF GETTER AND SETTER.........................
         //METHOD THAT CHECK IF HE/SHE REACH THE MAXIMUM 4 OF QUATERS...................................
         private string ReturnCon(string conditionQuaterChecks) {
             string handleSubject = "", handleCreator = "", handleReturnValue = "";
@@ -304,6 +332,60 @@ namespace ClassUserForm
             }
             return handleReturnValue;
         }
+
+
+
+
+        //METHOD TO CHECK IF THE NAME PENDING HAD ALREADY IN DATABASE...........................................
+        public string handleCheckHaveName(string conditionCheckingHaveDatabase) {
+            string[] arrayHandleData = new string[] { "", "", ""};
+            int numberCOunt = 0, numberCountArray = 0;
+            string handleReturn = "false";
+            MySqlConnection conn = new MySqlConnection();
+            //SEPERATE................................
+            while (numberCOunt <= conditionCheckingHaveDatabase.Length) {
+                if (numberCOunt != conditionCheckingHaveDatabase.Length) {
+                    if (conditionCheckingHaveDatabase[numberCOunt] != ',')
+                    {
+                        arrayHandleData[numberCountArray] = arrayHandleData[numberCountArray] +
+                            conditionCheckingHaveDatabase[numberCOunt].ToString();
+                    }
+                    else {
+                        numberCountArray++;
+                    }
+                }
+                numberCOunt++;
+            }
+
+            conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};Uid=root;Pwd=",
+                arrayHandleData[1], arrayHandleData[2]));
+
+            try {
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "SELECT `QuaterName` FROM `gradinghandlesem`";
+                using (MySqlDataReader reader = comm.ExecuteReader()) {
+                    while (reader.Read()) {
+                        if (handleReturn == "false") {
+                            if ((string)reader["QuaterName"] == arrayHandleData[0]) {
+                                handleReturn = "true";
+                            }
+                        }
+                    }
+                }
+
+            } catch(Exception e) {
+                handleReturn = e.ToString();
+                handleReturn = "Please Check Your Connection.";
+            }
+
+            return handleReturn;
+        }
+
+
+
+        //LAST LINE OF GETTER AND SETTER METHODS..........................................
+
 
 
 
