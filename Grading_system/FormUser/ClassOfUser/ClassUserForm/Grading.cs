@@ -342,7 +342,8 @@ namespace ClassUserForm
             int numberCOunt = 0, numberCountArray = 0;
             string handleReturn = "false";
             MySqlConnection conn = new MySqlConnection();
-            //SEPERATE................................
+
+            //SEPERATE SESSION................................
             while (numberCOunt <= conditionCheckingHaveDatabase.Length) {
                 if (numberCOunt != conditionCheckingHaveDatabase.Length) {
                     if (conditionCheckingHaveDatabase[numberCOunt] != ',')
@@ -413,7 +414,7 @@ namespace ClassUserForm
                             {
                                 errQuaterFetch = "",
                                 handlingIfHaveQuater = CheckIfHave,
-                                idQuater = (int)(reader["id"]),
+                                idQuater = Convert.ToInt32(reader["id"]),
                                 quatername = (string)(reader["QuaterName"]),
                                 commentsQuater = (string)(reader["Comments"]),
                                 tableNameQuater = (string)(reader["TableName"]),
@@ -442,9 +443,130 @@ namespace ClassUserForm
             return gradingHandleQuater;
         }
 
+     //   commSubject.CommandText = "CREATE TABLE `gradingHandleSem`(" +
+     //                           "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+      //                          "QuaterName varchar(225) NOT NULL," +
+     //                          "Comments varchar(100) NOT NULL," +
+      //                          "TableName varchar(225) NOT NULL," +
+     //                           "DateTime varchar(225) NOT NULL" +
+     //                           ")";
+     //                       commSubject.ExecuteNonQuery();
+
+        //ADD QUATERS.................................................................................
+        public async Task<List<GradingList>> addQuaters(string handleNameTable, string nameofQuater, 
+            string NameOfSubject, string nameofUserCreate) {
+            int countArrayString = 0;
+            List<string> handleSeperatedTable = new List<string>();
+            List<GradingList> handleDataListReturn = new List<GradingList>();
+            string handleCombineDataTable = "", handleAddedDataBase = "", handleDate = "";
+
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};" +
+                "Uid=root;Pwd=", NameOfSubject, nameofUserCreate)); 
 
 
+            bool SeperateDataAndCombine() {
 
+                for (int countLength = 0; handleNameTable.Length > countLength;countLength++) {
+                    if (handleNameTable[countLength].ToString() != ",")
+                    {
+                        handleCombineDataTable = handleCombineDataTable + handleNameTable[countLength];
+                    }
+                    else {
+                        handleSeperatedTable.Add(handleCombineDataTable);
+                        handleCombineDataTable = "";
+                    }
+
+                    if (handleNameTable.Length-1 <= countLength) {
+                        string[] handleDataCombineds = handleSeperatedTable.ToArray();
+
+                        handleCombineDataTable = "CREATE TABLE `"+ nameofQuater + "`(" +
+                            "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ";
+
+                        while (countArrayString < handleDataCombineds.Length)
+                        {
+                            if (handleDataCombineds.Length - 1 != countArrayString)
+                            {
+                                handleCombineDataTable += handleDataCombineds[countArrayString] + " varchar(25) NOT NULL, ";
+                                countArrayString++;
+                            }
+                            else {
+                                handleCombineDataTable += handleDataCombineds[countArrayString] + " varchar(25) NOT NULL)";
+                                countArrayString++;
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+            Task<bool> boolReturn = new Task<bool>(SeperateDataAndCombine);
+            boolReturn.Start();
+
+            if ((await boolReturn.ConfigureAwait(false)) == true) {
+
+                bool returnValueDone()
+                {
+                    int handleCountToDate = 0;
+                    foreach (string handle in handleSeperatedTable)
+                    {
+                          handleCountToDate++;
+                          handleAddedDataBase += handle + ",";
+                    }
+
+                    if (countArrayString == handleCountToDate) {
+                        handleDate = (DateTime.Now.Month <= 9 ? "0"+DateTime.Now.Month.ToString():DateTime.Now.Month.ToString())
+                            +"/"+(DateTime.Now.Day <= 9 ? "0"+DateTime.Now.Day.ToString():DateTime.Now.Day.ToString())+'/'+
+                            DateTime.Now.Year.ToString()+" "+(DateTime.Now.Hour < 12 ? (DateTime.Now.Hour <= 9 ? 
+                            "0"+DateTime.Now.Hour.ToString(): DateTime.Now.Hour.ToString()): ((DateTime.Now.Hour-12) <= 9 ?
+                            "0"+(DateTime.Now.Hour-12).ToString(): (DateTime.Now.Hour - 12).ToString()))+":"+
+                            (DateTime.Now.Minute <= 9 ? "0"+DateTime.Now.Minute.ToString(): DateTime.Now.Minute.ToString())+" "+
+                            (DateTime.Now.Hour <= 11 ? "AM":"PM");
+                    }
+
+                    return true;
+                }
+                Task<bool> taskReturn = new Task<bool>(() => returnValueDone());
+                taskReturn.Start();
+
+                if ((await taskReturn.ConfigureAwait(false)) != false) {
+                    try {
+                        conn.Open();
+                        MySqlCommand comm = conn.CreateCommand();
+                        comm.CommandText = "INSERT INTO `gradinghandlesem` (`id`, `QuaterName`, `Comments`, `TableName`, `DateTime`)" +
+                           "VALUES ('', @Quater, '', @Table, @Date)";
+                        comm.Parameters.AddWithValue("@Quater", nameofQuater);
+                        comm.Parameters.AddWithValue("@Table", handleAddedDataBase);
+                        comm.Parameters.AddWithValue("@Date", handleDate);
+                        comm.ExecuteNonQuery();
+
+                        try
+                        {
+                            comm.CommandText = handleCombineDataTable;
+                            comm.ExecuteNonQuery();
+                            conn.Close();
+                        }
+                        catch (Exception e) {
+                            string err = e.ToString();
+                            handleDataListReturn.Add(new GradingList
+                            {
+                                errQuaterFetch = err
+                            });
+                        }
+
+                    }
+                    catch (Exception e) {
+                        string err = e.ToString();
+                        handleDataListReturn.Add(new GradingList {
+                            errQuaterFetch = err
+                        });
+                    }
+                }
+
+            }
+
+            return handleDataListReturn;
+
+        }
 
     }
 }

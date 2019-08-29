@@ -3272,6 +3272,11 @@ namespace WindowsFormUserGrading
         private static int handleDataSub = 0;
         protected static string deleteSubject = "", ReadSubject = "";
         private static string[] handleDataClickedSub = new string[] { "", "", ""};
+        protected static int numberCountTable = 0, numberLeft = 13, numberTop = 14, numberCountBack = 0, numberCountLoop = 0,
+        numberCountLoop2 = 0, numberCountLast = 0;
+        private static bool sd = true, sds = true, sdss = true, sdsss = true;
+
+
 
         //STARTING TO GET THE DATA SEARCH.........................................................
         private async void gettingDataSearch() {
@@ -3822,10 +3827,11 @@ namespace WindowsFormUserGrading
 
 
 
-       // AccessibleName = SubjectCreator,
-       // AccessibleDescription = UserNameCreator,
+        // AccessibleName = SubjectCreator,
+        // AccessibleDescription = UserNameCreator,
 
         //BTTN OF SUBJECT TO CLICK...........................................................
+        private static bool hideToTimes = false;
         private void clickColorsSub(object controls, EventArgs e) {
             handleDataClickedSub = new string[] { "", "", ""};
               if (ReadSubject != "")
@@ -3837,7 +3843,7 @@ namespace WindowsFormUserGrading
                         handleDataClickedSub[0] = con.AccessibleName;
                         handleDataClickedSub[1] = con.AccessibleDescription;
                         JarSubjectLabel.Text = con.AccessibleName;
-
+                        hideToTimes = false;
                         //CALL METHOD TO SHOW THE QUATERS..........................
                         this.getDataClickedSubject();
                     }
@@ -3861,10 +3867,13 @@ namespace WindowsFormUserGrading
 
             foreach (var handleData in gradingListHandleQuater) {
                 if (handleData.errQuaterFetch == "") {
-                    if (handleData.handlingIfHaveQuater == "false") {
+                    if (handleData.handlingIfHaveQuater == "false")
+                    {
                         Thread th = new Thread(thFun);
-                        void thFun() {
-                            Label labelQuater = new Label() {
+                        void thFun()
+                        {
+                            Label labelQuater = new Label()
+                            {
                                 Text = "No Quater by Now.",
                                 Location = new Point(109, 145),
                                 Size = new Size(140, 16),
@@ -3882,14 +3891,16 @@ namespace WindowsFormUserGrading
                             };
 
 
-                            Action ac = () => {
+                            Action ac = () =>
+                            {
                                 QuaterPanel.Controls.Clear();
                                 QuaterPanel.Controls.Add(labelQuater);
                                 TableEditing.Visible = true;
                             };
                             QuaterPanel.BeginInvoke(ac);
 
-                            Action acs = new Action(() => {
+                            Action acs = new Action(() =>
+                            {
                                 CommetsQuater.Controls.Clear();
                                 CommetsQuater.Controls.Add(labelComments);
                             });
@@ -3898,13 +3909,17 @@ namespace WindowsFormUserGrading
                         };
                         th.Start();
                     }
+                    else {
+                        //do Statement.............................................  
+                        TableEditing.Visible = true;
+                    }
                 }
             }
 
 
         }
 
-
+        //CREATE QUATERS....................................
         private async void CreateQuaters_Click(object sender, EventArgs e)
         {
             string dataHandle = "", datahandleCheckHaveName = "";
@@ -3944,6 +3959,7 @@ namespace WindowsFormUserGrading
                                 PendingTablePanel.Controls.Clear();
                                 this.PanelEditingTable.Visible = true;
                                 this.CreatingDatabase.Visible = false;
+                                hideToTimes = true;
                             }
                             else if (datahandleCheckHaveName == "false")
                             {
@@ -3980,7 +3996,6 @@ namespace WindowsFormUserGrading
 
 
         //BUTTON ADD TABLE IN EDIT AND ADD TABLES..................................
-        protected static int numberCountTable = 0, numberLeft = 13, numberTop = 14, numberCountBack = 0;
         private void AddTableIcons_Click(object sender, EventArgs e)
         {
             numberCountTable = numberCountTable + 1;
@@ -3992,7 +4007,8 @@ namespace WindowsFormUserGrading
                     Size = new Size(132, 21),
                     Location = new Point(numberLeft, numberTop),
                     BorderStyle = BorderStyle.FixedSingle,
-                    BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833")
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
+                    ForeColor = System.Drawing.Color.FromArgb(179, 182, 183)
                 };
                 PendingTablePanel.Controls.Add(textName);
                 numberLeft = numberLeft + 145;
@@ -4004,13 +4020,14 @@ namespace WindowsFormUserGrading
                     Size = new Size(48, 21),
                     Location = new Point(numberLeft, numberTop),
                     BorderStyle = BorderStyle.FixedSingle,
-                    BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833")
+                    BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
+                    ForeColor = System.Drawing.Color.FromArgb(179, 182, 183)
                 };
                 PendingTablePanel.Controls.Add(textNames);
                 numberLeft = numberLeft + 59;
             }
             else {
-                if (numberCountTable <= 39)
+                if (numberCountTable <= 30)
                 {
                     if (numberTop == 14)
                     {
@@ -4020,6 +4037,18 @@ namespace WindowsFormUserGrading
                     }
                     else
                     {
+                        if (sdss != true)
+                        {
+                            numberCountLoop2++;
+                            if (numberCountLoop == numberCountLoop2)
+                            {
+                                numberCountBack = 10;
+                                sdss = true;
+                                numberCountLoop2 = 0;
+                                numberCountLoop = 0;
+                            }
+                        }
+
                         if (numberCountBack == 10)
                         {
                             numberTop += 40;
@@ -4029,21 +4058,24 @@ namespace WindowsFormUserGrading
                         numberCountBack++;
                     }
 
+
                     TextBox textNames = new TextBox
                     {
                         Size = new Size(48, 21),
                         Location = new Point(numberLeft, numberTop),
                         BorderStyle = BorderStyle.FixedSingle,
-                        BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833")
+                        BackColor = System.Drawing.ColorTranslator.FromHtml("#1C2833"),
+                        ForeColor = System.Drawing.Color.FromArgb(179, 182, 183)
                     };
                     PendingTablePanel.Controls.Add(textNames);
                     numberLeft = numberLeft + 59;
                 }
                 else {
-                    if (numberCountTable == 40) {
+                    if (numberCountTable >= 30) {
                         numberCountTable -= 1;
+                        this.TableCountLabel.Text = ""+numberCountTable;
                     }
-                    MessageBox.Show("Sorry the maximum table is just 39 tables");
+                    MessageBox.Show("Sorry the maximum table is just 30 tables");
                 }
 
             }
@@ -4055,40 +4087,213 @@ namespace WindowsFormUserGrading
         {
             int numberAdd = 0;
 
-            foreach (Control con in PendingTablePanel.Controls) {
-                if ((con.GetType() == typeof(TextBox)) || (con is TextBox)) {
-                    numberAdd++;
-                    if (numberAdd == numberCountTable) {
-                        ((TextBox)con).Dispose();
-
-                        if (numberCountTable <= 9)
+            if (numberCountTable != 0)
+            {
+                foreach (Control con in PendingTablePanel.Controls)
+                {
+                    if ((con.GetType() == typeof(TextBox)) || (con is TextBox))
+                    {
+                        numberAdd++;
+                        if (numberAdd == numberCountTable)
                         {
-                            if (numberCountTable > 1)
+                            ((TextBox)con).Dispose();
+
+                            if (numberCountTable <= 9)
                             {
-                                numberTop = 14;
-                                numberLeft -= 59;
+                                if (numberCountTable > 1)
+                                {
+                                    numberTop = 14;
+                                    if (!sd)
+                                    {
+                                        sd = true;
+                                        numberLeft = (numberCountTable - 1) * (59 + 12);
+                                    }
+                                    else
+                                    {
+                                        numberLeft -= 59;
+                                    }
+                                }
+                                else
+                                {
+                                    numberTop = 14;
+                                    numberLeft = 13;
+                                }
                             }
                             else
                             {
-                                numberTop = 14;
-                                numberLeft = 13;
+                                if (numberCountTable <= 19)
+                                {
+                                    if (numberCountTable == 10)
+                                    {
+                                        sd = false;
+                                        sdss = true;
+                                        sdss = false;
+                                        numberTop = 54;
+                                        numberLeft = 13;
+                                        if (sdss != true)
+                                        {
+                                            numberCountLoop = 0;
+                                            sdss = true;
+                                            numberCountBack = 1;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (sds != false)
+                                        {
+                                            numberLeft -= 59;
+                                            if (sdss != true)
+                                            {
+                                                numberCountLoop++;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            sds = true;
+                                            sdss = false;
+                                            numberTop = 54;
+                                            numberLeft = ((numberCountTable - 10) - 1) * (56 + 12);
+                                            numberCountLoop++;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (numberCountTable <= 29)
+                                    {
+                                        if (numberCountTable == 20)
+                                        {
+                                            sds = false;
+                                            sdss = true;
+                                            numberCountLoop = 0;
+                                            numberCountLoop++;
+                                            numberTop = 94;
+                                            numberLeft = 13;
+                                        }
+                                        else
+                                        {
+                                            if (sdsss != false)
+                                            {
+                                                numberLeft -= 59;
+                                                if (sdss != true)
+                                                {
+                                                    numberCountLoop++;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                sdsss = true;
+                                                sdss = false;
+                                                numberTop = 94;
+                                                numberLeft = ((numberCountTable - 19) - 1) * (50 + 11);
+                                                numberCountLoop++;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (numberCountTable == 30)
+                                        {
+                                            numberCountLoop = 0;
+                                            numberCountLoop++;
+                                            numberTop = 132;
+                                            numberLeft = 13;
+                                            sdsss = false;
+                                            numberCountLast = 0;
+                                        }
+                                    }
+                                }
                             }
+
+                            numberCountTable = numberCountTable - 1;
+                            numberCountBack--;
+                            this.TableCountLabel.Text = numberCountTable.ToString();
                         }
-                        else {
-                            if (numberCountTable <= 19) {
-                                if (numberCountTable == 10) {
-                                    
+                    }
+                }
+            }
+            else {
+                numberCountTable = 0;  numberLeft = 13; numberTop = 14; numberCountBack = 0; numberCountLoop = 0;
+                numberCountLoop2 = 0; numberCountLast = 0;
+                sd = true; sds = true; sdss = true; sdsss = true;
+            }
+        }
+
+
+        //SAVE AND CREATE NEW QUATERS.............................................................
+        private async void SaveCreate_Click(object sender, EventArgs e)
+        {
+            string handleDataTableName = "";
+            int countSee = 0;
+            bool conditionIfNoText = false;
+            string[] handleDataChecking;
+            List<string> stringhand = new List<string>();
+            List<GradingList> gradeQuater = new List<GradingList>();
+
+            if (numberCountTable >= 8)
+            {
+
+                foreach (Control con in PendingTablePanel.Controls)
+                {
+                    if (con.GetType() == typeof(TextBox))
+                    {
+                        countSee += 1;
+                        if (!String.IsNullOrEmpty(con.Text))
+                        {
+                            handleDataTableName += con.Text + ",";
+                            stringhand.Add(con.Text);
+                        }
+                        else
+                        {
+                            conditionIfNoText = true;
+                        }
+                    }
+                }
+
+                if (countSee == numberCountTable)
+                {
+                    if (conditionIfNoText != true)
+                    {
+                        handleDataChecking = stringhand.ToArray();
+                        for (int count1 = 0; count1 < handleDataChecking.Length; count1++) {
+                            if (conditionIfNoText != true) {
+                                for (int count2 = 0; count2 < handleDataChecking.Length; count2++) {
+                                    if (count1 != count2) {
+                                        if (handleDataChecking[count1] == handleDataChecking[count2]) {
+                                            conditionIfNoText = true;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (handleDataChecking.Length < count1+2) {
+                                if (conditionIfNoText == false)
+                                {
+                                    gradeQuater = await Task.Run(() => grading.addQuaters(handleDataTableName, NameLabelEditingtable.Text,
+                                      handleDataClickedSub[0], handleDataClickedSub[1])).ConfigureAwait(true);
+
+                                   
+                                         foreach(var asdd in gradeQuater) {
+                                             MessageBox.Show(asdd.errQuaterFetch);
+                                        }
+                                }
+                                else {
+                                    MessageBox.Show("The name of tables has a same name.");
                                 }
                             }
                         }
 
-                        numberCountTable = numberCountTable - 1;
-                        this.TableCountLabel.Text = numberCountTable.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry but one of the tables is empty.");
                     }
                 }
             }
+            else {
+                MessageBox.Show("Please create more than 8 tables to proceed.");
+            }
         }
-
 
 
 
@@ -4103,12 +4308,26 @@ namespace WindowsFormUserGrading
             {
                 this.BeginInvoke((Action)delegate
                 {
-                    TableEditing.Visible = false;
-                    this.PanelEditingTable.Visible = false;
-                    this.CreatingDatabase.Visible = true;
-                    Quatername.Text = "";
-                    DatabaseQuater.Text = "";
+                    if (hideToTimes == false)
+                    {
+                        TableEditing.Visible = false;
+                        PendingTablePanel.Controls.Clear();
+                        this.PanelEditingTable.Visible = false;
+                        this.CreatingDatabase.Visible = true;
+                        Quatername.Text = "";
+                        DatabaseQuater.Text = "";
+                    }
+                    else {
+                        hideToTimes = false;
+                        this.PanelEditingTable.Visible = false;
+                        CreatingDatabase.Visible = true;
+                        this.TableCountLabel.Text = "Not for Now.";
+                    }
                 });
+
+                numberCountTable = 0; numberLeft = 13; numberTop = 14; numberCountBack = 0; numberCountLoop = 0;
+                numberCountLoop2 = 0; numberCountLast = 0;
+                sd = true; sds = true; sdss = true; sdsss = true;
             });
             th.Start();
             
