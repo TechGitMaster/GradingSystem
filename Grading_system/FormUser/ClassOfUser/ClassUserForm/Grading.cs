@@ -197,7 +197,6 @@ namespace ClassUserForm
 
                         comm.CommandText = String.Format("CREATE DATABASE `grading_accounts_{0}_{1}`", textBoxCreateSub, UsernameOther);
                         comm.ExecuteNonQuery();
-                        conn.Close();
 
                         MySqlConnection connSubject = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_" +
                             "{0}_{1};Uid=root;Pwd=", textBoxCreateSub, UsernameOther));
@@ -214,6 +213,35 @@ namespace ClassUserForm
                                 ")";
                             commSubject.ExecuteNonQuery();
                             connSubject.Close();
+
+
+                            try {
+
+                                comm.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
+                                            "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) VALUES ('', @name, @image, @message, @color," +
+                                            "@day, @month, @timemesage, @monthdate)";
+                                comm.Parameters.AddWithValue("@name", fullNameOwn);
+                                comm.Parameters.AddWithValue("@image", ImageOwnUser);
+                                comm.Parameters.AddWithValue("@message", "New added Subject in your Grading List '" + textBoxCreateSub
+                                     + "'");
+                                comm.Parameters.AddWithValue("@color", "Coral");
+                                comm.Parameters.AddWithValue("@day", DateTime.Now.Day.ToString());
+                                comm.Parameters.AddWithValue("@month", DateTime.Now.Month.ToString());
+                                comm.Parameters.AddWithValue("@timemesage", ((DateTime.Now.Hour > 12 ? (DateTime.Now.Hour - 12).ToString()
+                                    : DateTime.Now.Hour.ToString()) + ":" + DateTime.Now.Minute.ToString() + ": " + (DateTime.Now.Hour < 11 ?
+                                    "AM" : "PM")));
+                                comm.Parameters.AddWithValue("@monthdate", handlingDate);
+                                comm.ExecuteNonQuery();
+
+                            } catch (Exception e) {
+                                string ee = e.ToString();
+
+                                listHandle.Add(new GradingList
+                                {
+                                    SubjectCreator = "",
+                                    errGrade = "Conn"
+                                });
+                            }
                         }
                         catch (Exception e)
                         {
@@ -443,23 +471,16 @@ namespace ClassUserForm
             return gradingHandleQuater;
         }
 
-     //   commSubject.CommandText = "CREATE TABLE `gradingHandleSem`(" +
-     //                           "id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
-      //                          "QuaterName varchar(225) NOT NULL," +
-     //                          "Comments varchar(100) NOT NULL," +
-      //                          "TableName varchar(225) NOT NULL," +
-     //                           "DateTime varchar(225) NOT NULL" +
-     //                           ")";
-     //                       commSubject.ExecuteNonQuery();
 
         //ADD QUATERS.................................................................................
         public async Task<List<GradingList>> addQuaters(string handleNameTable, string nameofQuater, 
-            string NameOfSubject, string nameofUserCreate) {
+            string NameOfSubject, string nameofUserCreate, string UserNameOwn) {
             int countArrayString = 0;
             List<string> handleSeperatedTable = new List<string>();
             List<GradingList> handleDataListReturn = new List<GradingList>();
-            string handleCombineDataTable = "", handleAddedDataBase = "", handleDate = "";
+            string handleCombineDataTable = "", handleAddedDataBase = "", handleDate = "", handleNameOwn = "", HandleImageOwn = "";
 
+            MySqlConnection connGetOwn = new MySqlConnection("Server=localhost;Database=grading_accounts;Uid=root;Pwd=");
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};" +
                 "Uid=root;Pwd=", NameOfSubject, nameofUserCreate)); 
 
@@ -529,35 +550,99 @@ namespace ClassUserForm
                 taskReturn.Start();
 
                 if ((await taskReturn.ConfigureAwait(false)) != false) {
-                    try {
-                        conn.Open();
-                        MySqlCommand comm = conn.CreateCommand();
-                        comm.CommandText = "INSERT INTO `gradinghandlesem` (`id`, `QuaterName`, `Comments`, `TableName`, `DateTime`)" +
-                           "VALUES ('', @Quater, '', @Table, @Date)";
-                        comm.Parameters.AddWithValue("@Quater", nameofQuater);
-                        comm.Parameters.AddWithValue("@Table", handleAddedDataBase);
-                        comm.Parameters.AddWithValue("@Date", handleDate);
-                        comm.ExecuteNonQuery();
-
-                        try
+                    try
+                    {
+                        connGetOwn.Open();
+                        MySqlCommand commGetOwn = connGetOwn.CreateCommand();
+                        commGetOwn.CommandText = "SELECT `FirstLastName`,`ImageUser` FROM `searchbargradingaccounts` WHERE `UserName`=" +
+                            "@username";
+                        commGetOwn.Parameters.AddWithValue("@username", UserNameOwn);
+                        using (MySqlDataReader reader = commGetOwn.ExecuteReader())
                         {
-                            comm.CommandText = handleCombineDataTable;
-                            comm.ExecuteNonQuery();
-                            conn.Close();
+                            while (reader.Read()) {
+                                handleNameOwn = (string)reader["FirstLastName"];
+                                HandleImageOwn = (string)reader["ImageUser"];
+                            }
                         }
-                        catch (Exception e) {
-                            string err = e.ToString();
-                            handleDataListReturn.Add(new GradingList
+                            try
                             {
-                                errQuaterFetch = err
-                            });
-                        }
+                                conn.Open();
+                                MySqlCommand comm = conn.CreateCommand();
+                                comm.CommandText = "INSERT INTO `gradinghandlesem` (`id`, `QuaterName`, `Comments`, `TableName`, `DateTime`)" +
+                                   "VALUES ('', @Quater, '', @Table, @Date)";
+                                comm.Parameters.AddWithValue("@Quater", nameofQuater);
+                                comm.Parameters.AddWithValue("@Table", handleAddedDataBase);
+                                comm.Parameters.AddWithValue("@Date", handleDate);
+                                comm.ExecuteNonQuery();
 
+                                try
+                                {
+                                    comm.CommandText = handleCombineDataTable;
+                                    comm.ExecuteNonQuery();
+
+
+
+                                    MySqlConnection connReport = new MySqlConnection("Server=localhost;Database=grading_accounts_" + nameofUserCreate +
+                                        ";Uid=root;Pwd=");
+
+                                    try
+                                    {
+                                        connReport.Open();
+                                        MySqlCommand commReport = connReport.CreateCommand();
+                                        commReport.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
+                                            "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) VALUES ('', @name, @image, @message, @color," +
+                                            "@day, @month, @timemesage, @monthdate)";
+                                             commReport.Parameters.AddWithValue("@name", handleNameOwn);
+                                             commReport.Parameters.AddWithValue("@image", HandleImageOwn);
+                                             commReport.Parameters.AddWithValue("@message", "New quater added in this subject '"+NameOfSubject+"', "+"The" +
+                                                 " name of Quater is '"+nameofQuater
+                                                  +"'");
+                                             commReport.Parameters.AddWithValue("@color", "Coral");
+                                             commReport.Parameters.AddWithValue("@day", DateTime.Now.Day.ToString());
+                                             commReport.Parameters.AddWithValue("@month", DateTime.Now.Month.ToString());
+                                             commReport.Parameters.AddWithValue("@timemesage", ((DateTime.Now.Hour > 12 ? (DateTime.Now.Hour-12).ToString()
+                                                 : DateTime.Now.Hour.ToString())+":"+DateTime.Now.Minute.ToString()+": "+(DateTime.Now.Hour < 11 ? 
+                                                 "AM":"PM")));
+                                             commReport.Parameters.AddWithValue("@monthdate", handleDate);
+                                        commReport.ExecuteNonQuery();
+
+
+
+
+                                    //GET FULL QUATER and display
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        string err = e.ToString();
+                                        handleDataListReturn.Add(new GradingList
+                                        {
+                                            errQuaterFetch = err
+                                        });
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    string err = e.ToString();
+                                    handleDataListReturn.Add(new GradingList
+                                    {
+                                        errQuaterFetch = err
+                                    });
+                                }
+
+                            }
+                            catch (Exception e)
+                            {
+                                string err = e.ToString();
+                                handleDataListReturn.Add(new GradingList
+                                {
+                                    errQuaterFetch = err
+                                });
+                            }
                     }
                     catch (Exception e) {
-                        string err = e.ToString();
-                        handleDataListReturn.Add(new GradingList {
-                            errQuaterFetch = err
+                        handleDataListReturn.Add(new GradingList
+                        {
+                            errQuaterFetch = e.ToString()
                         });
                     }
                 }

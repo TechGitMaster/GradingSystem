@@ -3747,6 +3747,8 @@ namespace WindowsFormUserGrading
             timerGradingSub.Stop();
         }
 
+
+        //CREATE SUBJECT IN GRADING..................................
         private async void CreateSubject_Click(object sender, EventArgs e)
         {
             bool condition_to_clear = false;
@@ -3754,7 +3756,7 @@ namespace WindowsFormUserGrading
                 timerGradingSub.Stop();
                 listHandleSubjectAndName = new List<GradingList>();
                 listHandleSubjectAndName = await Task.Run(() => grading.savingCreateSubAndReturn(
-                    textBox1CreateSub.Text, "kyle velarde", handleImage,
+                    textBox1CreateSub.Text, "kyle velarde", "C:/Users/Kyle_velarde/Desktop/Microsoft c# system/icons/219953-people/png/user-16.png",
                     CreateSubject.AccessibleDescription, handleUsername));
                 foreach (var handleDataSub in listHandleSubjectAndName) {
                     if (handleDataSub.errGrade == "")
@@ -4270,12 +4272,13 @@ namespace WindowsFormUserGrading
                                 if (conditionIfNoText == false)
                                 {
                                     gradeQuater = await Task.Run(() => grading.addQuaters(handleDataTableName, NameLabelEditingtable.Text,
-                                      handleDataClickedSub[0], handleDataClickedSub[1])).ConfigureAwait(true);
+                                      handleDataClickedSub[0], handleDataClickedSub[1], "vee")).ConfigureAwait(true);
 
                                    
+                                    //DISPLAY QUATERS..............
                                          foreach(var asdd in gradeQuater) {
                                              MessageBox.Show(asdd.errQuaterFetch);
-                                        }
+                                         }   
                                 }
                                 else {
                                     MessageBox.Show("The name of tables has a same name.");
