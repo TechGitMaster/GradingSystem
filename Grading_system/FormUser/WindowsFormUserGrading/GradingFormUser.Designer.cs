@@ -308,6 +308,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -331,6 +332,7 @@
             this.CommetsQuater.SuspendLayout();
             this.panel55.SuspendLayout();
             this.QuaterPanel.SuspendLayout();
+            this.panel51.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DeleteSubjects)).BeginInit();
             this.panel28.SuspendLayout();
@@ -703,9 +705,9 @@
             this.PanelEditingTable.Controls.Add(this.NameLabelEditingtable);
             this.PanelEditingTable.Controls.Add(this.label66);
             this.PanelEditingTable.Controls.Add(this.panel41);
-            this.PanelEditingTable.Location = new System.Drawing.Point(49, 148);
+            this.PanelEditingTable.Location = new System.Drawing.Point(361, 148);
             this.PanelEditingTable.Name = "PanelEditingTable";
-            this.PanelEditingTable.Size = new System.Drawing.Size(665, 346);
+            this.PanelEditingTable.Size = new System.Drawing.Size(347, 346);
             this.PanelEditingTable.TabIndex = 13;
             this.PanelEditingTable.Visible = false;
             // 
@@ -1297,7 +1299,7 @@
             this.CommetsQuater.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.CommetsQuater.Controls.Add(this.label60);
             this.CommetsQuater.Controls.Add(this.panel55);
-            this.CommetsQuater.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CommetsQuater.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.CommetsQuater.Location = new System.Drawing.Point(383, 188);
             this.CommetsQuater.Name = "CommetsQuater";
             this.CommetsQuater.Size = new System.Drawing.Size(325, 302);
@@ -1317,6 +1319,7 @@
             // panel55
             // 
             this.panel55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel55.Controls.Add(this.label61);
             this.panel55.Location = new System.Drawing.Point(10, 14);
             this.panel55.Name = "panel55";
@@ -1385,6 +1388,8 @@
             // panel51
             // 
             this.panel51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel51.Controls.Add(this.label67);
             this.panel51.Location = new System.Drawing.Point(10, 15);
             this.panel51.Name = "panel51";
             this.panel51.Size = new System.Drawing.Size(305, 49);
@@ -3576,6 +3581,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label67.Location = new System.Drawing.Point(10, 16);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(74, 16);
+            this.label67.TabIndex = 0;
+            this.label67.Text = "1st grading";
+            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3632,6 +3648,8 @@
             this.panel55.PerformLayout();
             this.QuaterPanel.ResumeLayout(false);
             this.QuaterPanel.PerformLayout();
+            this.panel51.ResumeLayout(false);
+            this.panel51.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReadSubjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DeleteSubjects)).EndInit();
             this.panel28.ResumeLayout(false);
@@ -4056,6 +4074,7 @@
         private System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.Label label67;
     }
 }
 

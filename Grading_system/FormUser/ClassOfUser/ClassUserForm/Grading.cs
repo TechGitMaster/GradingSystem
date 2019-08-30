@@ -563,6 +563,8 @@ namespace ClassUserForm
                                 handleNameOwn = (string)reader["FirstLastName"];
                                 HandleImageOwn = (string)reader["ImageUser"];
                             }
+
+                            connGetOwn.Close();
                         }
                             try
                             {
@@ -588,8 +590,8 @@ namespace ClassUserForm
                                     try
                                     {
                                         connReport.Open();
-                                        MySqlCommand commReport = connReport.CreateCommand();
-                                        commReport.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
+                                    MySqlCommand commReport = connReport.CreateCommand();
+                                       commReport.CommandText = "INSERT INTO `reports` (`id`, `NameWho`, `ImageUser`, `Message`, `ColorDeclared`, " +
                                             "`DayReport`, `MonthReport`, `TimeMessage`, `MonthDateTime`) VALUES ('', @name, @image, @message, @color," +
                                             "@day, @month, @timemesage, @monthdate)";
                                              commReport.Parameters.AddWithValue("@name", handleNameOwn);
@@ -605,11 +607,35 @@ namespace ClassUserForm
                                                  "AM":"PM")));
                                              commReport.Parameters.AddWithValue("@monthdate", handleDate);
                                         commReport.ExecuteNonQuery();
+                                    connReport.Close();
 
 
 
+                                    try {
 
-                                    //GET FULL QUATER and display
+                                        comm.CommandText = "SELECT * FROM `gradinghandlesem`";
+                                        using (MySqlDataReader reader = comm.ExecuteReader()) {
+                                            while (reader.Read()) {
+                                                handleDataListReturn.Add(new GradingList{
+                                                    errQuaterFetch = "",
+                                                    idQuater = Convert.ToInt32(reader["id"]),
+                                                    quatername = (string)(reader["QuaterName"]),
+                                                    commentsQuater = (string)(reader["Comments"]),
+                                                    tableNameQuater = (string)(reader["TableName"]),
+                                                    dateTimeQuater = (string)(reader["DateTime"])
+                                                });
+                                            }
+                                        }
+                                        conn.Close();
+
+                                    } catch (Exception e) {
+                                        string err = e.ToString();
+                                        handleDataListReturn.Add(new GradingList
+                                        {
+                                            errQuaterFetch = err
+                                        });
+                                    }
+
                                     }
                                     catch (Exception e)
                                     {

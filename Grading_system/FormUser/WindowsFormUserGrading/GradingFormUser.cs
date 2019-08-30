@@ -3262,19 +3262,27 @@ namespace WindowsFormUserGrading
 
 
         private static Grading grading = new Grading();
+
         private List<GradingList> listSearchBar = new List<GradingList>();
+        private List<GradingList> listHandleSubjectAndName = new List<GradingList>();
+        private static List<Task> taskDoSeeSearch = new List<Task>();
+
         private delegate void handlingDataShows(string UserNameOwner, string UserNameCreator,
             string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
             int numberCountForTopPanel);
-        private List<GradingList> listHandleSubjectAndName = new List<GradingList>();
-        private static List<Task> taskDoSeeSearch = new List<Task>();
+        private delegate void handlingShowQuaters(int id, string quaterName, string comments, string tableNameQuater, 
+            string dateTimeQuater, int countTopPanel);
+
         private static bool conditionToFirstCome = false, conditionToSeeSub = false;
+        private static bool sd = true, sds = true, sdss = true, sdsss = true;
+
         private static int handleDataSub = 0;
-        protected static string deleteSubject = "", ReadSubject = "";
-        private static string[] handleDataClickedSub = new string[] { "", "", ""};
         protected static int numberCountTable = 0, numberLeft = 13, numberTop = 14, numberCountBack = 0, numberCountLoop = 0,
         numberCountLoop2 = 0, numberCountLast = 0;
-        private static bool sd = true, sds = true, sdss = true, sdsss = true;
+
+        protected static string deleteSubject = "", ReadSubject = "";
+
+        private static string[] handleDataClickedSub = new string[] { "", "", ""};
 
 
 
@@ -3325,7 +3333,9 @@ namespace WindowsFormUserGrading
 
 
 
-        //TASK DO.....................................
+        //TASK DO, TASK DO, TASK DO, TASK DO, TASK DO, TASK DO, TASK DO.....................................
+
+
         //DO THE TASK TO SHOW ONE BY ONE USER IN SEARCH......................................................
         private async Task<string> doTheTashSeeSearch(int id, string Username, string FirstLastname, string ImageUser,
             int numberCountTopPanel) {
@@ -3362,6 +3372,17 @@ namespace WindowsFormUserGrading
         }
 
 
+
+        private Task handlingDataShowQuater(int id, string quaterName, string comments, string tableNameQuater, 
+            string dateTimeQuater, int countTopPanel) {
+
+            handlingShowQuaters delegateBridge = new handlingShowQuaters(ShowQuaterEach);
+            delegateBridge.Invoke(id, quaterName, comments, tableNameQuater, dateTimeQuater, countTopPanel);
+
+            return Task.CompletedTask;
+        }
+
+
         //....................................................
 
 
@@ -3373,7 +3394,10 @@ namespace WindowsFormUserGrading
 
 
 
+
+
         //THIS IS THE ZONE TO SHOW ALL THE INFORMATIONS.............................................................
+
 
         //FINAL SHOW THE USER IN SEARCH.............................................................................
         protected string SeeSearch(int id, string Username, string FirstLastname, string ImageUser, int numberCountTopPanel) {
@@ -3434,6 +3458,13 @@ namespace WindowsFormUserGrading
 
             return "Done";
         }
+
+
+
+
+
+
+
 
 
         //THIS IS TO SHOW THE SUBJECT OF THE USER OTHER.....................................
@@ -3519,6 +3550,13 @@ namespace WindowsFormUserGrading
         }
 
 
+
+
+
+
+
+
+
         //THIS IS THE NAME OF EVERY USER IN SUBJET CREATED.......................................
         private void subjectShowNameOfTeacher(string UserNameOwner, string UserNameCreator,
             string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
@@ -3556,7 +3594,66 @@ namespace WindowsFormUserGrading
         }
 
 
+
+
+
+
+        //PANEL SHOW THE QUATERS OTHER USER...............................................................
+        private void ShowQuaterEach(int id, string quaterName, string comments,
+            string tableNameQuater, string dateTimeQuater, int countTopPanel) {
+
+            Thread th = new Thread(() => {
+
+                Panel panQuater = new Panel {
+                    BackColor = System.Drawing.Color.FromArgb(28, 40, 51),
+                    Location = new Point(10, countTopPanel),
+                    Size = new Size(305, 49),
+                    BorderStyle = BorderStyle.FixedSingle,
+                };
+
+                Label labelQuaterName = new Label {
+                    Size = new Size(290, 17),
+                    Location = new Point(10, 16),
+                    ForeColor = System.Drawing.Color.FromArgb(179, 182, 183),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                    Text = quaterName
+                };
+
+
+                Panel panComm = new Panel
+                {
+                    BackColor = System.Drawing.Color.FromArgb(28, 40, 51),
+                    Location = new Point(10, countTopPanel),
+                    Size = new Size(305, 49),
+                    BorderStyle = BorderStyle.FixedSingle,
+                };
+
+                Label labelComm = new Label
+                {
+                    Size = new Size(290, 17),
+                    Location = new Point(10, 16),
+                    ForeColor = System.Drawing.Color.FromArgb(179, 182, 183),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular),
+                    Text = (String.IsNullOrEmpty(comments) == true ? "No Comment For Now.": comments)
+                };
+
+                TableEditing.BeginInvoke((Action)delegate {
+                    QuaterPanel.Controls.Add(panQuater);
+                    panQuater.Controls.Add(labelQuaterName);
+
+                    CommetsQuater.Controls.Add(panComm);
+                    panComm.Controls.Add(labelComm);
+                });
+            });
+            th.Start();
+        }
+
+
         //......................................................................................
+
+
+
+
 
 
 
@@ -3861,65 +3958,105 @@ namespace WindowsFormUserGrading
 
 
 
+
         //THIS IS WHEN THE USER CLICKED THE SUBJECTS AND THIS WILL HAPPEND.........................
         private async void getDataClickedSubject(){
             List<GradingList> gradingListHandleQuater = new List<GradingList>();
-
+            List<Task> TaskListShow = new List<Task>();
+            int panelLocationTop = 15, countToShow = 0;
+            bool conditionToNone = true, conditionToNo = true;
             gradingListHandleQuater = await Task.Run(() => grading.gettingDataQuaters(handleDataClickedSub[0], handleDataClickedSub[1]));
 
             foreach (var handleData in gradingListHandleQuater) {
-                if (handleData.errQuaterFetch == "") {
+                if (handleData.errQuaterFetch == "")
+                {
                     if (handleData.handlingIfHaveQuater == "false")
                     {
+                        conditionToNone = false;
                         Thread th = new Thread(thFun);
-                        void thFun()
-                        {
-                            Label labelQuater = new Label()
-                            {
-                                Text = "No Quater by Now.",
-                                Location = new Point(109, 145),
-                                Size = new Size(140, 16),
-                                ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue"),
-                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
-                            };
-
-                            Label labelComments = new Label()
-                            {
-                                Text = "No Comments By Now.",
-                                Location = new Point(96, 145),
-                                Size = new Size(160, 145),
-                                ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue"),
-                                Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
-                            };
-
-
-                            Action ac = () =>
-                            {
-                                QuaterPanel.Controls.Clear();
-                                QuaterPanel.Controls.Add(labelQuater);
-                                TableEditing.Visible = true;
-                            };
-                            QuaterPanel.BeginInvoke(ac);
-
-                            Action acs = new Action(() =>
-                            {
-                                CommetsQuater.Controls.Clear();
-                                CommetsQuater.Controls.Add(labelComments);
-                            });
-                            CommetsQuater.BeginInvoke(acs);
-
-                        };
                         th.Start();
                     }
-                    else {
+                    else
+                    {
+                        countToShow++;
                         //do Statement.............................................  
-                        TableEditing.Visible = true;
+                        TaskListShow.Add(handlingDataShowQuater(handleData.idQuater, handleData.quatername,
+                                                handleData.commentsQuater, handleData.tableNameQuater,
+                                                handleData.dateTimeQuater, panelLocationTop));
+                        panelLocationTop = panelLocationTop + 72;
+
                     }
+                }
+                else {
+                    conditionToNone = false;
+                    conditionToNo = false;
+                    MessageBox.Show("Please check your Internet Connection.");
+                    Thread th = new Thread(() => thFun());
+                    th.Start();
                 }
             }
 
 
+
+            void thFun()
+            {
+                Label labelQuater = new Label()
+                {
+                    Text = (conditionToNo != false ? "No Quater by Now.": "Please check your Internet Connection."),
+                    Location = new Point(109, 145),
+                    Size = new Size(140, 16),
+                    ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue"),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+                };
+
+                Label labelComments = new Label()
+                {
+                    Text = (conditionToNo != false ? "No Comments By Now." : "Please check your Internet Connection."),
+                    Location = new Point(96, 145),
+                    Size = new Size(160, 145),
+                    ForeColor = System.Drawing.ColorTranslator.FromHtml("CornflowerBlue"),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+                };
+
+
+                Action ac = () =>
+                {
+                    QuaterPanel.Controls.Clear();
+                    QuaterPanel.Controls.Add(labelQuater);
+                    TableEditing.Visible = true;
+                };
+                QuaterPanel.BeginInvoke(ac);
+
+                Action acs = new Action(() =>
+                {
+                    CommetsQuater.Controls.Clear();
+                    CommetsQuater.Controls.Add(labelComments);
+                });
+                CommetsQuater.BeginInvoke(acs);
+
+            }
+
+
+
+
+
+            //START TO SHOW THE CONTROLS QUATERS..............................
+            if (Convert.ToInt32(gradingListHandleQuater.Count) == countToShow) {
+                if (conditionToNone != false) {
+                    QuaterPanel.Controls.Clear();
+                    CommetsQuater.Controls.Clear();
+
+                    await Task.WhenAll(TaskListShow);
+                    TableEditing.Visible = true;
+                }
+            }
         }
+
+
+
+
+
+
 
         //CREATE QUATERS....................................
         private async void CreateQuaters_Click(object sender, EventArgs e)
@@ -3995,6 +4132,8 @@ namespace WindowsFormUserGrading
                 }
             }
         }
+
+
 
 
         //BUTTON ADD TABLE IN EDIT AND ADD TABLES..................................
@@ -4222,15 +4361,18 @@ namespace WindowsFormUserGrading
         }
 
 
+
+
         //SAVE AND CREATE NEW QUATERS.............................................................
         private async void SaveCreate_Click(object sender, EventArgs e)
         {
             string handleDataTableName = "";
-            int countSee = 0;
-            bool conditionIfNoText = false;
+            int countSee = 0, countToSeeDone = 0, countTopPanel = 15;
+            bool conditionIfNoText = false, conditionErrNoInternet = false;
             string[] handleDataChecking;
             List<string> stringhand = new List<string>();
             List<GradingList> gradeQuater = new List<GradingList>();
+            List<Task> taskDisplayQuater = new List<Task>();
 
             if (numberCountTable >= 8)
             {
@@ -4276,9 +4418,56 @@ namespace WindowsFormUserGrading
 
                                    
                                     //DISPLAY QUATERS..............
-                                         foreach(var asdd in gradeQuater) {
-                                             MessageBox.Show(asdd.errQuaterFetch);
-                                         }   
+                                    foreach(var handleDataQuater in gradeQuater) {
+                                        countToSeeDone++;
+                                        if (String.IsNullOrEmpty(handleDataQuater.errQuaterFetch) == true)
+                                        {
+                                            taskDisplayQuater.Add(handlingDataShowQuater(handleDataQuater.idQuater, handleDataQuater.quatername,
+                                                handleDataQuater.commentsQuater, handleDataQuater.tableNameQuater,
+                                                handleDataQuater.dateTimeQuater, countTopPanel));
+                                            countTopPanel += 72;
+                                        }
+                                        else {
+                                            conditionErrNoInternet = true;
+                                            MessageBox.Show("Please check your Internet Connection.");
+                                        }
+                                    }
+
+                                    if ((Int32)(gradeQuater.Count) == countToSeeDone) {
+                                        if (conditionErrNoInternet != true)
+                                        {
+
+                                            //done.........................................
+                                            QuaterPanel.Controls.Clear();
+                                            CommetsQuater.Controls.Clear();
+                                            await Task.WhenAll(taskDisplayQuater);
+
+                                            Quatername.Text = "";
+                                            DatabaseQuater.Text = "";
+                                            PanelEditingTable.Visible = false;
+                                            CreatingDatabase.Visible = true;
+                                            hideToTimes = false;
+
+
+                                            numberCountTable = 0; numberLeft = 13;
+                                            numberTop = 14; numberCountBack = 0; numberCountLoop = 0; numberCountLoop2 = 0; numberCountLast = 0;
+                                            sd = true; sds = true; sdss = true; sdsss = true;
+                                        }
+                                        else {
+                                            QuaterPanel.Controls.Clear();
+                                            CommetsQuater.Controls.Clear();
+                                            Quatername.Text = "";
+                                            DatabaseQuater.Text = "";
+                                            PanelEditingTable.Visible = false;
+                                            CreatingDatabase.Visible = true;
+                                            hideToTimes = false;
+
+
+                                            numberCountTable = 0; numberLeft = 13;
+                                            numberTop = 14; numberCountBack = 0; numberCountLoop = 0; numberCountLoop2 = 0; numberCountLast = 0;
+                                            sd = true; sds = true; sdss = true; sdsss = true;
+                                        }
+                                    }
                                 }
                                 else {
                                     MessageBox.Show("The name of tables has a same name.");
