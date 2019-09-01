@@ -48,6 +48,18 @@
             this.GradingBoxFinal = new System.Windows.Forms.Panel();
             this.GradingCreateSubject = new System.Windows.Forms.Panel();
             this.TableEditing = new System.Windows.Forms.Panel();
+            this.UpdateCommQuater = new System.Windows.Forms.Button();
+            this.CommentSectionQuater = new System.Windows.Forms.Panel();
+            this.label73 = new System.Windows.Forms.Label();
+            this.QuaterCommDate = new System.Windows.Forms.Label();
+            this.QuaterNameComm = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.TextBoxQuaterComm = new System.Windows.Forms.RichTextBox();
+            this.IconAniCreateTable = new System.Windows.Forms.Panel();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.PanelEditingTable = new System.Windows.Forms.Panel();
             this.EditingAndSaveTable = new System.Windows.Forms.Panel();
             this.SaveCreatesQuaters = new System.Windows.Forms.Button();
@@ -111,6 +123,7 @@
             this.panel53 = new System.Windows.Forms.Panel();
             this.panel52 = new System.Windows.Forms.Panel();
             this.panel51 = new System.Windows.Forms.Panel();
+            this.label67 = new System.Windows.Forms.Label();
             this.JarSubjectLabel = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.ReadSubjects = new System.Windows.Forms.PictureBox();
@@ -308,7 +321,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
             this.panelFirst.SuspendLayout();
             this.navigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUserBox)).BeginInit();
@@ -319,6 +331,11 @@
             this.GradingBoxFinal.SuspendLayout();
             this.GradingCreateSubject.SuspendLayout();
             this.TableEditing.SuspendLayout();
+            this.CommentSectionQuater.SuspendLayout();
+            this.IconAniCreateTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.PanelEditingTable.SuspendLayout();
             this.EditingAndSaveTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DeleteTableIcon)).BeginInit();
@@ -676,6 +693,9 @@
             // 
             // TableEditing
             // 
+            this.TableEditing.Controls.Add(this.UpdateCommQuater);
+            this.TableEditing.Controls.Add(this.CommentSectionQuater);
+            this.TableEditing.Controls.Add(this.IconAniCreateTable);
             this.TableEditing.Controls.Add(this.PanelEditingTable);
             this.TableEditing.Controls.Add(this.EraseCreateEditQuater);
             this.TableEditing.Controls.Add(this.label58);
@@ -693,6 +713,144 @@
             this.TableEditing.TabIndex = 14;
             this.TableEditing.Visible = false;
             // 
+            // UpdateCommQuater
+            // 
+            this.UpdateCommQuater.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.UpdateCommQuater.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(112)))), ((int)(((byte)(99)))));
+            this.UpdateCommQuater.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UpdateCommQuater.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateCommQuater.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.UpdateCommQuater.Location = new System.Drawing.Point(635, 151);
+            this.UpdateCommQuater.Name = "UpdateCommQuater";
+            this.UpdateCommQuater.Size = new System.Drawing.Size(79, 33);
+            this.UpdateCommQuater.TabIndex = 16;
+            this.UpdateCommQuater.Text = "Update";
+            this.UpdateCommQuater.UseVisualStyleBackColor = true;
+            this.UpdateCommQuater.Visible = false;
+            this.UpdateCommQuater.Click += new System.EventHandler(this.UpdateCommQuater_Click);
+            // 
+            // CommentSectionQuater
+            // 
+            this.CommentSectionQuater.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.CommentSectionQuater.Controls.Add(this.label73);
+            this.CommentSectionQuater.Controls.Add(this.QuaterCommDate);
+            this.CommentSectionQuater.Controls.Add(this.QuaterNameComm);
+            this.CommentSectionQuater.Controls.Add(this.label72);
+            this.CommentSectionQuater.Controls.Add(this.label70);
+            this.CommentSectionQuater.Controls.Add(this.TextBoxQuaterComm);
+            this.CommentSectionQuater.Location = new System.Drawing.Point(379, 189);
+            this.CommentSectionQuater.Name = "CommentSectionQuater";
+            this.CommentSectionQuater.Size = new System.Drawing.Size(337, 301);
+            this.CommentSectionQuater.TabIndex = 15;
+            this.CommentSectionQuater.Visible = false;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label73.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label73.Location = new System.Drawing.Point(315, 4);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(18, 18);
+            this.label73.TabIndex = 13;
+            this.label73.Text = "X";
+            // 
+            // QuaterCommDate
+            // 
+            this.QuaterCommDate.AutoSize = true;
+            this.QuaterCommDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuaterCommDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.QuaterCommDate.Location = new System.Drawing.Point(40, 91);
+            this.QuaterCommDate.Name = "QuaterCommDate";
+            this.QuaterCommDate.Size = new System.Drawing.Size(37, 15);
+            this.QuaterCommDate.TabIndex = 4;
+            this.QuaterCommDate.Text = "None";
+            // 
+            // QuaterNameComm
+            // 
+            this.QuaterNameComm.AutoSize = true;
+            this.QuaterNameComm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuaterNameComm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.QuaterNameComm.Location = new System.Drawing.Point(39, 34);
+            this.QuaterNameComm.Name = "QuaterNameComm";
+            this.QuaterNameComm.Size = new System.Drawing.Size(37, 15);
+            this.QuaterNameComm.TabIndex = 3;
+            this.QuaterNameComm.Text = "None";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.ForeColor = System.Drawing.Color.Coral;
+            this.label72.Location = new System.Drawing.Point(16, 65);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(81, 13);
+            this.label72.TabIndex = 2;
+            this.label72.Text = "Date Released:";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.ForeColor = System.Drawing.Color.Coral;
+            this.label70.Location = new System.Drawing.Point(15, 10);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(73, 13);
+            this.label70.TabIndex = 1;
+            this.label70.Text = "Quater Name:";
+            // 
+            // TextBoxQuaterComm
+            // 
+            this.TextBoxQuaterComm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.TextBoxQuaterComm.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBoxQuaterComm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxQuaterComm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.TextBoxQuaterComm.Location = new System.Drawing.Point(13, 130);
+            this.TextBoxQuaterComm.Name = "TextBoxQuaterComm";
+            this.TextBoxQuaterComm.Size = new System.Drawing.Size(308, 159);
+            this.TextBoxQuaterComm.TabIndex = 0;
+            this.TextBoxQuaterComm.Text = "asdsd";
+            // 
+            // IconAniCreateTable
+            // 
+            this.IconAniCreateTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.IconAniCreateTable.Controls.Add(this.pictureBox7);
+            this.IconAniCreateTable.Controls.Add(this.pictureBox6);
+            this.IconAniCreateTable.Controls.Add(this.pictureBox5);
+            this.IconAniCreateTable.Location = new System.Drawing.Point(378, 28);
+            this.IconAniCreateTable.Name = "IconAniCreateTable";
+            this.IconAniCreateTable.Size = new System.Drawing.Size(330, 109);
+            this.IconAniCreateTable.TabIndex = 14;
+            this.IconAniCreateTable.Visible = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::WindowsFormUserGrading.Properties.Resources.animat_lightbulb_color;
+            this.pictureBox7.Location = new System.Drawing.Point(218, 2);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(104, 100);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 2;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::WindowsFormUserGrading.Properties.Resources.animat_diamond_color;
+            this.pictureBox6.Location = new System.Drawing.Point(119, 3);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(93, 101);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 1;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::WindowsFormUserGrading.Properties.Resources.animat_customize_color;
+            this.pictureBox5.Location = new System.Drawing.Point(6, 3);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(106, 100);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
+            // 
             // PanelEditingTable
             // 
             this.PanelEditingTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
@@ -705,9 +863,9 @@
             this.PanelEditingTable.Controls.Add(this.NameLabelEditingtable);
             this.PanelEditingTable.Controls.Add(this.label66);
             this.PanelEditingTable.Controls.Add(this.panel41);
-            this.PanelEditingTable.Location = new System.Drawing.Point(361, 148);
+            this.PanelEditingTable.Location = new System.Drawing.Point(51, 148);
             this.PanelEditingTable.Name = "PanelEditingTable";
-            this.PanelEditingTable.Size = new System.Drawing.Size(347, 346);
+            this.PanelEditingTable.Size = new System.Drawing.Size(657, 346);
             this.PanelEditingTable.TabIndex = 13;
             this.PanelEditingTable.Visible = false;
             // 
@@ -1394,6 +1552,17 @@
             this.panel51.Name = "panel51";
             this.panel51.Size = new System.Drawing.Size(305, 49);
             this.panel51.TabIndex = 0;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label67.Location = new System.Drawing.Point(10, 16);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(74, 16);
+            this.label67.TabIndex = 0;
+            this.label67.Text = "1st grading";
             // 
             // JarSubjectLabel
             // 
@@ -3581,17 +3750,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "X";
             // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
-            this.label67.Location = new System.Drawing.Point(10, 16);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(74, 16);
-            this.label67.TabIndex = 0;
-            this.label67.Text = "1st grading";
-            // 
             // GradingFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3624,6 +3782,12 @@
             this.GradingCreateSubject.PerformLayout();
             this.TableEditing.ResumeLayout(false);
             this.TableEditing.PerformLayout();
+            this.CommentSectionQuater.ResumeLayout(false);
+            this.CommentSectionQuater.PerformLayout();
+            this.IconAniCreateTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.PanelEditingTable.ResumeLayout(false);
             this.PanelEditingTable.PerformLayout();
             this.EditingAndSaveTable.ResumeLayout(false);
@@ -4075,6 +4239,18 @@
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox20;
         private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Panel IconAniCreateTable;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Panel CommentSectionQuater;
+        private System.Windows.Forms.RichTextBox TextBoxQuaterComm;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label QuaterCommDate;
+        private System.Windows.Forms.Label QuaterNameComm;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Button UpdateCommQuater;
+        private System.Windows.Forms.Label label73;
     }
 }
 

@@ -147,5 +147,14 @@
   <ItemGroup>
     <None Include="Resources\error.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animat-customize-color.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animat-diamond-color.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animat-lightbulb-color.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

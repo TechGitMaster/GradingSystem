@@ -679,5 +679,30 @@ namespace ClassUserForm
 
         }
 
+
+
+
+        public bool updateCommentsQuater(string subjectname, string nameofCreator, string nameOfQuater, string comments)
+        {
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};Uid=root" +
+                ";Pwd=", subjectname, nameofCreator));
+            bool conditionR;
+            try {
+                conn.Open();
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "UPDATE `gradinghandlesem` SET `Comments`=@comments WHERE `QuaterName`=@quatername";
+                comm.Parameters.AddWithValue("@comments", comments);
+                comm.Parameters.AddWithValue("@quatername", nameOfQuater);
+                comm.ExecuteNonQuery();
+                conn.Close();
+
+                conditionR = false;
+            } catch (Exception e) {
+                string err = e.ToString();
+                conditionR = true;
+            }
+            return conditionR;
+        }
+
     }
 }

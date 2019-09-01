@@ -3281,9 +3281,9 @@ namespace WindowsFormUserGrading
         numberCountLoop2 = 0, numberCountLast = 0;
 
         protected static string deleteSubject = "", ReadSubject = "";
+        protected static string handleCommentQuater = "";
 
         private static string[] handleDataClickedSub = new string[] { "", "", ""};
-
 
 
         //STARTING TO GET THE DATA SEARCH.........................................................
@@ -3622,14 +3622,35 @@ namespace WindowsFormUserGrading
 
                 Panel panComm = new Panel
                 {
+                    Name = quaterName + "Pan",
+                    Tag = quaterName,
+                    AccessibleDescription = comments,
+                    AccessibleName = dateTimeQuater,
                     BackColor = System.Drawing.Color.FromArgb(28, 40, 51),
                     Location = new Point(10, countTopPanel),
                     Size = new Size(305, 49),
-                    BorderStyle = BorderStyle.FixedSingle,
+                    BorderStyle = BorderStyle.FixedSingle
                 };
+
+                panComm.Click += new System.EventHandler((object controls, EventArgs e) => {
+                    Control con = (Control)(controls);
+                    if (con.GetType() == typeof(Panel) && con is Panel) {
+                        CommentSectionQuater.Visible = true;
+                        QuaterNameComm.Text = con.Tag.ToString();
+                        QuaterCommDate.Text = con.AccessibleName;
+                        TextBoxQuaterComm.Text = con.AccessibleDescription;
+
+                        UpdateCommQuater.Visible = true;
+                        UpdateCommQuater.Tag = quaterName;
+                    }
+                });
 
                 Label labelComm = new Label
                 {
+                    Name = quaterName+"Label",
+                    Tag = quaterName,
+                    AccessibleDescription = comments,
+                    AccessibleName = dateTimeQuater,
                     Size = new Size(290, 17),
                     Location = new Point(10, 16),
                     ForeColor = System.Drawing.Color.FromArgb(179, 182, 183),
@@ -4099,6 +4120,7 @@ namespace WindowsFormUserGrading
                                 this.PanelEditingTable.Visible = true;
                                 this.CreatingDatabase.Visible = false;
                                 hideToTimes = true;
+                                IconAniCreateTable.Visible = true;
                             }
                             else if (datahandleCheckHaveName == "false")
                             {
@@ -4452,6 +4474,8 @@ namespace WindowsFormUserGrading
                                             numberCountTable = 0; numberLeft = 13;
                                             numberTop = 14; numberCountBack = 0; numberCountLoop = 0; numberCountLoop2 = 0; numberCountLast = 0;
                                             sd = true; sds = true; sdss = true; sdsss = true;
+
+                                            IconAniCreateTable.Visible = false;
                                         }
                                         else {
                                             QuaterPanel.Controls.Clear();
@@ -4462,6 +4486,7 @@ namespace WindowsFormUserGrading
                                             CreatingDatabase.Visible = true;
                                             hideToTimes = false;
 
+                                            IconAniCreateTable.Visible = false;
 
                                             numberCountTable = 0; numberLeft = 13;
                                             numberTop = 14; numberCountBack = 0; numberCountLoop = 0; numberCountLoop2 = 0; numberCountLast = 0;
@@ -4487,6 +4512,54 @@ namespace WindowsFormUserGrading
             }
         }
 
+
+        //handleDataClickedSub[0] = con.AccessibleName;
+        //handleDataClickedSub[1] = con.AccessibleDescription;
+
+
+
+        //UPDATE COMMENTS........................................................
+        private void UpdateCommQuater_Click(object sender, EventArgs e)
+        {
+            Button bttn = (Button)sender;
+            bool handleReturn;
+            handleCommentQuater = TextBoxQuaterComm.Text;
+            string handlsd = bttn.Tag.ToString();
+            Thread th = new Thread(() => {
+
+                Action ac = new Action(async() =>
+                {
+                    handleReturn = await Task.Run(() => grading.updateCommentsQuater(handleDataClickedSub[0], handleDataClickedSub[1],
+                        bttn.Tag.ToString(), handleCommentQuater)).ConfigureAwait(true);
+
+                    if (handleReturn != true)
+                    {
+                        CommentSectionQuater.Visible = false;
+                        UpdateCommQuater.Visible = false;
+                        UpdateCommQuater.Tag = "";
+                        TextBoxQuaterComm.Text = "";
+
+                        foreach (Panel pan in CommetsQuater.Controls) {
+                            foreach (Label lb in pan.Controls) {
+                                if (lb.Tag.ToString() == handlsd)
+                                {
+                                    lb.Text = handleCommentQuater;
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check your Internet Connection.");
+                    }
+
+                });
+
+                this.BeginInvoke(ac);
+            });
+            th.Start();
+        }
 
 
 
@@ -4516,12 +4589,16 @@ namespace WindowsFormUserGrading
                         this.TableCountLabel.Text = "Not for Now.";
                     }
                 });
-
                 numberCountTable = 0; numberLeft = 13; numberTop = 14; numberCountBack = 0; numberCountLoop = 0;
                 numberCountLoop2 = 0; numberCountLast = 0;
                 sd = true; sds = true; sdss = true; sdsss = true;
+
             });
             th.Start();
+
+
+            Thread ths = new Thread(() => IconAniCreateTable.BeginInvoke((Action)delegate { IconAniCreateTable.Visible = false; }));
+            ths.Start();
             
         }
 
