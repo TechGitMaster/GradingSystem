@@ -48,6 +48,35 @@
             this.GradingBoxFinal = new System.Windows.Forms.Panel();
             this.GradingCreateSubject = new System.Windows.Forms.Panel();
             this.TableEditing = new System.Windows.Forms.Panel();
+            this.QuaterJarGrade = new System.Windows.Forms.Panel();
+            this.panel57 = new System.Windows.Forms.Panel();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.jarNavigationGrading = new System.Windows.Forms.Panel();
+            this.panel68 = new System.Windows.Forms.Panel();
+            this.label85 = new System.Windows.Forms.Label();
+            this.panel67 = new System.Windows.Forms.Panel();
+            this.label84 = new System.Windows.Forms.Label();
+            this.panel66 = new System.Windows.Forms.Panel();
+            this.label83 = new System.Windows.Forms.Label();
+            this.panel65 = new System.Windows.Forms.Panel();
+            this.label82 = new System.Windows.Forms.Label();
+            this.panel64 = new System.Windows.Forms.Panel();
+            this.label81 = new System.Windows.Forms.Label();
+            this.panel63 = new System.Windows.Forms.Panel();
+            this.label80 = new System.Windows.Forms.Label();
+            this.panel62 = new System.Windows.Forms.Panel();
+            this.label79 = new System.Windows.Forms.Label();
+            this.PanelJarOfStudentGrade = new System.Windows.Forms.Panel();
+            this.panel61 = new System.Windows.Forms.Panel();
+            this.panel60 = new System.Windows.Forms.Panel();
+            this.panel59 = new System.Windows.Forms.Panel();
+            this.panel58 = new System.Windows.Forms.Panel();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
             this.UpdateCommQuater = new System.Windows.Forms.Button();
             this.CommentSectionQuater = new System.Windows.Forms.Panel();
             this.label73 = new System.Windows.Forms.Label();
@@ -331,6 +360,19 @@
             this.GradingBoxFinal.SuspendLayout();
             this.GradingCreateSubject.SuspendLayout();
             this.TableEditing.SuspendLayout();
+            this.QuaterJarGrade.SuspendLayout();
+            this.panel57.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            this.jarNavigationGrading.SuspendLayout();
+            this.panel68.SuspendLayout();
+            this.panel67.SuspendLayout();
+            this.panel66.SuspendLayout();
+            this.panel65.SuspendLayout();
+            this.panel64.SuspendLayout();
+            this.panel63.SuspendLayout();
+            this.panel62.SuspendLayout();
+            this.PanelJarOfStudentGrade.SuspendLayout();
             this.CommentSectionQuater.SuspendLayout();
             this.IconAniCreateTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -693,6 +735,7 @@
             // 
             // TableEditing
             // 
+            this.TableEditing.Controls.Add(this.QuaterJarGrade);
             this.TableEditing.Controls.Add(this.UpdateCommQuater);
             this.TableEditing.Controls.Add(this.CommentSectionQuater);
             this.TableEditing.Controls.Add(this.IconAniCreateTable);
@@ -712,6 +755,313 @@
             this.TableEditing.Size = new System.Drawing.Size(770, 502);
             this.TableEditing.TabIndex = 14;
             this.TableEditing.Visible = false;
+            // 
+            // QuaterJarGrade
+            // 
+            this.QuaterJarGrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.QuaterJarGrade.Controls.Add(this.panel57);
+            this.QuaterJarGrade.Controls.Add(this.jarNavigationGrading);
+            this.QuaterJarGrade.Controls.Add(this.PanelJarOfStudentGrade);
+            this.QuaterJarGrade.Controls.Add(this.label75);
+            this.QuaterJarGrade.Controls.Add(this.label74);
+            this.QuaterJarGrade.Location = new System.Drawing.Point(12, 27);
+            this.QuaterJarGrade.Name = "QuaterJarGrade";
+            this.QuaterJarGrade.Size = new System.Drawing.Size(730, 470);
+            this.QuaterJarGrade.TabIndex = 17;
+            this.QuaterJarGrade.Visible = false;
+            // 
+            // panel57
+            // 
+            this.panel57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.panel57.Controls.Add(this.label78);
+            this.panel57.Controls.Add(this.label77);
+            this.panel57.Controls.Add(this.label76);
+            this.panel57.Controls.Add(this.pictureBox9);
+            this.panel57.Controls.Add(this.pictureBox8);
+            this.panel57.Location = new System.Drawing.Point(483, 9);
+            this.panel57.Name = "panel57";
+            this.panel57.Size = new System.Drawing.Size(222, 90);
+            this.panel57.TabIndex = 12;
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label78.Location = new System.Drawing.Point(143, 57);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(48, 13);
+            this.label78.TabIndex = 14;
+            this.label78.Text = "Delete S";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label77.Location = new System.Drawing.Point(57, 56);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(36, 13);
+            this.label77.TabIndex = 13;
+            this.label77.Text = "Add S";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label76.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label76.Location = new System.Drawing.Point(15, 13);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(139, 15);
+            this.label76.TabIndex = 12;
+            this.label76.Text = "Add and Delete Student:";
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox9.Image = global::WindowsFormUserGrading.Properties.Resources.plus;
+            this.pictureBox9.Location = new System.Drawing.Point(20, 43);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(31, 30);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 5;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox8.Image = global::WindowsFormUserGrading.Properties.Resources.error;
+            this.pictureBox8.Location = new System.Drawing.Point(107, 45);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(31, 30);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 11;
+            this.pictureBox8.TabStop = false;
+            // 
+            // jarNavigationGrading
+            // 
+            this.jarNavigationGrading.AutoScroll = true;
+            this.jarNavigationGrading.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.jarNavigationGrading.Controls.Add(this.panel68);
+            this.jarNavigationGrading.Controls.Add(this.panel67);
+            this.jarNavigationGrading.Controls.Add(this.panel66);
+            this.jarNavigationGrading.Controls.Add(this.panel65);
+            this.jarNavigationGrading.Controls.Add(this.panel64);
+            this.jarNavigationGrading.Controls.Add(this.panel63);
+            this.jarNavigationGrading.Controls.Add(this.panel62);
+            this.jarNavigationGrading.Location = new System.Drawing.Point(14, 108);
+            this.jarNavigationGrading.Name = "jarNavigationGrading";
+            this.jarNavigationGrading.Size = new System.Drawing.Size(691, 50);
+            this.jarNavigationGrading.TabIndex = 3;
+            // 
+            // panel68
+            // 
+            this.panel68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel68.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel68.Controls.Add(this.label85);
+            this.panel68.Location = new System.Drawing.Point(616, 10);
+            this.panel68.Name = "panel68";
+            this.panel68.Size = new System.Drawing.Size(63, 29);
+            this.panel68.TabIndex = 6;
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label85.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label85.Location = new System.Drawing.Point(7, 7);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(23, 15);
+            this.label85.TabIndex = 0;
+            this.label85.Text = "VO";
+            // 
+            // panel67
+            // 
+            this.panel67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel67.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel67.Controls.Add(this.label84);
+            this.panel67.Location = new System.Drawing.Point(540, 10);
+            this.panel67.Name = "panel67";
+            this.panel67.Size = new System.Drawing.Size(63, 29);
+            this.panel67.TabIndex = 5;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label84.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label84.Location = new System.Drawing.Point(7, 7);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(23, 15);
+            this.label84.TabIndex = 0;
+            this.label84.Text = "VO";
+            // 
+            // panel66
+            // 
+            this.panel66.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel66.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel66.Controls.Add(this.label83);
+            this.panel66.Location = new System.Drawing.Point(461, 10);
+            this.panel66.Name = "panel66";
+            this.panel66.Size = new System.Drawing.Size(63, 29);
+            this.panel66.TabIndex = 4;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label83.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label83.Location = new System.Drawing.Point(7, 7);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(23, 15);
+            this.label83.TabIndex = 0;
+            this.label83.Text = "VO";
+            // 
+            // panel65
+            // 
+            this.panel65.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel65.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel65.Controls.Add(this.label82);
+            this.panel65.Location = new System.Drawing.Point(380, 10);
+            this.panel65.Name = "panel65";
+            this.panel65.Size = new System.Drawing.Size(63, 29);
+            this.panel65.TabIndex = 3;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label82.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label82.Location = new System.Drawing.Point(7, 7);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(23, 15);
+            this.label82.TabIndex = 0;
+            this.label82.Text = "VO";
+            // 
+            // panel64
+            // 
+            this.panel64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel64.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel64.Controls.Add(this.label81);
+            this.panel64.Location = new System.Drawing.Point(301, 10);
+            this.panel64.Name = "panel64";
+            this.panel64.Size = new System.Drawing.Size(63, 29);
+            this.panel64.TabIndex = 2;
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label81.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label81.Location = new System.Drawing.Point(7, 7);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(23, 15);
+            this.label81.TabIndex = 0;
+            this.label81.Text = "VO";
+            // 
+            // panel63
+            // 
+            this.panel63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel63.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel63.Controls.Add(this.label80);
+            this.panel63.Location = new System.Drawing.Point(225, 10);
+            this.panel63.Name = "panel63";
+            this.panel63.Size = new System.Drawing.Size(63, 29);
+            this.panel63.TabIndex = 1;
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label80.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label80.Location = new System.Drawing.Point(7, 7);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(23, 15);
+            this.label80.TabIndex = 0;
+            this.label80.Text = "VO";
+            // 
+            // panel62
+            // 
+            this.panel62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.panel62.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel62.Controls.Add(this.label79);
+            this.panel62.Location = new System.Drawing.Point(11, 10);
+            this.panel62.Name = "panel62";
+            this.panel62.Size = new System.Drawing.Size(200, 29);
+            this.panel62.TabIndex = 0;
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label79.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label79.Location = new System.Drawing.Point(7, 7);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(99, 15);
+            this.label79.TabIndex = 0;
+            this.label79.Text = "Name of Student";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // PanelJarOfStudentGrade
+            // 
+            this.PanelJarOfStudentGrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(40)))), ((int)(((byte)(51)))));
+            this.PanelJarOfStudentGrade.Controls.Add(this.panel61);
+            this.PanelJarOfStudentGrade.Controls.Add(this.panel60);
+            this.PanelJarOfStudentGrade.Controls.Add(this.panel59);
+            this.PanelJarOfStudentGrade.Controls.Add(this.panel58);
+            this.PanelJarOfStudentGrade.Location = new System.Drawing.Point(14, 175);
+            this.PanelJarOfStudentGrade.Name = "PanelJarOfStudentGrade";
+            this.PanelJarOfStudentGrade.Size = new System.Drawing.Size(691, 283);
+            this.PanelJarOfStudentGrade.TabIndex = 2;
+            // 
+            // panel61
+            // 
+            this.panel61.Location = new System.Drawing.Point(15, 209);
+            this.panel61.Name = "panel61";
+            this.panel61.Size = new System.Drawing.Size(632, 44);
+            this.panel61.TabIndex = 3;
+            // 
+            // panel60
+            // 
+            this.panel60.Location = new System.Drawing.Point(15, 145);
+            this.panel60.Name = "panel60";
+            this.panel60.Size = new System.Drawing.Size(632, 44);
+            this.panel60.TabIndex = 2;
+            // 
+            // panel59
+            // 
+            this.panel59.Location = new System.Drawing.Point(15, 80);
+            this.panel59.Name = "panel59";
+            this.panel59.Size = new System.Drawing.Size(632, 44);
+            this.panel59.TabIndex = 1;
+            // 
+            // panel58
+            // 
+            this.panel58.Location = new System.Drawing.Point(14, 18);
+            this.panel58.Name = "panel58";
+            this.panel58.Size = new System.Drawing.Size(633, 44);
+            this.panel58.TabIndex = 0;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label75.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(182)))), ((int)(((byte)(183)))));
+            this.label75.Location = new System.Drawing.Point(48, 43);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(74, 16);
+            this.label75.TabIndex = 1;
+            this.label75.Text = "1st grading";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label74.ForeColor = System.Drawing.Color.Coral;
+            this.label74.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label74.Location = new System.Drawing.Point(25, 21);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(97, 15);
+            this.label74.TabIndex = 0;
+            this.label74.Text = "Name of Quater:";
             // 
             // UpdateCommQuater
             // 
@@ -3782,6 +4132,28 @@
             this.GradingCreateSubject.PerformLayout();
             this.TableEditing.ResumeLayout(false);
             this.TableEditing.PerformLayout();
+            this.QuaterJarGrade.ResumeLayout(false);
+            this.QuaterJarGrade.PerformLayout();
+            this.panel57.ResumeLayout(false);
+            this.panel57.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            this.jarNavigationGrading.ResumeLayout(false);
+            this.panel68.ResumeLayout(false);
+            this.panel68.PerformLayout();
+            this.panel67.ResumeLayout(false);
+            this.panel67.PerformLayout();
+            this.panel66.ResumeLayout(false);
+            this.panel66.PerformLayout();
+            this.panel65.ResumeLayout(false);
+            this.panel65.PerformLayout();
+            this.panel64.ResumeLayout(false);
+            this.panel64.PerformLayout();
+            this.panel63.ResumeLayout(false);
+            this.panel63.PerformLayout();
+            this.panel62.ResumeLayout(false);
+            this.panel62.PerformLayout();
+            this.PanelJarOfStudentGrade.ResumeLayout(false);
             this.CommentSectionQuater.ResumeLayout(false);
             this.CommentSectionQuater.PerformLayout();
             this.IconAniCreateTable.ResumeLayout(false);
@@ -4251,6 +4623,35 @@
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.Button UpdateCommQuater;
         private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Panel QuaterJarGrade;
+        private System.Windows.Forms.Panel jarNavigationGrading;
+        private System.Windows.Forms.Panel PanelJarOfStudentGrade;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Panel panel57;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Panel panel61;
+        private System.Windows.Forms.Panel panel60;
+        private System.Windows.Forms.Panel panel59;
+        private System.Windows.Forms.Panel panel58;
+        private System.Windows.Forms.Panel panel67;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Panel panel66;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Panel panel65;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Panel panel64;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Panel panel63;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Panel panel62;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Panel panel68;
+        private System.Windows.Forms.Label label85;
     }
 }
 

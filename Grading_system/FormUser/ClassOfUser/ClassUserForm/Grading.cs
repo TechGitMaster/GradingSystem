@@ -682,6 +682,52 @@ namespace ClassUserForm
 
 
 
+        //GET DATA GRADE OF STUDENT QUATER...........................................................
+        public List<List<string>> gettingGradeStudentQuater(string subjectName, string nameOfUserCreatedQuater, string nameOfQuater,
+            string[] NavigatorQuarter) {
+            List<List<string>> GradeList = new List<List<string>>();
+            string SeeIfHave = "";
+            MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};Uid=root;" +
+                "PWd=", subjectName, nameOfUserCreatedQuater));
+
+            try {
+                conn.Open();
+
+                MySqlCommand comm = conn.CreateCommand();
+                comm.CommandText = "SELECT * FROM `"+nameOfQuater+"`";
+                using (MySqlDataReader reader = comm.ExecuteReader()) {
+                    while (reader.Read()) {
+                        SeeIfHave = "Have";
+                        List<string> temporaryHandle = new List<string>();
+                        string ass = (Convert.ToInt32(reader["id"])).ToString();
+                        temporaryHandle.Add(ass);
+                        for (int countArr = 0;countArr < NavigatorQuarter.Length; countArr++) {
+                            temporaryHandle.Add((string)reader[NavigatorQuarter[countArr]]);
+                        }
+                        GradeList.Add(temporaryHandle);
+                    }
+                }
+
+                if (SeeIfHave != "Have") {
+                    GradeList.Add(new List<string> { "No" });
+                }
+
+            } catch (Exception e) {
+               // string err = e.ToString();
+                GradeList.Add(new List<string> { "err" });
+                throw e;
+            }
+
+            return GradeList;
+        }
+
+
+
+
+
+
+
+        //UPDATE COMMENT IN QUATER SECTION................................................................
         public bool updateCommentsQuater(string subjectname, string nameofCreator, string nameOfQuater, string comments)
         {
             MySqlConnection conn = new MySqlConnection(String.Format("Server=localhost;Database=grading_accounts_{0}_{1};Uid=root" +

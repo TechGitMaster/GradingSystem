@@ -3266,6 +3266,7 @@ namespace WindowsFormUserGrading
         private List<GradingList> listSearchBar = new List<GradingList>();
         private List<GradingList> listHandleSubjectAndName = new List<GradingList>();
         private static List<Task> taskDoSeeSearch = new List<Task>();
+        private static List<string> stringHandleQuater = new List<string>();
 
         private delegate void handlingDataShows(string UserNameOwner, string UserNameCreator,
             string NameCreator, string ImageCreator, string SubjectCreator, string ColorCreator, string DateTimeCreated,
@@ -3605,11 +3606,35 @@ namespace WindowsFormUserGrading
             Thread th = new Thread(() => {
 
                 Panel panQuater = new Panel {
+                    Name = quaterName,
+                    AccessibleDescription = tableNameQuater,
                     BackColor = System.Drawing.Color.FromArgb(28, 40, 51),
                     Location = new Point(10, countTopPanel),
                     Size = new Size(305, 49),
                     BorderStyle = BorderStyle.FixedSingle,
                 };
+
+                panQuater.Click += new System.EventHandler((object control, EventArgs e) => {
+                    Panel bttn = (Panel)control;
+                    string handleString = "";
+                    stringHandleQuater = new List<string>();
+
+                    for (int numberCount = 0;numberCount < bttn.AccessibleDescription.Length; numberCount++) {
+                        if (bttn.AccessibleDescription[numberCount].ToString() != ",")
+                        {
+                            handleString += bttn.AccessibleDescription[numberCount].ToString();
+                        }
+                        else {
+                            stringHandleQuater.Add(handleString);
+                            handleString = "";
+                        }
+
+                        if (numberCount+1 == bttn.AccessibleDescription.Length) {
+                            this.QuaterShowNameFinal(stringHandleQuater.ToArray(), bttn.Name);
+                        }
+                    }
+                });
+
 
                 Label labelQuaterName = new Label {
                     Size = new Size(290, 17),
@@ -3671,12 +3696,6 @@ namespace WindowsFormUserGrading
 
 
         //......................................................................................
-
-
-
-
-
-
 
 
 
@@ -4515,6 +4534,157 @@ namespace WindowsFormUserGrading
 
         //handleDataClickedSub[0] = con.AccessibleName;
         //handleDataClickedSub[1] = con.AccessibleDescription;
+
+
+
+
+        //SHOW THE FINAL NAME OF NAVIGATION GRADE OF STUDENTS....................................................
+        private async void QuaterShowNameFinal(string[] arrayHandleNavigation, string handleNameOfQuater)
+        {
+            List<List<string>> gradingList = new List<List<string>>();
+            List<Task> taskT = new List<Task>(), taskR = new List<Task>();
+            async Task<string> AwaitSec()
+            {
+                gradingList = await Task.Run(() => grading.gettingGradeStudentQuater(handleDataClickedSub[0], handleDataClickedSub[1],
+                    handleNameOfQuater, arrayHandleNavigation)).ConfigureAwait(true);
+                int countTheList = 0, countTheNumberY = 18;
+                foreach (List<string> handleFirstData in gradingList) {
+                    countTheList++;
+
+                    if ((handleFirstData.ToArray())[0] != "err")
+                    {
+                        taskR.Add(ShowTheGradeOfStudent(handleFirstData.ToArray(), countTheNumberY));
+                        countTheNumberY = countTheNumberY + 62;
+                    }
+                    else {
+                        MessageBox.Show((handleFirstData.ToArray())[0]);
+                    }
+                    if (((Int32)gradingList.Count) == countTheList) {
+                        await Task.WhenAll(taskR);
+                    }
+                }
+
+                Task ShowTheGradeOfStudent(string[] arrayGrade, int countTheNumberYs) {
+                    //PanelJarOfStudentGrade.Controls.Add();
+                    Panel pan = new Panel {
+                        Name = "Student" + arrayGrade[0],
+                        AccessibleName = (Convert.ToInt32(arrayGrade[0])).ToString(),
+                        Size = new Size(633, 44),
+                        Location = new Point(14, countTheNumberYs),
+                        BackColor = System.Drawing.Color.FromArgb(23, 32, 42)
+                    };
+
+                    PanelJarOfStudentGrade.Controls.Add(pan);
+                    return Task.CompletedTask;
+                }
+
+
+                return "true";
+            }
+
+            if ((await Task.Run(AwaitSec)) == "true") {
+                jarNavigationGrading.Controls.Clear();
+                int numberTop = 11;
+                for (int count1 = 0;count1 < arrayHandleNavigation.Length;count1++) {
+
+                    taskT.Add(showTheNavigator(arrayHandleNavigation[count1], count1, numberTop));
+                    if (count1 == 0)
+                    {
+                        numberTop += 134;
+                    }
+                    else {
+                        numberTop += 76;
+                    }
+
+                    if (count1 == arrayHandleNavigation.Length-1) {
+
+                        if (arrayHandleNavigation.Length - 1 <= 6)
+                        {
+                            jarNavigationGrading.Size = new Size(691, 50);
+                        }
+                        else {
+                            jarNavigationGrading.Size = new Size(691, 62);
+                        }
+
+                        await Task.WhenAll(taskT);
+                    }
+                }
+
+
+                QuaterJarGrade.Visible = true;
+            }
+
+
+
+
+            Task showTheNavigator(string navigationName, int count1, int numberWidth) {
+                if (count1 == 0)
+                {
+                    string nameHandle = arrayHandleNavigation[count1];
+                    Thread th = new Thread(() =>
+                    {
+                        Panel pan = new Panel
+                        {
+                            BackColor = System.Drawing.Color.FromArgb(23, 32, 42),
+                            Size = new Size(200, 29),
+                            Location = new Point(11, 10),
+                            BorderStyle = BorderStyle.FixedSingle
+                        };
+
+                        Label label = new Label
+                        {
+                            ForeColor = System.Drawing.Color.FromArgb(179, 182, 183),
+                            Font = new Font("Microsoft Sans Serif", 9, FontStyle.Regular),
+                            Text = nameHandle,
+                            Location = new Point(7, 7)
+                        };
+
+                        QuaterJarGrade.BeginInvoke((Action)delegate
+                        {
+                            jarNavigationGrading.Controls.Add(pan);
+                            pan.Controls.Add(label);
+                        });
+                    });
+                    th.Start();
+                }
+                else
+                {
+
+                    string nameHandle = navigationName;
+                    Thread th = new Thread(() =>
+                    {
+                        Panel pan = new Panel
+                        {
+                            BackColor = System.Drawing.Color.FromArgb(23, 32, 42),
+                            Size = new Size(63, 29),
+                            Location = new Point(numberWidth, 10),
+                            BorderStyle = BorderStyle.FixedSingle
+                        };
+
+                        Label label = new Label
+                        {
+                            ForeColor = System.Drawing.Color.FromArgb(179, 182, 183),
+                            Font = new Font("Microsoft Sans Serif", 9, FontStyle.Regular),
+                            Text = nameHandle,
+                            Location = new Point(7, 7)
+                        };
+
+                        QuaterJarGrade.BeginInvoke((Action)delegate
+                        {
+                            jarNavigationGrading.Controls.Add(pan);
+                            pan.Controls.Add(label);
+                        });
+                    });
+                    th.Start();
+
+                    numberWidth += 76;
+                }
+
+                return Task.CompletedTask;
+            }
+        }
+
+
 
 
 
